@@ -26,7 +26,7 @@ export const en: ProfileText = {
       location: 'Bucharest, Romania',
       aboutShort: 'Bucharest printing house — 30 years, a team of over 140, offset and digital.',
       about:
-        'Tipografia Everest, founded in Bucharest in 1994, is a printing house with three decades of experience and a team of over 140 people, covering offset and digital printing with a full range of finishing techniques. Its work spans commercial printing, books and publishing, agendas and notebooks, labels and packaging, and art bindery, under ISO 9001 quality and ISO 14001 environmental management systems certified since 2007.',
+        'Tipografia Everest, founded in Bucharest in 1994, is a printing house with three decades of experience and a team of over 140 people, covering offset and digital printing with a full range of finishing techniques. Its work spans commercial printing, books and publishing, agendas and notebooks, labels and packaging, and art bindery, under ISO 9001 quality and ISO 14001 environmental management systems certified since 2007. In February 2012 it took over the assets of the RH Printing house, doubling its capacity and becoming the leader of the local sheet-fed offset market.',
       summary:
         'I lead the sales team at Tipografia Everest and keep my own hand on the accounts that matter most — from the first request to the negotiated contract, the price offer built for that client, the internal order and its delivery, and the reporting and planning that keep next year predictable.',
       bullets: [
@@ -45,9 +45,12 @@ export const en: ProfileText = {
       position: 'Senior Sales Executive',
       period: 'May 2003 – February 2012',
       location: 'Bucharest, Romania',
-      aboutShort: 'Printing company.',
+      aboutShort:
+        'The Rațiu family’s printing house, one of the most modern in the country; taken over by Everest in 2012.',
+      about:
+        'RH Printing was the Rațiu family’s printing house — founded by Ion Rațiu in the 1990s and rebuilt in 2007 by Nicolae Rațiu with an investment of around €12 million in a new plant on Bulevardul Timișoara, with equipment brought from Japan, regarded as one of the most modern in the country and specialised in sheet-fed offset for advertising materials. After several years of losses, its assets were taken over in February 2012 by Tipografia Everest, which thereby became the leader of the local sheet-fed offset market.',
       summary:
-        'Almost nine years of selling print: a portfolio of business clients of my own, quotes on complex jobs, and a standing line to production so that what was sold was what got delivered.',
+        'Almost nine years of selling print: a portfolio of business clients of my own, quotes on complex jobs, and a standing line to production so that what was sold was what got delivered. In February 2012, when Everest took over RH Printing, I continued at Everest.',
       bullets: [
         'Business client portfolio: prospecting, quoting, and managing the relationship for the long term.',
         'Quoting print work: specifications, print runs, deadlines and a price that was right for each job.',
@@ -60,8 +63,12 @@ export const en: ProfileText = {
       position: 'Sales Executive',
       period: 'April 2001 – December 2002',
       location: 'Bucharest, Romania',
+      aboutShort:
+        'Label and packaging manufacturer — among the most important in Romania and Eastern Europe.',
+      about:
+        'Rodata, founded in Bucharest in 1994, is one of the most important manufacturers of food and non-food labels and packaging in Romania and Eastern Europe: labels for soft drinks and mineral water, snack packaging printed in rotogravure, with complete pre-press services, packaging consultancy, integrated production and logistics.',
       bullets: [
-        'B2B sales: building a portfolio of company clients.',
+        'B2B sales: building a portfolio of company clients for labels and packaging.',
         'Quoting and negotiation: from the first meeting to the order.',
         'Client relationship: follow-up and retention.',
       ],
@@ -151,8 +158,6 @@ export const en: ProfileText = {
       blurb: 'The systems that keep a team honest.',
       items: [
         'Microsoft Office',
-        'Microsoft Dynamics Navision',
-        'Corel Draw',
         'Sales reporting — weekly, monthly, annual',
         'Order-to-delivery coordination',
       ],

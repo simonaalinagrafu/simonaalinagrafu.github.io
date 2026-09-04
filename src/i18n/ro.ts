@@ -155,6 +155,7 @@ export const ro: UiStrings = {
       title: 'Hai să vorbim.',
       body: 'Un mesaj scurt e de ajuns — răspund tuturor celor bine gândite.',
       ctaEmail: 'Scrie-mi un email',
+      ctaPhone: 'Sună-mă',
       ctaLinkedin: 'Conectează-te pe LinkedIn',
     },
   },

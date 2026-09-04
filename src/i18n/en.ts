@@ -151,6 +151,7 @@ export const en: UiStrings = {
       title: 'Let’s talk.',
       body: 'A short message is enough — I reply to every thoughtful one.',
       ctaEmail: 'Send me an email',
+      ctaPhone: 'Call me',
       ctaLinkedin: 'Connect on LinkedIn',
     },
   },

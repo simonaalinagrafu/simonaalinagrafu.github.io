@@ -201,6 +201,10 @@ const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
           <Icon name="lucide:mail" class="h-4 w-4" aria-hidden="true" />
           {s.home.band.ctaEmail}
         </a>
+        <a href={`tel:${siteFacts.phone.replace(/\s/g, '')}`} class="btn btn-inverse">
+          <Icon name="lucide:phone" class="h-4 w-4" aria-hidden="true" />
+          {s.home.band.ctaPhone} · {siteFacts.phone}
+        </a>
         <a href={siteFacts.linkedin} class="btn btn-inverse">
           <Icon name="lucide:linkedin" class="h-4 w-4" aria-hidden="true" />
           {s.home.band.ctaLinkedin}

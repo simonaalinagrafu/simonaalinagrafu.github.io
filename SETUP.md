@@ -214,9 +214,10 @@ Text lives in `src/data/profile/ro.ts` and `en.ts`; structure (names, flags) in
 - [ ] **Achievements** `portfolio`, `team`, `accounts-system` — imagined. The first prints on
       the CV as "Key achievement". Replace with real wins, ideally with figures, then remove
       the three `placeholder: true` flags.
-- [ ] **Company one-liners** — `aboutShort` is set only where the name makes it safe
-      (RH Printing, Delta Distribution). Rodata, Europetrolgaz and Euromobex have none; add a
-      line each if she wants context on the page and the CV.
+- [ ] **Company descriptions** — Everest, RH Printing and Rodata have sourced descriptions
+      (everest.ro, rodata.ro, Ziarul Financiar and print-romania.ro for the 2007 investment
+      and the February 2012 takeover). Europetrolgaz, Delta Distribution and Euromobex have
+      none beyond what the name says; add a line each if she wants context there.
 - [ ] **Email** — `simonaalinagrafu@gmail.com` was derived from the site name. Confirm the
       mailbox exists; it is on the Contact page, in the footer and on both CVs.
 - [ ] **GitHub link** — header still links to `github.com/simonaalinagrafu`. Keep or remove.

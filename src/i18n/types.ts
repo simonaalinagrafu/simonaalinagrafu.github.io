@@ -74,7 +74,7 @@ export interface UiStrings {
     /** The four-step way of working — the section that makes this a sales site. */
     process: Record<ProcessId, TitledBody>;
     /** Closing contact band. */
-    band: { title: string; body: string; ctaEmail: string; ctaLinkedin: string };
+    band: { title: string; body: string; ctaEmail: string; ctaPhone: string; ctaLinkedin: string };
   };
 
   career: {

@@ -32,7 +32,7 @@ export const ro: ProfileText = {
       aboutShort:
         'Tipografie din București — 30 de ani, o echipă de peste 140 de oameni, offset și digital.',
       about:
-        'Tipografia Everest, fondată la București în 1994, este o tipografie cu trei decenii de experiență și o echipă de peste 140 de oameni, care acoperă tipar offset și digital cu o gamă completă de tehnici de finisare. Lucrările ei merg de la tipărituri comerciale, cărți și editură la agende și blocnotesuri, etichete și ambalaje și legătorie de artă, sub sisteme de management al calității ISO 9001 și al mediului ISO 14001, certificate din 2007.',
+        'Tipografia Everest, fondată la București în 1994, este o tipografie cu trei decenii de experiență și o echipă de peste 140 de oameni, care acoperă tipar offset și digital cu o gamă completă de tehnici de finisare. Lucrările ei merg de la tipărituri comerciale, cărți și editură la agende și blocnotesuri, etichete și ambalaje și legătorie de artă, sub sisteme de management al calității ISO 9001 și al mediului ISO 14001, certificate din 2007. În februarie 2012 a preluat activele tipografiei RH Printing, dublându-și capacitatea și devenind liderul pieței locale de tipar offset în coală.',
       summary:
         'Conduc echipa de vânzări a Tipografiei Everest și păstrez în portofoliul meu conturile care contează cel mai mult — de la prima solicitare la contractul negociat, oferta de preț construită pentru acel client, comanda internă și livrarea ei, și raportarea și planificarea care fac anul următor predictibil.',
       bullets: [
@@ -51,9 +51,12 @@ export const ro: ProfileText = {
       position: 'Senior Sales Executive',
       period: 'Mai 2003 – Februarie 2012',
       location: 'București, România',
-      aboutShort: 'Companie de tipar.',
+      aboutShort:
+        'Tipografia familiei Rațiu, una dintre cele mai moderne din țară; preluată de Everest în 2012.',
+      about:
+        'RH Printing a fost tipografia familiei Rațiu — ctitorită de Ion Rațiu în anii ’90 și reconstruită în 2007 de Nicolae Rațiu, cu o investiție de circa 12 milioane de euro într-o unitate nouă pe Bulevardul Timișoara, cu echipamente aduse din Japonia, considerată una dintre cele mai moderne din țară și specializată în tipar offset în coală pentru materiale publicitare. După câțiva ani de pierderi, în februarie 2012 activele ei au fost preluate de Tipografia Everest, care a devenit astfel liderul pieței locale de tipar offset în coală.',
       summary:
-        'Aproape nouă ani de vânzări în industria tipografică: un portofoliu propriu de clienți business, ofertare pe lucrări complexe și legătura permanentă cu producția, ca ce s-a vândut să fie și ce se livrează.',
+        'Aproape nouă ani de vânzări în industria tipografică: un portofoliu propriu de clienți business, ofertare pe lucrări complexe și legătura permanentă cu producția, ca ce s-a vândut să fie și ce se livrează. În februarie 2012, odată cu preluarea RH Printing de către Everest, am continuat la Everest.',
       bullets: [
         'Portofoliu de clienți business: prospectare, ofertare și gestionarea relației pe termen lung.',
         'Ofertare pe lucrări de tipar: specificații, tiraje, termene și un preț corect pentru fiecare comandă.',
@@ -66,8 +69,12 @@ export const ro: ProfileText = {
       position: 'Sales Executive',
       period: 'Aprilie 2001 – Decembrie 2002',
       location: 'București, România',
+      aboutShort:
+        'Producător de etichete și ambalaje — între cei mai importanți din România și Europa de Est.',
+      about:
+        'Rodata, fondată la București în 1994, este unul dintre cei mai importanți producători de etichete și ambalaje alimentare și nealimentare din România și Europa de Est: etichete pentru băuturi răcoritoare și apă minerală, ambalaje pentru snacks tipărite în rotogravură, cu servicii complete de pre-press, consultanță de ambalare, producție integrată și logistică.',
       bullets: [
-        'Vânzări B2B: construirea unui portofoliu de clienți companii.',
+        'Vânzări B2B: construirea unui portofoliu de clienți companii pentru etichete și ambalaje.',
         'Ofertare și negociere: de la prima întâlnire la comandă.',
         'Relația cu clientul: follow-up și retenție.',
       ],
@@ -157,8 +164,6 @@ export const ro: ProfileText = {
       blurb: 'Sistemele care țin o echipă onestă.',
       items: [
         'Microsoft Office',
-        'Microsoft Dynamics Navision',
-        'Corel Draw',
         'Raportare de vânzări — săptămânal, lunar, anual',
         'Coordonare comandă–livrare',
       ],
