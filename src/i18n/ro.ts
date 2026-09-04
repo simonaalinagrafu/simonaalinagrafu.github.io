@@ -1,8 +1,8 @@
 import type { UiStrings } from './types';
 
 // Romanian UI strings — drafted for review. Same two conventions as
-// data/profile/ro.ts: English job titles are kept where they are the norm in
-// Romanian tech, and the prose stays gender-neutral.
+// data/profile/ro.ts: English job titles are kept where they are the norm on
+// the Romanian market, and the prose stays gender-neutral.
 
 export const ro: UiStrings = {
   htmlLang: 'ro',
@@ -15,7 +15,6 @@ export const ro: UiStrings = {
     home: 'Despre mine',
     career: 'Carieră',
     skills: 'Competențe',
-    articles: 'Articole',
     contact: 'Contact',
   },
 
@@ -36,21 +35,20 @@ export const ro: UiStrings = {
     email: 'Email',
     emailTip: 'Trimite-mi un email',
     github: 'GitHub',
-    githubTip: 'Codul meu pe GitHub',
+    githubTip: 'Profilul meu de GitHub',
     linkedin: 'LinkedIn',
     linkedinTip: 'Profilul meu de LinkedIn',
   },
 
   footer: {
-    blurb: 'Leadership în inginerie, arhitectură software și AI aplicat.',
-    rss: 'RSS',
+    blurb: 'Vânzări B2B, conturi cheie și echipele care le livrează.',
   },
 
   home: {
-    metaTitle: 'Engineering Manager & constructor de sisteme AI',
+    metaTitle: 'Manager de Vânzări, B2B',
     greeting: 'Bună, sunt',
     ctaCareer: 'Povestea carierei mele',
-    ctaWriting: 'Citește ce scriu',
+    ctaContact: 'Hai să vorbim',
     kickerReach: 'Anvergură și practică',
     kickerDoing: 'Ce fac',
     kickerWorking: 'Cum e să lucrezi cu mine',
@@ -59,76 +57,76 @@ export const ro: UiStrings = {
     headingPrinciples: 'Ce mă motivează',
 
     stats: {
-      years: { value: '20+', label: 'ani în dezvoltare software' },
-      apps: { value: '50+', label: 'aplicații construite sau la care am contribuit' },
-      requests: { value: 'Milioane', label: 'de cereri pe zi în unele aplicații' },
-      phases: { value: 'Fiecare etapă', label: 'de la specificație la producție' },
-      aiSystems: { value: 'Sisteme AI', label: 'construite, nu doar folosite' },
-      aiAssisted: { value: 'Asistat de AI', label: 'inginerie, în fiecare zi' },
+      years: { value: '20+', label: 'ani în vânzări B2B' },
+      b2b: { value: 'B2B', label: 'vânzări către companii, nu către consumatori' },
+      team: { value: 'O echipă', label: 'de oameni de vânzări condusă, pregătită și păstrată' },
+      accounts: { value: 'Conturi cheie', label: 'gestionate de la primul contact la reînnoire' },
+      stages: { value: 'Fiecare etapă', label: 'de la prospectare la livrare' },
+      relationships: { value: 'Pe termen lung', label: 'relații cu clienții, an după an' },
     },
 
     doing: {
-      engineering: {
-        title: 'Inginerie hands-on',
-        body: 'Scriu în continuare cod: C#/.NET, Python, React, SQL și infrastructura AWS pe care rulează. Specificații, arhitectură, medii cloud, pipeline-uri CI/CD — le construiesc, nu doar le aprob.',
+      team: {
+        title: 'Conducerea echipei de vânzări',
+        body: 'Conduc echipa de vânzări de la {company} — stabilesc obiective, fac coaching cu fiecare și construiesc rutinele care transformă indivizii într-o echipă ce își atinge cifrele împreună.',
       },
-      leadership: {
-        title: 'Leadership în inginerie',
-        body: 'Conduc una dintre echipele centrale ale {company} — angajare, mentorat și stabilirea standardelor din spatele unui software de livrare critic pentru business.',
+      accounts: {
+        title: 'Managementul conturilor cheie',
+        body: 'Gestionez relațiile care aduc cea mai mare parte din venituri: înțeleg afacerea fiecărui client suficient de bine încât să văd ce va avea nevoie în continuare și să fiu persoana pe care o sună prima.',
       },
-      aiAssisted: {
-        title: 'Inginerie asistată de AI',
-        body: 'Competențe avansate de Claude Code, între care un app builder care citește codebase-uri existente printr-un snapshot structural și generează, migrează sau traduce aplicații cu rezultate verificate.',
+      pipeline: {
+        title: 'Pipeline și prognoze',
+        body: 'Prospectare, calificare, prioritizare. Un pipeline pe care îl vede toată echipa și o prognoză pe care conducerea poate planifica, pentru că a fost onestă și până acum.',
       },
-      aiSystems: {
-        title: 'Sisteme AI',
-        body: 'Platforme AI agentice: orchestrare de LLM-uri, pipeline-uri RAG și arhitecturi multi-agent ancorate în date reale de business, integrate prin MCP și fiabile în producție.',
+      negotiation: {
+        title: 'Negociere și închidere',
+        body: 'Prețuri, contracte, condiții și reînnoiri cu clienți business de orice dimensiune — acorduri care rezistă pentru că ambele părți pot trăi cu ele.',
       },
     },
 
     value: {
-      ship: {
-        title: 'Echipe care livrează',
-        body: 'Echipe unite, care livrează software critic pentru business, an după an.',
+      revenue: {
+        title: 'Venituri care cresc',
+        body: 'Un portofoliu construit prin prospectare constantă și păstrarea a ce s-a câștigat.',
       },
-      build: {
-        title: 'Leadership care construiește',
-        body: 'Judecata unui arhitect, de la cineva care scrie în continuare cod.',
+      retention: {
+        title: 'Clienți care rămân',
+        body: 'Retenția ca măsură a succesului, nu doar mărimea listei.',
       },
-      handoff: {
-        title: 'Mai puține goluri la predare',
-        body: 'Cine a lucrat în fiecare etapă vede ce cade între ele.',
+      team: {
+        title: 'O echipă care performează',
+        body: 'Oameni de vânzări recrutați, pregătiți și păstrați — obiective atinse ca un întreg.',
       },
-      ai: {
-        title: 'AI care aduce rezultate',
-        body: 'Ancorat în experiență de producție, nu în hype.',
+      pipeline: {
+        title: 'Un pipeline predictibil',
+        body: 'Prognoze pe care afacerea poate planifica, pentru că au fost corecte și înainte.',
       },
-      load: {
-        title: 'Construit pentru încărcare',
-        body: 'Sisteme care rămân în picioare atunci când business-ul depinde de ele.',
+      relationships: {
+        title: 'Relații care deschid uși',
+        body: 'Douăzeci de ani de contacte de business care răspund la telefon.',
       },
-      grow: {
-        title: 'Oameni care cresc',
-        body: 'Ingineri angajați, îndrumați și păstrați — echipa supraviețuiește sistemului.',
+      process: {
+        title: 'Proces, nu eroism',
+        body: 'Rezultate care se repetă, pentru că modul de lucru este clar.',
       },
     },
 
     principles: {
-      curiosity: {
-        title: 'Curiozitate',
-        body: 'Am o pornire firească de a înțelege cum funcționează lucrurile și de ce funcționează așa. Îmi place să intru adânc într-o problemă, să învăț de la principii de bază și să leg idei din domenii diferite. Pentru mine, procesul de înțelegere este o răsplată în sine.',
+      trust: {
+        title: 'Încrederea mai întâi',
+        body: 'Fiecare client pe care l-am păstrat ani de zile a început cu o promisiune respectată. Prefer să pierd o vânzare decât să o câștig cu ceva ce nu pot livra. Clienții observă și se întorc.',
       },
-      evolution: {
-        title: 'Evoluție continuă',
-        body: 'Caut mereu moduri de a îmbunătăți felul în care gândesc, lucrez și construiesc. Ingineria asistată de AI mi-a schimbat deja practica zilnică, iar eu explorez activ instrumente, idei și abordări noi care mă pot face mai eficient. Văd schimbarea ca pe o ocazie de a regândi ce e posibil, nu doar ca pe ceva la care trebuie să mă adaptez.',
+      listen: {
+        title: 'Ascultă înainte să vinzi',
+        body: 'Oferta care prinde este cea care răspunde unei nevoi pe care clientul o are cu adevărat. Mare parte din vânzare este înțelegere — afacerea, constrângerile, cum arată un rezultat bun pentru omul de peste masă.',
       },
-      teams: {
-        title: 'Echipe care descoperă',
-        body: 'Lucrez cel mai bine în echipe colaborative și susținătoare, unde oamenii învață unii de la alții, provoacă ideile constructiv și sunt mândri de meseria lor. Prețuiesc munca spre un scop comun, lăsând în același timp fiecăruia spațiul de a contribui, de a experimenta și de a crește.',
+      team: {
+        title: 'Echipa câștigă',
+        body: 'Cele mai bune rezultate ale mele au venit din echipe în care oamenii împart ce funcționează, se acoperă unii pe alții și sunt mândri de cifra de pe tablă. A conduce înseamnă a face posibilă o astfel de echipă și apoi a nu-i sta în cale.',
       },
-      impact: {
-        title: 'Impact',
-        body: 'Tehnologia mă interesează cel mai mult atunci când contează — când sistemele pe care le construim susțin afaceri reale, economisesc timpul oamenilor și deschid posibilități care nu existau înainte. Înțelegerea motivului pentru care munca are sens schimbă felul în care o fac, iar să vezi o idee devenind ceva pe care oamenii se bazează zilnic este partea cea mai satisfăcătoare a ingineriei.',
+      results: {
+        title: 'Rezultate măsurabile',
+        body: 'Un pipeline, o prognoză și un obiectiv sunt utile doar dacă sunt oneste. Țin cifrele reale, chiar și atunci când cifra reală este incomodă, pentru că doar așa pot fi îmbunătățite.',
       },
     },
   },
@@ -136,47 +134,35 @@ export const ro: UiStrings = {
   career: {
     metaTitle: 'Carieră',
     metaDescription:
-      'Peste 20 de ani în software: Ubisoft, TeamNet, Consignor și nShift — de la programare de jocuri la management de inginerie și sisteme AI.',
+      'Peste 20 de ani în vânzări B2B: de la vânzări în teren la conturi cheie și la conducerea echipei de vânzări a Tipografiei Everest.',
     kicker: 'Parcurs',
     heading: 'Carieră',
     lede: 'Rolurile pe care le-am avut, echipele pe care le-am construit și ce a adăugat fiecare capitol.',
     download: 'Descarcă CV-ul (PDF)',
     downloadFile: 'Simona-Alina-Grafu-CV',
     stats: {
-      years: 'ani în software',
+      years: 'ani în vânzări B2B',
       leading: 'ani de condus echipe',
       companies: 'companii',
     },
     education: 'Educație',
     timeline: 'Cronologia carierei, pe companii',
+    now: 'acum',
   },
 
   skills: {
     metaTitle: 'Competențe',
     metaDescription:
-      'Competențe în leadership, AI și machine learning, arhitectură backend, cloud și fundamentele de dedesubt.',
+      'Competențe în leadership de vânzări, managementul conturilor cheie, negociere, pipeline și prognoze, și fundamentele de business de dedesubt.',
     kicker: 'Instrumentar',
     heading: 'Competențe',
-    lede: 'La ce apelez și pe ce se sprijină — de la condus echipe la matematica din spatele modelelor.',
-  },
-
-  articles: {
-    metaTitle: 'Articole',
-    metaDescription: 'Texte despre leadership în inginerie, arhitectură software și AI aplicat.',
-    feedTitle: 'Articole',
-    kicker: 'Scriu',
-    heading: 'Articole',
-    ledeBefore:
-      'Texte despre leadership în inginerie, arhitectură software, sisteme AI agentice și dezvoltare asistată de AI. Abonează-te prin ',
-    ledeRssLink: 'RSS',
-    ledeAfter: '.',
-    back: '← Toate articolele',
+    lede: 'La ce apelez și pe ce se sprijină — de la condusul unei echipe la marja din spatele unui preț.',
   },
 
   contact: {
     metaTitle: 'Contact',
     metaDescription:
-      'Ia legătura cu Simona Alina Grafu pentru a discuta despre leadership în inginerie, sisteme AI și cercetare.',
+      'Ia legătura cu Simona Alina Grafu pentru vânzări B2B, conturi cheie și conducerea echipelor de vânzări.',
     heading: 'Contact',
     lede: 'Citesc tot și răspund mesajelor bine gândite.',
     email: 'Email',
@@ -195,14 +181,14 @@ export const ro: UiStrings = {
     summary: 'Sumar',
     skills: 'Competențe',
     experience: 'Experiență',
-    keyProject: 'Proiect reprezentativ',
+    keyAchievement: 'Realizare reprezentativă',
     education: 'Educație',
-    tech: 'Tehnologii',
+    focus: 'Arii',
     highlights: [
-      'Milioane de cereri servite zilnic de platforma pe care o conduce echipa mea',
-      'Peste 10.000 de clienți business pe sistemele pe care le-am condus',
-      '50 de servicii web în producție, distribuite pe AWS',
-      'Peste 20 de ani, de la motoare de joc în timp real la sisteme AI agentice',
+      'Peste 20 de ani în vânzări B2B, de la vânzări în teren la management de vânzări',
+      'Conduce echipa de vânzări a Tipografiei Everest',
+      'Gestionează conturile cheie care aduc cea mai mare parte din venituri',
+      'Retenția și un pipeline predictibil ca măsuri ale succesului',
     ],
   },
 };

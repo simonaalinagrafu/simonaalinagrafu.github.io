@@ -17,40 +17,45 @@ const current = experience[0];
 // Display order and icons live here; the words live in the i18n dictionaries,
 // keyed by the same ids — so neither can drift out of step with the other.
 
-// Reach and practice: three figures, then how the work is actually done. The
-// lifecycle detail sits in the hero sentence above, so one tile points at it
-// rather than spending six. The AI tiles say what I build and how I build —
-// they describe the systems and the practice, never me.
-const statOrder: StatId[] = ['years', 'apps', 'requests', 'phases', 'aiSystems', 'aiAssisted'];
+// Reach and practice: the one real figure (20+ years), then the shape of the
+// work. Nothing here is a number that could be wrong.
+const statOrder: StatId[] = ['years', 'b2b', 'team', 'accounts', 'stages', 'relationships'];
 
 const doingIcons: Record<DoingId, string> = {
-  engineering: 'lucide:code-xml',
-  leadership: 'lucide:users',
-  aiAssisted: 'lucide:hammer',
-  aiSystems: 'lucide:sparkles',
+  team: 'lucide:users',
+  accounts: 'lucide:handshake',
+  pipeline: 'lucide:chart-line',
+  negotiation: 'lucide:file-signature',
 };
-const doingOrder: DoingId[] = ['engineering', 'leadership', 'aiAssisted', 'aiSystems'];
+const doingOrder: DoingId[] = ['team', 'accounts', 'pipeline', 'negotiation'];
 
 // Written from the employer's point of view rather than mine — one line each,
 // stating a benefit rather than restating a fact the tiles above already carry.
 const valueIcons: Record<ValueId, string> = {
-  ship: 'lucide:rocket',
-  build: 'lucide:wrench',
-  handoff: 'lucide:workflow',
-  ai: 'lucide:lightbulb',
-  load: 'lucide:gauge',
-  grow: 'lucide:sprout',
+  revenue: 'lucide:trending-up',
+  retention: 'lucide:heart-handshake',
+  team: 'lucide:sprout',
+  pipeline: 'lucide:gauge',
+  relationships: 'lucide:handshake',
+  process: 'lucide:clipboard-list',
 };
-const valueOrder: ValueId[] = ['ship', 'build', 'handoff', 'ai', 'load', 'grow'];
+const valueOrder: ValueId[] = [
+  'revenue',
+  'retention',
+  'team',
+  'pipeline',
+  'relationships',
+  'process',
+];
 
 // What keeps me in this work, as opposed to what I am paid to do.
 const principleIcons: Record<PrincipleId, string> = {
-  curiosity: 'lucide:telescope',
-  evolution: 'lucide:trending-up',
-  teams: 'lucide:handshake',
-  impact: 'lucide:target',
+  trust: 'lucide:heart-handshake',
+  listen: 'lucide:compass',
+  team: 'lucide:users',
+  results: 'lucide:target',
 };
-const principleOrder: PrincipleId[] = ['curiosity', 'evolution', 'teams', 'impact'];
+const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
 
 const monogram = siteFacts.name
   .split(' ')
@@ -90,7 +95,7 @@ const monogram = siteFacts.name
     </div>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href={localePath(locale, '/career/')} class="btn btn-primary">{s.home.ctaCareer}</a>
-      <a href={localePath(locale, '/articles/')} class="btn btn-ghost">{s.home.ctaWriting}</a>
+      <a href={localePath(locale, '/contact/')} class="btn btn-ghost">{s.home.ctaContact}</a>
     </div>
   </section>
 

@@ -143,9 +143,4 @@ html {
   .tip-end:focus-visible::after {
     transform: translateY(0);
   }
-
-  /* Article body typography (rendered ArticlePart HTML) */
-  .prose-article {
-    @apply text-muted [&_h2]:text-ink [&_h3]:text-ink [&_a]:text-accent [&_code]:bg-chip [&_blockquote]:border-line-strong max-w-none space-y-4 leading-relaxed [&_a]:underline [&_blockquote]:border-s-4 [&_blockquote]:ps-4 [&_blockquote]:italic [&_code]:rounded [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-sm [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mt-6 [&_h3]:text-xl [&_h3]:font-semibold [&_ol]:list-decimal [&_ol]:ps-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-4 [&_ul]:list-disc [&_ul]:ps-5;
-  }
 }

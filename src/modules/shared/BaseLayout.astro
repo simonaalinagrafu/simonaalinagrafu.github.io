@@ -4,7 +4,7 @@ import '@fontsource-variable/space-grotesk';
 import '@styles/global.css';
 import HeaderPart from './HeaderPart.astro';
 import FooterPart from './FooterPart.astro';
-import { siteFacts } from '@data/profile';
+import { siteFacts, getProfile } from '@data/profile';
 import { getLocale, stripLocale, localePath, locales, defaultLocale } from '@fx/lib/i18n';
 import { t } from '@i18n/index';
 
@@ -17,7 +17,7 @@ const path = Astro.url.pathname;
 const locale = getLocale(path);
 const s = t(locale);
 
-const { title, description = s.articles.metaDescription } = Astro.props;
+const { title, description = getProfile(locale).site.tagline } = Astro.props;
 
 // The same page in every language, for the hreflang alternates.
 const bare = stripLocale(path);
@@ -26,7 +26,6 @@ const alternates = locales.map((l) => ({
   href: new URL(localePath(l, bare), siteFacts.url).href,
 }));
 const canonical = new URL(path, siteFacts.url).href;
-const feed = localePath(locale, '/rss.xml');
 ---
 
 <html lang={s.htmlLang} class="antialiased">
@@ -44,12 +43,6 @@ const feed = localePath(locale, '/rss.xml');
       rel="alternate"
       hreflang="x-default"
       href={new URL(localePath(defaultLocale, bare), siteFacts.url).href}
-    />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title={`${siteFacts.name} — ${s.articles.feedTitle}`}
-      href={feed}
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteFacts.name} />

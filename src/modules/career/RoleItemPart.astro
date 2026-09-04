@@ -1,6 +1,6 @@
 ---
 // One entry on the Career timeline: era icon, period badge, company context,
-// role summary, a numbered list of what I did, and tech chips.
+// role summary, a numbered list of what I did, and focus-area chips.
 // The icon travels with the role (data/profile/shape.ts) rather than through a
 // positional array, so the two cannot fall out of step.
 import { Icon } from 'astro-icon/components';
@@ -63,10 +63,10 @@ const { role } = Astro.props;
     }
   </div>
   {
-    role.tech && (
+    role.focus && (
       <div class="mt-4 flex flex-wrap gap-2">
-        {role.tech.map((tech) => (
-          <span class="tag">{tech}</span>
+        {role.focus.map((area) => (
+          <span class="tag">{area}</span>
         ))}
       </div>
     )

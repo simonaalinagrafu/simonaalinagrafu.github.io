@@ -5,12 +5,12 @@
 // by id rather than ordered, so the icons that pair with it in the page cannot
 // silently fall out of step the way a positional array can.
 
-export type NavId = 'home' | 'career' | 'skills' | 'articles' | 'contact';
+export type NavId = 'home' | 'career' | 'skills' | 'contact';
 export type ThemeId = 'light' | 'dark' | 'emerald' | 'sepia';
-export type StatId = 'years' | 'apps' | 'requests' | 'phases' | 'aiSystems' | 'aiAssisted';
-export type DoingId = 'engineering' | 'leadership' | 'aiAssisted' | 'aiSystems';
-export type ValueId = 'ship' | 'build' | 'handoff' | 'ai' | 'load' | 'grow';
-export type PrincipleId = 'curiosity' | 'evolution' | 'teams' | 'impact';
+export type StatId = 'years' | 'b2b' | 'team' | 'accounts' | 'stages' | 'relationships';
+export type DoingId = 'team' | 'accounts' | 'pipeline' | 'negotiation';
+export type ValueId = 'revenue' | 'retention' | 'team' | 'pipeline' | 'relationships' | 'process';
+export type PrincipleId = 'trust' | 'listen' | 'team' | 'results';
 export type CareerStatId = 'years' | 'leading' | 'companies';
 
 export interface TitledBody {
@@ -50,14 +50,13 @@ export interface UiStrings {
 
   footer: {
     blurb: string;
-    rss: string;
   };
 
   home: {
     metaTitle: string;
     greeting: string;
     ctaCareer: string;
-    ctaWriting: string;
+    ctaContact: string;
     kickerReach: string;
     kickerDoing: string;
     kickerWorking: string;
@@ -65,7 +64,7 @@ export interface UiStrings {
     headingWorking: string;
     headingPrinciples: string;
     stats: Record<StatId, { value: string; label: string }>;
-    /** `engineering.body` may contain the token {company}. */
+    /** `team.body` may contain the token {company}. */
     doing: Record<DoingId, TitledBody>;
     value: Record<ValueId, TitledBody>;
     principles: Record<PrincipleId, TitledBody>;
@@ -84,6 +83,8 @@ export interface UiStrings {
     education: string;
     /** Accessible name for the company timeline ribbon. */
     timeline: string;
+    /** Short word for the open end of the current role on the ribbon. */
+    now: string;
   };
 
   skills: {
@@ -92,19 +93,6 @@ export interface UiStrings {
     kicker: string;
     heading: string;
     lede: string;
-  };
-
-  articles: {
-    metaTitle: string;
-    metaDescription: string;
-    /** RSS channel title suffix, after the site name. */
-    feedTitle: string;
-    kicker: string;
-    heading: string;
-    ledeBefore: string;
-    ledeRssLink: string;
-    ledeAfter: string;
-    back: string;
   };
 
   contact: {
@@ -128,10 +116,11 @@ export interface UiStrings {
     summary: string;
     skills: string;
     experience: string;
-    keyProject: string;
+    keyAchievement: string;
     education: string;
-    tech: string;
-    /** Read in the first few seconds — figures rather than prose. */
+    /** Label for the areas-of-responsibility line under a role. */
+    focus: string;
+    /** Read in the first few seconds — short, concrete lines. */
     highlights: string[];
   };
 }

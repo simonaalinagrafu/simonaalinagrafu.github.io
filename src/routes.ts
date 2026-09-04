@@ -22,11 +22,8 @@ const pages: PageDef[] = [
   { path: '/', entrypoint: './src/modules/index/IndexPage.astro' },
   { path: '/career', entrypoint: './src/modules/career/CareerPage.astro' },
   { path: '/skills', entrypoint: './src/modules/skills/SkillsPage.astro' },
-  { path: '/articles', entrypoint: './src/modules/articles/ArticlesPage.astro' },
-  { path: '/articles/[id]', entrypoint: './src/modules/articles/ArticlePage.astro' },
   { path: '/contact', entrypoint: './src/modules/contact/ContactPage.astro' },
   { path: '/resume-print', entrypoint: './src/modules/resume-print/ResumePrintPage.astro' },
-  { path: '/rss.xml', entrypoint: './src/modules/rss/RssEndpoint.js' },
   // GitHub Pages serves one /404.html for every unmatched path, so this page
   // cannot be per-locale — it carries both languages instead.
   { path: '/404', entrypoint: './src/modules/404/NotFoundPage.astro', locales: ['ro'] },

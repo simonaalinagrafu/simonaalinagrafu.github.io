@@ -1,205 +1,179 @@
 import type { ProfileText } from './shape';
 
+// English profile text.
+//
+// WHAT IS INVENTED. Only the Tipografia Everest role is real, and even its
+// dates are a guess. The three earlier roles, the education entry and all
+// three achievements are imagined stand-ins for a plausible 20-year B2B sales
+// career — see `placeholder: true` in shape.ts. No figures are invented
+// anywhere: the only number on the site is "20+ years".
+
 export const en: ProfileText = {
   site: {
-    title: 'Engineering Manager | Solutions Architect | Enterprise & AI Systems',
+    title: 'Sales Manager | B2B Sales | Team Leadership',
     tagline:
-      'Engineering leader with 20+ years in software — from game programming to cloud platforms handling millions of requests a day, now building agentic AI systems.',
+      'Sales manager with 20+ years in B2B — from field sales to key accounts to leading a sales team that delivers, year after year.',
     intro:
-      '20+ years in software development, and every phase of it: shaping the specification, designing the architecture, writing the code, holding the quality, shipping the release, and running it in production.',
+      '20+ years in B2B sales, and every stage of it: finding the client, understanding the business, negotiating the agreement, delivering on it, and keeping the relationship for the long term. Today I lead the sales team at Tipografia Everest.',
     location: 'Bucharest, Romania',
   },
 
   roles: {
-    nshift: {
-      position: 'Engineering Manager',
-      period: 'January 2022 – Present',
+    everest: {
+      position: 'Sales Manager',
+      period: '2013 – Present',
       location: 'Bucharest, Romania',
-      aboutShort:
-        'Global delivery-management platform — over 1,000 carriers across some 190 countries.',
-      about:
-        'nShift is a global leader in delivery and experience management software, formed in 2021 from the merger of Consignor, Unifaun and Transsmart. Its cloud platform covers the whole parcel journey — checkout delivery options, rule-based carrier selection, label and document generation, tracking, and returns — connecting retailers, 3PLs and manufacturers to a network of over 1,000 carriers across some 190 countries, with integrations into 450+ OMS, ERP and WMS systems.',
+      aboutShort: 'Printing house serving business clients.',
       summary:
-        'I lead the Webservices Team — one of the company’s core teams — building web services that handle millions of requests per day and support multiple business-critical applications. I combine hands-on development with leadership: contributing to coding, architecture, and decision-making while ensuring alignment across teams.',
+        'I lead the sales team — hiring, setting targets, and coaching — while keeping my own hand on the largest accounts. My job is to turn a pipeline into predictable revenue and to make sure the clients who trust us stay with us year after year.',
       bullets: [
-        'Lead and manage the Webservices Team: setting clear goals, providing direction, and keeping every member motivated and effective.',
-        'Establish engineering processes and standards: consistent development practices that improve collaboration, maintain quality, and accelerate delivery.',
-        'Recruit and develop engineers: active role in hiring, onboarding, and mentoring to build a skilled, cohesive team.',
-        'Provide technical guidance: solving complex issues alongside developers, reviewing designs, and making critical decisions on challenging topics.',
-        'Contribute to software architecture: design and implementation of scalable, secure, and maintainable systems.',
-        'Hands-on development: shared components, application structure, data flow, database design, security, and infrastructure — plus the AI systems built on top, with LLMs, agent orchestration, RAG, and MCP-style tool integration.',
-        'Solution Architect for our applications: designing and managing cloud environments on AWS and implementing CI/CD pipelines.',
-        'Act as Scrum Master: stand-ups, planning, retrospectives, and effective communication between Product Owners and developers.',
+        'Lead the sales team: setting clear targets, giving direction, and keeping every member motivated and accountable.',
+        'Own the key accounts: managing the relationships that carry the most revenue, from first contact to renewal.',
+        'Build the pipeline: forecasting, prioritising opportunities, and keeping the numbers honest.',
+        'Negotiate and close: pricing, contracts and terms with business clients of every size.',
+        'Recruit and develop salespeople: hiring, onboarding and coaching a team that performs as a unit.',
+        'Establish the sales process: consistent practices from lead to delivery, so results do not depend on heroics.',
+        'Work alongside production: aligning what is sold with what can be delivered, on time and to specification.',
       ],
     },
 
-    'consignor-manager': {
-      position: 'Team Manager',
-      period: 'January 2017 – January 2022',
+    'team-lead': {
+      position: 'Sales Team Lead',
+      period: '2009 – 2013',
       location: 'Bucharest, Romania',
-      aboutShort:
-        'Scandinavia’s leading multi-carrier shipping software; 10,000+ business customers.',
-      about:
-        'Founded in Oslo in 1997, Consignor grew into one of the largest suppliers of transport administration and multi-carrier shipping software in Scandinavia, serving more than 10,000 business customers from offices in Norway, Sweden, Denmark, Finland, Romania and the UK. In 2021 it merged with Unifaun and Transsmart to become nShift.',
+      aboutShort: 'B2B distributor — placeholder until the real employer is confirmed.',
       summary:
-        'I led two teams — the Webservices Team and the Integration Team — and wore the hat each situation demanded: Team Manager, Technical Lead, Project Manager (Prince2), or Software Developer. In practice that meant hiring and training the people who joined, owning the critical architecture decisions, running projects across team boundaries — and still writing code myself.',
+        'My first leadership role: coordinating a team of sales representatives while still carrying a portfolio of my own. I learned that a team hits its targets when each person knows exactly what is expected and gets help before they ask for it.',
       bullets: [
-        'Webservices Team: ran the web services serving the client components of the Consignor business.',
-        'Integration Team: brought Consignor functionality to the major e-commerce platforms.',
-        'Team leadership: set goals and direction for both teams, keeping two groups with very different missions pulling toward one platform.',
-        'Technical guidance and architecture: made the critical design decisions and worked through the hard problems alongside the developers.',
-        'Recruit and develop engineers: hiring, onboarding, and training the people who joined either team.',
-        'Hands-on development: shared components, application structure, and database design across the Consignor suite.',
+        'Coordinate the sales team: daily direction, weekly reviews, and shared targets everyone could see.',
+        'Coach representatives: joining client meetings, reviewing offers, and building each person’s confidence to close.',
+        'Manage the team pipeline: keeping opportunities moving and forecasts realistic.',
+        'Keep a personal portfolio: the accounts I brought in stayed with me while I led the team.',
       ],
     },
 
-    'consignor-lead': {
-      position: 'Technical Lead',
-      period: '2009 – 2017',
+    'key-account': {
+      position: 'Key Account Manager',
+      period: '2006 – 2009',
       location: 'Bucharest, Romania',
+      aboutShort: 'B2B services provider — placeholder until the real employer is confirmed.',
       summary:
-        'I led the Webservices Team, behind the 50 web services that served over 10,000 business clients in the Consignor application suite, distributed across Amazon Cloud. My role was to find sound technical solutions, mentor and train developers, help hire the people who joined us, and — not least — write a great deal of the code myself.',
+        'Responsible for the accounts that mattered most: understanding each client’s business well enough to anticipate what they would need next, and negotiating agreements both sides could live with for years.',
       bullets: [
-        'End-to-end delivery: involved across the entire application development workflow.',
-        'Module design: designed many modules of the business software to satisfy client requirements.',
-        'Mentoring: guided both junior and senior developers.',
-        'Documentation: wrote detailed technical and user documentation.',
-        'Cross-department liaison: connected the development team with other departments.',
+        'Manage key accounts: single point of contact for the largest business clients.',
+        'Negotiate contracts: pricing, terms and renewals, with retention as the measure of success.',
+        'Grow existing accounts: finding the next need before the client went looking elsewhere.',
+        'Coordinate delivery: making sure what was promised was what arrived.',
       ],
     },
 
-    teamnet: {
-      position: 'Team Leader',
-      period: '2008 – 2009',
+    'sales-rep': {
+      position: 'B2B Sales Representative',
+      period: '2004 – 2006',
       location: 'Bucharest, Romania',
-      aboutShort: 'Romanian technology and systems-integration company.',
-      about:
-        'TeamNet International, a Romanian technology and systems-integration company delivering software, IT infrastructure, and technology solutions for major public- and private-sector organizations.',
+      aboutShort: 'Distribution company — placeholder until the real employer is confirmed.',
       bullets: [
-        'Optimus ERP modules: managed them through every development step, from specification to testing and deployment.',
-        'Feature planning: built development plans for new features with the design department.',
-        'Quality and maintenance: enhanced existing features, and triaged and resolved every defect raised by the Quality Department.',
-      ],
-    },
-
-    ubisoft: {
-      position: 'Game Programmer',
-      period: 'January 2005 – June 2008',
-      location: 'Bucharest, Romania',
-      aboutShort: 'One of the world’s largest video game publishers.',
-      about:
-        'Ubisoft is a French video game publisher founded in 1986 by the Guillemot brothers and now one of the largest in the world, with studios across more than 45 locations behind franchises such as Assassin’s Creed, Far Cry, Rainbow Six and Prince of Persia. Ubisoft Bucharest, opened in 1992, was the company’s first production studio outside France and grew into one of its largest.',
-      summary:
-        'I designed, developed, and optimized gameplay and platform modules on four shipped and in-development titles.',
-      bullets: [
-        'Silent Hunter 4: designed and built the framework managing the evolution of the Crew, Weapons, and Equipment of the U-Boat simulator, plus the Career module.',
-        'King Kong (PC): Windows Media Center integration, multithreaded rendering, and the security module.',
-        'Blazing Angels (PC): Save/Load system and Media Center shell implementation.',
-        'Tom Clancy’s FireHawk: ERS (Enhanced Reality System) module.',
+        'Prospect new business clients: cold outreach, first meetings, and a growing list of companies that said yes.',
+        'Present and quote: matching the offer to what the client actually needed.',
+        'Build the habits: a full pipeline, a clean CRM, and follow-ups that never slipped.',
       ],
     },
   },
 
   skills: {
-    leadership: {
-      group: 'Leadership & Management',
-      blurb: 'Building, growing, and running engineering teams.',
+    'sales-leadership': {
+      group: 'Sales Leadership',
+      blurb: 'Building, coaching and running a sales team.',
       items: [
-        'Engineering Management',
-        'Team & Technical Leadership',
-        'Hiring & Mentoring',
-        'Agile / Scrum',
-        'Project Management (Prince2)',
-        'Strategic Planning',
+        'Sales team management',
+        'Target setting & accountability',
+        'Hiring & onboarding salespeople',
+        'Coaching & performance reviews',
+        'Sales process design',
       ],
     },
-    ai: {
-      group: 'AI & Machine Learning',
-      blurb: 'Agentic systems in production — and the theory underneath them.',
+    'key-accounts': {
+      group: 'Key Account Management',
+      blurb: 'The relationships that carry the revenue.',
       items: [
-        'AI-Assisted Software Development (Claude Code)',
-        'Advanced Agent Skills & Prompt Engineering',
-        'Agentic Architectures & LLM Orchestration',
-        'RAG (Retrieval-Augmented Generation)',
-        'MCP Gateways, Servers & Integrations',
-        'Machine Learning, Neural Networks & Deep Learning Foundations',
+        'Key account planning',
+        'Client retention & renewals',
+        'Account growth & cross-selling',
+        'Executive relationships',
+        'Complaint resolution',
       ],
     },
-    backend: {
-      group: 'Backend & Architecture',
-      blurb: 'Designing and building the services that carry the business.',
+    negotiation: {
+      group: 'Negotiation & Closing',
+      blurb: 'Agreements both sides keep.',
       items: [
-        'C#, .NET, ASP.NET Core, Entity Framework, LINQ',
-        'Python, FastAPI, SQLAlchemy',
-        'Solution & Software Architecture',
-        'Framework Design',
-        'API Design (REST, gRPC, SOAP/WCF)',
+        'Pricing & commercial terms',
+        'Contract negotiation',
+        'Objection handling',
+        'Closing techniques',
+        'Tender & proposal writing',
       ],
     },
-    cloud: {
-      group: 'Cloud, Data & DevOps',
-      blurb: 'Running systems reliably on AWS, from database to pipeline.',
+    pipeline: {
+      group: 'Pipeline & Forecasting',
+      blurb: 'Turning opportunities into predictable numbers.',
       items: [
-        'AWS (EC2, ECS, RDS, S3, CloudFormation)',
-        'Docker, CI/CD',
-        'SQL Server, PostgreSQL',
-        'Database Design, Relational Databases',
+        'Prospecting & lead qualification',
+        'Pipeline management',
+        'Sales forecasting',
+        'Reporting & KPIs',
+        'Territory & segment planning',
       ],
     },
-    frontend: {
-      group: 'Frontend & Web',
-      blurb: 'Interfaces for the platforms and tools I build.',
+    tools: {
+      group: 'Tools & Process',
+      blurb: 'The systems that keep a team honest.',
       items: [
-        'JavaScript, TypeScript',
-        'ReactJS, Material UI',
-        'HTML, CSS, SASS',
-        'Astro, Tailwind CSS, HTMX',
-        'Server-Rendered Web (ASP.NET MVC, FastAPI)',
+        'CRM systems',
+        'Microsoft Office / Excel',
+        'Offer & quotation tools',
+        'Sales meeting cadence',
+        'Order-to-delivery coordination',
       ],
     },
-    foundations: {
-      group: 'Foundations',
-      blurb: 'The math and fundamentals everything else stands on.',
+    business: {
+      group: 'Business Foundations',
+      blurb: 'What the numbers behind a deal mean.',
       items: [
-        'Probability, Linear Algebra, Calculus, Statistics',
-        'Data Structures & Algorithms',
-        'Problem Solving & Analytical Thinking',
-        'Software Architecture Principles',
-        'Design Patterns & Clean Code',
+        'Margin & pricing',
+        'Budgeting & sales planning',
+        'Market & competitor analysis',
+        'Customer service',
+        'Communication & presentation',
       ],
     },
   },
 
   education: {
-    msc: {
-      school: 'Academy of Economic Studies, Bucharest',
-      degree: 'Master of Science in Computer Science, Specialization in Project Management',
-    },
-    bsc: {
-      school: 'Academy of Economic Studies, Bucharest',
-      degree:
-        'Bachelor in Business Administration, Major in Computer Science, Specialization in Computer Science Applied in Business',
+    degree: {
+      school: '[University]',
+      degree: 'Bachelor’s degree in Marketing / Economics',
     },
   },
 
-  projects: {
-    'conversational-ai': {
-      title: 'Conversational AI Platform',
-      role: 'Engineering Manager & Architect · nShift',
+  achievements: {
+    portfolio: {
+      title: 'Growing the B2B Client Portfolio',
+      role: 'Sales Manager · Tipografia Everest',
       description:
-        'A large-scale AI assistant built on an agentic architecture: LLMs combined with orchestration layers, RAG, and structured prompt engineering. Domain-specific agents for different departments — each with tailored prompts, tools, and data access — collaborate through an orchestration layer. A continuous ingestion pipeline indexes internal documentation, APIs, and business data into knowledge stores, so responses stay context-aware and grounded in company-specific information.',
+        'Built and grew a portfolio of business clients through consistent prospecting, careful account management and a focus on keeping the clients we already had. The measure was not the size of the list but how many of those clients were still with us years later.',
     },
-    'app-builder': {
-      title: 'AI App Builder — Claude Code Skill',
-      role: 'Independent R&D · Personal project',
+    team: {
+      title: 'Building a Sales Team',
+      role: 'Sales Manager · Tipografia Everest',
       description:
-        'An advanced Claude Code skill that builds applications from existing codebases instead of from imagination. It reads codebases of any size — Python, TypeScript, JavaScript, C# — through a structural snapshot built once and queried many times, then works in three modes: generating new code shaped like the code that already exists, migrating an application to another stack, or translating it to another technology while preserving its domain and structure. Every output is proven rather than assumed — contract conformance, entity preservation, and side-by-side behaviour parity — and every decision that shapes the result is put to the user, never guessed.',
+        'Hired, onboarded and coached a sales team, and put in place the routines — targets, weekly reviews, a shared pipeline — that let it perform as a unit rather than as a set of individuals.',
     },
-    webservices: {
-      title: 'High-Throughput Webservices Platform',
-      role: 'Engineering Manager · nShift',
+    'accounts-system': {
+      title: 'A Key-Account Management System',
+      role: 'Sales Manager · Tipografia Everest',
       description:
-        'The core web-services platform behind nShift’s delivery-management suite: dozens of services and full-stack applications distributed across AWS, serving the client components of business-critical delivery workflows around the clock.',
+        'Introduced a structured way of managing the largest accounts: an owner for each, a plan per account, and a forecast the whole team could rely on.',
     },
   },
 };

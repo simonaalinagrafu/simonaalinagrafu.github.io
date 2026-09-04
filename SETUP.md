@@ -36,6 +36,7 @@ independent of the site's content identity (Simona Alina Grafu).
 | npm | 11.16.0 | Ships with Node |
 | Git | 2.53.0 | |
 | Google Chrome | any recent | **Only** needed to regenerate the CV PDFs and `og.png` (§6) |
+| Python 3 | any | Not needed by the site; only used by ad-hoc maintenance one-liners |
 
 Chrome is expected at:
 
@@ -68,49 +69,41 @@ npm run format     # prettier over src/
 ```
 
 **Expected clean state:** `npm run check` → *0 errors, 0 warnings, 0 hints*;
-`npm run build` → *15 page(s) built* (every page in Romanian and English, plus
-redirect stubs; `/404` is single-language).
+`npm run build` → *11 page(s) built* (About, Career, Skills, Contact and the CV print page
+in Romanian and English, plus `/404`, which is single-language) and **one warning line**
+listing the placeholder entries (§7).
 
 > If port 4321 is busy, Astro picks the next free port — or pass one explicitly:
 > `npm run preview -- --port 4322`.
 
 ---
 
-## 4. Deployment — configure this once ⚠️
+## 4. Deployment — configured and working ✅
 
-**This is the step that is currently NOT done, and nothing will deploy correctly until it is.**
+Pages source is set to **GitHub Actions** and the pipeline has deployed successfully. Every
+push to `main` rebuilds and publishes the site. (The earlier symptom — GitHub's built-in
+Jekyll build rendering `README.md` — is gone; note that a run named `pages build and
+deployment` still appears after each deploy, because `actions/deploy-pages` publishes its
+artifact through one. That is normal, not a sign Jekyll is back.)
 
-As of the last check, the repo's Pages source is set to **"Deploy from a branch"**, so GitHub
-runs its built-in Jekyll build and serves `README.md` rendered with the default theme. That is
-what is live at https://simonaalinagrafu.github.io right now — not this Astro site. The only
-workflow run in the repo's history is GitHub's own `pages build and deployment`; the workflow
-in `.github/workflows/deploy.yml` has never run.
-
-### Fix
-
-1. Go to **repo → Settings → Pages**.
-2. Under **Build and deployment → Source**, change *Deploy from a branch* to
-   **GitHub Actions**.
-3. Push to `main` (or run the workflow manually — it has `workflow_dispatch`).
-
-Verify afterwards:
+Verify after any deploy:
 
 ```sh
 curl -s https://simonaalinagrafu.github.io | grep -o "<title>[^<]*</title>"
 ```
 
-- ✅ correct: `<title>Simona Alina Grafu — Engineering Manager & AI Systems Builder</title>`
-- ❌ still Jekyll: `<title>simonaalinagrafu.github.io | simonaalinagrafu</title>`
+- ✅ correct: `<title>Simona Alina Grafu — Manager de Vânzări, B2B</title>` (Romanian root)
+- ❌ Jekyll again: `<title>simonaalinagrafu.github.io | simonaalinagrafu</title>` — go to
+  **repo → Settings → Pages → Source** and set it back to **GitHub Actions**
 
-### If it still fails, check the org settings
+### If a deploy fails
 
-Because the repo is owned by an organization rather than a user, deploys can also be blocked
-one level up, at **organization → Settings**:
-
-- **Actions → General → Actions permissions** — Actions must be allowed for this repo.
-- **Actions → General → Workflow permissions** — the workflow declares its own
-  `permissions:` block, but an org policy set to a stricter default can still override it.
-- **Pages** — some orgs restrict who may publish Pages sites and at what visibility.
+- **"Refusing to build for deployment: … placeholder content"** — expected while §7 is not
+  empty. That is the guard doing its job; replace the placeholders, don't override it.
+- **A type error in `npm run check`** — the same gate you run locally; fix and push.
+- Anything else, check one level up at **organization → Settings**, since the repo is owned by
+  an organization: **Actions → General** (Actions permissions, workflow permissions) and
+  **Pages** (who may publish, at what visibility).
 
 ### How the pipeline works
 
@@ -188,40 +181,65 @@ It pulls Space Grotesk and Inter from Google Fonts, so this needs a network conn
 Hand-edited SVG containing the `SAG` monogram. Keep it in sync with the hero monogram
 (derived from the name in `IndexPage.astro`) and the ring in `design/og-image.html`.
 
-## 7. Outstanding — placeholder data still to replace
+## 7. Outstanding — placeholder content to replace before deploying
 
-The site was renamed from `vasilegrafu` / *Vasile Grafu* to `simonaalinagrafu` /
-*Simona Alina Grafu*. The rename covered every URL, handle, title, monogram and generated asset,
-but these carry over from the original and are **still wrong**:
+The site now describes **Simona Alina Grafu, Sales Manager at Tipografia Everest**. Only
+that one fact was supplied; everything below is an imagined-but-plausible stand-in for a
+20-year B2B sales career, waiting for her real CV. Nothing invented uses a figure — the only
+number on the site is "20+ years".
 
+**Do not push until this list is empty.** `src/data/profile/index.ts` refuses to build under
+CI while any `placeholder: true` remains (§8), and the live site still shows the previous
+owner's biography until the first deploy after review.
+
+Each item names where to edit: text in `src/data/profile/ro.ts` and `en.ts`, structure
+(company name, dates, the `placeholder` flag) in `src/data/profile/shape.ts`.
+
+- [ ] **Tipografia Everest — dates.** `2013 – Prezent` is a guess. Real role too, so no
+      placeholder flag; just fix the years in both text files.
+- [ ] **Role `team-lead`** — `[Distribuitor industrial]`, 2009–2013, Sales Team Lead.
+      Invented employer and dates; prose is generic.
+- [ ] **Role `key-account`** — `[Furnizor de servicii B2B]`, 2006–2009, Key Account Manager.
+- [ ] **Role `sales-rep`** — `[Companie de distribuție]`, 2004–2006, B2B Sales Representative.
+- [ ] **Education `degree`** — `[Universitate]`, 2000–2004, Licență în Marketing / Economie.
+- [ ] **Achievements** `portfolio`, `team`, `accounts-system` — all imagined. The first one
+      prints on the CV as "Key achievement". Replace with real wins, ideally with figures.
+- [ ] **Career ribbon** — the `eras` array in `src/modules/career/CareerPage.astro` repeats
+      the same bracketed names and year spans; update it alongside the roles.
+- [ ] **Home stats and CV highlights** — `home.stats` and `resume.highlights` in
+      `src/i18n/ro.ts` / `en.ts` are deliberately qualitative. Add real figures (team size,
+      portfolio size, growth) when known.
 - [ ] **LinkedIn URL** — `src/data/profile/shape.ts` still has
       `https://www.linkedin.com/in/vasile-grafu-6a99369`. It is live on the Contact page, in the
       header, and printed into both CV PDFs.
 - [ ] **Phone** — `+40 722 635 785`, printed into both CV PDFs.
 - [ ] **Email** — mechanically renamed to `simonaalinagrafu@gmail.com`. Confirm that mailbox
-      actually exists before publishing.
-- [ ] **Romanian translation** — drafted by Claude and not yet reviewed by a native
-      speaker. Two conventions were chosen and are easy to reverse: job titles stay in
-      English (the norm on Romanian tech CVs), and the prose is written to stay
-      gender-neutral, since Romanian agrees adjectives with gender.
-- [ ] **Biography** — all of `experience`, `skills`, `education` and `projects` in
-      `src/data/profile/` describe Vasile Grafu's career (nShift, Consignor, TeamNet, Ubisoft).
-      So does the `why-i-built-this-site` article and the home page hero copy.
+      actually exists.
+- [ ] **GitHub link** — header and footer still link to `github.com/simonaalinagrafu`. Keep or
+      remove depending on whether she wants a GitHub presence.
+- [ ] **Romanian translation** — drafted by Claude and not yet reviewed by a native speaker.
+      Two conventions, easy to reverse: English job titles where they are the market norm
+      (Key Account Manager), and gender-neutral prose (Romanian agrees adjectives with
+      gender). If she prefers explicitly feminine wording, it is one pass over the two `ro.ts`
+      files.
 
-After changing any of the first three, regenerate both CV PDFs (§6).
+After changing any of these, regenerate both CV PDFs (§6), then delete the `placeholder: true`
+line from each entry you have confirmed.
 
 ---
 
 ## 8. Known rough edges
 
+- **The placeholder guard.** `getProfile()` in `src/data/profile/index.ts` throws when
+  `process.env.CI` is set and any placeholder remains. GitHub Actions sets `CI=true`, so a
+  push with placeholders fails at the build step rather than deploying invented content.
+  `PLACEHOLDERS_OK=1` overrides it deliberately. Delete the guard once the list in §7 is
+  empty — it has no purpose after that.
 - **`src/fx/components/FlowDiagramPart.astro` is unused.** Its only consumer was the
   Projects page, which has been removed. It is kept because `fx/` is the portable framework
   layer rather than site content — delete it if that layer is ever pruned.
-- **`projects` is still exported from `data/profile/`** even though the Projects page is
-  gone — `ResumePrintPage.astro` uses `projects[0]` for the PDF's "Key project" section.
-  Do not delete it.
-- **The Projects page was removed**; `/projects` and `/en/projects` redirect to their
-  respective homepages, alongside `/resume` → `/career` and `/ideas` → `/`.
+- **Removed sections redirect.** `/projects`, `/articles` and `/ideas` (and their `/en/`
+  twins) redirect to their locale's home, alongside `/resume` → `/career`.
 - **Redirects are not locale-expanded automatically.** Adding one means adding its `/en/…`
   counterpart by hand in `astro.config.mjs`. Never inject a route for a path that also has
   a redirect — Astro treats the duplicate as an error.

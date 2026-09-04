@@ -2,7 +2,7 @@
 // Print source for the CV PDFs, rendered entirely from src/data/profile/.
 // One page per locale: /resume-print/ → public/cv-ro.pdf,
 //                      /en/resume-print/ → public/cv-en.pdf
-// Regenerate both after any profile change with:  npm run pdf
+// Regenerate both after any profile change with:  npm run cv
 // This page is noindex and excluded from the sitemap (see astro.config.mjs).
 import './resume-print.css';
 import { getProfile } from '@data/profile';
@@ -11,9 +11,9 @@ import { t } from '@i18n/index';
 
 const locale = getLocale(Astro.url.pathname);
 const s = t(locale);
-const { site, experience, skills, education, projects } = getProfile(locale);
+const { site, experience, skills, education, achievements } = getProfile(locale);
 
-const keyProject = projects[0];
+const keyAchievement = achievements[0];
 
 const linkedinLabel = site.linkedin.replace('https://www.', '');
 const siteLabel = site.url.replace('https://', '');
@@ -95,10 +95,10 @@ function splitBullet(b: string) {
                 );
               })}
             </ul>
-            {role.tech && (
+            {role.focus && (
               <p class="tech">
-                <span class="tech-label">{s.resume.tech}</span>
-                {role.tech.join(' · ')}
+                <span class="tech-label">{s.resume.focus}</span>
+                {role.focus.join(' · ')}
               </p>
             )}
           </div>
@@ -106,13 +106,13 @@ function splitBullet(b: string) {
       })
     }
 
-    <h2>{s.resume.keyProject}</h2>
+    <h2>{s.resume.keyAchievement}</h2>
     <div class="role">
       <div class="role-head">
-        <h3>{keyProject.title}</h3>
-        <span class="period">{keyProject.role}</span>
+        <h3>{keyAchievement.title}</h3>
+        <span class="period">{keyAchievement.role}</span>
       </div>
-      <p class="summary">{keyProject.description}</p>
+      <p class="summary">{keyAchievement.description}</p>
     </div>
 
     <h2>{s.resume.education}</h2>

@@ -6,8 +6,8 @@
 src/
 ├─ modules/            application layer
 │  ├─ shared/          cross-module parts, BaseLayout, nav data
-│  ├─ index/ career/ … one directory per page
-│  └─ …
+│  ├─ index/ career/ skills/ contact/ resume-print/ 404/
+│  └─ …                one directory per page
 ├─ data/profile/       content layer — the site's facts, per locale
 ├─ i18n/               UI strings and page copy, per locale
 ├─ fx/                 framework layer — portable to any project
@@ -77,19 +77,24 @@ Adding a page = new module directory + one line in `routes.ts`.
 
 Redirects are **not** locale-expanded automatically — add the `/en/…` counterpart
 by hand in `astro.config.mjs`, and never inject a path that also has a redirect
-(duplicate routes are an error).
+(duplicate routes are an error). Removed sections (`/projects`, `/articles`,
+`/ideas`) redirect to their locale's home.
 
 ## Content
 
 `src/data/profile/` splits the CV in two:
 
-- `shape.ts` — what exists and in what order: role IDs, company names, tech
-  lists, icons, bullet-count flags, contact details. The same in every language.
+- `shape.ts` — what exists and in what order: role IDs, company names, focus
+  areas, icons, bullet-count flags, contact details. The same in every language.
+  Entries that are not yet confirmed carry `placeholder: true`.
 - `ro.ts` / `en.ts` — the prose, keyed by those IDs.
-- `index.ts` — `getProfile(locale)` merges the two.
+- `index.ts` — `getProfile(locale)` merges the two, and guards the placeholders:
+  a warning locally, a hard failure under `CI` (override: `PLACEHOLDERS_OK=1`).
 
 Icons travel with the thing they describe rather than in a parallel array, so
-they cannot fall out of step when the order changes.
+they cannot fall out of step when the order changes. A role's `focus` list is
+its areas of responsibility (chips on the Career page, a "Focus" line on the
+PDF); `achievements[0]` is the "Key achievement" the PDF prints.
 
 ## Styling ladder
 
@@ -99,7 +104,7 @@ they cannot fall out of step when the order changes.
    Never write a raw palette color (`slate-600`, `indigo-500`) in a component.
 2. **Recipes** (`global.css` `@layer components`) — named classes for repeated
    patterns: `.title-*`, `.btn*`, `.card`, `.tag`, `.badge`, `.chip`,
-   `.nav-pill`, `.menu-item`, `.icon-tile`, `.tip`, `.lede`, `.prose-article`…
+   `.nav-pill`, `.menu-item`, `.icon-tile`, `.tip`, `.lede`…
    Extract a recipe only when a pattern repeats or has a clear name.
 3. **Inline utilities** — everything else, directly in the markup.
 4. **`style=` attribute** — only for data-driven values Tailwind cannot know
@@ -107,15 +112,6 @@ they cannot fall out of step when the order changes.
 5. **`<style>` blocks in components — never.** The one non-Tailwind stylesheet
    is `modules/resume-print/resume-print.css` (the PDF is deliberately
    theme-independent print CSS).
-
-## Articles
-
-`modules/articles/registry.ts` lists metadata with a title and description per
-locale. Each article is a directory `modules/articles/content/<id>/` holding one
-body per language — `ArticlePart.ro.astro` and `ArticlePart.en.astro` — plus any
-local components, scripts, or media. **Both languages are required**; a missing
-body throws a build error naming the file to create. Listing, RSS (one feed per
-locale) and routes read the registry.
 
 ## Themes
 

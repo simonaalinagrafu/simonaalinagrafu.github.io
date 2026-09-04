@@ -11,7 +11,6 @@ export const en: UiStrings = {
     home: 'About Me',
     career: 'Career',
     skills: 'Skills',
-    articles: 'Articles',
     contact: 'Contact',
   },
 
@@ -32,21 +31,20 @@ export const en: UiStrings = {
     email: 'Email',
     emailTip: 'Send me an email',
     github: 'GitHub',
-    githubTip: 'My code on GitHub',
+    githubTip: 'My GitHub profile',
     linkedin: 'LinkedIn',
     linkedinTip: 'My LinkedIn profile',
   },
 
   footer: {
-    blurb: 'Engineering leadership, software architecture, and applied AI.',
-    rss: 'RSS',
+    blurb: 'B2B sales, key accounts, and the teams that deliver them.',
   },
 
   home: {
-    metaTitle: 'Engineering Manager & AI Systems Builder',
+    metaTitle: 'Sales Manager, B2B',
     greeting: 'Hello, I’m',
     ctaCareer: 'My career story',
-    ctaWriting: 'Read my writing',
+    ctaContact: 'Get in touch',
     kickerReach: 'Reach and practice',
     kickerDoing: 'What I do',
     kickerWorking: 'Working with me',
@@ -55,76 +53,76 @@ export const en: UiStrings = {
     headingPrinciples: 'What drives me',
 
     stats: {
-      years: { value: '20+', label: 'years in software development' },
-      apps: { value: '50+', label: 'applications built or contributed to' },
-      requests: { value: 'Millions', label: 'of requests a day on some applications' },
-      phases: { value: 'Every phase', label: 'specification through production' },
-      aiSystems: { value: 'AI systems', label: 'built, not just used' },
-      aiAssisted: { value: 'AI-assisted', label: 'engineering, every day' },
+      years: { value: '20+', label: 'years in B2B sales' },
+      b2b: { value: 'B2B', label: 'selling to businesses, not consumers' },
+      team: { value: 'A team', label: 'of salespeople led, coached and kept' },
+      accounts: { value: 'Key accounts', label: 'owned from first contact to renewal' },
+      stages: { value: 'Every stage', label: 'from prospecting to delivery' },
+      relationships: { value: 'Long-term', label: 'client relationships, year after year' },
     },
 
     doing: {
-      engineering: {
-        title: 'Hands-on engineering',
-        body: 'I still write the code: C#/.NET, Python, React, SQL, and the AWS infrastructure it runs on. Specifications, architecture, cloud environments, CI/CD pipelines — I build them, not just approve them.',
+      team: {
+        title: 'Sales team leadership',
+        body: 'Leading the sales team at {company} — setting targets, coaching each person, and building the routines that turn individuals into a team that hits its numbers together.',
       },
-      leadership: {
-        title: 'Engineering leadership',
-        body: 'Leading one of {company}’s core teams — hiring, mentoring, and setting the standards behind business-critical delivery software.',
+      accounts: {
+        title: 'Key account management',
+        body: 'Owning the relationships that carry the most revenue: understanding each client’s business well enough to see what they will need next, and being the person they call first.',
       },
-      aiAssisted: {
-        title: 'AI-assisted engineering',
-        body: 'Advanced Claude Code skills, including an app builder that reads existing codebases through a structural snapshot and generates, migrates, or translates applications with verified results.',
+      pipeline: {
+        title: 'Pipeline & forecasting',
+        body: 'Prospecting, qualifying, prioritising. A pipeline the whole team can see, and a forecast that management can plan against because it has been honest before.',
       },
-      aiSystems: {
-        title: 'AI systems',
-        body: 'Agentic AI platforms: LLM orchestration, RAG pipelines, and multi-agent architectures grounded in real business data, integrated over MCP and answerable in production.',
+      negotiation: {
+        title: 'Negotiation & closing',
+        body: 'Pricing, contracts, terms and renewals with business clients of every size — agreements that hold up because both sides can live with them.',
       },
     },
 
     value: {
-      ship: {
-        title: 'Teams that ship',
-        body: 'Cohesive teams delivering business-critical software, year after year.',
+      revenue: {
+        title: 'Revenue that grows',
+        body: 'A portfolio built by prospecting steadily and keeping what was won.',
       },
-      build: {
-        title: 'Leadership that builds',
-        body: 'An architect’s judgment, from someone who still writes the code.',
+      retention: {
+        title: 'Clients who stay',
+        body: 'Retention as the measure of success, not just the size of the list.',
       },
-      handoff: {
-        title: 'Fewer handoff gaps',
-        body: 'Someone who has worked every phase sees what falls between them.',
+      team: {
+        title: 'A team that performs',
+        body: 'Salespeople hired, coached and kept — targets met as a unit.',
       },
-      ai: {
-        title: 'AI that pays off',
-        body: 'Grounded in production experience, not in hype.',
+      pipeline: {
+        title: 'A predictable pipeline',
+        body: 'Forecasts the business can plan against, because they have been right before.',
       },
-      load: {
-        title: 'Built for load',
-        body: 'Systems that stay up when the business depends on them.',
+      relationships: {
+        title: 'Relationships that open doors',
+        body: 'Twenty years of business contacts who pick up the phone.',
       },
-      grow: {
-        title: 'People who grow',
-        body: 'Engineers hired, mentored and kept — the team outlasts the system.',
+      process: {
+        title: 'Process, not heroics',
+        body: 'Results that repeat because the way of working is clear.',
       },
     },
 
     principles: {
-      curiosity: {
-        title: 'Curiosity',
-        body: 'I’m naturally driven to understand how things work and why they work the way they do. I enjoy going deep into a problem, learning from first principles, and connecting ideas across different areas. For me, the process of understanding is rewarding in itself.',
+      trust: {
+        title: 'Trust first',
+        body: 'Every sale I have kept for years started with a promise that was kept. I would rather lose a deal than win it with something I cannot deliver. Clients notice, and they come back.',
       },
-      evolution: {
-        title: 'Constant evolution',
-        body: 'I’m always looking for ways to improve how I think, work, and build. AI-assisted engineering has already reshaped my daily practice, and I actively explore new tools, ideas, and approaches that can make me more effective. I see change as an opportunity to rethink what’s possible rather than simply adapt to it.',
+      listen: {
+        title: 'Listen before you sell',
+        body: 'The offer that lands is the one that answers a need the client actually has. Most of selling is understanding — the business, the constraints, what a good outcome looks like for the person across the table.',
       },
-      teams: {
-        title: 'Teams that discover',
-        body: 'I do my best work in supportive, collaborative teams where people learn from each other, challenge ideas constructively, and take pride in their craft. I value working toward a shared goal while giving everyone the space to contribute, experiment, and grow.',
+      team: {
+        title: 'The team wins',
+        body: 'My best results have come from teams where people share what works, cover for each other, and take pride in the number on the board. Leading means making that kind of team possible, then getting out of the way.',
       },
-      impact: {
-        title: 'Impact',
-        body: 'Technology is most interesting to me when it matters — when the systems we build carry real businesses, save people time, and open possibilities that weren’t there before. Understanding why the work matters shapes how I build it, and seeing an idea become something people rely on every day is the most satisfying part of engineering.',
+      results: {
+        title: 'Results you can measure',
+        body: 'A pipeline, a forecast and a target are only useful if they are honest. I keep the numbers real, even when the real number is uncomfortable, because that is the only way to improve them.',
       },
     },
   },
@@ -132,47 +130,35 @@ export const en: UiStrings = {
   career: {
     metaTitle: 'Career',
     metaDescription:
-      '20+ years in software: Ubisoft, TeamNet, Consignor, and nShift — from game programming to engineering management and AI systems.',
+      '20+ years in B2B sales: from field sales to key accounts to leading the sales team at Tipografia Everest.',
     kicker: 'Journey',
     heading: 'Career',
     lede: 'The roles I’ve held, the teams I’ve built, and what each chapter added.',
-    download: 'Download resume (PDF)',
-    downloadFile: 'Simona-Alina-Grafu-Resume',
+    download: 'Download CV (PDF)',
+    downloadFile: 'Simona-Alina-Grafu-CV',
     stats: {
-      years: 'years in software',
+      years: 'years in B2B sales',
       leading: 'years leading teams',
       companies: 'companies',
     },
     education: 'Education',
     timeline: 'Career timeline by company',
+    now: 'now',
   },
 
   skills: {
     metaTitle: 'Skills',
     metaDescription:
-      'Skills across leadership, AI and machine learning, backend architecture, cloud, and the fundamentals beneath them.',
+      'Skills across sales leadership, key account management, negotiation, pipeline and forecasting, and the business fundamentals beneath them.',
     kicker: 'Toolbox',
     heading: 'Skills',
-    lede: 'What I reach for and the ground it stands on — from leading teams to the math under the models.',
-  },
-
-  articles: {
-    metaTitle: 'Articles',
-    metaDescription: 'Writing on engineering leadership, software architecture, and applied AI.',
-    feedTitle: 'Articles',
-    kicker: 'Writing',
-    heading: 'Articles',
-    ledeBefore:
-      'Writing on engineering leadership, software architecture, agentic AI systems, and AI-assisted development. Subscribe via ',
-    ledeRssLink: 'RSS',
-    ledeAfter: '.',
-    back: '← All articles',
+    lede: 'What I reach for and the ground it stands on — from leading a team to the margin behind a price.',
   },
 
   contact: {
     metaTitle: 'Contact',
     metaDescription:
-      'Get in touch with Simona Alina Grafu to exchange ideas on engineering leadership, AI systems, and research.',
+      'Get in touch with Simona Alina Grafu about B2B sales, key accounts, and leading sales teams.',
     heading: 'Contact',
     lede: 'I read everything and reply to thoughtful messages.',
     email: 'Email',
@@ -191,14 +177,14 @@ export const en: UiStrings = {
     summary: 'Summary',
     skills: 'Skills',
     experience: 'Experience',
-    keyProject: 'Key Project',
+    keyAchievement: 'Key Achievement',
     education: 'Education',
-    tech: 'Tech',
+    focus: 'Focus',
     highlights: [
-      'Millions of requests served every day by the platform my team runs',
-      '10,000+ business clients on the systems I have led',
-      '50 web services in production, distributed across AWS',
-      '20+ years, from real-time game engines to agentic AI systems',
+      '20+ years in B2B sales, from field sales to sales management',
+      'Leads the sales team at Tipografia Everest',
+      'Owns the key accounts that carry the most revenue',
+      'Retention and a predictable pipeline as the measures of success',
     ],
   },
 };

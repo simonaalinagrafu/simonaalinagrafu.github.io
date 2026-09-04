@@ -14,17 +14,18 @@ const { experience, education } = getProfile(locale);
 
 const stats = [
   { value: '20+', label: s.career.stats.years },
-  { value: '18', label: s.career.stats.leading },
-  { value: '4', label: s.career.stats.companies },
+  { value: '15+', label: s.career.stats.leading },
+  { value: String(experience.length), label: s.career.stats.companies },
 ];
 
 // Company eras for the ribbon; widths are proportional to duration. Company
-// names and year ranges are the same in every language.
+// names and year ranges are the same in every language. Bracketed names are
+// placeholders (see data/profile/shape.ts).
 const eras = [
-  { label: 'Ubisoft', note: '’05–’08', weight: 3.5 },
-  { label: 'TeamNet', note: '’08–’09', weight: 1 },
-  { label: 'Consignor', note: '’09–’22', weight: 13 },
-  { label: 'nShift', note: '’22–now', weight: 4.7, highlight: true },
+  { label: '[Distribuție]', note: '’04–’06', weight: 2 },
+  { label: '[Servicii B2B]', note: '’06–’09', weight: 3 },
+  { label: '[Distribuitor]', note: '’09–’13', weight: 4 },
+  { label: 'Tipografia Everest', note: `’13–${s.career.now}`, weight: 13, highlight: true },
 ];
 
 const cv = locale === 'ro' ? '/cv-ro.pdf' : '/cv-en.pdf';

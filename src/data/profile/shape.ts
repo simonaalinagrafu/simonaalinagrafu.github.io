@@ -1,16 +1,24 @@
 // The locale-invariant spine of the profile: what exists, in what order, and
-// the facts that are the same in every language (brand names, tech, icons,
+// the facts that are the same in every language (company names, icons,
 // contact details).
 //
 // Translated prose lives in ro.ts / en.ts, keyed by the IDs below. Because the
 // text maps are typed `Record<RoleId, RoleText>`, a locale that forgets an
 // entry is a TYPE ERROR — `npm run check` (the CI gate) catches drift between
 // the two languages before it can ship.
+//
+// PLACEHOLDERS. Only the Tipografia Everest role is real. Everything marked
+// `placeholder: true` is an imagined-but-plausible stand-in, waiting for the
+// real CV. index.ts warns about them at build time and refuses to build under
+// CI, so they cannot be deployed by accident. Company and school names for
+// placeholders are written in [brackets] so the page itself shows what is not
+// yet real.
 
-export type RoleId = 'nshift' | 'consignor-manager' | 'consignor-lead' | 'teamnet' | 'ubisoft';
-export type SkillId = 'leadership' | 'ai' | 'backend' | 'cloud' | 'frontend' | 'foundations';
-export type ProjectId = 'conversational-ai' | 'app-builder' | 'webservices';
-export type EducationId = 'msc' | 'bsc';
+export type RoleId = 'everest' | 'team-lead' | 'key-account' | 'sales-rep';
+export type SkillId =
+  'sales-leadership' | 'key-accounts' | 'negotiation' | 'pipeline' | 'tools' | 'business';
+export type AchievementId = 'portfolio' | 'team' | 'accounts-system';
+export type EducationId = 'degree';
 
 /** Facts that never change with language. */
 export const siteFacts = {
@@ -40,12 +48,16 @@ export interface RoleShape {
   /** Lucide icon for the Career timeline. Lives here so it can never fall out
       of step with the role, the way a positional array can. */
   icon: string;
-  tech?: string[];
+  /** Areas of responsibility — shown as chips under the role and as a
+      "Focus" line on the PDF. */
+  focus?: string[];
   /** How many leading bullets describe the scope of the role (the teams run)
       rather than the work itself — the Career page emphasises those. */
   leadBullets?: number;
   /** How many bullets the resume PDF shows. Omit to show all. */
   pdfBullets?: number;
+  /** Imagined stand-in, not yet confirmed. See the note at the top. */
+  placeholder?: true;
 }
 
 export interface RoleText {
@@ -64,63 +76,33 @@ export interface RoleText {
 /** Ordered most recent first — this is the Career page and PDF order. */
 export const roleShapes: RoleShape[] = [
   {
-    id: 'nshift',
-    company: 'nShift',
-    icon: 'lucide:sparkles',
-    tech: [
-      'AI-assisted development (Claude Code)',
-      'LLMs, Agents, RAG, MCP',
-      'C# / .NET / ASP.NET Core',
-      'Python / FastAPI / SQLAlchemy',
-      'SQL Server / PostgreSQL',
-      'AWS (EC2, ECS, RDS, S3)',
-      'Docker, CI/CD',
-      'JavaScript / TypeScript / ReactJS / Material UI',
-    ],
+    id: 'everest',
+    company: 'Tipografia Everest',
+    icon: 'lucide:briefcase',
+    leadBullets: 1,
+    focus: ['B2B', 'Key accounts', 'Sales team', 'Forecasting', 'Negotiation', 'CRM'],
   },
   {
-    id: 'consignor-manager',
-    company: 'Consignor',
-    icon: 'lucide:globe',
-    leadBullets: 2,
-    tech: [
-      'C# / .NET web services',
-      'E-commerce platforms (WooCommerce, Klarna, Magento)',
-      'APIs & integrations',
-      'AWS',
-      'Project management (Prince2)',
-    ],
+    id: 'team-lead',
+    company: '[Distribuitor industrial]',
+    icon: 'lucide:users',
+    placeholder: true,
+    leadBullets: 1,
+    focus: ['B2B', 'Sales team', 'Coaching', 'Targets', 'Pipeline'],
   },
   {
-    id: 'consignor-lead',
-    company: 'Consignor',
-    icon: 'lucide:layers',
-    tech: [
-      'C# / .NET, ASP.NET MVC',
-      'WCF web services',
-      'SQL Server Enterprise',
-      'JavaScript, jQuery, Bootstrap, LESS/SASS',
-      'Python',
-      'AWS',
-    ],
+    id: 'key-account',
+    company: '[Furnizor de servicii B2B]',
+    icon: 'lucide:handshake',
+    placeholder: true,
+    focus: ['Key accounts', 'Contracts', 'Negotiation', 'Retention'],
   },
   {
-    id: 'teamnet',
-    company: 'TeamNet',
-    icon: 'lucide:package',
-    tech: ['C# / .NET', 'Windows Forms', 'SQL Server'],
-  },
-  {
-    id: 'ubisoft',
-    company: 'Ubisoft',
-    icon: 'lucide:gamepad-2',
-    tech: [
-      'C++, STL',
-      'Gameplay & platform modules',
-      'Multithreaded rendering',
-      'Software optimization',
-      'Linear algebra, calculus, probabilities',
-    ],
+    id: 'sales-rep',
+    company: '[Companie de distribuție]',
+    icon: 'lucide:phone-call',
+    placeholder: true,
+    focus: ['Prospecting', 'B2B', 'Field sales'],
   },
 ];
 
@@ -140,12 +122,12 @@ export interface SkillText {
 }
 
 export const skillShapes: SkillShape[] = [
-  { id: 'leadership', icon: 'lucide:users' },
-  { id: 'ai', icon: 'lucide:brain' },
-  { id: 'backend', icon: 'lucide:server' },
-  { id: 'cloud', icon: 'lucide:cloud' },
-  { id: 'frontend', icon: 'lucide:monitor' },
-  { id: 'foundations', icon: 'lucide:sigma' },
+  { id: 'sales-leadership', icon: 'lucide:users' },
+  { id: 'key-accounts', icon: 'lucide:handshake' },
+  { id: 'negotiation', icon: 'lucide:file-signature' },
+  { id: 'pipeline', icon: 'lucide:chart-line' },
+  { id: 'tools', icon: 'lucide:clipboard-list' },
+  { id: 'business', icon: 'lucide:calculator' },
 ];
 
 // --- Education --------------------------------------------------------------
@@ -154,6 +136,7 @@ export interface EducationShape {
   id: EducationId;
   /** Years only — no words, so it needs no translation. */
   period: string;
+  placeholder?: true;
 }
 
 export interface EducationText {
@@ -162,36 +145,39 @@ export interface EducationText {
 }
 
 export const educationShapes: EducationShape[] = [
-  { id: 'msc', period: '2000 – 2002' },
-  { id: 'bsc', period: '1995 – 2000' },
+  { id: 'degree', period: '2000 – 2004', placeholder: true },
 ];
 
-// --- Projects ---------------------------------------------------------------
+// --- Achievements -----------------------------------------------------------
 
-export interface ProjectShape {
-  id: ProjectId;
+export interface AchievementShape {
+  id: AchievementId;
   tags: string[];
+  placeholder?: true;
 }
 
-export interface ProjectText {
+export interface AchievementText {
   title: string;
   role: string;
   description: string;
 }
 
-/** The first entry is the "Key project" printed on the resume PDF. */
-export const projectShapes: ProjectShape[] = [
+/** The first entry is the "Key achievement" printed on the resume PDF. */
+export const achievementShapes: AchievementShape[] = [
   {
-    id: 'conversational-ai',
-    tags: ['LLMs', 'Agents', 'RAG', 'MCP', 'Orchestration', 'Python'],
+    id: 'portfolio',
+    tags: ['B2B', 'Key accounts', 'Retention', 'Growth'],
+    placeholder: true,
   },
   {
-    id: 'app-builder',
-    tags: ['Claude Code', 'Agent Skills', 'Code Generation', 'Static Analysis', 'Python'],
+    id: 'team',
+    tags: ['Hiring', 'Coaching', 'Targets', 'Process'],
+    placeholder: true,
   },
   {
-    id: 'webservices',
-    tags: ['C# / .NET', 'AWS', 'SQL Server', 'PostgreSQL', 'Docker', 'CI/CD'],
+    id: 'accounts-system',
+    tags: ['CRM', 'Pipeline', 'Forecasting'],
+    placeholder: true,
   },
 ];
 
@@ -202,5 +188,5 @@ export interface ProfileText {
   roles: Record<RoleId, RoleText>;
   skills: Record<SkillId, SkillText>;
   education: Record<EducationId, EducationText>;
-  projects: Record<ProjectId, ProjectText>;
+  achievements: Record<AchievementId, AchievementText>;
 }

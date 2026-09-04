@@ -24,6 +24,8 @@ export default defineConfig({
     '/en/resume': '/en/career',
     '/en/ideas': '/en',
     '/en/projects': '/en',
+    '/articles': '/',
+    '/en/articles': '/en',
   },
   integrations: [
     centralRoutes(),
