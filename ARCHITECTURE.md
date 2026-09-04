@@ -127,17 +127,20 @@ without the file, the frame holds the space with initials.
 
 ## Themes
 
-Four themes, one family: `cream` (the default and the brand), `night` (the
-brand after dark), `forest` and `marine` (alternate accent hues on the same
-paper). Every theme must pass `npm run contrast` — a WCAG AA check over the
-text-bearing token pairs in `src/themes/*.css`.
+Three themes, one family: `cream` (the default and the brand), `forest` and
+`marine` (alternate accent hues on the same paper). Every theme must pass
+`npm run contrast` — a WCAG AA check over the text-bearing token pairs in
+`src/themes/*.css`. The masthead is drawn in the same tokens, so it re-skins
+with the rest of the site.
 
 Adding a theme: create `src/themes/<name>.css` implementing the token
 contract, import it in `themes/index.css`, add an entry in `themes.ts`, and add
 its label to every `src/i18n/*.ts` (the `ThemeId` union makes that a type error
 if you forget). It then appears in the header dropdown automatically. Selection
 persists in `localStorage` and is applied pre-paint in `BaseLayout`'s head
-script; without a selection, cream is the default.
+script; without a selection, cream is the default. Removing a theme is safe:
+the head script drops a stored id that is no longer registered, so anyone who
+had picked it lands on cream rather than on no theme at all.
 
 The language dropdown works differently on purpose: its items are real links, so
 switching needs no JavaScript and both trees stay crawlable. A chosen language is

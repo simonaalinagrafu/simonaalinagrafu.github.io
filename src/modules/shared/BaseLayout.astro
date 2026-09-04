@@ -8,6 +8,7 @@ import MastheadPart from './MastheadPart.astro';
 import { siteFacts, getProfile } from '@data/profile';
 import { getLocale, stripLocale, localePath, locales, defaultLocale } from '@fx/lib/i18n';
 import { t } from '@i18n/index';
+import { themes } from '@themes/themes';
 
 interface Props {
   title: string;
@@ -57,12 +58,20 @@ const canonical = new URL(path, siteFacts.url).href;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={new URL('/og.png', siteFacts.url).href} />
     <meta name="generator" content={Astro.generator} />
-    <script is:inline>
+    <script is:inline define:vars={{ themeIds: themes.map((theme) => theme.id) }}>
       (function () {
         var t;
         try {
           t = localStorage.getItem('theme');
         } catch (e) {}
+        // A theme that has since been retired would leave the page on no theme
+        // at all, so an unknown stored value is dropped and cream applies.
+        if (t && themeIds.indexOf(t) === -1) {
+          try {
+            localStorage.removeItem('theme');
+          } catch (e) {}
+          t = null;
+        }
         if (t) document.documentElement.setAttribute('data-theme', t);
       })();
     </script>

@@ -6,7 +6,7 @@
 // silently fall out of step the way a positional array can.
 
 export type NavId = 'home' | 'career' | 'skills' | 'contact';
-export type ThemeId = 'cream' | 'night' | 'forest' | 'marine';
+export type ThemeId = 'cream' | 'forest' | 'marine';
 export type StatId = 'years' | 'b2b' | 'team' | 'accounts' | 'stages' | 'relationships';
 export type DoingId = 'team' | 'accounts' | 'pipeline' | 'negotiation';
 export type ValueId = 'revenue' | 'retention' | 'team' | 'pipeline' | 'relationships' | 'process';

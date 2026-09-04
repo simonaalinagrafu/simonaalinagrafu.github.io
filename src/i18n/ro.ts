@@ -20,7 +20,6 @@ export const ro: UiStrings = {
 
   themes: {
     cream: 'Crem',
-    night: 'Noapte',
     forest: 'Pădure',
     marine: 'Marin',
   },

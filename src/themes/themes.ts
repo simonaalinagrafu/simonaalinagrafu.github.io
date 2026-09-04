@@ -12,7 +12,6 @@ export interface ThemeDef {
 
 export const themes: ThemeDef[] = [
   { id: 'cream', swatch: '#7a1f2b' },
-  { id: 'night', swatch: '#17130f' },
   { id: 'forest', swatch: '#1f4d3a' },
   { id: 'marine', swatch: '#1c3557' },
 ];

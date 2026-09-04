@@ -16,7 +16,6 @@ export const en: UiStrings = {
 
   themes: {
     cream: 'Cream',
-    night: 'Night',
     forest: 'Forest',
     marine: 'Marine',
   },

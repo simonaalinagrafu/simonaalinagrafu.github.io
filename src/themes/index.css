@@ -3,9 +3,9 @@
    The active theme is chosen by data-theme on <html> (set by ThemeMenuPart);
    with no attribute, cream is the default.
 
-   All four are one family — warm editorial: paper grounds, a single strong
-   accent, aged-gold labels. cream is the brand; night is the brand after
-   dark; forest and marine swap the accent hue.
+   All three are one family — warm editorial: paper grounds, a single strong
+   accent, aged-gold labels. cream is the brand; forest and marine swap the
+   accent hue.
 
    Token contract (every theme must define all of these):
      --t-bg            page ground
@@ -32,6 +32,5 @@
    Contrast is checked by scripts/contrast.mjs — run it after editing a theme.
 --------------------------------------------------------------------------- */
 @import './cream.css';
-@import './night.css';
 @import './forest.css';
 @import './marine.css';
