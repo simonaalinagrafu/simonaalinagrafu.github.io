@@ -125,6 +125,14 @@ html {
   .nav-pill-active {
     @apply bg-surface text-ink font-semibold shadow-sm;
   }
+  /* Page pager (phones): a wide tap target, quiet until pressed. The end of
+     the sequence keeps the arrow in place but takes its life away. */
+  .pager-link {
+    @apply text-muted hover:text-accent flex min-w-0 flex-1 items-center gap-1.5 rounded-md px-2 py-3 text-sm font-medium transition-colors;
+  }
+  .pager-link-off {
+    @apply text-faint/50 pointer-events-none;
+  }
   .menu-item {
     @apply text-muted hover:bg-chip hover:text-ink flex w-full items-center gap-2.5 rounded-md px-3 py-2 transition-colors;
   }

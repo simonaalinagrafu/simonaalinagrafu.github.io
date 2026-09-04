@@ -45,6 +45,11 @@ export interface UiStrings {
     emailTip: string;
     linkedin: string;
     linkedinTip: string;
+    /** Accessible name of the phone-only page pager under the menu. */
+    pager: string;
+    /** Prefix for the pager's arrow labels, e.g. "Previous page: Career". */
+    prevPage: string;
+    nextPage: string;
   };
 
   footer: {

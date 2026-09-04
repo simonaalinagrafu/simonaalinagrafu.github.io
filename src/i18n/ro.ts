@@ -35,6 +35,9 @@ export const ro: UiStrings = {
     emailTip: 'Trimite-mi un email',
     linkedin: 'LinkedIn',
     linkedinTip: 'Profilul meu de LinkedIn',
+    pager: 'Navigare între pagini',
+    prevPage: 'Pagina anterioară',
+    nextPage: 'Pagina următoare',
   },
 
   footer: {

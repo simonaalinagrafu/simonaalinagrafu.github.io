@@ -1,0 +1,81 @@
+---
+// Phone-only page pager, under the menu row: walk the site in nav order with
+// one tap instead of opening the dropdown every time. The dots say how many
+// pages there are and which one this is — something the arrows alone cannot.
+//
+// It is deliberately not styled like the menu above it: a lighter ground, an
+// accent hairline between the two, and controls spread edge to edge rather
+// than a row of pills.
+//
+// Static markup — each page resolves its own neighbours at build time. Off the
+// four nav pages (the 404, the print CV) there is no position in the sequence,
+// so nothing renders. The ends stop rather than wrap: at Contact there is no
+// next page, and the arrow says so by going quiet.
+import { Icon } from 'astro-icon/components';
+import { navItems } from './nav';
+import { isActive } from '@fx/lib/routing';
+import { getLocale, stripLocale, localePath } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const path = Astro.url.pathname;
+const locale = getLocale(path);
+const s = t(locale);
+const bare = stripLocale(path);
+
+const index = navItems.findIndex((item) => isActive(item.href, bare));
+const prev = index > 0 ? navItems[index - 1] : undefined;
+const next = index >= 0 && index < navItems.length - 1 ? navItems[index + 1] : undefined;
+---
+
+{
+  index !== -1 && (
+    <nav
+      aria-label={s.header.pager}
+      class="border-accent-line border-line-strong bg-surface border-t border-b sm:hidden"
+    >
+      <div class="mx-auto flex max-w-7xl items-center gap-3 px-2">
+        {prev ? (
+          <a
+            href={localePath(locale, prev.href)}
+            aria-label={`${s.header.prevPage}: ${s.nav[prev.id]}`}
+            class="pager-link"
+          >
+            <Icon name="lucide:chevron-left" class="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span class="truncate">{s.nav[prev.id]}</span>
+          </a>
+        ) : (
+          <span class="pager-link pager-link-off" aria-hidden="true">
+            <Icon name="lucide:chevron-left" class="h-4 w-4 shrink-0" />
+          </span>
+        )}
+
+        <span class="flex shrink-0 items-center gap-1.5" aria-hidden="true">
+          {navItems.map((item, i) => (
+            <span
+              class:list={[
+                'h-1.5 w-1.5 rounded-full',
+                i === index ? 'bg-accent' : 'bg-line-strong',
+              ]}
+              data-nav-id={item.id}
+            />
+          ))}
+        </span>
+
+        {next ? (
+          <a
+            href={localePath(locale, next.href)}
+            aria-label={`${s.header.nextPage}: ${s.nav[next.id]}`}
+            class="pager-link justify-end"
+          >
+            <span class="truncate">{s.nav[next.id]}</span>
+            <Icon name="lucide:chevron-right" class="h-4 w-4 shrink-0" aria-hidden="true" />
+          </a>
+        ) : (
+          <span class="pager-link pager-link-off justify-end" aria-hidden="true">
+            <Icon name="lucide:chevron-right" class="h-4 w-4 shrink-0" />
+          </span>
+        )}
+      </div>
+    </nav>
+  )
+}

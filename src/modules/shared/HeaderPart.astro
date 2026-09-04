@@ -5,6 +5,7 @@
 import MenuButton from '@fx/components/MenuButtonPart.astro';
 import NavMenu from './NavMenuPart.astro';
 import MobileMenu from './MobileMenuPart.astro';
+import Pager from './PagerPart.astro';
 import SocialLinks from './SocialLinksPart.astro';
 import LanguageMenuPart from './LanguageMenuPart.astro';
 import ThemeMenuPart from './ThemeMenuPart.astro';
@@ -38,4 +39,5 @@ const s = t(getLocale(Astro.url.pathname));
     </div>
     <MobileMenu />
   </div>
+  <Pager />
 </header>

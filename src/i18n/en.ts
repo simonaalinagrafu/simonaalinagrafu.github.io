@@ -31,6 +31,9 @@ export const en: UiStrings = {
     emailTip: 'Send me an email',
     linkedin: 'LinkedIn',
     linkedinTip: 'My LinkedIn profile',
+    pager: 'Page navigation',
+    prevPage: 'Previous page',
+    nextPage: 'Next page',
   },
 
   footer: {

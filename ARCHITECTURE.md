@@ -104,7 +104,7 @@ PDF); `achievements[0]` is the "Key achievement" the PDF prints.
    Never write a raw palette color (`slate-600`, `indigo-500`) in a component.
 2. **Recipes** (`global.css` `@layer components`) — named classes for repeated
    patterns: `.title-*`, `.btn*`, `.card`, `.tag`, `.badge`, `.chip`,
-   `.nav-pill`, `.menu-item`, `.icon-tile`, `.tip`, `.lede`, `.figure` (serif numeral),
+   `.nav-pill`, `.menu-item`, `.pager-link`, `.icon-tile`, `.tip`, `.lede`, `.figure` (serif numeral),
    `.rule` (kicker on a hairline), `.band` (the accent panel), `.portrait`…
    Extract a recipe only when a pattern repeats or has a clear name.
 3. **Inline utilities** — everything else, directly in the markup.
@@ -141,6 +141,13 @@ persists in `localStorage` and is applied pre-paint in `BaseLayout`'s head
 script; without a selection, cream is the default. Removing a theme is safe:
 the head script drops a stored id that is no longer registered, so anyone who
 had picked it lands on cream rather than on no theme at all.
+
+`modules/shared/nav.ts` is the single list of pages, and three parts read it:
+the desktop pills, the phone dropdown, and `PagerPart` — a phone-only prev/next
+strip under the menu, so the site can be walked in order without opening the
+dropdown each time. The pager finds its own position with `isActive`, which
+means a page outside that list (the 404, the print CV) simply renders no pager,
+and the ends of the sequence stop rather than wrap.
 
 The language dropdown works differently on purpose: its items are real links, so
 switching needs no JavaScript and both trees stay crawlable. A chosen language is
