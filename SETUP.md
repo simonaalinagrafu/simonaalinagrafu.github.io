@@ -188,9 +188,12 @@ that one fact was supplied; everything below is an imagined-but-plausible stand-
 20-year B2B sales career, waiting for her real CV. Nothing invented uses a figure — the only
 number on the site is "20+ years".
 
-**Do not push until this list is empty.** `src/data/profile/index.ts` refuses to build under
-CI while any `placeholder: true` remains (§8), and the live site still shows the previous
-owner's biography until the first deploy after review.
+**The placeholders are live.** The guard in `src/data/profile/index.ts` (§8) is currently
+overridden with `PLACEHOLDERS_OK: '1'` in `.github/workflows/deploy.yml`, by decision, so the
+sales-manager site could replace the previous owner's biography before the real CV arrived.
+Bracketed names such as `[Distribuitor industrial]` are therefore visible on the public site.
+**When this list is empty, delete that `env:` block from the workflow** so the guard protects
+future edits again.
 
 Each item names where to edit: text in `src/data/profile/ro.ts` and `en.ts`, structure
 (company name, dates, the `placeholder` flag) in `src/data/profile/shape.ts`.
@@ -233,8 +236,9 @@ line from each entry you have confirmed.
 - **The placeholder guard.** `getProfile()` in `src/data/profile/index.ts` throws when
   `process.env.CI` is set and any placeholder remains. GitHub Actions sets `CI=true`, so a
   push with placeholders fails at the build step rather than deploying invented content.
-  `PLACEHOLDERS_OK=1` overrides it deliberately. Delete the guard once the list in §7 is
-  empty — it has no purpose after that.
+  `PLACEHOLDERS_OK=1` overrides it — and **the workflow currently sets it** (see §7). Once
+  the list in §7 is empty, delete the `env:` block from the workflow first, then the guard
+  itself — it has no purpose after that.
 - **`src/fx/components/FlowDiagramPart.astro` is unused.** Its only consumer was the
   Projects page, which has been removed. It is kept because `fx/` is the portable framework
   layer rather than site content — delete it if that layer is ever pruned.

@@ -17,6 +17,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Deliberate override of the placeholder guard in src/data/profile/index.ts:
+    # the site ships with imagined stand-in entries (bracketed names) until the
+    # real CV arrives. REMOVE this env block once SETUP.md §7 is empty, so the
+    # guard protects future edits again.
+    env:
+      PLACEHOLDERS_OK: '1'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
