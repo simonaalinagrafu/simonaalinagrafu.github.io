@@ -43,8 +43,6 @@ export interface UiStrings {
     closeMenu: string;
     email: string;
     emailTip: string;
-    github: string;
-    githubTip: string;
     linkedin: string;
     linkedinTip: string;
   };
@@ -73,8 +71,6 @@ export interface UiStrings {
     principles: Record<PrincipleId, TitledBody>;
     /** The four-step way of working — the section that makes this a sales site. */
     process: Record<ProcessId, TitledBody>;
-    /** Closing contact band. */
-    band: { title: string; body: string; ctaEmail: string; ctaPhone: string; ctaLinkedin: string };
   };
 
   career: {
@@ -111,7 +107,6 @@ export interface UiStrings {
     lede: string;
     email: string;
     linkedin: string;
-    linkedinSubtitle: string;
     phone: string;
     phoneSubtitle: string;
     /** Heading of the location/timezone aside. */

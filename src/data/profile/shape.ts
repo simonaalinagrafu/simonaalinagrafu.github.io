@@ -33,7 +33,6 @@ export const siteFacts = {
   email: 'simonaalinagrafu@gmail.com',
   phone: '+40 726 704 058',
   linkedin: 'https://www.linkedin.com/in/simona-deliu-413a5b2b/',
-  github: 'https://github.com/simonaalinagrafu',
   url: 'https://simonaalinagrafu.github.io',
 };
 

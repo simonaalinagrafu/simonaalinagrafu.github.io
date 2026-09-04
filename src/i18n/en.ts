@@ -30,8 +30,6 @@ export const en: UiStrings = {
     closeMenu: 'Close menu',
     email: 'Email',
     emailTip: 'Send me an email',
-    github: 'GitHub',
-    githubTip: 'My GitHub profile',
     linkedin: 'LinkedIn',
     linkedinTip: 'My LinkedIn profile',
   },
@@ -146,14 +144,6 @@ export const en: UiStrings = {
         body: 'What was promised reaches the client, and the relationship continues after the signature.',
       },
     },
-
-    band: {
-      title: 'Let’s talk.',
-      body: 'A short message is enough — I reply to every thoughtful one.',
-      ctaEmail: 'Send me an email',
-      ctaPhone: 'Call me',
-      ctaLinkedin: 'Connect on LinkedIn',
-    },
   },
 
   career: {
@@ -193,7 +183,6 @@ export const en: UiStrings = {
     lede: 'I read everything and reply to thoughtful messages.',
     email: 'Email',
     linkedin: 'LinkedIn',
-    linkedinSubtitle: 'Best for professional messages',
     phone: 'Phone',
     phoneSubtitle: 'For a direct conversation',
     details: 'Details',

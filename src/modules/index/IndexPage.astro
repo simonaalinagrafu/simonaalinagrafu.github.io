@@ -89,7 +89,7 @@ const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
           <a href={localePath(locale, '/career/')} class="btn btn-ghost">{s.home.ctaCareer}</a>
         </div>
       </div>
-      <div class="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-md">
+      <div class="mx-auto w-full max-w-64 sm:max-w-[19.2rem] lg:max-w-[22.4rem]">
         <PortraitPart
           src={hasPortrait ? '/portrait.jpg' : undefined}
           alt={siteFacts.name}
@@ -112,12 +112,11 @@ const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
 
   <section class="py-8">
     <p class="rule"><span class="kicker">{s.home.kickerDoing}</span></p>
-    <!-- A numbered list on hairlines rather than a card grid. -->
+    <!-- A list on hairlines rather than a card grid. -->
     <div class="mt-6 grid gap-x-12 gap-y-8 sm:grid-cols-2">
       {
-        doingOrder.map((id, i) => (
-          <div class="border-line flex gap-5 border-t pt-6">
-            <span class="figure text-2xl">{String(i + 1).padStart(2, '0')}</span>
+        doingOrder.map((id) => (
+          <div class="border-line border-t pt-6">
             <div>
               <div class="flex items-center gap-2.5">
                 <Icon name={doingIcons[id]} class="text-label h-4.5 w-4.5" aria-hidden="true" />
@@ -189,25 +188,25 @@ const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
     </div>
   </section>
 
-  <!-- Closing band: the one place the accent fills a whole panel. -->
+  <!-- Closing band: the one place the accent fills a whole panel. Plain
+       contact facts, nothing to decode — the same three the Contact page has. -->
   <section class="py-10">
     <div class="band px-8 py-12 text-center sm:px-12 sm:py-14">
       <h2 class="font-display text-3xl font-semibold text-balance sm:text-4xl">
-        {s.home.band.title}
+        {s.contact.heading}
       </h2>
-      <p class="text-accent-ink/80 mx-auto mt-3 max-w-xl">{s.home.band.body}</p>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
         <a href={`mailto:${siteFacts.email}`} class="btn btn-inverse">
           <Icon name="lucide:mail" class="h-4 w-4" aria-hidden="true" />
-          {s.home.band.ctaEmail}
+          {siteFacts.email}
         </a>
         <a href={`tel:${siteFacts.phone.replace(/\s/g, '')}`} class="btn btn-inverse">
           <Icon name="lucide:phone" class="h-4 w-4" aria-hidden="true" />
-          {s.home.band.ctaPhone} · {siteFacts.phone}
+          {siteFacts.phone}
         </a>
         <a href={siteFacts.linkedin} class="btn btn-inverse">
-          <Icon name="lucide:linkedin" class="h-4 w-4" aria-hidden="true" />
-          {s.home.band.ctaLinkedin}
+          <Icon name="linkedin" class="h-4 w-4" aria-hidden="true" />
+          {s.header.linkedin}
         </a>
       </div>
     </div>

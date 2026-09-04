@@ -220,7 +220,6 @@ Text lives in `src/data/profile/ro.ts` and `en.ts`; structure (names, flags) in
       none beyond what the name says; add a line each if she wants context there.
 - [ ] **Email** — `simonaalinagrafu@gmail.com` was derived from the site name. Confirm the
       mailbox exists; it is on the Contact page, in the footer and on both CVs.
-- [ ] **GitHub link** — header still links to `github.com/simonaalinagrafu`. Keep or remove.
 - [ ] **Romanian translation** — drafted and not yet reviewed by a native speaker. Two
       conventions, easy to reverse: English job titles where they are the market norm, and
       gender-neutral prose (Romanian agrees adjectives with gender). If she prefers explicitly

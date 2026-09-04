@@ -11,6 +11,7 @@ const s = t(locale);
 const { site } = getProfile(locale);
 
 const telHref = `tel:${site.phone.replace(/\s/g, '')}`;
+const linkedinLabel = site.linkedin.replace('https://www.', '').replace(/\/$/, '');
 ---
 
 <BaseLayout
@@ -37,9 +38,9 @@ const telHref = `tel:${site.phone.replace(/\s/g, '')}`;
       />
       <LinkCardPart
         href={site.linkedin}
-        icon="lucide:linkedin"
+        icon="linkedin"
         title={s.contact.linkedin}
-        subtitle={s.contact.linkedinSubtitle}
+        subtitle={linkedinLabel}
       />
     </div>
 

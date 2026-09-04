@@ -1,5 +1,5 @@
 ---
-// Mail / GitHub / LinkedIn icon links shown in the header.
+// Mail / LinkedIn icon links shown in the header.
 import { Icon } from 'astro-icon/components';
 import { siteFacts } from '@data/profile';
 import { getLocale } from '@fx/lib/i18n';
@@ -18,19 +18,11 @@ const s = t(getLocale(Astro.url.pathname));
     <Icon name="lucide:mail" class="h-4.5 w-4.5" aria-hidden="true" />
   </a>
   <a
-    href={siteFacts.github}
-    aria-label={s.header.github}
-    data-tip={s.header.githubTip}
-    class="tip hover:text-accent"
-  >
-    <Icon name="lucide:github" class="h-4.5 w-4.5" aria-hidden="true" />
-  </a>
-  <a
     href={siteFacts.linkedin}
     aria-label={s.header.linkedin}
     data-tip={s.header.linkedinTip}
     class="tip hover:text-accent"
   >
-    <Icon name="lucide:linkedin" class="h-4.5 w-4.5" aria-hidden="true" />
+    <Icon name="linkedin" class="h-4.5 w-4.5" aria-hidden="true" />
   </a>
 </div>

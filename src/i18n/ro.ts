@@ -34,8 +34,6 @@ export const ro: UiStrings = {
     closeMenu: 'Închide meniul',
     email: 'Email',
     emailTip: 'Trimite-mi un email',
-    github: 'GitHub',
-    githubTip: 'Profilul meu de GitHub',
     linkedin: 'LinkedIn',
     linkedinTip: 'Profilul meu de LinkedIn',
   },
@@ -150,14 +148,6 @@ export const ro: UiStrings = {
         body: 'Ce s-a promis ajunge la client, iar relația continuă și după semnătură.',
       },
     },
-
-    band: {
-      title: 'Hai să vorbim.',
-      body: 'Un mesaj scurt e de ajuns — răspund tuturor celor bine gândite.',
-      ctaEmail: 'Scrie-mi un email',
-      ctaPhone: 'Sună-mă',
-      ctaLinkedin: 'Conectează-te pe LinkedIn',
-    },
   },
 
   career: {
@@ -197,7 +187,6 @@ export const ro: UiStrings = {
     lede: 'Citesc tot și răspund mesajelor bine gândite.',
     email: 'Email',
     linkedin: 'LinkedIn',
-    linkedinSubtitle: 'Cel mai potrivit pentru mesaje profesionale',
     phone: 'Telefon',
     phoneSubtitle: 'Pentru o discuție directă',
     details: 'Detalii',
