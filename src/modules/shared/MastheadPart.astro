@@ -3,57 +3,72 @@
 // the only place the name and the role line appear (the home hero deliberately
 // says neither, so nothing is duplicated).
 //
-// The artwork — paper ground, slanted accent panel, five-bar mark — is the
-// supplied design, but drawn entirely in theme tokens rather than fixed hex,
-// so it follows the theme picker like the rest of the site. The text is live
-// too: the name and the localized short title, set in the site's own faces.
+// The supplied design — paper ground, slanted accent panel, five-bar mark — is
+// composed rather than drawn as one scalable picture, and that is the point:
+// in a single SVG the type scaled with the viewport, so by 768px the name was
+// 31px inside a 96px band and the title had fallen to 15px. Here the band's
+// height and both type sizes are set per breakpoint, and only the artwork
+// scales:
 //
-// Two forms: the wide SVG from ~640px up, and a compact bar on phones, where
-// the wide artwork's type would shrink to a few pixels.
+//     width      band    name   title
+//     < 640      76px    20px   11px
+//     640        100     28     13
+//     768        116     32     15
+//     1024       144     42     18
+//     1280+      176     56     24
+//
+// The slant is a constant 28px, so the angle does not steepen as the band gets
+// shorter, and the bar mark is sized as a fraction of the band. Colours are
+// theme tokens throughout, so the letterhead re-skins with the site.
 import { getProfile, siteFacts } from '@data/profile';
 import { getLocale } from '@fx/lib/i18n';
 
 const locale = getLocale(Astro.url.pathname);
 const { site } = getProfile(locale);
+
+// Bar mark: heights as drawn, normalized to a 100-unit band.
+const bars = [
+  { x: 0, height: 100, fill: 'var(--t-accent-strong)' },
+  { x: 46, height: 82, fill: 'var(--t-grad-b)' },
+  { x: 92, height: 100, fill: 'var(--t-chip)' },
+  // --t-mark exists for this bar alone: the label gold is a text colour and
+  // reads as olive against the accent panel.
+  { x: 138, height: 62, fill: 'var(--t-mark)' },
+  { x: 184, height: 100, fill: 'var(--t-accent-strong)' },
+];
 ---
 
-<div class="w-full">
-  <!-- Phones: same palette, stacked, at a size that stays readable. -->
-  <div class="bg-chip flex items-center justify-between gap-4 px-4 py-3 sm:hidden">
-    <div class="min-w-0">
-      <p class="font-display text-ink truncate text-xl font-semibold">{siteFacts.name}</p>
-      <p class="text-accent mt-0.5 truncate text-[11px]">{site.titleShort}</p>
-    </div>
-    <svg viewBox="0 0 214 120" class="h-7 w-auto shrink-0" aria-hidden="true" focusable="false">
-      <rect width="30" height="120" fill="var(--t-accent-strong)"></rect>
-      <rect x="46" width="30" height="98" fill="var(--t-grad-b)"></rect>
-      <rect x="92" width="30" height="120" fill="var(--t-accent-solid)"></rect>
-      <rect x="138" width="30" height="75" fill="var(--t-label)"></rect>
-      <rect x="184" width="30" height="120" fill="var(--t-accent-strong)"></rect>
+<div
+  class="bg-chip relative h-[76px] w-full overflow-hidden sm:h-[100px] md:h-[116px] lg:h-[144px] xl:h-[176px]"
+>
+  <!-- Accent panel, anchored right. -->
+  <div
+    class="bg-accent-solid absolute inset-y-0 right-0 flex w-[30%] items-center justify-center sm:w-[34%] lg:w-[37%]"
+    style="clip-path: polygon(28px 0, 100% 0, 100% 100%, 0 100%)"
+    aria-hidden="true"
+  >
+    <svg viewBox="0 0 214 100" class="h-[58%] w-auto" focusable="false">
+      {
+        bars.map((bar) => (
+          <rect x={bar.x} width="30" height={bar.height} fill={bar.fill} fill-opacity="0.95" />
+        ))
+      }
     </svg>
   </div>
 
-  <!-- Tablet and up: the artwork as drawn. -->
-  <svg
-    viewBox="0 0 1200 150"
-    class="hidden h-auto w-full sm:block"
-    role="img"
-    aria-label={`${siteFacts.name} — ${site.titleShort}`}
-  >
-    <rect width="1200" height="150" fill="var(--t-chip)"></rect>
-    <path d="M760 0h440v150H737Z" fill="var(--t-accent-solid)"></path>
-    <g transform="translate(860 25)">
-      <rect width="30" height="100" fill="var(--t-accent-strong)"></rect>
-      <rect x="46" width="30" height="82" fill="var(--t-grad-b)"></rect>
-      <rect x="92" width="30" height="100" fill="var(--t-chip)" fill-opacity="0.9"></rect>
-      <rect x="138" width="30" height="62" fill="var(--t-label)"></rect>
-      <rect x="184" width="30" height="100" fill="var(--t-accent-strong)"></rect>
-    </g>
-    <text x="80" y="78" class="font-display" font-size="48" font-weight="600" fill="var(--t-ink)"
-      >{siteFacts.name}</text
-    >
-    <text x="80" y="116" class="font-sans" font-size="23" fill="var(--t-accent)"
-      >{site.titleShort}</text
-    >
-  </svg>
+  <!-- Type, aligned to the same container as the menu and the page below it. -->
+  <div class="relative mx-auto flex h-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+    <div class="w-[68%] min-w-0 sm:w-[64%] lg:w-[62%]">
+      <p
+        class="font-display text-ink truncate text-xl leading-tight font-semibold sm:text-[1.75rem] md:text-[2rem] lg:text-[2.625rem] xl:text-[3.5rem]"
+      >
+        {siteFacts.name}
+      </p>
+      <p
+        class="text-accent truncate text-[11px] leading-tight sm:mt-0.5 sm:text-[13px] md:text-[15px] lg:text-[18px] xl:text-[24px]"
+      >
+        {site.titleShort}
+      </p>
+    </div>
+  </div>
 </div>

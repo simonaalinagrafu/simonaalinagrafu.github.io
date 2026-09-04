@@ -180,10 +180,18 @@ It pulls Fraunces and Inter from Google Fonts, so this needs a network connectio
 
 ### The masthead
 
-`src/modules/shared/MastheadPart.astro` — the supplied 1200×280 banner as inline SVG, shown
-above the navigation on every page, hidden on phones. Its colours are fixed (it does not follow
-the themes); its text is live, taken from `siteFacts.name` and the localized `site.title`, so it
-changes with the profile and the language. To change the artwork, edit the SVG in that file.
+`src/modules/shared/MastheadPart.astro` — the supplied banner, shown above the navigation on
+every page and at every width. It is composed, not one scalable picture: the accent panel is a
+right-anchored block with a constant 28 px slant, the bar mark an SVG sized as a fraction of the
+band, and the name and title real HTML text. That is deliberate — as a single SVG the type
+scaled with the viewport, so by 768 px the name was 31 px in a 96 px band. Band height and both
+type sizes are now set per breakpoint (76 → 176 px tall), so the proportions hold from a phone
+to a wide desktop.
+
+Its colours are `--t-*` tokens, so it follows the theme picker; `--t-mark` exists for the gold
+bar alone, because the label gold is a text colour and reads as olive on the accent panel. Its
+text is live, from `siteFacts.name` and the localized `site.titleShort`. To change the artwork,
+edit that file; to change the sizes, edit the breakpoint classes in it.
 
 ### `public/favicon.svg`
 

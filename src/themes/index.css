@@ -28,6 +28,7 @@
      --t-label         secondary label color (kickers, icons)
      --t-label-strong  label text on label-soft
      --t-label-soft    soft label fill (icon tiles, tags)
+     --t-mark          highlight bar of the masthead mark, on the accent panel
 
    Contrast is checked by scripts/contrast.mjs — run it after editing a theme.
 --------------------------------------------------------------------------- */
