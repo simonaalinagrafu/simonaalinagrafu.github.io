@@ -1,7 +1,11 @@
 /* ---------------------------------------------------------------------------
    Themes — each file defines the same set of --t-* tokens for one look.
    The active theme is chosen by data-theme on <html> (set by ThemeMenuPart);
-   with no attribute, light is the default.
+   with no attribute, cream is the default.
+
+   All four are one family — warm editorial: paper grounds, a single strong
+   accent, aged-gold labels. cream is the brand; night is the brand after
+   dark; forest and marine swap the accent hue.
 
    Token contract (every theme must define all of these):
      --t-bg            page ground
@@ -13,20 +17,21 @@
      --t-faint         timestamps, footnotes
      --t-line          default borders
      --t-line-strong   stronger borders (buttons, inputs)
-     --t-accent        interactive color (links, icons)
+     --t-accent        interactive color (links, icons, numerals)
      --t-accent-strong active-state text on accent-soft
      --t-accent-ink    text on solid accent
-     --t-accent-solid  solid accent fill (primary buttons)
+     --t-accent-solid  solid accent fill (primary buttons, the band)
      --t-accent-hover  hover state of the solid fill
-     --t-accent-soft   soft accent fill (icon tiles, active pills)
-     --t-accent-line   accent-tinted border
-     --t-grad-a/b      brand gradient stops
-     --t-label         secondary label color (kickers, badges)
+     --t-accent-soft   soft accent fill (active pills)
+     --t-accent-line   accent-tinted border (portrait ring)
+     --t-grad-a/b      accent gradient stops — the timeline ribbon only
+     --t-label         secondary label color (kickers, icons)
      --t-label-strong  label text on label-soft
-     --t-label-soft    soft label fill
-     --t-blob-a/b      decorative hero blooms
+     --t-label-soft    soft label fill (icon tiles, tags)
+
+   Contrast is checked by scripts/contrast.mjs — run it after editing a theme.
 --------------------------------------------------------------------------- */
-@import './light.css';
-@import './dark.css';
-@import './emerald.css';
-@import './sepia.css';
+@import './cream.css';
+@import './night.css';
+@import './forest.css';
+@import './marine.css';

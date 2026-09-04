@@ -1,6 +1,6 @@
 ---
 import '@fontsource-variable/inter';
-import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/fraunces';
 import '@styles/global.css';
 import HeaderPart from './HeaderPart.astro';
 import FooterPart from './FooterPart.astro';
@@ -35,7 +35,7 @@ const canonical = new URL(path, siteFacts.url).href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={siteFacts.name} />
-    <meta name="theme-color" content="#1e3a8a" />
+    <meta name="theme-color" content="#7a1f2b" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}

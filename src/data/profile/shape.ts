@@ -7,25 +7,26 @@
 // entry is a TYPE ERROR — `npm run check` (the CI gate) catches drift between
 // the two languages before it can ship.
 //
-// PLACEHOLDERS. Only the Tipografia Everest role is real. Everything marked
-// `placeholder: true` is an imagined-but-plausible stand-in, waiting for the
-// real CV. index.ts warns about them at build time and refuses to build under
-// CI, so they cannot be deployed by accident. Company and school names for
-// placeholders are written in [brackets] so the page itself shows what is not
-// yet real.
+// SOURCES. The six roles — employers, titles and dates — come from Simona's
+// LinkedIn profile (linkedin.com/in/simona-deliu-413a5b2b). The prose under
+// each role is drafted and awaits her own wording. Entries still marked
+// `placeholder: true` are the parts nothing confirmed yet: the three
+// achievements. Education is from LinkedIn too. index.ts warns about them at build time
+// and refuses to build under CI, so they cannot be deployed by accident;
+// bracketed text on the page marks the same thing.
 
-export type RoleId = 'everest' | 'team-lead' | 'key-account' | 'sales-rep';
+export type RoleId = 'everest' | 'rh-printing' | 'rodata' | 'europetrolgaz' | 'delta' | 'euromobex';
 export type SkillId =
   'sales-leadership' | 'key-accounts' | 'negotiation' | 'pipeline' | 'tools' | 'business';
 export type AchievementId = 'portfolio' | 'team' | 'accounts-system';
-export type EducationId = 'degree';
+export type EducationId = 'journalism' | 'marketing';
 
 /** Facts that never change with language. */
 export const siteFacts = {
   name: 'Simona Alina Grafu',
   email: 'simonaalinagrafu@gmail.com',
-  phone: '+40 722 635 785',
-  linkedin: 'https://www.linkedin.com/in/vasile-grafu-6a99369',
+  phone: '+40 726 704 058',
+  linkedin: 'https://www.linkedin.com/in/simona-deliu-413a5b2b/',
   github: 'https://github.com/simonaalinagrafu',
   url: 'https://simonaalinagrafu.github.io',
 };
@@ -83,26 +84,34 @@ export const roleShapes: RoleShape[] = [
     focus: ['B2B', 'Key accounts', 'Sales team', 'Forecasting', 'Negotiation', 'CRM'],
   },
   {
-    id: 'team-lead',
-    company: '[Distribuitor industrial]',
-    icon: 'lucide:users',
-    placeholder: true,
-    leadBullets: 1,
-    focus: ['B2B', 'Sales team', 'Coaching', 'Targets', 'Pipeline'],
+    id: 'rh-printing',
+    company: 'RH Printing',
+    icon: 'lucide:printer',
+    focus: ['B2B', 'Print', 'Key accounts', 'Quotes', 'Production'],
   },
   {
-    id: 'key-account',
-    company: '[Furnizor de servicii B2B]',
+    id: 'rodata',
+    company: 'Rodata',
     icon: 'lucide:handshake',
-    placeholder: true,
-    focus: ['Key accounts', 'Contracts', 'Negotiation', 'Retention'],
+    focus: ['B2B', 'Accounts', 'Negotiation'],
   },
   {
-    id: 'sales-rep',
-    company: '[Companie de distribuție]',
+    id: 'europetrolgaz',
+    company: 'Europetrolgaz',
     icon: 'lucide:phone-call',
-    placeholder: true,
-    focus: ['Prospecting', 'B2B', 'Field sales'],
+    focus: ['Field sales', 'Prospecting'],
+  },
+  {
+    id: 'delta',
+    company: 'Delta Distribution',
+    icon: 'lucide:megaphone',
+    focus: ['Marketing', 'Distribution', 'B2B'],
+  },
+  {
+    id: 'euromobex',
+    company: 'Euromobex',
+    icon: 'lucide:phone-call',
+    focus: ['Field sales', 'Prospecting'],
   },
 ];
 
@@ -145,7 +154,8 @@ export interface EducationText {
 }
 
 export const educationShapes: EducationShape[] = [
-  { id: 'degree', period: '2000 – 2004', placeholder: true },
+  { id: 'journalism', period: '2010 – 2012' },
+  { id: 'marketing', period: '1993 – 1997' },
 ];
 
 // --- Achievements -----------------------------------------------------------

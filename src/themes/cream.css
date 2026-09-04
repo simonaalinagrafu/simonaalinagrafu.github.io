@@ -1,0 +1,28 @@
+/* Cream — the default theme (applies when no theme is selected).
+   Warm paper, deep burgundy accent, charcoal text, aged-gold labels.
+   :where() keeps the default at zero specificity so any [data-theme='…']
+   selection always overrides it. */
+:where(:root),
+[data-theme='cream'] {
+  --t-bg: #faf7f2;
+  --t-surface: #fffdfa;
+  --t-tint: rgb(243 236 226 / 0.55);
+  --t-chip: #f1ebe1;
+  --t-ink: #2b2724;
+  --t-muted: #574f48;
+  --t-faint: #776c62;
+  --t-line: #e8e1d6;
+  --t-line-strong: #d6ccbd;
+  --t-accent: #7a1f2b;
+  --t-accent-strong: #5e1620;
+  --t-accent-ink: #ffffff;
+  --t-accent-solid: #7a1f2b;
+  --t-accent-hover: #5e1620;
+  --t-accent-soft: #f3e4e6;
+  --t-accent-line: #e3c5ca;
+  --t-grad-a: #7a1f2b;
+  --t-grad-b: #a63446;
+  --t-label: #7a5f30;
+  --t-label-strong: #5e4722;
+  --t-label-soft: #f5eedf;
+}

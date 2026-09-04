@@ -119,7 +119,8 @@ function splitBullet(b: string) {
     {
       education.map((entry) => (
         <div class="edu">
-          <b>{entry.degree}</b> — {entry.school} <span class="period">({entry.period})</span>
+          <b>{entry.degree}</b> — {entry.school}
+          {entry.period && <span class="period">({entry.period})</span>}
         </div>
       ))
     }

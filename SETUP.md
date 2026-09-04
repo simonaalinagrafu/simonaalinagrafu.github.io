@@ -65,6 +65,7 @@ npm run check      # astro check — type-checks .astro/.ts (must be 0 errors)
 npm run build      # static build to ./dist
 npm run preview    # serve ./dist, to see exactly what deploys
 npm run cv         # regenerate both CV PDFs (needs a build first)
+npm run contrast   # WCAG AA check over every theme's tokens
 npm run format     # prettier over src/
 ```
 
@@ -174,60 +175,57 @@ file, not part of the build). It is single-language by design.
   "D:\Dev.Work\simonaalinagrafu.github.io\design\og-image.html"
 ```
 
-It pulls Space Grotesk and Inter from Google Fonts, so this needs a network connection.
+It pulls Fraunces and Inter from Google Fonts, so this needs a network connection.
 
 ### `public/favicon.svg`
 
-Hand-edited SVG containing the `SAG` monogram. Keep it in sync with the hero monogram
-(derived from the name in `IndexPage.astro`) and the ring in `design/og-image.html`.
+Hand-written SVG: a burgundy rounded square with a single serif **S** in cream. One letter
+reads at 16 px where three did not.
 
-## 7. Outstanding — placeholder content to replace before deploying
+### `public/portrait.jpg` — the one asset supplied by hand
 
-The site now describes **Simona Alina Grafu, Sales Manager at Tipografia Everest**. Only
-that one fact was supplied; everything below is an imagined-but-plausible stand-in for a
-20-year B2B sales career, waiting for her real CV. Nothing invented uses a figure — the only
-number on the site is "20+ years".
+The home hero is designed around a portrait. Save the photo as `public/portrait.jpg`
+(JPEG, 4:5 portrait orientation, ≥ 900×1125 px) and rebuild; `IndexPage.astro` detects the
+file at build time. Until it exists the frame shows her initials on a warm block, at the same
+size, so the layout is identical before and after.
 
-**The placeholders are live.** The guard in `src/data/profile/index.ts` (§8) is currently
-overridden with `PLACEHOLDERS_OK: '1'` in `.github/workflows/deploy.yml`, by decision, so the
-sales-manager site could replace the previous owner's biography before the real CV arrived.
-Bracketed names such as `[Distribuitor industrial]` are therefore visible on the public site.
-**When this list is empty, delete that `env:` block from the workflow** so the guard protects
-future edits again.
+## 7. Outstanding — what is still drafted or unconfirmed
 
-Each item names where to edit: text in `src/data/profile/ro.ts` and `en.ts`, structure
-(company name, dates, the `placeholder` flag) in `src/data/profile/shape.ts`.
+The career is now **real**: the six roles — employers, titles and dates, 1997 to today — come
+from Simona's LinkedIn profile (`linkedin.com/in/simona-deliu-413a5b2b`), which is also the
+LinkedIn link the site uses. What remains is prose she has not written yet and two facts nobody
+has confirmed.
 
-- [ ] **Tipografia Everest — dates.** `2013 – Prezent` is a guess. Real role too, so no
-      placeholder flag; just fix the years in both text files.
-- [ ] **Role `team-lead`** — `[Distribuitor industrial]`, 2009–2013, Sales Team Lead.
-      Invented employer and dates; prose is generic.
-- [ ] **Role `key-account`** — `[Furnizor de servicii B2B]`, 2006–2009, Key Account Manager.
-- [ ] **Role `sales-rep`** — `[Companie de distribuție]`, 2004–2006, B2B Sales Representative.
-- [ ] **Education `degree`** — `[Universitate]`, 2000–2004, Licență în Marketing / Economie.
-- [ ] **Achievements** `portfolio`, `team`, `accounts-system` — all imagined. The first one
-      prints on the CV as "Key achievement". Replace with real wins, ideally with figures.
-- [ ] **Career ribbon** — the `eras` array in `src/modules/career/CareerPage.astro` repeats
-      the same bracketed names and year spans; update it alongside the roles.
-- [ ] **Home stats and CV highlights** — `home.stats` and `resume.highlights` in
-      `src/i18n/ro.ts` / `en.ts` are deliberately qualitative. Add real figures (team size,
-      portfolio size, growth) when known.
-- [ ] **LinkedIn URL** — `src/data/profile/shape.ts` still has
-      `https://www.linkedin.com/in/vasile-grafu-6a99369`. It is live on the Contact page, in the
-      header, and printed into both CV PDFs.
-- [ ] **Phone** — `+40 722 635 785`, printed into both CV PDFs.
-- [ ] **Email** — mechanically renamed to `simonaalinagrafu@gmail.com`. Confirm that mailbox
-      actually exists.
-- [ ] **GitHub link** — header and footer still link to `github.com/simonaalinagrafu`. Keep or
-      remove depending on whether she wants a GitHub presence.
-- [ ] **Romanian translation** — drafted by Claude and not yet reviewed by a native speaker.
-      Two conventions, easy to reverse: English job titles where they are the market norm
-      (Key Account Manager), and gender-neutral prose (Romanian agrees adjectives with
-      gender). If she prefers explicitly feminine wording, it is one pass over the two `ro.ts`
-      files.
+**Placeholders are live.** The guard in `src/data/profile/index.ts` (§8) is overridden with
+`PLACEHOLDERS_OK: '1'` in `.github/workflows/deploy.yml`, by decision. **When this list is
+empty, delete that `env:` block from the workflow** so the guard protects future edits again.
 
-After changing any of these, regenerate both CV PDFs (§6), then delete the `placeholder: true`
-line from each entry you have confirmed.
+Text lives in `src/data/profile/ro.ts` and `en.ts`; structure (names, flags) in
+`src/data/profile/shape.ts`.
+
+- [ ] **Everest job title.** The site says *Manager de Vânzări / Sales Manager* and describes
+      leading the sales team, as told. Her LinkedIn headline says *Account Manager*. One of the
+      two should change so the site and LinkedIn agree — a recruiter will see both.
+- [ ] **Role prose for the five earlier roles** — their `summary` and `bullets` are drafted to
+      fit the title; nothing in them is a figure, but it is not her wording. The **Everest**
+      bullets are different: they restate the responsibilities from her own LinkedIn "About",
+      so only the phrasing needs her eye. Real numbers (team size, portfolio, volumes) would
+      strengthen all six.
+- [ ] **Achievements** `portfolio`, `team`, `accounts-system` — imagined. The first prints on
+      the CV as "Key achievement". Replace with real wins, ideally with figures, then remove
+      the three `placeholder: true` flags.
+- [ ] **Company one-liners** — `aboutShort` is set only where the name makes it safe
+      (RH Printing, Delta Distribution). Rodata, Europetrolgaz and Euromobex have none; add a
+      line each if she wants context on the page and the CV.
+- [ ] **Email** — `simonaalinagrafu@gmail.com` was derived from the site name. Confirm the
+      mailbox exists; it is on the Contact page, in the footer and on both CVs.
+- [ ] **GitHub link** — header still links to `github.com/simonaalinagrafu`. Keep or remove.
+- [ ] **Romanian translation** — drafted and not yet reviewed by a native speaker. Two
+      conventions, easy to reverse: English job titles where they are the market norm, and
+      gender-neutral prose (Romanian agrees adjectives with gender). If she prefers explicitly
+      feminine wording, it is one pass over the two `ro.ts` files.
+
+After changing any of these, regenerate both CV PDFs (§6).
 
 ---
 

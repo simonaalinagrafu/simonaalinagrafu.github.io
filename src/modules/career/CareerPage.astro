@@ -12,20 +12,24 @@ const locale = getLocale(Astro.url.pathname);
 const s = t(locale);
 const { experience, education } = getProfile(locale);
 
+// The Everest figure is derived from her start date there (February 2012),
+// so it ages on its own.
+const year = new Date().getFullYear();
 const stats = [
   { value: '20+', label: s.career.stats.years },
-  { value: '15+', label: s.career.stats.leading },
+  { value: String(year - 2012), label: s.career.stats.everest },
   { value: String(experience.length), label: s.career.stats.companies },
 ];
 
 // Company eras for the ribbon; widths are proportional to duration. Company
-// names and year ranges are the same in every language. Bracketed names are
-// placeholders (see data/profile/shape.ts).
+// names and year ranges are the same in every language.
 const eras = [
-  { label: '[Distribuție]', note: '’04–’06', weight: 2 },
-  { label: '[Servicii B2B]', note: '’06–’09', weight: 3 },
-  { label: '[Distribuitor]', note: '’09–’13', weight: 4 },
-  { label: 'Tipografia Everest', note: `’13–${s.career.now}`, weight: 13, highlight: true },
+  { label: 'Euromobex', note: '’97–’99', weight: 2 },
+  { label: 'Delta', note: '’99–’00', weight: 1.2 },
+  { label: 'Europetrolgaz', note: '’00–’01', weight: 0.7 },
+  { label: 'Rodata', note: '’01–’02', weight: 1.7 },
+  { label: 'RH Printing', note: '’03–’12', weight: 8.8 },
+  { label: 'Tipografia Everest', note: `’12–${s.career.now}`, weight: 14.6, highlight: true },
 ];
 
 const cv = locale === 'ro' ? '/cv-ro.pdf' : '/cv-en.pdf';
@@ -47,28 +51,34 @@ const cv = locale === 'ro' ? '/cv-ro.pdf' : '/cv-en.pdf';
     </a>
   </div>
 
-  <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-    {stats.map((stat) => <StatTilePart value={stat.value} label={stat.label} />)}
+  <!-- Figures on a hairline strip, the same device as the home page. -->
+  <div class="border-line mt-10 grid grid-cols-3 gap-6 border-y py-7">
+    {stats.map((stat) => <StatTilePart value={stat.value} label={stat.label} bare />)}
   </div>
 
   <SegmentBarPart segments={eras} ariaLabel={s.career.timeline} />
 
-  <ol class="border-line relative mt-10 space-y-12 border-s">
+  <ol class="border-line relative mt-12 space-y-14 border-s">
     {experience.map((role) => <RoleItem role={role} />)}
   </ol>
 
-  <h2 class="title-section mt-14 flex items-center gap-2.5">
-    <Icon name="lucide:graduation-cap" class="text-accent h-6 w-6" aria-hidden="true" />
-    {s.career.education}
-  </h2>
-  <ul class="mt-4 space-y-4">
+  <p class="rule mt-16"><span class="kicker">{s.career.education}</span></p>
+  <ul class="mt-6 space-y-5">
     {
       education.map((entry) => (
-        <li>
-          <p class="text-ink font-medium">{entry.degree}</p>
-          <p class="text-faint text-sm">
-            {entry.school} · {entry.period}
-          </p>
+        <li class="flex gap-4">
+          <Icon
+            name="lucide:graduation-cap"
+            class="text-label mt-1 h-5 w-5 shrink-0"
+            aria-hidden="true"
+          />
+          <div>
+            <p class="font-display text-ink text-lg font-semibold">{entry.degree}</p>
+            <p class="text-faint mt-0.5 text-sm">
+              {entry.school}
+              {entry.period && ` · ${entry.period}`}
+            </p>
+          </div>
         </li>
       ))
     }

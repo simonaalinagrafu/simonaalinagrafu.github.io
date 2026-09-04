@@ -1,5 +1,5 @@
 ---
-// Big gradient number over a small label. Two forms: a bordered card (the
+// Big serif numeral over a small label. Two forms: a bordered card (the
 // Career "at a glance" row) or `bare`, with no chrome at all, for a stat strip
 // that sits directly on the page between hairlines.
 interface Props {
@@ -13,9 +13,7 @@ const { value, label, bare = false }: Props = Astro.props;
 ---
 
 <div class:list={['text-center', bare ? 'px-2' : 'card p-4']}>
-  <p
-    class="font-display from-grad-a to-grad-b bg-gradient-to-br bg-clip-text text-3xl font-bold text-transparent"
-  >
+  <p class="figure text-3xl sm:text-4xl">
     {value}
   </p>
   <p class="text-faint mt-1 text-xs">{label}</p>

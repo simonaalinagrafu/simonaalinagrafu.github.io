@@ -18,17 +18,19 @@ const { skills } = getProfile(locale);
   <h1 class="title-page mt-2">{s.skills.heading}</h1>
   <p class="lede">{s.skills.lede}</p>
 
-  <div class="mt-8 grid gap-6 sm:grid-cols-2">
+  <!-- An editorial list on hairlines rather than a card grid: each group is a
+       heading with its own rule, not a box. -->
+  <div class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
     {
       skills.map((cat) => (
-        <section class="card card-lift p-5">
+        <section class="border-line border-t pt-6">
           <div class="flex items-center gap-3">
             <div class="icon-tile">
-              <Icon name={cat.icon} class="h-5 w-5" aria-hidden="true" />
+              <Icon name={cat.icon} class="h-4 w-4" aria-hidden="true" />
             </div>
-            <h2 class="font-display text-ink font-semibold">{cat.group}</h2>
+            <h2 class="title-item">{cat.group}</h2>
           </div>
-          <p class="text-muted mt-3 text-sm">{cat.blurb}</p>
+          <p class="text-muted mt-3 text-sm leading-relaxed">{cat.blurb}</p>
           <ul class="mt-4 flex flex-wrap gap-2">
             {cat.items.map((item) => (
               <li class="chip text-sm">{item}</li>

@@ -25,6 +25,7 @@ npm run build    # production build to ./dist
 npm run preview  # preview the production build
 npm run check    # type-check — also the CI gate
 npm run cv       # regenerate both CV PDFs (after npm run build)
+npm run contrast # WCAG AA check over every theme's tokens
 ```
 
 ## Updating the profile
@@ -50,6 +51,12 @@ npm run cv
 
 That prints both, using `astro preview` and headless Chrome. Set `CHROME_PATH` if your
 browser is not in the default location.
+
+### Portrait
+
+The home page hero is built around a photo. Save it as **`public/portrait.jpg`** — JPEG,
+portrait orientation 4:5, at least 900×1125 — and rebuild. Until the file exists the frame
+shows her initials instead, so nothing else on the page moves when the photo arrives.
 
 ### Placeholder content
 

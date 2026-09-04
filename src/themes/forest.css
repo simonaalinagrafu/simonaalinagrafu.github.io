@@ -1,0 +1,24 @@
+/* Forest — the same paper, deep green in place of burgundy. */
+[data-theme='forest'] {
+  --t-bg: #f6f5ef;
+  --t-surface: #fffffb;
+  --t-tint: rgb(233 236 224 / 0.55);
+  --t-chip: #e9ebdf;
+  --t-ink: #1f2620;
+  --t-muted: #4b574d;
+  --t-faint: #667165;
+  --t-line: #e0e2d5;
+  --t-line-strong: #c9cdbd;
+  --t-accent: #1f4d3a;
+  --t-accent-strong: #163a2b;
+  --t-accent-ink: #ffffff;
+  --t-accent-solid: #1f4d3a;
+  --t-accent-hover: #163a2b;
+  --t-accent-soft: #e2ede6;
+  --t-accent-line: #bfd3c7;
+  --t-grad-a: #1f4d3a;
+  --t-grad-b: #3b7a5e;
+  --t-label: #7a5f30;
+  --t-label-strong: #5e4722;
+  --t-label-soft: #f3eedf;
+}

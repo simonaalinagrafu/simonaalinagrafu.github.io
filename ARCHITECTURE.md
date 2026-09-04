@@ -104,7 +104,8 @@ PDF); `achievements[0]` is the "Key achievement" the PDF prints.
    Never write a raw palette color (`slate-600`, `indigo-500`) in a component.
 2. **Recipes** (`global.css` `@layer components`) — named classes for repeated
    patterns: `.title-*`, `.btn*`, `.card`, `.tag`, `.badge`, `.chip`,
-   `.nav-pill`, `.menu-item`, `.icon-tile`, `.tip`, `.lede`…
+   `.nav-pill`, `.menu-item`, `.icon-tile`, `.tip`, `.lede`, `.figure` (serif numeral),
+   `.rule` (kicker on a hairline), `.band` (the accent panel), `.portrait`…
    Extract a recipe only when a pattern repeats or has a clear name.
 3. **Inline utilities** — everything else, directly in the markup.
 4. **`style=` attribute** — only for data-driven values Tailwind cannot know
@@ -113,14 +114,30 @@ PDF); `achievements[0]` is the "Key achievement" the PDF prints.
    is `modules/resume-print/resume-print.css` (the PDF is deliberately
    theme-independent print CSS).
 
+## Design voice
+
+Warm editorial: paper grounds, one strong accent, aged-gold kickers as the
+section device, a serif display face (Fraunces) over Inter, and hairlines
+instead of boxes wherever a box is not doing work. Numerals are set in the
+serif (`.figure`); the only filled accent surface is the closing `.band`.
+
+The hero is built around a portrait (`fx/components/PortraitPart.astro`).
+`IndexPage` checks for `public/portrait.jpg` at build time and passes it in;
+without the file, the frame holds the space with initials.
+
 ## Themes
+
+Four themes, one family: `cream` (the default and the brand), `night` (the
+brand after dark), `forest` and `marine` (alternate accent hues on the same
+paper). Every theme must pass `npm run contrast` — a WCAG AA check over the
+text-bearing token pairs in `src/themes/*.css`.
 
 Adding a theme: create `src/themes/<name>.css` implementing the token
 contract, import it in `themes/index.css`, add an entry in `themes.ts`, and add
 its label to every `src/i18n/*.ts` (the `ThemeId` union makes that a type error
 if you forget). It then appears in the header dropdown automatically. Selection
 persists in `localStorage` and is applied pre-paint in `BaseLayout`'s head
-script; without a selection, light is the default.
+script; without a selection, cream is the default.
 
 The language dropdown works differently on purpose: its items are real links, so
 switching needs no JavaScript and both trees stay crawlable. A chosen language is
@@ -130,6 +147,8 @@ always render the language they name.
 ## Generated files
 
 `public/cv-ro.pdf` and `public/cv-en.pdf` are printed from the `/resume-print/`
-pages, and `public/og.png` from `design/og-image.html`. None of them are rebuilt
+pages, and `public/og.png` from `design/og-image.html`. `public/favicon.svg` is
+hand-written. `public/portrait.jpg` is *not* generated — it is the one asset
+supplied by hand, and it is optional until it exists. None of them are rebuilt
 by `npm run build`, so they go stale silently. Regenerate the CVs with
 `npm run build && npm run cv`; see `SETUP.md` for the OG card.

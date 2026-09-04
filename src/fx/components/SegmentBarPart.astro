@@ -1,6 +1,6 @@
 ---
 // Generic horizontal segment bar: each segment's width is proportional to its
-// weight; one segment can be highlighted with the gradient accent.
+// weight; one segment can be highlighted with the solid accent.
 interface Segment {
   label: string;
   note?: string;
@@ -20,10 +20,8 @@ const { segments, ariaLabel } = Astro.props;
   {
     segments.map((s) => (
       <div
-        class={`rounded-lg px-2.5 py-1.5 text-center text-xs whitespace-nowrap ${
-          s.highlight
-            ? 'from-grad-a to-grad-b text-accent-ink bg-gradient-to-r font-medium'
-            : 'bg-chip text-muted'
+        class={`rounded-md px-2.5 py-1.5 text-center text-xs whitespace-nowrap ${
+          s.highlight ? 'bg-accent-solid text-accent-ink font-medium' : 'bg-chip text-muted'
         }`}
         style={`flex-grow: ${s.weight}; flex-basis: 0; min-width: fit-content;`}
       >

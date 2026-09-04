@@ -1,0 +1,37 @@
+---
+// Portrait frame for the hero: a 4:5 photo with the paper offset shadow. When
+// no `src` is given it holds the space with initials on a warm block, so the
+// page lays out identically before and after the photo arrives.
+interface Props {
+  src?: string;
+  alt: string;
+  initials: string;
+  class?: string;
+}
+
+const { src, alt, initials, class: className } = Astro.props;
+---
+
+<div class:list={['portrait', className]}>
+  {
+    src ? (
+      <img
+        src={src}
+        alt={alt}
+        width="900"
+        height="1125"
+        loading="eager"
+        decoding="async"
+        class="h-full w-full object-cover"
+      />
+    ) : (
+      <div
+        class="bg-label-soft flex h-full w-full items-center justify-center"
+        role="img"
+        aria-label={alt}
+      >
+        <span class="font-display text-label text-7xl font-semibold">{initials}</span>
+      </div>
+    )
+  }
+</div>

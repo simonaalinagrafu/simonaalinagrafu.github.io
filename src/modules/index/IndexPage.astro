@@ -1,18 +1,31 @@
 ---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import BaseLayout from '@modules/shared/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
-import IconCardPart from '@fx/components/IconCardPart.astro';
 import StatTilePart from '@fx/components/StatTilePart.astro';
+import StepListPart from '@fx/components/StepListPart.astro';
+import PortraitPart from '@fx/components/PortraitPart.astro';
 import { getProfile, siteFacts } from '@data/profile';
 import { getLocale, localePath } from '@fx/lib/i18n';
 import { t } from '@i18n/index';
-import type { StatId, DoingId, ValueId, PrincipleId } from '@i18n/types';
+import type { StatId, DoingId, ValueId, PrincipleId, ProcessId } from '@i18n/types';
 
 const locale = getLocale(Astro.url.pathname);
 const s = t(locale);
 const { site, experience } = getProfile(locale);
 
 const current = experience[0];
+
+// The hero is built around a portrait. Drop public/portrait.jpg in and rebuild;
+// until then the frame holds the space with initials.
+// process.cwd() is the project root while Astro builds; import.meta.url is
+// not a reliable way back to the source tree from a bundled component.
+const hasPortrait = existsSync(join(process.cwd(), 'public', 'portrait.jpg'));
+const monogram = siteFacts.name
+  .split(' ')
+  .map((word) => word[0])
+  .join('');
 
 // Display order and icons live here; the words live in the i18n dictionaries,
 // keyed by the same ids — so neither can drift out of step with the other.
@@ -28,6 +41,9 @@ const doingIcons: Record<DoingId, string> = {
   negotiation: 'lucide:file-signature',
 };
 const doingOrder: DoingId[] = ['team', 'accounts', 'pipeline', 'negotiation'];
+
+// The four-step way of working — the section that makes this a sales site.
+const processOrder: ProcessId[] = ['listen', 'propose', 'negotiate', 'deliver'];
 
 // Written from the employer's point of view rather than mine — one line each,
 // stating a benefit rather than restating a fact the tiles above already carry.
@@ -56,56 +72,36 @@ const principleIcons: Record<PrincipleId, string> = {
   results: 'lucide:target',
 };
 const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
-
-const monogram = siteFacts.name
-  .split(' ')
-  .map((word) => word[0])
-  .join('');
 ---
 
 <BaseLayout title={`${siteFacts.name} — ${s.home.metaTitle}`} description={site.tagline}>
-  <section class="relative py-10 sm:py-14">
-    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-      <div class="blob bg-blob-a -top-24 -right-24 h-80 w-80"></div>
-      <div class="blob bg-blob-b top-32 -left-24 h-64 w-64"></div>
-    </div>
-    <div class="flex flex-wrap items-center justify-between gap-8 lg:flex-nowrap">
-      <div class="max-w-3xl min-w-0">
-        <p class="text-accent font-medium">{s.home.greeting}</p>
-        <h1 class="title-hero mt-1">
-          {siteFacts.name}
-        </h1>
-        <p class="text-muted mt-3 text-xl">{site.title}</p>
-        <p class="mt-5 text-lg leading-relaxed">
-          {site.intro}
-        </p>
-      </div>
-      <div class="hidden shrink-0 items-center justify-center lg:flex" aria-hidden="true">
-        <div
-          class="from-grad-a to-grad-b shadow-accent-solid/20 rounded-full bg-gradient-to-br p-1 shadow-xl"
-        >
-          <div class="bg-bg flex h-36 w-36 items-center justify-center rounded-full">
-            <span
-              class="font-display from-grad-a to-grad-b bg-gradient-to-br bg-clip-text text-4xl font-bold text-transparent"
-              >{monogram}</span
-            >
-          </div>
+  <!-- Hero: the name and one paragraph on the left, the portrait on the right.
+       Contact is the primary action — this is a sales site. -->
+  <section class="py-6 sm:py-12">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
+      <div class="max-w-2xl">
+        <p class="kicker">{site.title}</p>
+        <p class="text-accent mt-6 font-medium">{s.home.greeting}</p>
+        <h1 class="title-hero mt-1">{siteFacts.name}</h1>
+        <p class="text-muted mt-6 text-lg leading-relaxed">{site.intro}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={localePath(locale, '/contact/')} class="btn btn-primary">{s.home.ctaContact}</a>
+          <a href={localePath(locale, '/career/')} class="btn btn-ghost">{s.home.ctaCareer}</a>
         </div>
       </div>
-    </div>
-    <div class="mt-8 flex flex-wrap gap-3">
-      <a href={localePath(locale, '/career/')} class="btn btn-primary">{s.home.ctaCareer}</a>
-      <a href={localePath(locale, '/contact/')} class="btn btn-ghost">{s.home.ctaContact}</a>
+      <div class="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-md">
+        <PortraitPart
+          src={hasPortrait ? '/portrait.jpg' : undefined}
+          alt={siteFacts.name}
+          initials={monogram}
+        />
+      </div>
     </div>
   </section>
 
   <section class="py-8">
-    <p class="kicker">{s.home.kickerReach}</p>
-    <!-- A strip between hairlines rather than a card grid, so the facts read
-         differently from the capability cards below. -->
-    <div
-      class="border-line mt-5 grid grid-cols-2 gap-x-6 gap-y-8 border-y py-8 sm:grid-cols-3 sm:gap-x-10"
-    >
+    <p class="rule"><span class="kicker">{s.home.kickerReach}</span></p>
+    <div class="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 sm:gap-x-10">
       {
         statOrder.map((id) => (
           <StatTilePart value={s.home.stats[id].value} label={s.home.stats[id].label} bare />
@@ -115,31 +111,49 @@ const monogram = siteFacts.name
   </section>
 
   <section class="py-8">
-    <p class="kicker">{s.home.kickerDoing}</p>
-    <div class="mt-4 grid gap-6 sm:grid-cols-2">
+    <p class="rule"><span class="kicker">{s.home.kickerDoing}</span></p>
+    <!-- A numbered list on hairlines rather than a card grid. -->
+    <div class="mt-6 grid gap-x-12 gap-y-8 sm:grid-cols-2">
       {
-        doingOrder.map((id) => (
-          <IconCardPart icon={doingIcons[id]} title={s.home.doing[id].title}>
-            {s.home.doing[id].body.replace('{company}', current.company)}
-          </IconCardPart>
+        doingOrder.map((id, i) => (
+          <div class="border-line flex gap-5 border-t pt-6">
+            <span class="figure text-2xl">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <div class="flex items-center gap-2.5">
+                <Icon name={doingIcons[id]} class="text-label h-4.5 w-4.5" aria-hidden="true" />
+                <h2 class="title-item">{s.home.doing[id].title}</h2>
+              </div>
+              <p class="text-muted mt-2 text-sm leading-relaxed">
+                {s.home.doing[id].body.replace('{company}', current.company)}
+              </p>
+            </div>
+          </div>
         ))
       }
     </div>
   </section>
 
   <section class="py-8">
-    <p class="kicker">{s.home.kickerWorking}</p>
-    <h2 class="title-section mt-2">{s.home.headingWorking}</h2>
-    <!-- The only panel on a page of strips, cards and lists — that shape is
-         enough to mark the zone, so the colour stays out of it. -->
+    <p class="rule"><span class="kicker">{s.home.kickerProcess}</span></p>
+    <h2 class="title-section mt-4">{s.home.headingProcess}</h2>
+    <div class="mt-8">
+      <StepListPart steps={processOrder.map((id) => s.home.process[id])} />
+    </div>
+  </section>
+
+  <section class="py-8">
+    <p class="rule"><span class="kicker">{s.home.kickerWorking}</span></p>
+    <h2 class="title-section mt-4">{s.home.headingWorking}</h2>
+    <!-- The only panel on a page of rules and lists — that shape is enough to
+         mark the zone, so the colour stays out of it. -->
     <div
-      class="bg-tint border-line mt-4 grid gap-8 rounded-2xl border p-8 sm:grid-cols-2 lg:grid-cols-3"
+      class="bg-tint border-line mt-6 grid gap-8 rounded-2xl border p-8 sm:grid-cols-2 lg:grid-cols-3"
     >
       {
         valueOrder.map((id) => (
           <div>
             <div class="icon-tile">
-              <Icon name={valueIcons[id]} class="h-5 w-5" aria-hidden="true" />
+              <Icon name={valueIcons[id]} class="h-4 w-4" aria-hidden="true" />
             </div>
             <h3 class="font-display text-ink mt-4 text-lg font-semibold">
               {s.home.value[id].title}
@@ -152,26 +166,46 @@ const monogram = siteFacts.name
   </section>
 
   <section class="py-8">
-    <p class="kicker">{s.home.kickerPrinciples}</p>
-    <h2 class="title-section mt-2">{s.home.headingPrinciples}</h2>
-    <!-- A numbered manifesto rather than another card grid — principles are not
-         features, and the form should say so before the words do. -->
-    <div class="mt-6 grid gap-x-12 gap-y-9 sm:grid-cols-2">
+    <p class="rule"><span class="kicker">{s.home.kickerPrinciples}</span></p>
+    <h2 class="title-section mt-4">{s.home.headingPrinciples}</h2>
+    <div class="mt-8 grid gap-x-12 gap-y-9 sm:grid-cols-2">
       {
         principleOrder.map((id) => (
           <div class="flex gap-4">
             <Icon
               name={principleIcons[id]}
-              class="text-label mt-0.5 h-6 w-6 shrink-0"
+              class="text-label mt-1 h-5 w-5 shrink-0"
               aria-hidden="true"
             />
             <div>
-              <h3 class="font-display text-ink font-semibold">{s.home.principles[id].title}</h3>
+              <h3 class="font-display text-ink text-lg font-semibold">
+                {s.home.principles[id].title}
+              </h3>
               <p class="text-muted mt-1.5 text-sm leading-relaxed">{s.home.principles[id].body}</p>
             </div>
           </div>
         ))
       }
+    </div>
+  </section>
+
+  <!-- Closing band: the one place the accent fills a whole panel. -->
+  <section class="py-10">
+    <div class="band px-8 py-12 text-center sm:px-12 sm:py-14">
+      <h2 class="font-display text-3xl font-semibold text-balance sm:text-4xl">
+        {s.home.band.title}
+      </h2>
+      <p class="text-accent-ink/80 mx-auto mt-3 max-w-xl">{s.home.band.body}</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href={`mailto:${siteFacts.email}`} class="btn btn-inverse">
+          <Icon name="lucide:mail" class="h-4 w-4" aria-hidden="true" />
+          {s.home.band.ctaEmail}
+        </a>
+        <a href={siteFacts.linkedin} class="btn btn-inverse">
+          <Icon name="lucide:linkedin" class="h-4 w-4" aria-hidden="true" />
+          {s.home.band.ctaLinkedin}
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

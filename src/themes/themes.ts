@@ -11,8 +11,8 @@ export interface ThemeDef {
 }
 
 export const themes: ThemeDef[] = [
-  { id: 'light', swatch: '#1e3a8a' },
-  { id: 'dark', swatch: '#020617' },
-  { id: 'emerald', swatch: '#047857' },
-  { id: 'sepia', swatch: '#9a3412' },
+  { id: 'cream', swatch: '#7a1f2b' },
+  { id: 'night', swatch: '#17130f' },
+  { id: 'forest', swatch: '#1f4d3a' },
+  { id: 'marine', swatch: '#1c3557' },
 ];

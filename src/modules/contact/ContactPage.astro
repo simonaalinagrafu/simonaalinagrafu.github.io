@@ -9,57 +9,56 @@ import { t } from '@i18n/index';
 const locale = getLocale(Astro.url.pathname);
 const s = t(locale);
 const { site } = getProfile(locale);
+
+const telHref = `tel:${site.phone.replace(/\s/g, '')}`;
 ---
 
 <BaseLayout
   title={`${s.contact.metaTitle} — ${siteFacts.name}`}
   description={s.contact.metaDescription}
 >
-  <div class="relative">
-    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-      <div class="blob bg-blob-a -top-16 -right-24 h-72 w-72"></div>
-      <div class="blob bg-blob-b top-48 -left-24 h-56 w-56"></div>
+  <p class="kicker">{s.contact.metaTitle}</p>
+  <h1 class="title-page mt-2">{s.contact.heading}</h1>
+  <p class="lede">{s.contact.lede}</p>
+
+  <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_20rem]">
+    <div class="space-y-4">
+      <LinkCardPart
+        href={`mailto:${site.email}`}
+        icon="lucide:mail"
+        title={s.contact.email}
+        subtitle={site.email}
+      />
+      <LinkCardPart
+        href={telHref}
+        icon="lucide:phone"
+        title={s.contact.phone}
+        subtitle={site.phone}
+      />
+      <LinkCardPart
+        href={site.linkedin}
+        icon="lucide:linkedin"
+        title={s.contact.linkedin}
+        subtitle={s.contact.linkedinSubtitle}
+      />
     </div>
 
-    <h1 class="title-page">{s.contact.heading}</h1>
-    <p class="lede">{s.contact.lede}</p>
-
-    <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_20rem]">
-      <div class="space-y-4">
-        <LinkCardPart
-          href={`mailto:${site.email}`}
-          icon="lucide:mail"
-          title={s.contact.email}
-          subtitle={site.email}
-        />
-        <LinkCardPart
-          href={site.linkedin}
-          icon="lucide:linkedin"
-          title={s.contact.linkedin}
-          subtitle={s.contact.linkedinSubtitle}
-        />
-      </div>
-
-      <aside class="card bg-tint h-fit p-6">
-        <ul class="text-muted space-y-4 text-sm">
-          <li class="flex items-start gap-3">
-            <Icon
-              name="lucide:map-pin"
-              class="text-label mt-0.5 h-4 w-4 shrink-0"
-              aria-hidden="true"
-            />
-            <span>{site.location}</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <Icon
-              name="lucide:clock"
-              class="text-label mt-0.5 h-4 w-4 shrink-0"
-              aria-hidden="true"
-            />
-            <span>{s.contact.timezone}</span>
-          </li>
-        </ul>
-      </aside>
-    </div>
+    <aside class="card bg-tint h-fit p-6">
+      <p class="rule"><span class="kicker">{s.contact.details}</span></p>
+      <ul class="text-muted mt-5 space-y-4 text-sm">
+        <li class="flex items-start gap-3">
+          <Icon
+            name="lucide:map-pin"
+            class="text-label mt-0.5 h-4 w-4 shrink-0"
+            aria-hidden="true"
+          />
+          <span>{site.location}</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <Icon name="lucide:clock" class="text-label mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>{s.contact.timezone}</span>
+        </li>
+      </ul>
+    </aside>
   </div>
 </BaseLayout>

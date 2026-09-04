@@ -15,10 +15,10 @@ export const en: UiStrings = {
   },
 
   themes: {
-    light: 'Light',
-    dark: 'Dark',
-    emerald: 'Emerald',
-    sepia: 'Sepia',
+    cream: 'Cream',
+    night: 'Night',
+    forest: 'Forest',
+    marine: 'Marine',
   },
 
   header: {
@@ -49,12 +49,14 @@ export const en: UiStrings = {
     kickerDoing: 'What I do',
     kickerWorking: 'Working with me',
     kickerPrinciples: 'Principles',
+    kickerProcess: 'How I work',
     headingWorking: 'What I bring to an organization',
     headingPrinciples: 'What drives me',
+    headingProcess: 'Four steps, every time',
 
     stats: {
       years: { value: '20+', label: 'years in B2B sales' },
-      b2b: { value: 'B2B', label: 'selling to businesses, not consumers' },
+      b2b: { value: 'B2B', label: 'selling to businesses' },
       team: { value: 'A team', label: 'of salespeople led, coached and kept' },
       accounts: { value: 'Key accounts', label: 'owned from first contact to renewal' },
       stages: { value: 'Every stage', label: 'from prospecting to delivery' },
@@ -125,12 +127,38 @@ export const en: UiStrings = {
         body: 'A pipeline, a forecast and a target are only useful if they are honest. I keep the numbers real, even when the real number is uncomfortable, because that is the only way to improve them.',
       },
     },
+
+    process: {
+      listen: {
+        title: 'Listen',
+        body: 'Before any offer, I understand the client’s business, its constraints, and what a good outcome means to them.',
+      },
+      propose: {
+        title: 'Propose',
+        body: 'An offer that answers the real need, at prices and terms I can stand behind.',
+      },
+      negotiate: {
+        title: 'Negotiate',
+        body: 'Agreements both sides can live with for years — not one-day wins.',
+      },
+      deliver: {
+        title: 'Deliver and stay',
+        body: 'What was promised reaches the client, and the relationship continues after the signature.',
+      },
+    },
+
+    band: {
+      title: 'Let’s talk.',
+      body: 'A short message is enough — I reply to every thoughtful one.',
+      ctaEmail: 'Send me an email',
+      ctaLinkedin: 'Connect on LinkedIn',
+    },
   },
 
   career: {
     metaTitle: 'Career',
     metaDescription:
-      '20+ years in B2B sales: from field sales to key accounts to leading the sales team at Tipografia Everest.',
+      '20+ years in B2B sales, from Euromobex and RH Printing to leading the sales team at Tipografia Everest.',
     kicker: 'Journey',
     heading: 'Career',
     lede: 'The roles I’ve held, the teams I’ve built, and what each chapter added.',
@@ -138,12 +166,13 @@ export const en: UiStrings = {
     downloadFile: 'Simona-Alina-Grafu-CV',
     stats: {
       years: 'years in B2B sales',
-      leading: 'years leading teams',
+      everest: 'years at Tipografia Everest',
       companies: 'companies',
     },
     education: 'Education',
     timeline: 'Career timeline by company',
     now: 'now',
+    placeholderTag: 'to be confirmed',
   },
 
   skills: {
@@ -164,6 +193,9 @@ export const en: UiStrings = {
     email: 'Email',
     linkedin: 'LinkedIn',
     linkedinSubtitle: 'Best for professional messages',
+    phone: 'Phone',
+    phoneSubtitle: 'For a direct conversation',
+    details: 'Details',
     timezone: 'EET (UTC+2)',
   },
 
@@ -181,8 +213,8 @@ export const en: UiStrings = {
     education: 'Education',
     focus: 'Focus',
     highlights: [
-      '20+ years in B2B sales, from field sales to sales management',
-      'Leads the sales team at Tipografia Everest',
+      '20+ years in B2B sales, most of them in the printing industry',
+      'Leads the sales team at Tipografia Everest, where she has been since 2012',
       'Owns the key accounts that carry the most revenue',
       'Retention and a predictable pipeline as the measures of success',
     ],

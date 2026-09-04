@@ -1,30 +1,43 @@
 ---
-// One entry on the Career timeline: era icon, period badge, company context,
-// role summary, a numbered list of what I did, and focus-area chips.
+// One entry on the Career timeline: era icon, period in gold small caps, a
+// "to be confirmed" tag while the role is still a placeholder, company
+// context, role summary, a numbered list of what I did, and focus-area chips.
 // The icon travels with the role (data/profile/shape.ts) rather than through a
 // positional array, so the two cannot fall out of step.
 import { Icon } from 'astro-icon/components';
 import type { Role } from '@data/profile';
+import { getLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
 
 interface Props {
   role: Role;
 }
 
 const { role } = Astro.props;
+const s = t(getLocale(Astro.url.pathname));
 ---
 
 <li class="ms-6">
   <span
-    class="border-line bg-bg text-accent absolute -start-3.5 mt-1 flex h-7 w-7 items-center justify-center rounded-full border"
+    class="border-accent-line bg-bg text-accent absolute -start-3.5 mt-1 flex h-7 w-7 items-center justify-center rounded-full border"
   >
-    <Icon name={role.icon} class="h-4 w-4" aria-hidden="true" />
+    <Icon name={role.icon} class="h-3.5 w-3.5" aria-hidden="true" />
   </span>
-  <p class="text-faint flex flex-wrap items-center gap-2 text-sm">
+  <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
     <span class="badge">{role.period}</span>
-    {role.location}
+    <span class="text-faint">{role.location}</span>
+    {
+      role.placeholder && (
+        <span class="border-label text-label rounded-md border px-1.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase">
+          {s.career.placeholderTag}
+        </span>
+      )
+    }
   </p>
   <h2 class="title-item mt-2">
-    {role.position} · {role.company}
+    {role.position}
+    <span class="text-faint font-normal">·</span>
+    {role.company}
   </h2>
   {
     role.about && (
@@ -41,13 +54,13 @@ const { role } = Astro.props;
         const title = idx > 0 ? b.slice(0, idx) : null;
         const rest = idx > 0 ? b.slice(idx + 2) : b;
         const body = title ? rest.charAt(0).toUpperCase() + rest.slice(1) : rest;
-        // Leading bullets name the teams I ran — scope, not activity — so their
-        // numeral takes the accent colour to set them apart from the rest.
+        // Leading bullets name the scope of the role rather than the work, so
+        // their numeral takes the accent colour to set them apart.
         const lead = i < (role.leadBullets ?? 0);
         return (
           <div class="flex gap-3">
             <span
-              class={`font-display pt-px text-sm font-bold tabular-nums ${lead ? 'text-accent' : 'text-label/70'}`}
+              class={`font-display pt-px text-sm font-semibold tabular-nums ${lead ? 'text-accent' : 'text-label'}`}
             >
               {String(i + 1).padStart(2, '0')}
             </span>

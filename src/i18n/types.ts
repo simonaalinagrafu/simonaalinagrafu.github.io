@@ -6,12 +6,13 @@
 // silently fall out of step the way a positional array can.
 
 export type NavId = 'home' | 'career' | 'skills' | 'contact';
-export type ThemeId = 'light' | 'dark' | 'emerald' | 'sepia';
+export type ThemeId = 'cream' | 'night' | 'forest' | 'marine';
 export type StatId = 'years' | 'b2b' | 'team' | 'accounts' | 'stages' | 'relationships';
 export type DoingId = 'team' | 'accounts' | 'pipeline' | 'negotiation';
 export type ValueId = 'revenue' | 'retention' | 'team' | 'pipeline' | 'relationships' | 'process';
 export type PrincipleId = 'trust' | 'listen' | 'team' | 'results';
-export type CareerStatId = 'years' | 'leading' | 'companies';
+export type ProcessId = 'listen' | 'propose' | 'negotiate' | 'deliver';
+export type CareerStatId = 'years' | 'everest' | 'companies';
 
 export interface TitledBody {
   title: string;
@@ -61,13 +62,19 @@ export interface UiStrings {
     kickerDoing: string;
     kickerWorking: string;
     kickerPrinciples: string;
+    kickerProcess: string;
     headingWorking: string;
     headingPrinciples: string;
+    headingProcess: string;
     stats: Record<StatId, { value: string; label: string }>;
     /** `team.body` may contain the token {company}. */
     doing: Record<DoingId, TitledBody>;
     value: Record<ValueId, TitledBody>;
     principles: Record<PrincipleId, TitledBody>;
+    /** The four-step way of working — the section that makes this a sales site. */
+    process: Record<ProcessId, TitledBody>;
+    /** Closing contact band. */
+    band: { title: string; body: string; ctaEmail: string; ctaLinkedin: string };
   };
 
   career: {
@@ -85,6 +92,8 @@ export interface UiStrings {
     timeline: string;
     /** Short word for the open end of the current role on the ribbon. */
     now: string;
+    /** Tag shown on roles still marked `placeholder` in the data. */
+    placeholderTag: string;
   };
 
   skills: {
@@ -103,6 +112,10 @@ export interface UiStrings {
     email: string;
     linkedin: string;
     linkedinSubtitle: string;
+    phone: string;
+    phoneSubtitle: string;
+    /** Heading of the location/timezone aside. */
+    details: string;
     timezone: string;
   };
 

@@ -2,80 +2,101 @@ import type { ProfileText } from './shape';
 
 // English profile text.
 //
-// WHAT IS INVENTED. Only the Tipografia Everest role is real, and even its
-// dates are a guess. The three earlier roles, the education entry and all
-// three achievements are imagined stand-ins for a plausible 20-year B2B sales
-// career — see `placeholder: true` in shape.ts. No figures are invented
-// anywhere: the only number on the site is "20+ years".
+// WHAT IS REAL AND WHAT IS DRAFTED. The six roles — employers, titles, dates —
+// and both education entries are from Simona's LinkedIn profile. The Everest
+// bullets restate the responsibilities in her own LinkedIn "About"; the prose
+// under the five earlier roles is drafted to fit the title and awaits her
+// wording. No figures are invented. Still unconfirmed, and marked
+// `placeholder: true` in shape.ts: the three achievements.
 
 export const en: ProfileText = {
   site: {
     title: 'Sales Manager | B2B Sales | Team Leadership',
     tagline:
-      'Sales manager with 20+ years in B2B — from field sales to key accounts to leading a sales team that delivers, year after year.',
+      'Sales manager with 20+ years in B2B sales, most of them in the printing industry — from field sales to key accounts to leading a sales team that delivers.',
     intro:
-      '20+ years in B2B sales, and every stage of it: finding the client, understanding the business, negotiating the agreement, delivering on it, and keeping the relationship for the long term. Today I lead the sales team at Tipografia Everest.',
+      '20+ years in B2B sales, most of them in the printing industry, and every stage of it: finding the client, understanding the business, negotiating the agreement, delivering on it, and keeping the relationship for the long term. Today I lead the sales team at Tipografia Everest.',
     location: 'Bucharest, Romania',
   },
 
   roles: {
     everest: {
       position: 'Sales Manager',
-      period: '2013 – Present',
+      period: 'February 2012 – Present',
       location: 'Bucharest, Romania',
-      aboutShort: 'Printing house serving business clients.',
+      aboutShort: 'Bucharest printing house — 30 years, a team of over 140, offset and digital.',
+      about:
+        'Tipografia Everest, founded in Bucharest in 1994, is a printing house with three decades of experience and a team of over 140 people, covering offset and digital printing with a full range of finishing techniques. Its work spans commercial printing, books and publishing, agendas and notebooks, labels and packaging, and art bindery, under ISO 9001 quality and ISO 14001 environmental management systems certified since 2007.',
       summary:
-        'I lead the sales team — hiring, setting targets, and coaching — while keeping my own hand on the largest accounts. My job is to turn a pipeline into predictable revenue and to make sure the clients who trust us stay with us year after year.',
+        'I lead the sales team at Tipografia Everest and keep my own hand on the accounts that matter most — from the first request to the negotiated contract, the price offer built for that client, the internal order and its delivery, and the reporting and planning that keep next year predictable.',
       bullets: [
-        'Lead the sales team: setting clear targets, giving direction, and keeping every member motivated and accountable.',
-        'Own the key accounts: managing the relationships that carry the most revenue, from first contact to renewal.',
-        'Build the pipeline: forecasting, prioritising opportunities, and keeping the numbers honest.',
-        'Negotiate and close: pricing, contracts and terms with business clients of every size.',
-        'Recruit and develop salespeople: hiring, onboarding and coaching a team that performs as a unit.',
-        'Establish the sales process: consistent practices from lead to delivery, so results do not depend on heroics.',
-        'Work alongside production: aligning what is sold with what can be delivered, on time and to specification.',
+        'Lead the sales team: setting targets, giving direction, and keeping every member accountable for their numbers.',
+        'Clients and their needs: handling requests and complaints, and matching products to what each client actually needs.',
+        'Negotiate contracts: with clients and with suppliers — prices, delivery terms and conditions.',
+        'Recruit new customers: prospecting and bringing new business accounts into the portfolio.',
+        'Price offers per client: managing each client’s budget and building an offer adapted to it.',
+        'Plan internal orders: scheduling production orders and negotiating delivery terms.',
+        'Sales reporting and planning: weekly, monthly and annual reports; monthly and annual sales estimates.',
+        'Marketing activities: negotiating and organising events and campaigns that promote the company’s products.',
       ],
     },
 
-    'team-lead': {
-      position: 'Sales Team Lead',
-      period: '2009 – 2013',
+    'rh-printing': {
+      position: 'Senior Sales Executive',
+      period: 'May 2003 – February 2012',
       location: 'Bucharest, Romania',
-      aboutShort: 'B2B distributor — placeholder until the real employer is confirmed.',
+      aboutShort: 'Printing company.',
       summary:
-        'My first leadership role: coordinating a team of sales representatives while still carrying a portfolio of my own. I learned that a team hits its targets when each person knows exactly what is expected and gets help before they ask for it.',
+        'Almost nine years of selling print: a portfolio of business clients of my own, quotes on complex jobs, and a standing line to production so that what was sold was what got delivered.',
       bullets: [
-        'Coordinate the sales team: daily direction, weekly reviews, and shared targets everyone could see.',
-        'Coach representatives: joining client meetings, reviewing offers, and building each person’s confidence to close.',
-        'Manage the team pipeline: keeping opportunities moving and forecasts realistic.',
-        'Keep a personal portfolio: the accounts I brought in stayed with me while I led the team.',
+        'Business client portfolio: prospecting, quoting, and managing the relationship for the long term.',
+        'Quoting print work: specifications, print runs, deadlines and a price that was right for each job.',
+        'Coordination with production: following every order from approval to delivery.',
+        'Key accounts: the clients with steady volume, kept year after year.',
       ],
     },
 
-    'key-account': {
-      position: 'Key Account Manager',
-      period: '2006 – 2009',
+    rodata: {
+      position: 'Sales Executive',
+      period: 'April 2001 – December 2002',
       location: 'Bucharest, Romania',
-      aboutShort: 'B2B services provider — placeholder until the real employer is confirmed.',
-      summary:
-        'Responsible for the accounts that mattered most: understanding each client’s business well enough to anticipate what they would need next, and negotiating agreements both sides could live with for years.',
       bullets: [
-        'Manage key accounts: single point of contact for the largest business clients.',
-        'Negotiate contracts: pricing, terms and renewals, with retention as the measure of success.',
-        'Grow existing accounts: finding the next need before the client went looking elsewhere.',
-        'Coordinate delivery: making sure what was promised was what arrived.',
+        'B2B sales: building a portfolio of company clients.',
+        'Quoting and negotiation: from the first meeting to the order.',
+        'Client relationship: follow-up and retention.',
       ],
     },
 
-    'sales-rep': {
-      position: 'B2B Sales Representative',
-      period: '2004 – 2006',
+    europetrolgaz: {
+      position: 'Sales Representative',
+      period: 'August 2000 – March 2001',
       location: 'Bucharest, Romania',
-      aboutShort: 'Distribution company — placeholder until the real employer is confirmed.',
       bullets: [
-        'Prospect new business clients: cold outreach, first meetings, and a growing list of companies that said yes.',
-        'Present and quote: matching the offer to what the client actually needed.',
-        'Build the habits: a full pipeline, a clean CRM, and follow-ups that never slipped.',
+        'Field sales: visits, presentations and orders from business clients.',
+        'Prospecting: new clients on a territory of my own.',
+      ],
+    },
+
+    delta: {
+      position: 'Marketing Representative',
+      period: 'June 1999 – August 2000',
+      location: 'Bucharest, Romania',
+      aboutShort: 'Distribution company.',
+      bullets: [
+        'Promoting the product portfolio to business clients.',
+        'Supporting the sales team: materials, campaigns and feedback from the market.',
+      ],
+    },
+
+    euromobex: {
+      position: 'Sales Representative',
+      period: 'July 1997 – June 1999',
+      location: 'Bucharest, Romania',
+      summary:
+        'The first sales role — and the first habits that stayed: steady prospecting, disciplined follow-up, and clients who come back.',
+      bullets: [
+        'Prospecting and direct sales to business clients.',
+        'Building a first portfolio of clients.',
       ],
     },
   },
@@ -129,10 +150,10 @@ export const en: ProfileText = {
       group: 'Tools & Process',
       blurb: 'The systems that keep a team honest.',
       items: [
-        'CRM systems',
-        'Microsoft Office / Excel',
-        'Offer & quotation tools',
-        'Sales meeting cadence',
+        'Microsoft Office',
+        'Microsoft Dynamics Navision',
+        'Corel Draw',
+        'Sales reporting — weekly, monthly, annual',
         'Order-to-delivery coordination',
       ],
     },
@@ -150,9 +171,13 @@ export const en: ProfileText = {
   },
 
   education: {
-    degree: {
-      school: '[University]',
-      degree: 'Bachelor’s degree in Marketing / Economics',
+    journalism: {
+      school: 'University of Bucharest',
+      degree: 'Journalism',
+    },
+    marketing: {
+      school: 'Academy of Economic Studies, Bucharest',
+      degree: 'Marketing',
     },
   },
 

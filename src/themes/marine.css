@@ -1,0 +1,24 @@
+/* Marine — warm white, deep navy accent, copper labels. */
+[data-theme='marine'] {
+  --t-bg: #fbfaf7;
+  --t-surface: #ffffff;
+  --t-tint: rgb(238 240 244 / 0.55);
+  --t-chip: #edeef1;
+  --t-ink: #1a2230;
+  --t-muted: #48525f;
+  --t-faint: #5f6877;
+  --t-line: #e2e4e8;
+  --t-line-strong: #cbd0d8;
+  --t-accent: #1c3557;
+  --t-accent-strong: #142640;
+  --t-accent-ink: #ffffff;
+  --t-accent-solid: #1c3557;
+  --t-accent-hover: #142640;
+  --t-accent-soft: #e4e9f2;
+  --t-accent-line: #c2ccdd;
+  --t-grad-a: #1c3557;
+  --t-grad-b: #2e5a8e;
+  --t-label: #8f5222;
+  --t-label-strong: #6f4019;
+  --t-label-soft: #f7ede3;
+}

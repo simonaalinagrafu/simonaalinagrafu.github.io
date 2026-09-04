@@ -1,10 +1,10 @@
 /* Print stylesheet for the resume PDF (A4). Standalone by design — the PDF
    must keep a fixed, print-tuned look independent of the site's themes. */
 :root {
-  --ink: #1e293b;
-  --muted: #64748b;
-  --accent: #4338ca;
-  --line: #e2e8f0;
+  --ink: #2b2724;
+  --muted: #5a524b;
+  --accent: #7a1f2b;
+  --line: #e8e1d6;
 }
 * {
   margin: 0;
@@ -156,4 +156,11 @@ h2 {
 /* Contact links stay clickable in the PDF and read as links. */
 .contact a {
   color: var(--accent);
+}
+
+/* Redesign: serif display for the name and section headings, matching the site. */
+h1,
+h2,
+h3 {
+  font-family: Georgia, 'Times New Roman', serif;
 }

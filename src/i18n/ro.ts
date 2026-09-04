@@ -19,10 +19,10 @@ export const ro: UiStrings = {
   },
 
   themes: {
-    light: 'Luminoasă',
-    dark: 'Întunecată',
-    emerald: 'Smarald',
-    sepia: 'Sepia',
+    cream: 'Crem',
+    night: 'Noapte',
+    forest: 'Pădure',
+    marine: 'Marin',
   },
 
   header: {
@@ -53,12 +53,14 @@ export const ro: UiStrings = {
     kickerDoing: 'Ce fac',
     kickerWorking: 'Cum e să lucrezi cu mine',
     kickerPrinciples: 'Principii',
+    kickerProcess: 'Cum lucrez',
     headingWorking: 'Ce aduc într-o organizație',
     headingPrinciples: 'Ce mă motivează',
+    headingProcess: 'Patru pași, de fiecare dată',
 
     stats: {
       years: { value: '20+', label: 'ani în vânzări B2B' },
-      b2b: { value: 'B2B', label: 'vânzări către companii, nu către consumatori' },
+      b2b: { value: 'B2B', label: 'vânzări către companii' },
       team: { value: 'O echipă', label: 'de oameni de vânzări condusă, pregătită și păstrată' },
       accounts: { value: 'Conturi cheie', label: 'gestionate de la primul contact la reînnoire' },
       stages: { value: 'Fiecare etapă', label: 'de la prospectare la livrare' },
@@ -129,12 +131,38 @@ export const ro: UiStrings = {
         body: 'Un pipeline, o prognoză și un obiectiv sunt utile doar dacă sunt oneste. Țin cifrele reale, chiar și atunci când cifra reală este incomodă, pentru că doar așa pot fi îmbunătățite.',
       },
     },
+
+    process: {
+      listen: {
+        title: 'Ascult',
+        body: 'Înainte de orice ofertă, înțeleg afacerea clientului, constrângerile lui și ce înseamnă un rezultat bun pentru el.',
+      },
+      propose: {
+        title: 'Propun',
+        body: 'O ofertă care răspunde nevoii reale, cu prețuri și condiții pe care le pot susține.',
+      },
+      negotiate: {
+        title: 'Negociez',
+        body: 'Acorduri cu care ambele părți pot trăi ani la rând — nu victorii de o zi.',
+      },
+      deliver: {
+        title: 'Livrez și rămân',
+        body: 'Ce s-a promis ajunge la client, iar relația continuă și după semnătură.',
+      },
+    },
+
+    band: {
+      title: 'Hai să vorbim.',
+      body: 'Un mesaj scurt e de ajuns — răspund tuturor celor bine gândite.',
+      ctaEmail: 'Scrie-mi un email',
+      ctaLinkedin: 'Conectează-te pe LinkedIn',
+    },
   },
 
   career: {
     metaTitle: 'Carieră',
     metaDescription:
-      'Peste 20 de ani în vânzări B2B: de la vânzări în teren la conturi cheie și la conducerea echipei de vânzări a Tipografiei Everest.',
+      '20+ ani în vânzări B2B: de la Euromobex și RH Printing la conducerea echipei de vânzări a Tipografiei Everest.',
     kicker: 'Parcurs',
     heading: 'Carieră',
     lede: 'Rolurile pe care le-am avut, echipele pe care le-am construit și ce a adăugat fiecare capitol.',
@@ -142,12 +170,13 @@ export const ro: UiStrings = {
     downloadFile: 'Simona-Alina-Grafu-CV',
     stats: {
       years: 'ani în vânzări B2B',
-      leading: 'ani de condus echipe',
+      everest: 'ani la Tipografia Everest',
       companies: 'companii',
     },
     education: 'Educație',
     timeline: 'Cronologia carierei, pe companii',
     now: 'acum',
+    placeholderTag: 'de confirmat',
   },
 
   skills: {
@@ -168,6 +197,9 @@ export const ro: UiStrings = {
     email: 'Email',
     linkedin: 'LinkedIn',
     linkedinSubtitle: 'Cel mai potrivit pentru mesaje profesionale',
+    phone: 'Telefon',
+    phoneSubtitle: 'Pentru o discuție directă',
+    details: 'Detalii',
     timezone: 'EET (UTC+2)',
   },
 
@@ -185,8 +217,8 @@ export const ro: UiStrings = {
     education: 'Educație',
     focus: 'Arii',
     highlights: [
-      'Peste 20 de ani în vânzări B2B, de la vânzări în teren la management de vânzări',
-      'Conduce echipa de vânzări a Tipografiei Everest',
+      '20+ ani în vânzări B2B, cei mai mulți în industria tipografică',
+      'Conduce echipa de vânzări a Tipografiei Everest, unde lucrează din 2012',
       'Gestionează conturile cheie care aduc cea mai mare parte din venituri',
       'Retenția și un pipeline predictibil ca măsuri ale succesului',
     ],

@@ -5,7 +5,7 @@
   --font-sans:
     'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
     Arial, sans-serif;
-  --font-display: 'Space Grotesk Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
 }
 
 /* Map theme tokens to Tailwind colors: bg-bg, text-ink, border-line,
@@ -32,8 +32,6 @@
   --color-label: var(--t-label);
   --color-label-strong: var(--t-label-strong);
   --color-label-soft: var(--t-label-soft);
-  --color-blob-a: var(--t-blob-a);
-  --color-blob-b: var(--t-blob-b);
 }
 
 html {
@@ -43,77 +41,107 @@ html {
 /* ---------------------------------------------------------------------------
    Design system — the site's reusable style vocabulary. Change a recipe here
    and every usage across the site follows.
+
+   The voice is warm editorial: serif display type, a single strong accent,
+   gold kickers as the section device, hairlines instead of boxes wherever a
+   box is not doing work.
 --------------------------------------------------------------------------- */
 @layer components {
   /* Typography */
   .title-hero {
-    @apply font-display text-ink text-3xl font-bold tracking-tight sm:text-5xl;
+    @apply font-display text-ink text-4xl font-semibold text-balance sm:text-6xl;
+    line-height: 1.05;
   }
   .title-page {
-    @apply font-display text-ink text-3xl font-bold;
+    @apply font-display text-ink text-3xl font-semibold text-balance sm:text-4xl;
+    line-height: 1.1;
   }
   .title-section {
-    @apply font-display text-ink text-2xl font-bold;
+    @apply font-display text-ink text-2xl font-semibold text-balance sm:text-3xl;
+    line-height: 1.15;
   }
   .title-item {
     @apply font-display text-ink text-xl font-semibold;
+    line-height: 1.2;
   }
   .kicker {
-    @apply text-label text-xs font-semibold uppercase;
-    letter-spacing: 0.14em;
+    @apply text-label text-[11px] font-semibold uppercase;
+    letter-spacing: 0.16em;
   }
   .lede {
-    @apply text-muted mt-3 max-w-2xl;
+    @apply text-muted mt-3 max-w-2xl text-lg leading-relaxed;
+  }
+  /* Serif numeral, for stat strips and step numbers. */
+  .figure {
+    @apply font-display text-accent font-semibold tabular-nums;
+  }
+
+  /* Section rule: a kicker sitting on a hairline. */
+  .rule {
+    @apply flex items-center gap-4;
+  }
+  .rule::after {
+    content: '';
+    @apply bg-line h-px flex-1;
   }
 
   /* Buttons */
   .btn {
-    @apply inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors;
+    @apply inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors;
   }
   .btn-primary {
-    @apply bg-accent-solid text-accent-ink hover:bg-accent-hover shadow-sm;
+    @apply bg-accent-solid text-accent-ink hover:bg-accent-hover;
   }
   .btn-ghost {
     @apply border-line-strong text-ink hover:border-accent hover:text-accent border;
   }
+  /* On the burgundy band: cream outline, inverted on hover. */
+  .btn-inverse {
+    @apply border-accent-ink/40 text-accent-ink hover:bg-accent-ink hover:text-accent-solid border;
+  }
 
   /* Surfaces */
   .card {
-    @apply border-line rounded-xl border;
+    @apply border-line bg-surface rounded-lg border;
   }
   .card-lift {
-    @apply hover:shadow-accent/25 transition-[transform,box-shadow,border-color] duration-150 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-12px];
+    @apply hover:border-line-strong transition-colors;
+  }
+  .band {
+    @apply bg-accent-solid text-accent-ink rounded-2xl;
+  }
+  .portrait {
+    @apply ring-accent-line aspect-[4/5] w-full overflow-hidden rounded-2xl ring-1;
+    box-shadow: 10px 10px 0 0 var(--t-label-soft);
   }
 
   /* Navigation */
   .nav-pill {
-    @apply text-muted hover:bg-chip hover:text-ink inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition-colors;
+    @apply text-muted hover:bg-chip hover:text-ink inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-colors;
   }
   .nav-pill-active {
-    @apply bg-accent-soft text-accent-strong hover:bg-accent-soft hover:text-accent-strong font-medium;
+    @apply bg-chip text-ink font-medium;
   }
   .menu-item {
-    @apply text-muted hover:bg-chip hover:text-ink flex w-full items-center gap-2.5 rounded-lg px-3 py-2 transition-colors;
+    @apply text-muted hover:bg-chip hover:text-ink flex w-full items-center gap-2.5 rounded-md px-3 py-2 transition-colors;
   }
   .menu-item-active {
-    @apply bg-accent-soft text-accent-strong hover:bg-accent-soft hover:text-accent-strong font-medium;
+    @apply bg-chip text-ink font-medium;
   }
 
   /* Small pieces */
   .tag {
-    @apply bg-chip text-muted rounded-full px-3 py-1 text-xs;
+    @apply border-line text-muted rounded-md border px-2.5 py-1 text-xs;
   }
   .badge {
-    @apply bg-label-soft text-label-strong rounded-full px-2.5 py-0.5 text-xs font-medium;
+    @apply text-label-strong text-[11px] font-semibold uppercase;
+    letter-spacing: 0.12em;
   }
   .chip {
-    @apply border-line bg-surface/60 text-muted inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5;
-  }
-  .blob {
-    @apply absolute rounded-full blur-3xl;
+    @apply border-line text-muted inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5;
   }
   .icon-tile {
-    @apply bg-accent-soft text-accent flex h-9 w-9 items-center justify-center rounded-lg;
+    @apply bg-label-soft text-label flex h-8 w-8 items-center justify-center rounded-md;
   }
   .link-accent {
     @apply text-accent hover:underline;
