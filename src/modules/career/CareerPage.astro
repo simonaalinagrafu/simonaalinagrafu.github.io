@@ -4,15 +4,22 @@ import { Icon } from 'astro-icon/components';
 import StatTilePart from '@fx/components/StatTilePart.astro';
 import SegmentBarPart from '@fx/components/SegmentBarPart.astro';
 import RoleItem from './RoleItemPart.astro';
-import { experience, education } from '@data/profile';
+import { getProfile, siteFacts } from '@data/profile';
+import { getLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const locale = getLocale(Astro.url.pathname);
+const s = t(locale);
+const { experience, education } = getProfile(locale);
 
 const stats = [
-  { value: '20+', label: 'years in software' },
-  { value: '18', label: 'years leading teams' },
-  { value: '4', label: 'companies' },
+  { value: '20+', label: s.career.stats.years },
+  { value: '18', label: s.career.stats.leading },
+  { value: '4', label: s.career.stats.companies },
 ];
 
-// Company eras for the ribbon; widths are proportional to duration.
+// Company eras for the ribbon; widths are proportional to duration. Company
+// names and year ranges are the same in every language.
 const eras = [
   { label: 'Ubisoft', note: '’05–’08', weight: 3.5 },
   { label: 'TeamNet', note: '’08–’09', weight: 1 },
@@ -20,53 +27,46 @@ const eras = [
   { label: 'nShift', note: '’22–now', weight: 4.7, highlight: true },
 ];
 
-// Lucide icon per role, in the same order as `experience`.
-const roleIcons = [
-  'lucide:sparkles', // nShift — AI era
-  'lucide:globe', // Consignor Team Manager
-  'lucide:layers', // Consignor Technical Lead
-  'lucide:package', // TeamNet — ERP
-  'lucide:gamepad-2', // Ubisoft
-];
+const cv = locale === 'ro' ? '/cv-ro.pdf' : '/cv-en.pdf';
 ---
 
 <BaseLayout
-  title="Career — Simona Alina Grafu"
-  description="20+ years in software: Ubisoft, TeamNet, Consignor, and nShift — from game programming to engineering management and AI systems."
+  title={`${s.career.metaTitle} — ${siteFacts.name}`}
+  description={s.career.metaDescription}
 >
   <div class="flex flex-wrap items-start justify-between gap-4">
     <div>
-      <p class="kicker">Journey</p>
-      <h1 class="title-page mt-2">Career</h1>
-      <p class="lede">The roles I’ve held, the teams I’ve built, and what each chapter added.</p>
+      <p class="kicker">{s.career.kicker}</p>
+      <h1 class="title-page mt-2">{s.career.heading}</h1>
+      <p class="lede">{s.career.lede}</p>
     </div>
-    <a href="/cv.pdf" download="Simona-Alina-Grafu-Resume.pdf" class="btn btn-primary">
+    <a href={cv} download={`${s.career.downloadFile}.pdf`} class="btn btn-primary">
       <Icon name="lucide:download" class="h-3.5 w-3.5" aria-hidden="true" />
-      Download resume (PDF)
+      {s.career.download}
     </a>
   </div>
 
   <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-    {stats.map((s) => <StatTilePart value={s.value} label={s.label} />)}
+    {stats.map((stat) => <StatTilePart value={stat.value} label={stat.label} />)}
   </div>
 
-  <SegmentBarPart segments={eras} ariaLabel="Career timeline by company" />
+  <SegmentBarPart segments={eras} ariaLabel={s.career.timeline} />
 
   <ol class="border-line relative mt-10 space-y-12 border-s">
-    {experience.map((role, i) => <RoleItem role={role} icon={roleIcons[i]} />)}
+    {experience.map((role) => <RoleItem role={role} />)}
   </ol>
 
   <h2 class="title-section mt-14 flex items-center gap-2.5">
     <Icon name="lucide:graduation-cap" class="text-accent h-6 w-6" aria-hidden="true" />
-    Education
+    {s.career.education}
   </h2>
   <ul class="mt-4 space-y-4">
     {
-      education.map((e) => (
+      education.map((entry) => (
         <li>
-          <p class="text-ink font-medium">{e.degree}</p>
+          <p class="text-ink font-medium">{entry.degree}</p>
           <p class="text-faint text-sm">
-            {e.school} · {e.period}
+            {entry.school} · {entry.period}
           </p>
         </li>
       ))

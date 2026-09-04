@@ -1,33 +1,42 @@
 ---
 import BaseLayout from '@modules/shared/BaseLayout.astro';
-import { articles, type ArticleMeta } from './registry';
+import { articles, getArticles } from './registry';
+import { siteFacts } from '@data/profile';
+import { getLocale, localePath } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
 
+// The same ids in every language — a translation is mandatory, so both route
+// patterns (/articles/[id] and /en/articles/[id]) emit the same set.
 export async function getStaticPaths() {
-  return articles.map((article) => ({
-    params: { id: article.id },
-    props: { article },
-  }));
+  return articles.map((article) => ({ params: { id: article.id } }));
 }
 
-interface Props {
-  article: ArticleMeta;
-}
+const locale = getLocale(Astro.url.pathname);
+const s = t(locale);
+const { id } = Astro.params;
 
-const { article } = Astro.props;
+const article = getArticles(locale).find((a) => a.id === id)!;
 
-// Resolve the article's content component by convention:
-// content/<id>/ArticlePart.astro
-const contentModules = import.meta.glob<{ default: any }>('./content/*/ArticlePart.astro', {
+// Resolve the article body by convention: content/<id>/ArticlePart.<locale>.astro
+const contentModules = import.meta.glob<{ default: any }>('./content/*/ArticlePart.*.astro', {
   eager: true,
 });
-const Content = contentModules[`./content/${article.id}/ArticlePart.astro`].default;
+const key = `./content/${id}/ArticlePart.${locale}.astro`;
+const module = contentModules[key];
+if (!module) {
+  throw new Error(
+    `Article "${id}" has no ${locale.toUpperCase()} translation. ` +
+      `Every article must exist in all languages — create ${key.replace('./', 'src/modules/articles/')}.`,
+  );
+}
+const Content = module.default;
 ---
 
-<BaseLayout title={`${article.title} — Simona Alina Grafu`} description={article.description}>
+<BaseLayout title={`${article.title} — ${siteFacts.name}`} description={article.description}>
   <article>
     <p class="text-faint text-sm">
       {
-        article.pubDate.toLocaleDateString('en-GB', {
+        article.pubDate.toLocaleDateString(s.dateLocale, {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
@@ -38,8 +47,8 @@ const Content = contentModules[`./content/${article.id}/ArticlePart.astro`].defa
     {
       article.tags.length > 0 && (
         <div class="mt-3 flex flex-wrap gap-2">
-          {article.tags.map((t) => (
-            <span class="tag">{t}</span>
+          {article.tags.map((tag) => (
+            <span class="tag">{tag}</span>
           ))}
         </div>
       )
@@ -49,6 +58,6 @@ const Content = contentModules[`./content/${article.id}/ArticlePart.astro`].defa
     </div>
   </article>
   <p class="mt-10">
-    <a href="/articles/" class="link-accent">← All articles</a>
+    <a href={localePath(locale, '/articles/')} class="link-accent">{s.articles.back}</a>
   </p>
 </BaseLayout>

@@ -3,84 +3,62 @@ import BaseLayout from '@modules/shared/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 import IconCardPart from '@fx/components/IconCardPart.astro';
 import StatTilePart from '@fx/components/StatTilePart.astro';
-import { site, experience } from '@data/profile';
+import { getProfile, siteFacts } from '@data/profile';
+import { getLocale, localePath } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+import type { StatId, DoingId, ValueId, PrincipleId } from '@i18n/types';
+
+const locale = getLocale(Astro.url.pathname);
+const s = t(locale);
+const { site, experience } = getProfile(locale);
 
 const current = experience[0];
+
+// Display order and icons live here; the words live in the i18n dictionaries,
+// keyed by the same ids — so neither can drift out of step with the other.
 
 // Reach and practice: three figures, then how the work is actually done. The
 // lifecycle detail sits in the hero sentence above, so one tile points at it
 // rather than spending six. The AI tiles say what I build and how I build —
 // they describe the systems and the practice, never me.
-const scaleStats = [
-  { value: '20+', label: 'years in software development' },
-  { value: '50+', label: 'applications built or contributed to' },
-  { value: 'Millions', label: 'of requests a day on some applications' },
-  { value: 'Every phase', label: 'specification through production' },
-  { value: 'AI systems', label: 'built, not just used' },
-  { value: 'AI-assisted', label: 'engineering, every day' },
-];
+const statOrder: StatId[] = ['years', 'apps', 'requests', 'phases', 'aiSystems', 'aiAssisted'];
+
+const doingIcons: Record<DoingId, string> = {
+  engineering: 'lucide:code-xml',
+  leadership: 'lucide:users',
+  aiAssisted: 'lucide:hammer',
+  aiSystems: 'lucide:sparkles',
+};
+const doingOrder: DoingId[] = ['engineering', 'leadership', 'aiAssisted', 'aiSystems'];
 
 // Written from the employer's point of view rather than mine — one line each,
 // stating a benefit rather than restating a fact the tiles above already carry.
-const valueProps = [
-  {
-    icon: 'lucide:rocket',
-    title: 'Teams that ship',
-    body: 'Cohesive teams delivering business-critical software, year after year.',
-  },
-  {
-    icon: 'lucide:wrench',
-    title: 'Leadership that builds',
-    body: 'An architect’s judgment, from someone who still writes the code.',
-  },
-  {
-    icon: 'lucide:workflow',
-    title: 'Fewer handoff gaps',
-    body: 'Someone who has worked every phase sees what falls between them.',
-  },
-  {
-    icon: 'lucide:lightbulb',
-    title: 'AI that pays off',
-    body: 'Grounded in production experience, not in hype.',
-  },
-  {
-    icon: 'lucide:gauge',
-    title: 'Built for load',
-    body: 'Systems that stay up when the business depends on them.',
-  },
-  {
-    icon: 'lucide:sprout',
-    title: 'People who grow',
-    body: 'Engineers hired, mentored and kept — the team outlasts the system.',
-  },
-];
+const valueIcons: Record<ValueId, string> = {
+  ship: 'lucide:rocket',
+  build: 'lucide:wrench',
+  handoff: 'lucide:workflow',
+  ai: 'lucide:lightbulb',
+  load: 'lucide:gauge',
+  grow: 'lucide:sprout',
+};
+const valueOrder: ValueId[] = ['ship', 'build', 'handoff', 'ai', 'load', 'grow'];
 
 // What keeps me in this work, as opposed to what I am paid to do.
-const principles = [
-  {
-    icon: 'lucide:telescope',
-    title: 'Curiosity',
-    body: 'I’m naturally driven to understand how things work and why they work the way they do. I enjoy going deep into a problem, learning from first principles, and connecting ideas across different areas. For me, the process of understanding is rewarding in itself.',
-  },
-  {
-    icon: 'lucide:trending-up',
-    title: 'Constant evolution',
-    body: 'I’m always looking for ways to improve how I think, work, and build. AI-assisted engineering has already reshaped my daily practice, and I actively explore new tools, ideas, and approaches that can make me more effective. I see change as an opportunity to rethink what’s possible rather than simply adapt to it.',
-  },
-  {
-    icon: 'lucide:handshake',
-    title: 'Teams that discover',
-    body: 'I do my best work in supportive, collaborative teams where people learn from each other, challenge ideas constructively, and take pride in their craft. I value working toward a shared goal while giving everyone the space to contribute, experiment, and grow.',
-  },
-  {
-    icon: 'lucide:target',
-    title: 'Impact',
-    body: 'Technology is most interesting to me when it matters — when the systems we build carry real businesses, save people time, and open possibilities that weren’t there before. Understanding why the work matters shapes how I build it, and seeing an idea become something people rely on every day is the most satisfying part of engineering.',
-  },
-];
+const principleIcons: Record<PrincipleId, string> = {
+  curiosity: 'lucide:telescope',
+  evolution: 'lucide:trending-up',
+  teams: 'lucide:handshake',
+  impact: 'lucide:target',
+};
+const principleOrder: PrincipleId[] = ['curiosity', 'evolution', 'teams', 'impact'];
+
+const monogram = siteFacts.name
+  .split(' ')
+  .map((word) => word[0])
+  .join('');
 ---
 
-<BaseLayout title="Simona Alina Grafu — Engineering Manager & AI Systems Builder">
+<BaseLayout title={`${siteFacts.name} — ${s.home.metaTitle}`} description={site.tagline}>
   <section class="relative py-10 sm:py-14">
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
       <div class="blob bg-blob-a -top-24 -right-24 h-80 w-80"></div>
@@ -88,9 +66,9 @@ const principles = [
     </div>
     <div class="flex flex-wrap items-center justify-between gap-8 lg:flex-nowrap">
       <div class="max-w-3xl min-w-0">
-        <p class="text-accent font-medium">Hello, I’m</p>
+        <p class="text-accent font-medium">{s.home.greeting}</p>
         <h1 class="title-hero mt-1">
-          {site.name}
+          {siteFacts.name}
         </h1>
         <p class="text-muted mt-3 text-xl">{site.title}</p>
         <p class="mt-5 text-lg leading-relaxed">
@@ -104,69 +82,64 @@ const principles = [
           <div class="bg-bg flex h-36 w-36 items-center justify-center rounded-full">
             <span
               class="font-display from-grad-a to-grad-b bg-gradient-to-br bg-clip-text text-4xl font-bold text-transparent"
-              >SAG</span
+              >{monogram}</span
             >
           </div>
         </div>
       </div>
     </div>
     <div class="mt-8 flex flex-wrap gap-3">
-      <a href="/career/" class="btn btn-primary"> My career story </a>
-      <a href="/articles/" class="btn btn-ghost"> Read my writing </a>
+      <a href={localePath(locale, '/career/')} class="btn btn-primary">{s.home.ctaCareer}</a>
+      <a href={localePath(locale, '/articles/')} class="btn btn-ghost">{s.home.ctaWriting}</a>
     </div>
   </section>
 
   <section class="py-8">
-    <p class="kicker">Reach and practice</p>
+    <p class="kicker">{s.home.kickerReach}</p>
     <!-- A strip between hairlines rather than a card grid, so the facts read
          differently from the capability cards below. -->
     <div
       class="border-line mt-5 grid grid-cols-2 gap-x-6 gap-y-8 border-y py-8 sm:grid-cols-3 sm:gap-x-10"
     >
-      {scaleStats.map((s) => <StatTilePart value={s.value} label={s.label} bare />)}
+      {
+        statOrder.map((id) => (
+          <StatTilePart value={s.home.stats[id].value} label={s.home.stats[id].label} bare />
+        ))
+      }
     </div>
   </section>
 
   <section class="py-8">
-    <p class="kicker">What I do</p>
+    <p class="kicker">{s.home.kickerDoing}</p>
     <div class="mt-4 grid gap-6 sm:grid-cols-2">
-      <IconCardPart icon="lucide:code-xml" title="Hands-on engineering">
-        I still write the code: C#/.NET, Python, React, SQL, and the AWS infrastructure it runs on.
-        Specifications, architecture, cloud environments, CI/CD pipelines — I build them, not just
-        approve them.
-      </IconCardPart>
-      <IconCardPart icon="lucide:users" title="Engineering leadership">
-        Leading one of {current.company}’s core teams — hiring, mentoring, and setting the standards
-        behind business-critical delivery software.
-      </IconCardPart>
-      <IconCardPart icon="lucide:hammer" title="AI-assisted engineering">
-        Advanced Claude Code skills, including an app builder that reads existing codebases through
-        a structural snapshot and generates, migrates, or translates applications with verified
-        results.
-      </IconCardPart>
-      <IconCardPart icon="lucide:sparkles" title="AI systems">
-        Agentic AI platforms: LLM orchestration, RAG pipelines, and multi-agent architectures
-        grounded in real business data, integrated over MCP and answerable in production.
-      </IconCardPart>
+      {
+        doingOrder.map((id) => (
+          <IconCardPart icon={doingIcons[id]} title={s.home.doing[id].title}>
+            {s.home.doing[id].body.replace('{company}', current.company)}
+          </IconCardPart>
+        ))
+      }
     </div>
   </section>
 
   <section class="py-8">
-    <p class="kicker">Working with me</p>
-    <h2 class="title-section mt-2">What I bring to an organization</h2>
+    <p class="kicker">{s.home.kickerWorking}</p>
+    <h2 class="title-section mt-2">{s.home.headingWorking}</h2>
     <!-- The only panel on a page of strips, cards and lists — that shape is
          enough to mark the zone, so the colour stays out of it. -->
     <div
       class="bg-tint border-line mt-4 grid gap-8 rounded-2xl border p-8 sm:grid-cols-2 lg:grid-cols-3"
     >
       {
-        valueProps.map((v) => (
+        valueOrder.map((id) => (
           <div>
             <div class="icon-tile">
-              <Icon name={v.icon} class="h-5 w-5" aria-hidden="true" />
+              <Icon name={valueIcons[id]} class="h-5 w-5" aria-hidden="true" />
             </div>
-            <h3 class="font-display text-ink mt-4 text-lg font-semibold">{v.title}</h3>
-            <p class="text-muted mt-1.5 text-sm leading-relaxed">{v.body}</p>
+            <h3 class="font-display text-ink mt-4 text-lg font-semibold">
+              {s.home.value[id].title}
+            </h3>
+            <p class="text-muted mt-1.5 text-sm leading-relaxed">{s.home.value[id].body}</p>
           </div>
         ))
       }
@@ -174,18 +147,22 @@ const principles = [
   </section>
 
   <section class="py-8">
-    <p class="kicker">Principles</p>
-    <h2 class="title-section mt-2">What drives me</h2>
+    <p class="kicker">{s.home.kickerPrinciples}</p>
+    <h2 class="title-section mt-2">{s.home.headingPrinciples}</h2>
     <!-- A numbered manifesto rather than another card grid — principles are not
          features, and the form should say so before the words do. -->
     <div class="mt-6 grid gap-x-12 gap-y-9 sm:grid-cols-2">
       {
-        principles.map((p) => (
+        principleOrder.map((id) => (
           <div class="flex gap-4">
-            <Icon name={p.icon} class="text-label mt-0.5 h-6 w-6 shrink-0" aria-hidden="true" />
+            <Icon
+              name={principleIcons[id]}
+              class="text-label mt-0.5 h-6 w-6 shrink-0"
+              aria-hidden="true"
+            />
             <div>
-              <h3 class="font-display text-ink font-semibold">{p.title}</h3>
-              <p class="text-muted mt-1.5 text-sm leading-relaxed">{p.body}</p>
+              <h3 class="font-display text-ink font-semibold">{s.home.principles[id].title}</h3>
+              <p class="text-muted mt-1.5 text-sm leading-relaxed">{s.home.principles[id].body}</p>
             </div>
           </div>
         ))

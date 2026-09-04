@@ -1,30 +1,34 @@
 ---
 // Mail / GitHub / LinkedIn icon links shown in the header.
 import { Icon } from 'astro-icon/components';
-import { site } from '@data/profile';
+import { siteFacts } from '@data/profile';
+import { getLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const s = t(getLocale(Astro.url.pathname));
 ---
 
 <div class="text-faint flex items-center gap-3">
   <a
-    href={`mailto:${site.email}`}
-    aria-label="Email"
-    data-tip="Send me an email"
+    href={`mailto:${siteFacts.email}`}
+    aria-label={s.header.email}
+    data-tip={s.header.emailTip}
     class="tip hover:text-accent"
   >
     <Icon name="lucide:mail" class="h-4.5 w-4.5" aria-hidden="true" />
   </a>
   <a
-    href={site.github}
-    aria-label="GitHub"
-    data-tip="My code on GitHub"
+    href={siteFacts.github}
+    aria-label={s.header.github}
+    data-tip={s.header.githubTip}
     class="tip hover:text-accent"
   >
     <Icon name="lucide:github" class="h-4.5 w-4.5" aria-hidden="true" />
   </a>
   <a
-    href={site.linkedin}
-    aria-label="LinkedIn"
-    data-tip="My LinkedIn profile"
+    href={siteFacts.linkedin}
+    aria-label={s.header.linkedin}
+    data-tip={s.header.linkedinTip}
     class="tip hover:text-accent"
   >
     <Icon name="lucide:linkedin" class="h-4.5 w-4.5" aria-hidden="true" />

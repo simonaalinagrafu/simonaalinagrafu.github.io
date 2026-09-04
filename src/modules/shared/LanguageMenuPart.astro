@@ -1,0 +1,97 @@
+---
+// Language dropdown. Unlike the theme menu, the items are real links: a
+// language is a URL here, so switching works without JavaScript and search
+// engines can crawl both trees. Clicking also records the choice, which
+// BaseLayout's head script honours for a later visit to the bare root.
+import { Icon } from 'astro-icon/components';
+import { locales, getLocale, switchLocalePath } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const path = Astro.url.pathname;
+const locale = getLocale(path);
+const s = t(locale);
+
+const options = locales.map((l) => ({
+  id: l,
+  name: t(l).localeName,
+  href: switchLocalePath(path, l),
+  active: l === locale,
+}));
+---
+
+<div class="relative">
+  <button
+    id="lang-menu-btn"
+    type="button"
+    aria-label={s.header.changeLanguage}
+    aria-haspopup="menu"
+    aria-expanded="false"
+    data-tip={s.header.changeLanguageTip}
+    class="tip tip-end border-line-strong text-muted hover:border-accent hover:text-accent inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+  >
+    <Icon name="lucide:languages" class="h-4 w-4" aria-hidden="true" />
+    <span>{s.localeShort}</span>
+    <Icon
+      name="lucide:chevron-down"
+      class="h-3.5 w-3.5 transition-transform [[aria-expanded='true']_&]:rotate-180"
+      aria-hidden="true"
+    />
+  </button>
+
+  <div
+    id="lang-menu"
+    role="menu"
+    class="card bg-bg absolute top-full right-0 z-20 mt-2 hidden w-44 p-1 shadow-lg"
+  >
+    {
+      options.map((option) => (
+        <a
+          href={option.href}
+          role="menuitemradio"
+          aria-checked={option.active ? 'true' : 'false'}
+          hreflang={option.id}
+          data-locale-id={option.id}
+          class:list={['lang-item', 'menu-item', 'text-sm', option.active && 'menu-item-active']}
+        >
+          <span class="grow text-start">{option.name}</span>
+          {option.active && (
+            <Icon name="lucide:check" class="text-accent h-4 w-4" aria-hidden="true" />
+          )}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('lang-menu-btn');
+    var menu = document.getElementById('lang-menu');
+
+    function close() {
+      menu.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = menu.classList.toggle('hidden') === false;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (!menu.contains(e.target) && e.target !== btn) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+
+    // Remember the choice; the link itself does the navigating.
+    menu.querySelectorAll('.lang-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        try {
+          localStorage.setItem('locale', item.getAttribute('data-locale-id'));
+        } catch (e) {}
+      });
+    });
+  })();
+</script>

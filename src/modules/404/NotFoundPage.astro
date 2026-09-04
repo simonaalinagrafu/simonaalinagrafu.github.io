@@ -1,11 +1,23 @@
 ---
+// GitHub Pages serves this one file for every unmatched path in either
+// language, so it cannot be locale-specific — it carries both.
 import BaseLayout from '@modules/shared/BaseLayout.astro';
+import { siteFacts } from '@data/profile';
+import { t } from '@i18n/index';
+
+const ro = t('ro');
+const en = t('en');
 ---
 
-<BaseLayout title="Page not found — Simona Alina Grafu">
+<BaseLayout title={`${ro.notFound.metaTitle} — ${siteFacts.name}`}>
   <div class="py-20 text-center">
     <h1 class="font-display text-ink text-5xl font-bold">404</h1>
-    <p class="text-muted mt-4">This page doesn’t exist.</p>
-    <a href="/" class="link-accent mt-6 inline-block">← Back home</a>
+    <p class="text-muted mt-4">{ro.notFound.message}</p>
+    <p class="text-faint mt-1 text-sm">{en.notFound.message}</p>
+    <p class="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+      <a href="/" class="link-accent">{ro.notFound.back}</a>
+      <span class="text-faint" aria-hidden="true">·</span>
+      <a href="/en/" class="link-accent">{en.notFound.back}</a>
+    </p>
   </div>
 </BaseLayout>

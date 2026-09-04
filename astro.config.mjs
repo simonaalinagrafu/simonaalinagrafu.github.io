@@ -21,11 +21,21 @@ export default defineConfig({
     '/resume': '/career',
     '/ideas': '/',
     '/projects': '/',
+    '/en/resume': '/en/career',
+    '/en/ideas': '/en',
+    '/en/projects': '/en',
   },
   integrations: [
     centralRoutes(),
     icon(),
     sitemap({
+      // Groups /career/ with /en/career/ and emits hreflang alternates.
+      // Passing i18n is also what makes status-code pages locale-aware, so
+      // /en/404/ stays out of the sitemap.
+      i18n: {
+        defaultLocale: 'ro',
+        locales: { ro: 'ro-RO', en: 'en-US' },
+      },
       filter: (page) => !page.includes('/resume-print/'),
     }),
   ],

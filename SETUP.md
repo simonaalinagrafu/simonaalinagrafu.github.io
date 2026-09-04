@@ -35,7 +35,7 @@ independent of the site's content identity (Simona Alina Grafu).
 | Node.js | v24.18.1 | Any Node 18+ works; there is no `engines` field pinning it |
 | npm | 11.16.0 | Ships with Node |
 | Git | 2.53.0 | |
-| Google Chrome | any recent | **Only** needed to regenerate `cv.pdf` and `og.png` (§6) |
+| Google Chrome | any recent | **Only** needed to regenerate the CV PDFs and `og.png` (§6) |
 
 Chrome is expected at:
 
@@ -63,11 +63,13 @@ npm run dev        # dev server at http://localhost:4321
 npm run check      # astro check — type-checks .astro/.ts (must be 0 errors)
 npm run build      # static build to ./dist
 npm run preview    # serve ./dist, to see exactly what deploys
+npm run cv         # regenerate both CV PDFs (needs a build first)
 npm run format     # prettier over src/
 ```
 
 **Expected clean state:** `npm run check` → *0 errors, 0 warnings, 0 hints*;
-`npm run build` → *8 page(s) built*.
+`npm run build` → *15 page(s) built* (every page in Romanian and English, plus
+redirect stubs; `/404` is single-language).
 
 > If port 4321 is busy, Astro picks the next free port — or pass one explicitly:
 > `npm run preview -- --port 4322`.
@@ -125,54 +127,52 @@ as a gate before the action takes over.
 
 ---
 
-## 5. First push
+## 5. Pushing
 
-The repo currently has a single commit (`d71f930 Initial commit`) and the whole site is still
-untracked. `.gitignore` already covers `node_modules/`, `dist/`, `.astro/`.
+`.gitignore` already covers `node_modules/`, `dist/`, `.astro/`.
 
 ```sh
 git add -A
 git status          # confirm dist/ and node_modules/ are NOT staged
-git commit -m "Add Astro site"
+git commit -m "..."
 git push origin main
 ```
 
-Then watch the run under the repo's **Actions** tab.
+Then watch the run under the repo's **Actions** tab. Remember that the generated files in
+`public/` (§6) are committed, so regenerate them *before* committing a profile change.
 
 ---
 
 ## 6. Regenerating the binary assets
 
-`public/cv.pdf` and `public/og.png` are **generated files** checked into the repo. They are not
-rebuilt by `npm run build`, so they go stale silently whenever the data behind them changes.
+`public/cv-ro.pdf`, `public/cv-en.pdf` and `public/og.png` are **generated files** checked
+into the repo. They are not rebuilt by `npm run build`, so they go stale silently whenever
+the data behind them changes.
 
-### `public/cv.pdf` — after any edit to `src/data/profile.ts`
+### The CV PDFs — after any edit to `src/data/profile/`
 
-Printed by headless Chrome from the `/resume-print/` page (`src/modules/resume-print/`), which
-renders entirely from `profile.ts` and is `noindex` + excluded from the sitemap.
-
-Use `npm run preview`, **not** `npm run dev` — the dev server injects the Astro dev toolbar into
-the page.
+Both are printed from the `/resume-print/` and `/en/resume-print/` pages, which render
+entirely from `src/data/profile/` and are `noindex` + excluded from the sitemap.
 
 ```sh
 npm run build
-npm run preview -- --port 4322    # leave running in another terminal
+npm run cv
 ```
 
-```powershell
-& "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu `
-  --no-pdf-header-footer `
-  --print-to-pdf="D:\Dev.Work\simonaalinagrafu.github.io\public\cv.pdf" `
-  "http://localhost:4322/resume-print/"
-```
+`scripts/print-cv.mjs` starts `astro preview`, prints both PDFs with headless Chrome, and
+shuts the server down. It uses `preview` rather than `dev` deliberately — the dev server
+injects the Astro dev toolbar into the page. Set `CHROME_PATH` if Chrome is not at one of
+the default locations.
 
-The `pdfBullets` field on a role caps how many bullets the PDF shows, so the Career page can
-carry full detail while the PDF stays at two pages. Check the page count after regenerating.
+Both CVs currently run to **three pages**. If you want them at two, the `pdfBullets` field
+on a role caps how many bullets the PDF shows while the Career page keeps full detail; note
+Romanian prose runs a little longer than English, so the two locales may need different
+caps.
 
 ### `public/og.png` — after any change to name, title, or URL
 
-The 1200×630 link-preview card, screenshotted from `design/og-image.html` (which is a
-standalone file, not part of the build):
+The 1200x630 link-preview card, screenshotted from `design/og-image.html` (a standalone
+file, not part of the build). It is single-language by design.
 
 ```powershell
 & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu `
@@ -185,10 +185,8 @@ It pulls Space Grotesk and Inter from Google Fonts, so this needs a network conn
 
 ### `public/favicon.svg`
 
-Hand-edited SVG containing the `SAG` monogram. Keep it in sync with the hero monogram in
-`src/modules/index/IndexPage.astro` and the ring in `design/og-image.html`.
-
----
+Hand-edited SVG containing the `SAG` monogram. Keep it in sync with the hero monogram
+(derived from the name in `IndexPage.astro`) and the ring in `design/og-image.html`.
 
 ## 7. Outstanding — placeholder data still to replace
 
@@ -196,33 +194,39 @@ The site was renamed from `vasilegrafu` / *Vasile Grafu* to `simonaalinagrafu` /
 *Simona Alina Grafu*. The rename covered every URL, handle, title, monogram and generated asset,
 but these carry over from the original and are **still wrong**:
 
-- [ ] **LinkedIn URL** — `src/data/profile.ts` still has
+- [ ] **LinkedIn URL** — `src/data/profile/shape.ts` still has
       `https://www.linkedin.com/in/vasile-grafu-6a99369`. It is live on the Contact page, in the
-      header, and printed into `cv.pdf`.
-- [ ] **Phone** — `+40 722 635 785`, printed into `cv.pdf`.
+      header, and printed into both CV PDFs.
+- [ ] **Phone** — `+40 722 635 785`, printed into both CV PDFs.
 - [ ] **Email** — mechanically renamed to `simonaalinagrafu@gmail.com`. Confirm that mailbox
       actually exists before publishing.
+- [ ] **Romanian translation** — drafted by Claude and not yet reviewed by a native
+      speaker. Two conventions were chosen and are easy to reverse: job titles stay in
+      English (the norm on Romanian tech CVs), and the prose is written to stay
+      gender-neutral, since Romanian agrees adjectives with gender.
 - [ ] **Biography** — all of `experience`, `skills`, `education` and `projects` in
-      `src/data/profile.ts` describe Vasile Grafu's career (nShift, Consignor, TeamNet, Ubisoft).
+      `src/data/profile/` describe Vasile Grafu's career (nShift, Consignor, TeamNet, Ubisoft).
       So does the `why-i-built-this-site` article and the home page hero copy.
 
-After changing any of the first three, regenerate `cv.pdf` (§6).
+After changing any of the first three, regenerate both CV PDFs (§6).
 
 ---
 
 ## 8. Known rough edges
 
-- **`README.md` is stale about articles.** It documents a Markdown/MDX content-collections
-  workflow with `index.mdx` files. That does not exist. Articles are `.astro` components —
-  metadata in `src/modules/articles/registry.ts`, body at
-  `src/modules/articles/content/<id>/ArticlePart.astro`, resolved by convention via
-  `import.meta.glob`. `ARCHITECTURE.md` describes it correctly.
-- **`src/fx/components/FlowDiagramPart.astro` is unused.** Its only consumer was the Projects
-  page, which has been removed. It is kept because `fx/` is the portable framework layer rather
-  than site content — delete it if that layer is ever pruned.
-- **`projects` is still exported from `profile.ts`** even though the Projects page is gone —
-  `ResumePrintPage.astro` uses `projects[0]` for the PDF's "Key project" section. Do not delete it.
-- **The Projects page was removed**; `/projects` now redirects to `/`, alongside the existing
-  `/resume` → `/career` and `/ideas` → `/` redirects in `astro.config.mjs`.
-- **No tests and no linter.** `npm run check` (type-checking) is the only automated gate, and it
-  is the same gate CI runs.
+- **`src/fx/components/FlowDiagramPart.astro` is unused.** Its only consumer was the
+  Projects page, which has been removed. It is kept because `fx/` is the portable framework
+  layer rather than site content — delete it if that layer is ever pruned.
+- **`projects` is still exported from `data/profile/`** even though the Projects page is
+  gone — `ResumePrintPage.astro` uses `projects[0]` for the PDF's "Key project" section.
+  Do not delete it.
+- **The Projects page was removed**; `/projects` and `/en/projects` redirect to their
+  respective homepages, alongside `/resume` → `/career` and `/ideas` → `/`.
+- **Redirects are not locale-expanded automatically.** Adding one means adding its `/en/…`
+  counterpart by hand in `astro.config.mjs`. Never inject a route for a path that also has
+  a redirect — Astro treats the duplicate as an error.
+- **`/404` is single-language.** GitHub Pages serves one `404.html` for every unmatched
+  path, in either language, so that page carries Romanian and English together.
+- **No tests and no linter.** `npm run check` is the only automated gate, and it is the same
+  gate CI runs. It is load-bearing here: translations are typed as `Record<Locale, ...>`, so
+  a missing translation is a type error rather than a half-English page.

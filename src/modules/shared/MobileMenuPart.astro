@@ -3,8 +3,13 @@
 import { Icon } from 'astro-icon/components';
 import { navItems } from './nav';
 import { isActive } from '@fx/lib/routing';
+import { getLocale, stripLocale, localePath } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
 
 const path = Astro.url.pathname;
+const locale = getLocale(path);
+const s = t(locale);
+const bare = stripLocale(path);
 ---
 
 <div id="mobile-menu" class="border-line hidden border-t sm:hidden">
@@ -12,11 +17,11 @@ const path = Astro.url.pathname;
     {
       navItems.map((item) => (
         <a
-          href={item.href}
-          class:list={['menu-item', isActive(item.href, path) && 'menu-item-active']}
+          href={localePath(locale, item.href)}
+          class:list={['menu-item', isActive(item.href, bare) && 'menu-item-active']}
         >
           <Icon name={item.icon} class="h-4.5 w-4.5" aria-hidden="true" />
-          {item.label}
+          {s.nav[item.id]}
         </a>
       ))
     }
@@ -30,6 +35,6 @@ const path = Astro.url.pathname;
     document.getElementById('menu-icon-open').classList.toggle('hidden', open);
     document.getElementById('menu-icon-close').classList.toggle('hidden', !open);
     this.setAttribute('aria-expanded', open ? 'true' : 'false');
-    this.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    this.setAttribute('aria-label', open ? this.dataset.labelClose : this.dataset.labelOpen);
   });
 </script>

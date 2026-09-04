@@ -8,6 +8,7 @@
       "@fx/*": ["./src/fx/*"],
       "@data/*": ["./src/data/*"],
       "@themes/*": ["./src/themes/*"],
+      "@i18n/*": ["./src/i18n/*"],
       "@styles/*": ["./src/styles/*"]
     }
   }

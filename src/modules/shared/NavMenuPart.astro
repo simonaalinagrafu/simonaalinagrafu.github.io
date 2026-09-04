@@ -3,16 +3,26 @@
 import { Icon } from 'astro-icon/components';
 import { navItems } from './nav';
 import { isActive } from '@fx/lib/routing';
+import { getLocale, stripLocale, localePath } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
 
 const path = Astro.url.pathname;
+const locale = getLocale(path);
+const s = t(locale);
+// Active state is decided on the locale-free path, so /en/career highlights
+// the same item /career does.
+const bare = stripLocale(path);
 ---
 
 <nav class="hidden flex-wrap gap-1 text-sm sm:flex">
   {
     navItems.map((item) => (
-      <a href={item.href} class:list={['nav-pill', isActive(item.href, path) && 'nav-pill-active']}>
+      <a
+        href={localePath(locale, item.href)}
+        class:list={['nav-pill', isActive(item.href, bare) && 'nav-pill-active']}
+      >
         <Icon name={item.icon} class="h-4 w-4" aria-hidden="true" />
-        {item.label}
+        {s.nav[item.id]}
       </a>
     ))
   }

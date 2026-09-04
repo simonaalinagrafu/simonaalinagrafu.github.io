@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "cv": "node scripts/print-cv.mjs",
     "format": "prettier --write \"src/**/*.{astro,ts,js,css}\""
   },
   "dependencies": {

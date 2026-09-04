@@ -1,18 +1,22 @@
 ---
 import BaseLayout from '@modules/shared/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
-import { skills } from '@data/profile';
+import { getProfile, siteFacts } from '@data/profile';
+import { getLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const locale = getLocale(Astro.url.pathname);
+const s = t(locale);
+const { skills } = getProfile(locale);
 ---
 
 <BaseLayout
-  title="Skills — Simona Alina Grafu"
-  description="Skills across leadership, AI and machine learning, backend architecture, cloud, and the fundamentals beneath them."
+  title={`${s.skills.metaTitle} — ${siteFacts.name}`}
+  description={s.skills.metaDescription}
 >
-  <p class="kicker">Toolbox</p>
-  <h1 class="title-page mt-2">Skills</h1>
-  <p class="lede">
-    What I reach for and the ground it stands on — from leading teams to the math under the models.
-  </p>
+  <p class="kicker">{s.skills.kicker}</p>
+  <h1 class="title-page mt-2">{s.skills.heading}</h1>
+  <p class="lede">{s.skills.lede}</p>
 
   <div class="mt-8 grid gap-6 sm:grid-cols-2">
     {

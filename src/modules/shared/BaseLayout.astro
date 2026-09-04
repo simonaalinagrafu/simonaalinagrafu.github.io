@@ -4,43 +4,64 @@ import '@fontsource-variable/space-grotesk';
 import '@styles/global.css';
 import HeaderPart from './HeaderPart.astro';
 import FooterPart from './FooterPart.astro';
-import { site } from '@data/profile';
+import { siteFacts } from '@data/profile';
+import { getLocale, stripLocale, localePath, locales, defaultLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = site.tagline } = Astro.props;
 const path = Astro.url.pathname;
+const locale = getLocale(path);
+const s = t(locale);
+
+const { title, description = s.articles.metaDescription } = Astro.props;
+
+// The same page in every language, for the hreflang alternates.
+const bare = stripLocale(path);
+const alternates = locales.map((l) => ({
+  hreflang: t(l).htmlLang,
+  href: new URL(localePath(l, bare), siteFacts.url).href,
+}));
+const canonical = new URL(path, siteFacts.url).href;
+const feed = localePath(locale, '/rss.xml');
 ---
 
-<html lang="en" class="antialiased">
+<html lang={s.htmlLang} class="antialiased">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content={site.name} />
+    <meta name="author" content={siteFacts.name} />
     <meta name="theme-color" content="#1e3a8a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="canonical" href={new URL(path, site.url)} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(localePath(defaultLocale, bare), siteFacts.url).href}
+    />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={`${site.name} — Articles`}
-      href="/rss.xml"
+      title={`${siteFacts.name} — ${s.articles.feedTitle}`}
+      href={feed}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={site.name} />
+    <meta property="og:site_name" content={siteFacts.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={new URL(path, site.url)} />
-    <meta property="og:image" content={new URL('/og.png', site.url)} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={s.ogLocale} />
+    <meta property="og:image" content={new URL('/og.png', siteFacts.url).href} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={new URL('/og.png', site.url)} />
+    <meta name="twitter:image" content={new URL('/og.png', siteFacts.url).href} />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       (function () {
@@ -49,6 +70,16 @@ const path = Astro.url.pathname;
           t = localStorage.getItem('theme');
         } catch (e) {}
         if (t) document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <script is:inline>
+      // Honour a previously chosen language, but only for someone arriving at
+      // the bare root. Deep links always render the language they name.
+      (function () {
+        if (window.location.pathname !== '/') return;
+        try {
+          if (localStorage.getItem('locale') === 'en') window.location.replace('/en/');
+        } catch (e) {}
       })();
     </script>
   </head>

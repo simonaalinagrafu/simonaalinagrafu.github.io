@@ -1,13 +1,17 @@
+// Navigation structure. Labels live in the i18n dictionaries, keyed by `id`;
+// hrefs here are locale-free and get prefixed at render by localePath().
+import type { NavId } from '@i18n/types';
+
 export interface NavItem {
+  id: NavId;
   href: string;
-  label: string;
   icon: string;
 }
 
 export const navItems: NavItem[] = [
-  { href: '/', label: 'About Me', icon: 'lucide:user' },
-  { href: '/career/', label: 'Career', icon: 'lucide:briefcase' },
-  { href: '/skills/', label: 'Skills', icon: 'lucide:wrench' },
-  { href: '/articles/', label: 'Articles', icon: 'lucide:file-text' },
-  { href: '/contact/', label: 'Contact', icon: 'lucide:at-sign' },
+  { id: 'home', href: '/', icon: 'lucide:user' },
+  { id: 'career', href: '/career/', icon: 'lucide:briefcase' },
+  { id: 'skills', href: '/skills/', icon: 'lucide:wrench' },
+  { id: 'articles', href: '/articles/', icon: 'lucide:file-text' },
+  { id: 'contact', href: '/contact/', icon: 'lucide:at-sign' },
 ];

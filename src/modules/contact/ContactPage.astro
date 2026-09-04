@@ -2,12 +2,18 @@
 import BaseLayout from '@modules/shared/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 import LinkCardPart from '@fx/components/LinkCardPart.astro';
-import { site } from '@data/profile';
+import { getProfile, siteFacts } from '@data/profile';
+import { getLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const locale = getLocale(Astro.url.pathname);
+const s = t(locale);
+const { site } = getProfile(locale);
 ---
 
 <BaseLayout
-  title="Contact — Simona Alina Grafu"
-  description="Get in touch with Simona Alina Grafu to exchange ideas on engineering leadership, AI systems, and research."
+  title={`${s.contact.metaTitle} — ${siteFacts.name}`}
+  description={s.contact.metaDescription}
 >
   <div class="relative">
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
@@ -15,28 +21,22 @@ import { site } from '@data/profile';
       <div class="blob bg-blob-b top-48 -left-24 h-56 w-56"></div>
     </div>
 
-    <h1 class="title-page">Contact</h1>
-    <p class="lede">I read everything and reply to thoughtful messages.</p>
+    <h1 class="title-page">{s.contact.heading}</h1>
+    <p class="lede">{s.contact.lede}</p>
 
     <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_20rem]">
       <div class="space-y-4">
         <LinkCardPart
           href={`mailto:${site.email}`}
           icon="lucide:mail"
-          title="Email"
+          title={s.contact.email}
           subtitle={site.email}
         />
         <LinkCardPart
           href={site.linkedin}
           icon="lucide:linkedin"
-          title="LinkedIn"
-          subtitle="Best for professional messages"
-        />
-        <LinkCardPart
-          href={site.github}
-          icon="lucide:github"
-          title="GitHub"
-          subtitle="Code and experiments"
+          title={s.contact.linkedin}
+          subtitle={s.contact.linkedinSubtitle}
         />
       </div>
 
@@ -56,7 +56,7 @@ import { site } from '@data/profile';
               class="text-label mt-0.5 h-4 w-4 shrink-0"
               aria-hidden="true"
             />
-            <span>EET (UTC+2)</span>
+            <span>{s.contact.timezone}</span>
           </li>
         </ul>
       </aside>

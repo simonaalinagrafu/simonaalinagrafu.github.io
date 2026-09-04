@@ -5,20 +5,24 @@
 // in BaseLayout's <head>.
 import { Icon } from 'astro-icon/components';
 import { themes } from '@themes/themes';
+import { getLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const s = t(getLocale(Astro.url.pathname));
 ---
 
 <div class="relative">
   <button
     id="theme-menu-btn"
     type="button"
-    aria-label="Change theme"
+    aria-label={s.header.changeTheme}
     aria-haspopup="menu"
     aria-expanded="false"
-    data-tip="Change the site's color theme"
+    data-tip={s.header.changeThemeTip}
     class="tip tip-end border-line-strong text-muted hover:border-accent hover:text-accent inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
   >
     <Icon name="lucide:palette" class="h-4 w-4" aria-hidden="true" />
-    <span id="theme-menu-label">Light</span>
+    <span id="theme-menu-label">{s.themes.light}</span>
     <Icon
       name="lucide:chevron-down"
       class="h-3.5 w-3.5 transition-transform [[aria-expanded='true']_&]:rotate-180"
@@ -32,19 +36,19 @@ import { themes } from '@themes/themes';
     class="card bg-bg absolute top-full right-0 z-20 mt-2 hidden w-44 p-1 shadow-lg"
   >
     {
-      themes.map((t) => (
+      themes.map((theme) => (
         <button
           type="button"
           role="menuitemradio"
-          data-theme-id={t.id}
+          data-theme-id={theme.id}
           class="theme-item menu-item text-sm"
         >
           <span
             class="border-line-strong h-3.5 w-3.5 rounded-full border"
-            style={`background:${t.swatch}`}
+            style={`background:${theme.swatch}`}
             aria-hidden="true"
           />
-          <span class="grow text-start">{t.label}</span>
+          <span class="grow text-start">{s.themes[theme.id]}</span>
           <Icon
             name="lucide:check"
             class="theme-check text-accent hidden h-4 w-4"

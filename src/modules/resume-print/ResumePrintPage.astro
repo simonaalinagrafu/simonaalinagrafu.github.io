@@ -1,27 +1,23 @@
 ---
-// Print source for public/cv.pdf, rendered entirely from src/data/profile.ts.
-// Regenerate the PDF after any profile change with:
-//   npm run build
-//   npm run preview   (note the port it prints)
-//   & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu `
-//     --no-pdf-header-footer --print-to-pdf="<repo>\public\cv.pdf" "http://localhost:4321/resume-print/"
+// Print source for the CV PDFs, rendered entirely from src/data/profile/.
+// One page per locale: /resume-print/ → public/cv-ro.pdf,
+//                      /en/resume-print/ → public/cv-en.pdf
+// Regenerate both after any profile change with:  npm run pdf
 // This page is noindex and excluded from the sitemap (see astro.config.mjs).
 import './resume-print.css';
-import { site, experience, skills, education, projects } from '@data/profile';
+import { getProfile } from '@data/profile';
+import { getLocale } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
+
+const locale = getLocale(Astro.url.pathname);
+const s = t(locale);
+const { site, experience, skills, education, projects } = getProfile(locale);
 
 const keyProject = projects[0];
 
 const linkedinLabel = site.linkedin.replace('https://www.', '');
 const siteLabel = site.url.replace('https://', '');
 const telHref = `tel:${site.phone.replace(/\s/g, '')}`;
-
-// Read in the first few seconds, so it leads with figures rather than prose.
-const highlights = [
-  'Millions of requests served every day by the platform my team runs',
-  '10,000+ business clients on the systems I have led',
-  '50 web services in production, distributed across AWS',
-  '20+ years, from real-time game engines to agentic AI systems',
-];
 
 /** Bullets are written as "Lead-in: detail" — split so the lead-in can be bold. */
 function splitBullet(b: string) {
@@ -30,11 +26,11 @@ function splitBullet(b: string) {
 }
 ---
 
-<html lang="en">
+<html lang={s.htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex" />
-    <title>{site.name} — Resume</title>
+    <title>{site.name} — {s.career.metaTitle}</title>
   </head>
   <body>
     <header>
@@ -49,25 +45,25 @@ function splitBullet(b: string) {
       </div>
     </header>
 
-    <h2>Summary</h2>
+    <h2>{s.resume.summary}</h2>
     <p>{site.intro}</p>
 
     <div class="highlights">
-      {highlights.map((h) => <div>{h}</div>)}
+      {s.resume.highlights.map((h) => <div>{h}</div>)}
     </div>
 
-    <h2>Skills</h2>
+    <h2>{s.resume.skills}</h2>
     <div class="skills">
       {
-        skills.map((s) => (
+        skills.map((skill) => (
           <p>
-            <b>{s.group}:</b> {s.items.join(', ')}
+            <b>{skill.group}:</b> {skill.items.join(', ')}
           </p>
         ))
       }
     </div>
 
-    <h2>Experience</h2>
+    <h2>{s.resume.experience}</h2>
     {
       experience.map((role) => {
         // The Career page carries every bullet; the PDF takes the leading few
@@ -101,7 +97,7 @@ function splitBullet(b: string) {
             </ul>
             {role.tech && (
               <p class="tech">
-                <span class="tech-label">Tech</span>
+                <span class="tech-label">{s.resume.tech}</span>
                 {role.tech.join(' · ')}
               </p>
             )}
@@ -110,7 +106,7 @@ function splitBullet(b: string) {
       })
     }
 
-    <h2>Key Project</h2>
+    <h2>{s.resume.keyProject}</h2>
     <div class="role">
       <div class="role-head">
         <h3>{keyProject.title}</h3>
@@ -119,11 +115,11 @@ function splitBullet(b: string) {
       <p class="summary">{keyProject.description}</p>
     </div>
 
-    <h2>Education</h2>
+    <h2>{s.resume.education}</h2>
     {
-      education.map((e) => (
+      education.map((entry) => (
         <div class="edu">
-          <b>{e.degree}</b> — {e.school} <span class="period">({e.period})</span>
+          <b>{entry.degree}</b> — {entry.school} <span class="period">({entry.period})</span>
         </div>
       ))
     }

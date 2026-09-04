@@ -1,13 +1,23 @@
 ---
 // Hamburger button that opens the mobile menu panel (script in MobileMenu.astro).
+// Labels come in as props so this stays free of site content.
 import { Icon } from 'astro-icon/components';
+
+interface Props {
+  openLabel: string;
+  closeLabel: string;
+}
+
+const { openLabel, closeLabel } = Astro.props;
 ---
 
 <button
   id="menu-toggle"
   type="button"
-  aria-label="Open menu"
+  aria-label={openLabel}
   aria-expanded="false"
+  data-label-open={openLabel}
+  data-label-close={closeLabel}
   class="border-line-strong text-ink hover:border-accent hover:text-accent inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-colors sm:hidden"
 >
   <Icon name="lucide:menu" id="menu-icon-open" class="h-5 w-5" aria-hidden="true" />

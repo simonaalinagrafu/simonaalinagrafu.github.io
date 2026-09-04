@@ -1,28 +1,34 @@
 ---
 import BaseLayout from '@modules/shared/BaseLayout.astro';
 import { articlesByDate } from './registry';
+import { siteFacts } from '@data/profile';
+import { getLocale, localePath } from '@fx/lib/i18n';
+import { t } from '@i18n/index';
 
-const articles = articlesByDate();
+const locale = getLocale(Astro.url.pathname);
+const s = t(locale);
+const articles = articlesByDate(locale);
 ---
 
 <BaseLayout
-  title="Articles — Simona Alina Grafu"
-  description="Writing on engineering leadership, software architecture, and applied AI."
+  title={`${s.articles.metaTitle} — ${siteFacts.name}`}
+  description={s.articles.metaDescription}
 >
-  <p class="kicker">Writing</p>
-  <h1 class="title-page mt-2">Articles</h1>
+  <p class="kicker">{s.articles.kicker}</p>
+  <h1 class="title-page mt-2">{s.articles.heading}</h1>
   <p class="lede">
-    Writing on engineering leadership, software architecture, agentic AI systems, and AI-assisted
-    development. Subscribe via <a href="/rss.xml" class="link-accent">RSS</a>.
+    {s.articles.ledeBefore}<a href={localePath(locale, '/rss.xml')} class="link-accent"
+      >{s.articles.ledeRssLink}</a
+    >{s.articles.ledeAfter}
   </p>
 
   <ul class="mt-8 space-y-8">
     {
       articles.map((article) => (
         <li>
-          <a href={`/articles/${article.id}/`} class="group block">
+          <a href={localePath(locale, `/articles/${article.id}/`)} class="group block">
             <p class="text-faint text-sm">
-              {article.pubDate.toLocaleDateString('en-GB', {
+              {article.pubDate.toLocaleDateString(s.dateLocale, {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
