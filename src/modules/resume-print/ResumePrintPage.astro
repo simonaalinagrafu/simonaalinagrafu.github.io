@@ -11,7 +11,7 @@ import { t } from '@i18n/index';
 
 const locale = getLocale(Astro.url.pathname);
 const s = t(locale);
-const { site, experience, skills, education, achievements } = getProfile(locale);
+const { site, experience, skills, education, achievements, extras } = getProfile(locale);
 
 const keyAchievement = achievements[0];
 
@@ -123,6 +123,15 @@ function splitBullet(b: string) {
           {entry.period && <span class="period">({entry.period})</span>}
         </div>
       ))
+    }
+
+    {
+      extras.length > 0 && (
+        <>
+          <h2>{s.resume.other}</h2>
+          <p class="extras">{extras.join(' · ')}</p>
+        </>
+      )
     }
   </body>
 </html>

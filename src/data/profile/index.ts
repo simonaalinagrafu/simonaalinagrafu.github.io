@@ -31,6 +31,7 @@ export type Site = typeof siteFacts & ProfileText['site'];
 
 export interface Profile {
   site: Site;
+  extras: string[];
   experience: Role[];
   skills: SkillCategory[];
   education: Education[];
@@ -71,6 +72,7 @@ export function getProfile(locale: Locale): Profile {
   const text = texts[locale];
   return {
     site: { ...siteFacts, ...text.site },
+    extras: text.extras,
     experience: roleShapes.map((shape) => ({ ...shape, ...text.roles[shape.id] })),
     skills: skillShapes.map((shape) => ({ ...shape, ...text.skills[shape.id] })),
     education: educationShapes.map((shape) => ({ ...shape, ...text.education[shape.id] })),

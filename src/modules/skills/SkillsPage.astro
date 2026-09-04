@@ -7,7 +7,7 @@ import { t } from '@i18n/index';
 
 const locale = getLocale(Astro.url.pathname);
 const s = t(locale);
-const { skills } = getProfile(locale);
+const { skills, extras } = getProfile(locale);
 ---
 
 <BaseLayout
@@ -40,4 +40,24 @@ const { skills } = getProfile(locale);
       ))
     }
   </div>
+
+  <!-- The same closing facts the CV prints (licence, languages…), so the two
+       pages can never disagree. -->
+  {
+    extras.length > 0 && (
+      <section class="mt-14">
+        <p class="rule">
+          <span class="kicker">{s.resume.other}</span>
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          {extras.map((item) => (
+            <li class="chip text-sm">
+              <Icon name="lucide:car" class="text-label h-4 w-4" aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </BaseLayout>

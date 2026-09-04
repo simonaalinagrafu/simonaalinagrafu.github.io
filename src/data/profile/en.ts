@@ -19,6 +19,8 @@ export const en: ProfileText = {
     location: 'Bucharest, Romania',
   },
 
+  extras: ['Driving licence, category B'],
+
   roles: {
     everest: {
       position: 'Sales Manager',
@@ -171,6 +173,18 @@ export const en: ProfileText = {
         'Market & competitor analysis',
         'Customer service',
         'Communication & presentation',
+      ],
+    },
+    personal: {
+      group: 'Personal Strengths',
+      blurb: 'What I bring beyond the job description — in my own words.',
+      items: [
+        'Broad education in science and liberal arts',
+        'Long, first-hand experience in dealing with people',
+        'Extensive conceptual and human knowledge',
+        'Critical thinking and internal mobility',
+        'Objectivity and efficiency',
+        'Creativity and imagination',
       ],
     },
   },

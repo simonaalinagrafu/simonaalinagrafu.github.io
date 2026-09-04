@@ -1,10 +1,14 @@
-/* Print stylesheet for the resume PDF (A4). Standalone by design — the PDF
-   must keep a fixed, print-tuned look independent of the site's themes. */
+/* Print stylesheet for the CV PDF (A4). Standalone by design — the PDF must
+   keep a fixed, print-tuned look independent of the site's themes.
+
+   Set for reading, not for density: 11pt body, generous margins, serif
+   headings in the site's burgundy, and room to run to three pages. */
 :root {
   --ink: #2b2724;
   --muted: #5a524b;
+  --faint: #857a70;
   --accent: #7a1f2b;
-  --line: #e8e1d6;
+  --line: #e2dbcf;
 }
 * {
   margin: 0;
@@ -13,62 +17,104 @@
 }
 @page {
   size: A4;
-  margin: 16mm 16mm;
+  margin: 18mm 18mm 20mm;
 }
 body {
   font-family: 'Segoe UI', ui-sans-serif, system-ui, Arial, sans-serif;
   color: var(--ink);
-  font-size: 10pt;
-  line-height: 1.42;
-}
-header {
-  border-bottom: 2.5px solid var(--accent);
-  padding-bottom: 12px;
-}
-h1 {
-  font-size: 22pt;
-  letter-spacing: -0.5px;
-}
-.subtitle {
   font-size: 11pt;
-  color: var(--accent);
+  line-height: 1.5;
+}
+h1,
+h2,
+h3 {
+  font-family: Georgia, 'Times New Roman', serif;
   font-weight: 600;
-  margin-top: 2px;
-}
-.contact {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 8.5pt;
-}
-.contact span + span::before {
-  content: ' · ';
 }
 a {
   color: var(--accent);
   text-decoration: none;
 }
-h2 {
-  font-size: 10.5pt;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--accent);
-  margin: 14px 0 6px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 2px;
+
+/* ---- Header ------------------------------------------------------------ */
+header {
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 14px;
+  margin-bottom: 6px;
 }
+h1 {
+  font-size: 27pt;
+  line-height: 1.1;
+  letter-spacing: -0.2px;
+}
+.subtitle {
+  font-size: 12.5pt;
+  color: var(--accent);
+  margin-top: 5px;
+}
+.contact {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 9.5pt;
+}
+.contact span + span::before {
+  content: ' · ';
+  color: var(--faint);
+}
+
+/* ---- Sections ---------------------------------------------------------- */
+h2 {
+  font-size: 12pt;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin: 24px 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--line);
+  page-break-after: avoid;
+}
+
+/* ---- Summary ----------------------------------------------------------- */
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 26px;
+  margin-top: 10px;
+}
+.highlights div {
+  position: relative;
+  padding-left: 15px;
+  font-size: 10.5pt;
+}
+.highlights div::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+/* ---- Skills ------------------------------------------------------------ */
 .skills {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px 18px;
+  gap: 9px 26px;
 }
 .skills p {
-  font-size: 8.5pt;
+  font-size: 10pt;
+  line-height: 1.45;
+  page-break-inside: avoid;
 }
 .skills b {
   color: var(--ink);
 }
+
+/* ---- Experience -------------------------------------------------------- */
 .role {
-  margin-bottom: 13px;
+  margin-bottom: 18px;
   page-break-inside: avoid;
 }
 .role.allow-break {
@@ -78,79 +124,65 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  gap: 16px;
+  page-break-after: avoid;
 }
 .role-head h3 {
-  font-size: 10.5pt;
+  font-size: 12.5pt;
+  line-height: 1.25;
 }
 .role-head .period {
   color: var(--muted);
-  font-size: 8.5pt;
+  font-size: 9.5pt;
   white-space: nowrap;
 }
-.role .summary {
+.role .about {
   margin-top: 2px;
+  color: var(--muted);
+  font-size: 9.8pt;
+}
+.role .summary {
+  margin-top: 6px;
   color: var(--ink);
 }
 .role ul {
-  margin: 4px 0 0 15px;
+  margin: 7px 0 0 17px;
 }
 .role li {
-  margin-bottom: 3px;
+  margin-bottom: 4px;
+  font-size: 10.5pt;
 }
-/* The stack for a role: given a rule, a label and full-strength ink, because a
-   recruiter scanning for a technology should find it without reading prose. */
+/* The focus line for a role: given a rule and a label, because a recruiter
+   scanning for an area should find it without reading prose. */
 .tech {
-  margin-top: 6px;
-  padding-top: 4px;
+  margin-top: 8px;
+  padding-top: 6px;
   border-top: 1px solid var(--line);
   color: var(--ink);
-  font-size: 9pt;
+  font-size: 9.5pt;
 }
 .tech-label {
   display: inline-block;
-  margin-right: 7px;
+  margin-right: 9px;
   color: var(--accent);
-  font-size: 7.5pt;
+  font-size: 8pt;
   font-weight: 700;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
+
+/* ---- Education, other -------------------------------------------------- */
 .edu {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  font-size: 10.5pt;
 }
 .edu .period {
   color: var(--muted);
-  font-size: 8.5pt;
-}
-
-/* Number-led facts under the summary, for the recruiter's first scan. */
-.highlights {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 18px;
-  margin-top: 6px;
-}
-.highlights div {
-  position: relative;
-  padding-left: 13px;
   font-size: 9.5pt;
 }
-.highlights div::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.45em;
-  width: 5px;
-  height: 5px;
-  border-radius: 1px;
-  background: var(--accent);
-}
-
-/* One line of company context under a role heading. */
-.role .about {
-  margin-top: 1px;
-  color: var(--muted);
-  font-size: 8.8pt;
+.extras {
+  font-size: 10.5pt;
+  color: var(--ink);
 }
 
 /* Contact links stay clickable in the PDF and read as links. */
@@ -158,9 +190,19 @@ h2 {
   color: var(--accent);
 }
 
-/* Redesign: serif display for the name and section headings, matching the site. */
-h1,
-h2,
-h3 {
-  font-family: Georgia, 'Times New Roman', serif;
+/* On screen only: frame the page like the A4 sheet it prints to, so the
+   preview in a browser looks like the PDF. Chrome's print engine ignores this
+   and uses @page. */
+@media screen {
+  html {
+    background: #e9e4dc;
+  }
+  body {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    padding: 18mm 18mm 20mm;
+    background: #ffffff;
+    box-shadow: 0 2px 18px rgb(0 0 0 / 0.12);
+  }
 }

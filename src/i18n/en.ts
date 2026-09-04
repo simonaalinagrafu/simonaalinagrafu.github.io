@@ -212,6 +212,7 @@ export const en: UiStrings = {
     experience: 'Experience',
     keyAchievement: 'Key Achievement',
     education: 'Education',
+    other: 'Other',
     focus: 'Focus',
     highlights: [
       '20+ years in B2B sales, most of them in the printing industry',

@@ -216,6 +216,7 @@ export const ro: UiStrings = {
     experience: 'Experiență',
     keyAchievement: 'Realizare reprezentativă',
     education: 'Educație',
+    other: 'Diverse',
     focus: 'Arii',
     highlights: [
       '20+ ani în vânzări B2B, cei mai mulți în industria tipografică',

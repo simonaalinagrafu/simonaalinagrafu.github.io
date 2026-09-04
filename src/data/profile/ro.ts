@@ -24,6 +24,8 @@ export const ro: ProfileText = {
     location: 'București, România',
   },
 
+  extras: ['Permis de conducere, categoria B'],
+
   roles: {
     everest: {
       position: 'Manager de Vânzări',
@@ -177,6 +179,18 @@ export const ro: ProfileText = {
         'Analiza pieței și a concurenței',
         'Servicii pentru clienți',
         'Comunicare și prezentare',
+      ],
+    },
+    personal: {
+      group: 'Calități personale',
+      blurb: 'Ce aduc dincolo de fișa postului — în cuvintele mele.',
+      items: [
+        'Educație vastă, în științe și în domeniul umanist',
+        'Experiență directă și îndelungată în lucrul cu oamenii',
+        'Cunoștințe conceptuale și umane extinse',
+        'Gândire critică și mobilitate internă',
+        'Obiectivitate și eficiență',
+        'Creativitate și imaginație',
       ],
     },
   },

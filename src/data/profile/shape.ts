@@ -17,7 +17,13 @@
 
 export type RoleId = 'everest' | 'rh-printing' | 'rodata' | 'europetrolgaz' | 'delta' | 'euromobex';
 export type SkillId =
-  'sales-leadership' | 'key-accounts' | 'negotiation' | 'pipeline' | 'tools' | 'business';
+  | 'sales-leadership'
+  | 'key-accounts'
+  | 'negotiation'
+  | 'pipeline'
+  | 'tools'
+  | 'business'
+  | 'personal';
 export type AchievementId = 'portfolio' | 'team' | 'accounts-system';
 export type EducationId = 'journalism' | 'marketing';
 
@@ -137,6 +143,7 @@ export const skillShapes: SkillShape[] = [
   { id: 'pipeline', icon: 'lucide:chart-line' },
   { id: 'tools', icon: 'lucide:clipboard-list' },
   { id: 'business', icon: 'lucide:calculator' },
+  { id: 'personal', icon: 'lucide:user-round' },
 ];
 
 // --- Education --------------------------------------------------------------
@@ -195,6 +202,8 @@ export const achievementShapes: AchievementShape[] = [
 
 export interface ProfileText {
   site: SiteText;
+  /** Short facts for the CV's closing "Other" line — licence, languages, and the like. */
+  extras: string[];
   roles: Record<RoleId, RoleText>;
   skills: Record<SkillId, SkillText>;
   education: Record<EducationId, EducationText>;

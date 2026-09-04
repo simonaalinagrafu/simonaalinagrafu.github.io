@@ -131,6 +131,8 @@ export interface UiStrings {
     experience: string;
     keyAchievement: string;
     education: string;
+    /** Closing line of the CV — licence, languages, and the like. */
+    other: string;
     /** Label for the areas-of-responsibility line under a role. */
     focus: string;
     /** Read in the first few seconds — short, concrete lines. */
