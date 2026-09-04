@@ -1,0 +1,60 @@
+---
+// Masthead above the navigation, on every page — the site's letterhead, and
+// the only place the name and the role line appear (the home hero deliberately
+// says neither, so nothing is duplicated).
+//
+// The artwork — cream ground, burgundy slanted panel, five-bar mark — is the
+// supplied design, kept as drawn with fixed colours, so it does not follow the
+// themes. Everything else is live: the name and the localized short title, set
+// in the site's own faces (Fraunces display, Inter text) rather than in a
+// hardcoded stack, so the band reads as part of the page.
+//
+// Two forms: the wide SVG from ~640px up, and a compact bar on phones, where
+// the wide artwork's type would shrink to a few pixels.
+import { getProfile, siteFacts } from '@data/profile';
+import { getLocale } from '@fx/lib/i18n';
+
+const locale = getLocale(Astro.url.pathname);
+const { site } = getProfile(locale);
+---
+
+<div class="w-full">
+  <!-- Phones: same palette, stacked, at a size that stays readable. -->
+  <div class="flex items-center justify-between gap-4 px-4 py-3 sm:hidden" style="background:#f5efe6">
+    <div class="min-w-0">
+      <p class="font-display truncate text-xl font-semibold" style="color:#221b1d">
+        {siteFacts.name}
+      </p>
+      <p class="mt-0.5 truncate text-[11px]" style="color:#7a1f2b">{site.titleShort}</p>
+    </div>
+    <svg viewBox="0 0 214 120" class="h-7 w-auto shrink-0" aria-hidden="true" focusable="false">
+      <rect width="30" height="120" fill="#4a1119"></rect>
+      <rect x="46" width="30" height="98" fill="#a3434f"></rect>
+      <rect x="92" width="30" height="120" fill="#7a1f2b"></rect>
+      <rect x="138" width="30" height="75" fill="#b8935a"></rect>
+      <rect x="184" width="30" height="120" fill="#4a1119"></rect>
+    </svg>
+  </div>
+
+  <!-- Tablet and up: the artwork as drawn. -->
+  <svg
+    viewBox="0 0 1200 150"
+    class="hidden h-auto w-full sm:block"
+    role="img"
+    aria-label={`${siteFacts.name} — ${site.titleShort}`}
+  >
+    <rect width="1200" height="150" fill="#f5efe6"></rect>
+    <path d="M760 0h440v150H737Z" fill="#7a1f2b"></path>
+    <g transform="translate(860 25)">
+      <rect width="30" height="100" fill="#4a1119"></rect>
+      <rect x="46" width="30" height="82" fill="#a3434f"></rect>
+      <rect x="92" width="30" height="100" fill="#f5efe6" fill-opacity="0.9"></rect>
+      <rect x="138" width="30" height="62" fill="#b8935a"></rect>
+      <rect x="184" width="30" height="100" fill="#4a1119"></rect>
+    </g>
+    <text x="80" y="78" class="font-display" font-size="48" font-weight="600" fill="#221b1d"
+      >{siteFacts.name}</text
+    >
+    <text x="80" y="116" class="font-sans" font-size="23" fill="#7a1f2b">{site.titleShort}</text>
+  </svg>
+</div>

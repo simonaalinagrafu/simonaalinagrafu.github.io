@@ -40,7 +40,8 @@ export const en: UiStrings = {
 
   home: {
     metaTitle: 'Sales Manager, B2B',
-    greeting: 'Hello, I’m',
+    greeting: 'Hello, I’m Simona.',
+    headline: 'B2B sales, from the first conversation to the relationship that lasts.',
     ctaCareer: 'My career story',
     ctaContact: 'Get in touch',
     kickerReach: 'Reach and practice',

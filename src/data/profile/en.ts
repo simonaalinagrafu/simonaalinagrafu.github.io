@@ -12,6 +12,7 @@ import type { ProfileText } from './shape';
 export const en: ProfileText = {
   site: {
     title: 'Sales Manager | B2B Sales | Team Leadership',
+    titleShort: 'Sales Manager | B2B',
     tagline:
       'Sales manager with 20+ years in B2B sales, most of them in the printing industry — from field sales to key accounts to leading a sales team that delivers.',
     intro:

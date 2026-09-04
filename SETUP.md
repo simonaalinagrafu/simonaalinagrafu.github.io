@@ -79,13 +79,14 @@ listing the placeholder entries (§7).
 
 ---
 
-## 4. Deployment — configured and working ✅
+## 4. Deployment — configured ✅
 
-Pages source is set to **GitHub Actions** and the pipeline has deployed successfully. Every
-push to `main` rebuilds and publishes the site. (The earlier symptom — GitHub's built-in
-Jekyll build rendering `README.md` — is gone; note that a run named `pages build and
-deployment` still appears after each deploy, because `actions/deploy-pages` publishes its
-artifact through one. That is normal, not a sign Jekyll is back.)
+Every push to `main` builds and publishes the site through `.github/workflows/deploy.yml`.
+The repo's Pages source is set to **GitHub Actions** (repo → Settings → Pages → Build and
+deployment → Source). Before that was set, GitHub also ran its legacy Jekyll build on every
+push — a red `pages build and deployment` run beside the green one, failing harmlessly. If
+that run ever reappears, the source has been switched back to *branch*; set it to
+**GitHub Actions** again.
 
 Verify after any deploy:
 
@@ -94,8 +95,8 @@ curl -s https://simonaalinagrafu.github.io | grep -o "<title>[^<]*</title>"
 ```
 
 - ✅ correct: `<title>Simona Alina Grafu — Manager de Vânzări, B2B</title>` (Romanian root)
-- ❌ Jekyll again: `<title>simonaalinagrafu.github.io | simonaalinagrafu</title>` — go to
-  **repo → Settings → Pages → Source** and set it back to **GitHub Actions**
+- ❌ Jekyll took over: `<title>simonaalinagrafu.github.io | simonaalinagrafu</title>` — set the
+  source to **GitHub Actions** as above.
 
 ### If a deploy fails
 
@@ -176,6 +177,13 @@ file, not part of the build). It is single-language by design.
 ```
 
 It pulls Fraunces and Inter from Google Fonts, so this needs a network connection.
+
+### The masthead
+
+`src/modules/shared/MastheadPart.astro` — the supplied 1200×280 banner as inline SVG, shown
+above the navigation on every page, hidden on phones. Its colours are fixed (it does not follow
+the themes); its text is live, taken from `siteFacts.name` and the localized `site.title`, so it
+changes with the profile and the language. To change the artwork, edit the SVG in that file.
 
 ### `public/favicon.svg`
 

@@ -44,7 +44,8 @@ export const ro: UiStrings = {
 
   home: {
     metaTitle: 'Manager de Vânzări, B2B',
-    greeting: 'Bună, sunt',
+    greeting: 'Bună, sunt Simona.',
+    headline: 'Vânzări B2B, de la prima discuție la relația care ține.',
     ctaCareer: 'Povestea carierei mele',
     ctaContact: 'Hai să vorbim',
     kickerReach: 'Anvergură și practică',

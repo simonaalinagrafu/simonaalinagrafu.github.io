@@ -17,6 +17,7 @@ import type { ProfileText } from './shape';
 export const ro: ProfileText = {
   site: {
     title: 'Manager de Vânzări | Vânzări B2B | Conducere de echipe',
+    titleShort: 'Manager de Vânzări | B2B',
     tagline:
       'Manager de vânzări cu 20+ ani în vânzări B2B, cei mai mulți în industria tipografică — de la vânzări în teren la conturi cheie și la conducerea unei echipe care livrează.',
     intro:

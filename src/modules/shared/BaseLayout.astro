@@ -4,6 +4,7 @@ import '@fontsource-variable/fraunces';
 import '@styles/global.css';
 import HeaderPart from './HeaderPart.astro';
 import FooterPart from './FooterPart.astro';
+import MastheadPart from './MastheadPart.astro';
 import { siteFacts, getProfile } from '@data/profile';
 import { getLocale, stripLocale, localePath, locales, defaultLocale } from '@fx/lib/i18n';
 import { t } from '@i18n/index';
@@ -77,9 +78,10 @@ const canonical = new URL(path, siteFacts.url).href;
     </script>
   </head>
   <body class="bg-bg text-ink/90 flex min-h-screen flex-col overflow-x-clip font-sans">
+    <MastheadPart />
     <HeaderPart />
 
-    <main class="mx-auto w-full max-w-7xl grow px-4 py-10 sm:px-6 lg:px-8">
+    <main class="mx-auto w-full max-w-7xl grow px-4 pt-7 pb-10 sm:px-6 lg:px-8">
       <slot />
     </main>
 

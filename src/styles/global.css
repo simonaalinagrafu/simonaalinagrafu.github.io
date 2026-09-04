@@ -48,9 +48,11 @@ html {
 --------------------------------------------------------------------------- */
 @layer components {
   /* Typography */
+  /* The hero heading is a sentence, not a name — so it sits well below the
+     display size a single name would carry. */
   .title-hero {
-    @apply font-display text-ink text-4xl font-semibold text-balance sm:text-6xl;
-    line-height: 1.05;
+    @apply font-display text-ink text-[1.75rem] font-semibold text-balance sm:text-[2.5rem];
+    line-height: 1.15;
   }
   .title-page {
     @apply font-display text-ink text-3xl font-semibold text-balance sm:text-4xl;
@@ -116,11 +118,12 @@ html {
   }
 
   /* Navigation */
+  /* On the tinted menu bar: quiet by default, a raised surface when active. */
   .nav-pill {
-    @apply text-muted hover:bg-chip hover:text-ink inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-colors;
+    @apply text-muted hover:bg-surface/70 hover:text-ink inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium transition-colors;
   }
   .nav-pill-active {
-    @apply bg-chip text-ink font-medium;
+    @apply bg-surface text-ink font-semibold shadow-sm;
   }
   .menu-item {
     @apply text-muted hover:bg-chip hover:text-ink flex w-full items-center gap-2.5 rounded-md px-3 py-2 transition-colors;

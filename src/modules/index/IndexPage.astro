@@ -75,21 +75,28 @@ const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
 ---
 
 <BaseLayout title={`${siteFacts.name} — ${s.home.metaTitle}`} description={site.tagline}>
-  <!-- Hero: the name and one paragraph on the left, the portrait on the right.
-       Contact is the primary action — this is a sales site. -->
-  <section class="py-6 sm:py-12">
-    <div class="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
-      <div class="max-w-2xl">
-        <p class="kicker">{site.title}</p>
-        <p class="text-accent mt-6 font-medium">{s.home.greeting}</p>
-        <h1 class="title-hero mt-1">{siteFacts.name}</h1>
-        <p class="text-muted mt-6 text-lg leading-relaxed">{site.intro}</p>
+  <!-- Hero: greeting, headline and one paragraph on the left, the portrait on
+       the right. It opens the page directly under the menu, so it carries no
+       top padding of its own. Contact is the primary action — this is a sales
+       site. -->
+  <section class="pb-6 sm:pb-10">
+    <!-- The portrait column is sized to the portrait and pushed to the right
+         edge, so the text column takes the slack instead of it turning into a
+         gap in the middle. -->
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div>
+        <!-- The name and the role line are the masthead's job on every page,
+             so the hero says neither: the greeting is first-name only and the
+             h1 states the work. Nothing on this page is said twice. -->
+        <p class="text-accent font-medium">{s.home.greeting}</p>
+        <h1 class="title-hero mt-2 max-w-3xl">{s.home.headline}</h1>
+        <p class="text-muted mt-6 max-w-2xl text-lg leading-relaxed">{site.intro}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={localePath(locale, '/contact/')} class="btn btn-primary">{s.home.ctaContact}</a>
           <a href={localePath(locale, '/career/')} class="btn btn-ghost">{s.home.ctaCareer}</a>
         </div>
       </div>
-      <div class="mx-auto w-full max-w-64 sm:max-w-[19.2rem] lg:max-w-[22.4rem]">
+      <div class="mx-auto w-full max-w-52 sm:max-w-64 lg:mr-0 lg:ml-auto lg:w-72">
         <PortraitPart
           src={hasPortrait ? '/portrait.jpg' : undefined}
           alt={siteFacts.name}

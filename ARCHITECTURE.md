@@ -148,7 +148,9 @@ always render the language they name.
 
 `public/cv-ro.pdf` and `public/cv-en.pdf` are printed from the `/resume-print/`
 pages, and `public/og.png` from `design/og-image.html`. `public/favicon.svg` is
-hand-written. `public/portrait.jpg` is *not* generated — it is the one asset
+hand-written. The masthead banner above the navigation is `modules/shared/MastheadPart.astro`:
+the supplied artwork as inline SVG with fixed colours, its name and title text live from the
+profile so each language gets its own. `public/portrait.jpg` is *not* generated — it is the one asset
 supplied by hand, and it is optional until it exists. None of them are rebuilt
 by `npm run build`, so they go stale silently. Regenerate the CVs with
 `npm run build && npm run cv`; see `SETUP.md` for the OG card.

@@ -53,7 +53,10 @@ export interface UiStrings {
 
   home: {
     metaTitle: string;
+    /** Whole line — the name is in the masthead, so it is not repeated here. */
     greeting: string;
+    /** Hero h1: what she does, not who she is. The masthead carries the name. */
+    headline: string;
     ctaCareer: string;
     ctaContact: string;
     kickerReach: string;

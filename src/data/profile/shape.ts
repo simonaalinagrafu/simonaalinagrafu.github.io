@@ -39,6 +39,8 @@ export const siteFacts = {
 export interface SiteText {
   /** Headline role line under the name. */
   title: string;
+  /** Two-segment form of `title`, for the masthead where space is tight. */
+  titleShort: string;
   /** Short form — meta/OG description and the resume PDF. Keep near 160 chars. */
   tagline: string;
   /** Long form, home hero only. */
