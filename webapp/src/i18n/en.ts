@@ -49,8 +49,8 @@ export const en: UiStrings = {
     heading: '{position} at {company}',
     facts: '{location} · {sales} in sales · {leadership} leading the sales office',
     paragraphs: [
-      'I run the sales office at Tipografia Everest, a Bucharest printing house of over 140 people working in offset and digital print — coordinating the sales agents while keeping a client portfolio of my own.',
-      'I joined Everest in 2012 as a sales representative and have led its sales office since 2015. Before that came almost nine years selling print at RH Printing, packaging sales at Rodata, and a start in accounting, marketing and sales analysis.',
+      'I run the sales office at Tipografia Everest, a Bucharest printing house of over 140 people working in offset and digital print. Reporting to the Commercial Director, I coordinate the sales agents, manage a client portfolio of my own, and take part in planning and implementing the sales strategy.',
+      'I joined Everest in 2012 as a sales representative and have led its sales office since 2015. Before that: almost nine years in print sales at RH Printing, packaging sales at Rodata, and first roles in accounting, marketing and sales analysis.',
     ],
     ctaCareer: 'Full career',
     ctaContact: 'Contact',
@@ -64,26 +64,27 @@ export const en: UiStrings = {
       clients: {
         term: 'Clients',
         detail:
-          'A portfolio of my own: offers, orders, technical and commercial advice, and the relationship from the first request onwards.',
+          'A portfolio of my own: price offers, orders, technical and commercial advice, and the client relationship from the first request onwards.',
       },
       contracts: {
         term: 'Contracts',
         detail:
-          'Printing-service contracts, negotiated and signed within the limits set by the Commercial and General Directors.',
+          'Printing-service contracts negotiated and signed, and invoice reversals and third-party commissions approved, within the limits set by the Commercial and General Directors.',
       },
       plan: {
-        term: 'Sales plan',
+        term: 'Strategy & plan',
         detail:
-          'Monthly, quarterly and annual targets, a daily look at the sales against them, and analysis reports for management.',
+          'Taking part in planning and implementing the sales strategy; monthly, quarterly and annual sales plans, daily analysis of sales against them, and reports for management.',
       },
       coordination: {
         term: 'Coordination',
         detail:
-          'The flow between sales and production, dispatch and finance — so offers go out on time and orders are planned well.',
+          'The flow of information between sales and production, dispatch and finance — so that offers reach clients on time and orders are planned into production efficiently.',
       },
       market: {
         term: 'Market',
-        detail: 'The competition and the market for printing services, followed continuously.',
+        detail:
+          'The competition, the trends in the printing-services market, and new products proposed for the printing house’s offer.',
       },
     },
     kickerHighlights: 'Highlights',
@@ -91,7 +92,7 @@ export const en: UiStrings = {
       promotion: {
         title: 'Head of the sales office',
         context: 'Tipografia Everest · 2015',
-        body: 'Promoted three years after joining as a sales representative — the sales office became part of the job, alongside the clients.',
+        body: 'Promoted three years after joining as a sales representative: responsibility for the sales office, added to a client portfolio of my own.',
       },
       print: {
         title: '{print} in print and packaging',
@@ -99,9 +100,9 @@ export const en: UiStrings = {
         body: 'Printed packaging in offset and rotogravure at Rodata, sheet-fed offset at RH Printing, then commercial printing, books and packaging at Everest.',
       },
       foundation: {
-        title: 'A start on the numbers side',
+        title: 'A foundation in accounting and marketing',
         context: 'Euromobex · Delta Distribution · Neweuropetrolgaz · 1997–2001',
-        body: 'An economist first, then marketing and sales analysis — so the accounting behind an offer is familiar ground.',
+        body: 'Marketing graduate of ASE Bucharest; economist first, then marketing and sales analysis — a working knowledge of the finances behind every offer.',
       },
     },
     kickerBackground: 'Background',
@@ -138,7 +139,7 @@ export const en: UiStrings = {
       'Skills across sales office coordination, the client portfolio, offers and contracts, new business and the sales plan, and the business foundations beneath them.',
     kicker: 'Toolbox',
     heading: 'Skills',
-    lede: 'What I reach for and the ground it stands on — from coordinating a sales office to the receivables behind a sale.',
+    lede: 'The skills the role draws on — from coordinating a sales office to collecting the payment behind a sale.',
   },
 
   contact: {
@@ -178,8 +179,8 @@ export const en: UiStrings = {
     highlights: [
       'In sales since 2000, in the printing industry since 2001',
       'Head of the sales office at Tipografia Everest since 2015; there since 2012',
-      'The whole commercial cycle: offer, negotiation, contract, production, collection',
-      'A start in accounting and marketing — the numbers behind every offer',
+      'The full commercial cycle: offer, negotiation, contract, production, collection',
+      'Marketing graduate (ASE Bucharest); first roles in accounting and marketing',
     ],
   },
 };

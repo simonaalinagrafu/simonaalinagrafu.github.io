@@ -54,8 +54,8 @@ export const ro: UiStrings = {
     heading: '{position} la {company}',
     facts: '{location} · {sales} în vânzări · {leadership} la conducerea biroului de vânzări',
     paragraphs: [
-      'Conduc biroul de vânzări al Tipografiei Everest, o tipografie din București cu peste 140 de oameni, care lucrează în offset și digital — coordonez agenții de vânzări și păstrez totodată un portofoliu propriu de clienți.',
-      'Am venit la Everest în 2012 ca reprezentant comercial și conduc biroul de vânzări din 2015. Înainte: aproape nouă ani de vânzări în tipografie la RH Printing, vânzări de ambalaje la Rodata și un început în contabilitate, marketing și analiza vânzărilor.',
+      'Conduc biroul de vânzări al Tipografiei Everest, o tipografie din București cu peste 140 de oameni, care lucrează în offset și digital. În subordinea Directorului Comercial, coordonez agenții de vânzări, gestionez un portofoliu propriu de clienți și particip la planificarea și implementarea strategiei de vânzări.',
+      'Am venit la Everest în 2012 ca reprezentant comercial și conduc biroul de vânzări din 2015. Înainte: aproape nouă ani de vânzări de tipar la RH Printing, vânzări de ambalaje la Rodata și primele roluri în contabilitate, marketing și analiza vânzărilor.',
     ],
     ctaCareer: 'Toată cariera',
     ctaContact: 'Contact',
@@ -69,26 +69,27 @@ export const ro: UiStrings = {
       clients: {
         term: 'Clienți',
         detail:
-          'Un portofoliu propriu: oferte, comenzi, consultanță tehnică și comercială și relația cu clientul de la prima solicitare.',
+          'Un portofoliu propriu: oferte de preț, comenzi, consultanță tehnică și comercială și relația cu clientul de la prima solicitare.',
       },
       contracts: {
         term: 'Contracte',
         detail:
-          'Contracte de prestări servicii tipografice, negociate și semnate în limitele stabilite de Directorul Comercial și Directorul General.',
+          'Contracte de prestări servicii tipografice negociate și semnate, stornări de facturi și comisioane către terți aprobate, în limitele stabilite de Directorul Comercial și Directorul General.',
       },
       plan: {
-        term: 'Planul de vânzări',
+        term: 'Strategie și plan',
         detail:
-          'Obiective lunare, trimestriale și anuale, analiza zilnică a vânzărilor față de ele și rapoarte de analiză pentru conducere.',
+          'Participare la planificarea și implementarea strategiei de vânzări; planuri de vânzări lunare, trimestriale și anuale, analiza zilnică a vânzărilor față de ele și rapoarte pentru conducere.',
       },
       coordination: {
         term: 'Coordonare',
         detail:
-          'Legătura dintre vânzări și producție, expediție și financiar — ca ofertele să plece la timp și comenzile să fie bine planificate.',
+          'Fluxul de informații dintre vânzări și producție, expediție și financiar — astfel încât ofertele să ajungă la clienți la timp, iar comenzile să fie planificate eficient în producție.',
       },
       market: {
         term: 'Piața',
-        detail: 'Concurența și piața serviciilor tipografice, urmărite permanent.',
+        detail:
+          'Concurența, tendințele pieței de servicii tipografice și produsele noi propuse pentru oferta tipografiei.',
       },
     },
     kickerHighlights: 'Repere',
@@ -96,7 +97,7 @@ export const ro: UiStrings = {
       promotion: {
         title: 'La conducerea biroului de vânzări',
         context: 'Tipografia Everest · 2015',
-        body: 'Promovare la trei ani după venirea ca reprezentant comercial — biroul de vânzări a devenit parte din meserie, alături de clienți.',
+        body: 'Promovare la trei ani după venirea ca reprezentant comercial: răspunderea pentru biroul de vânzări, adăugată unui portofoliu propriu de clienți.',
       },
       print: {
         title: '{print} în tipar și ambalaje',
@@ -104,9 +105,9 @@ export const ro: UiStrings = {
         body: 'Ambalaje tipărite în offset și rotogravură la Rodata, tipar offset în coală la RH Printing, apoi tipărituri comerciale, cărți și ambalaje la Everest.',
       },
       foundation: {
-        title: 'Un început pe partea de cifre',
+        title: 'O bază în contabilitate și marketing',
         context: 'Euromobex · Delta Distribution · Neweuropetrolgaz · 1997–2001',
-        body: 'Mai întâi economist, apoi marketing și analiza vânzărilor — așa că partea contabilă din spatele unei oferte e teren cunoscut.',
+        body: 'Licență în Marketing la ASE București; mai întâi economist, apoi marketing și analiza vânzărilor — o cunoaștere practică a părții financiare din spatele fiecărei oferte.',
       },
     },
     kickerBackground: 'Parcurs',
@@ -143,7 +144,7 @@ export const ro: UiStrings = {
       'Competențe în coordonarea biroului de vânzări, portofoliul de clienți, oferte și contracte, clienți noi și planul de vânzări, și fundamentele de business de dedesubt.',
     kicker: 'Instrumentar',
     heading: 'Competențe',
-    lede: 'La ce apelez și pe ce se sprijină — de la coordonarea unui birou de vânzări la încasarea din spatele unei vânzări.',
+    lede: 'Competențele pe care se sprijină rolul — de la coordonarea unui birou de vânzări la încasarea contravalorii unei vânzări.',
   },
 
   contact: {
@@ -184,7 +185,7 @@ export const ro: UiStrings = {
       'În vânzări din 2000, în industria tipografică din 2001',
       'Șef Birou Vânzări la Tipografia Everest din 2015; acolo din 2012',
       'Întregul ciclu comercial: ofertă, negociere, contract, producție, încasare',
-      'Un început în contabilitate și marketing — cifrele din spatele fiecărei oferte',
+      'Licență în Marketing (ASE București); primele roluri în contabilitate și marketing',
     ],
   },
 };

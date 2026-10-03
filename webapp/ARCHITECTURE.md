@@ -159,7 +159,8 @@ at build time instead of read at render: `__BUILD_YEAR__` (the footer and every
 `src/data/profile/` splits the CV in two:
 
 - `shape.ts` — what exists and in what order: role IDs, company names, icons,
-  bullet-count flags, contact details, and the start dates the year counts come
+  bullet-count flags (`pdfBullets`, `pdfItems`: how much the PDF shows), contact
+  details, and the start dates the year counts come
   from (`salesStart`, `printStart`, `leadershipStart`). The same in every
   language. Its header names the document every entry comes from.
 - `ro.ts` / `en.ts` — the prose, keyed by those IDs: per role a position,

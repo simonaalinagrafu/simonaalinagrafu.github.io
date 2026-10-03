@@ -62,7 +62,8 @@ export default function ResumePrintPage() {
       <div className="skills">
         {skills.map((skill) => (
           <p key={skill.id}>
-            <b>{skill.group}:</b> {skill.items.join(', ')}
+            <b>{skill.group}:</b>{' '}
+            {(skill.pdfItems ? skill.items.slice(0, skill.pdfItems) : skill.items).join(', ')}
           </p>
         ))}
       </div>

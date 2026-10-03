@@ -12,10 +12,14 @@
 // - 1997–2002 (Euromobex, Delta Distribution, Neweuropetrolgaz, Rodata): her
 //   own CVs from 2003, in Romanian and English;
 // - Tipografia Everest: her employment contract addendum of 21.04.2015 and the
-//   job descriptions for both of her roles there;
+//   job descriptions for both of her roles there, plus two duties (reporting
+//   cadence, marketing) from her own LinkedIn "About";
 // - RH Printing (2003–2012) and the journalism degree: her LinkedIn profile
-//   (linkedin.com/in/simona-deliu-413a5b2b). The RH Printing prose is still
-//   drafted and awaits her wording — see SETUP.md §7.
+//   (linkedin.com/in/simona-deliu-413a5b2b) — title and dates only. No document
+//   covers the RH Printing years, so its text says no more than the title and
+//   the company imply — see SETUP.md §7.
+// - Company descriptions: her CVs and the companies' own sites, checked
+//   October 2026. Press claims are left out.
 // No figures are invented: counts are derived from the dates below.
 
 export type RoleId =
@@ -119,7 +123,7 @@ export const roleShapes: RoleShape[] = [
     company: 'Tipografia Everest',
     icon: 'lucide:users',
     leadBullets: 3,
-    pdfBullets: 4,
+    pdfBullets: 5,
   },
   { id: 'everest-rep', company: 'Tipografia Everest', icon: 'lucide:briefcase', pdfBullets: 4 },
   { id: 'rh-printing', company: 'RH Printing', icon: 'lucide:printer' },
@@ -135,6 +139,8 @@ export interface SkillShape {
   id: SkillId;
   /** Lucide icon, used on the Skills page. The PDF ignores it. */
   icon: string;
+  /** How many items the resume PDF shows. Omit to show all. */
+  pdfItems?: number;
 }
 
 export interface SkillText {
@@ -151,7 +157,7 @@ export const skillShapes: SkillShape[] = [
   { id: 'pipeline', icon: 'lucide:chart-line' },
   { id: 'business', icon: 'lucide:calculator' },
   { id: 'tools', icon: 'lucide:clipboard-list' },
-  { id: 'personal', icon: 'lucide:user-round' },
+  { id: 'personal', icon: 'lucide:user-round', pdfItems: 4 },
 ];
 
 // --- Education --------------------------------------------------------------

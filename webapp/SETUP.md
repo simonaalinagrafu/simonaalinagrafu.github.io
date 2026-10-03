@@ -166,7 +166,8 @@ one of the default locations.
 Both CVs run to **three pages**, and Romanian, which runs longer, fills the third almost to
 the end. Check the page count after every profile change. Two levers keep it there: the
 `pdfBullets` field on a role caps how many bullets the PDF shows while the Career page keeps
-full detail (both Everest roles show 4), and any role with more than three bullets may break
+full detail (the Everest roles show 5 and 4), `pdfItems` does the same for a skills group
+(Personal Strengths shows its first 4), and any role with more than three bullets may break
 across a page (`ResumePrintPage.tsx`).
 
 ### `public/og.png` — after any change to name, title, or URL
@@ -220,14 +221,24 @@ deliberately outside it, because the originals carry a home address and a date o
   in Romanian and English;
 - **Tipografia Everest** — the job descriptions for *Reprezentant comercial* (from February
   2012) and *Șef Birou Vânzări* (from April 2015), and the contract addendum that made the
-  change.
+  change. Two duties of the current role — the weekly/monthly/annual reporting and estimates,
+  and the marketing events and campaigns — come from her own LinkedIn "About" instead.
+- **Personal strengths** — her LinkedIn "Specialties", plus three from her own cover letters
+  (tight deadlines, strategic thinking and organisation, quick to learn and join a team).
+- **Company descriptions** — her CVs and the companies' own sites (everest.ro, rodata.ro),
+  re-checked in October 2026. Press claims were removed in that review: "leader of the local
+  sheet-fed offset market", "certified since 2007", the €12 million investment, and RH
+  Printing's losses — unverifiable, or not something to say about a former employer.
 
 Job titles are the ones those documents give. Nothing on the site is imagined any more, so
 the placeholder guard and its CI override are gone. What remains:
 
-- [ ] **RH Printing (2003–2012)** — title and dates from her LinkedIn; the `summary` and
-      `bullets` are drafted to fit the title and await her wording. No document in the data
-      source covers these years.
+- [ ] **RH Printing (2003–2012)** — title and dates from her LinkedIn. No document in the data
+      source covers these nine years, so the entry is deliberately thin: two generic duties
+      that the title and the company imply. Her own account of the role would strengthen the
+      CV more than anything else on this list.
+- [ ] **Still current?** — the Everest documents date from 2015. The site says *April 2015 –
+      Present*; confirm she still holds the role.
 - [ ] **LinkedIn** — her headline says *Account Manager*; the site now says *Head of Sales
       Office* (2015–) and *Sales Representative* (2012–2015), as her documents do. Updating
       LinkedIn would make the two agree — a recruiter will see both.
