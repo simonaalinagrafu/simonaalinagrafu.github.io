@@ -37,9 +37,9 @@ export const en: ProfileText = {
       impact:
         'Head of the sales office, reporting to the Commercial Director: the sales agents’ reporting, the allocation of work among them and their client visits — alongside a client portfolio of my own.',
       aboutShort:
-        'Bucharest printing house — 30 years of experience, a team of over 140, offset and digital.',
+        'Tipografia Everest 2001 SRL — Bucharest printing house: 30 years of experience, a team of over 140, offset and digital.',
       about:
-        'Tipografia Everest, founded in Bucharest in 1994, is a printing house with three decades of experience and a team of over 140 people. It prints sheet-fed and web, offset and digital, with a full range of finishing, and processes some 400 tonnes of paper a month. Its work spans commercial printing, books and publishing, agendas and notebooks, labels and packaging, and art bindery, under ISO 9001 quality, ISO 14001 environmental and FSC chain-of-custody certification. In February 2012 it took over the RH Printing house.',
+        'Tipografia Everest (S.C. Tipografia Everest 2001 S.R.L.), founded in Bucharest in 1994 and based on Bulevardul Timișoara, is a printing house with three decades of experience and a team of over 140 people. It prints sheet-fed and web, offset and digital, with a full range of finishing, and processes some 400 tonnes of paper a month. Its work spans commercial printing, books and publishing, agendas and notebooks, labels and packaging, and art bindery, under ISO 9001 quality, ISO 14001 environmental and FSC chain-of-custody certification. In February 2012 it took over the RH Printing house.',
       summary:
         'Promoted in April 2015, three years after joining as a sales representative. The role adds the running of the sales office to the sales work itself: how the agents report, how work is allocated, and how sales works with production, dispatch and finance.',
       bullets: [
@@ -107,9 +107,9 @@ export const en: ProfileText = {
       impact:
         'Sold printed packaging to business clients — from the price offer and the contract to the order followed through production.',
       aboutShort:
-        'Printing company producing paper, cardboard and OPP-film packaging, in offset and rotogravure.',
+        'Rodata SA — printing company producing paper, cardboard and OPP-film packaging, in offset and rotogravure.',
       about:
-        'Rodata is a Bucharest manufacturer of labels and packaging for food and non-food products — labels for soft drinks and mineral water, snack packaging printed in rotogravure — with complete pre-press services, packaging consultancy, integrated production and logistics.',
+        'Rodata SA was, at the time, a printing company producing packaging from paper, cardboard and OPP film, in offset and rotogravure printing. Today it is a Bucharest manufacturer of labels and packaging for food and non-food products — labels for soft drinks and mineral water, snack packaging printed in rotogravure — with complete pre-press services, packaging consultancy, integrated production and logistics.',
       bullets: [
         'Offers and contracts: price offers, negotiation and contracts with business clients.',
         'Orders in production: following each order and contract through production.',
@@ -125,7 +125,9 @@ export const en: ProfileText = {
       location: 'Bucharest, Romania',
       impact:
         'Price offers, contracts and sales analysis for an importer, working with clients in Romania and suppliers abroad.',
-      aboutShort: 'Importer of LPG installations and equipment.',
+      aboutShort: 'Neweuropetrolgaz Exim SRL — importer of LPG installations and equipment.',
+      about:
+        'Neweuropetrolgaz Exim SRL — a Bucharest trading company importing installations and equipment for LPG (liquefied petroleum gas).',
       bullets: [
         'Offers and contracts: price offers and contract negotiation with clients.',
         'Foreign suppliers: the relationship with suppliers abroad and the banking documents for each import.',
@@ -141,7 +143,10 @@ export const en: ProfileText = {
       location: 'Bucharest, Romania',
       impact:
         'Drafted and implemented the company’s marketing and promotion policy, and ran a continuous study of the competition.',
-      aboutShort: 'Importer of interior-finishing products — floor and wall tiles, sanitary ware.',
+      aboutShort:
+        'Delta Distribution SA — importer of interior-finishing products: floor and wall tiles, sanitary ware.',
+      about:
+        'Delta Distribution SA — a Bucharest trading company importing products for interior finishing: floor tiles, wall tiles and sanitary ware.',
       bullets: [
         'Marketing policy: drafting and implementing the company’s marketing strategy, in particular its promotion policy — for the company’s image and for the products it sold.',
         'Competitor research: desk and field research on the competition, with periodic reports.',
@@ -155,7 +160,10 @@ export const en: ProfileText = {
       location: 'Bucharest, Romania',
       impact:
         'First role after university: accounting, banking and import–export documentation for a trading company — the financial grounding for the sales work that followed.',
-      aboutShort: 'Importer of materials for the furniture industry, and exporter of furniture.',
+      aboutShort:
+        'Euromobex SA — importer of materials for the furniture industry, and exporter of furniture.',
+      about:
+        'Euromobex SA — a Bucharest trading company importing raw materials for the furniture industry and exporting furniture.',
       bullets: [
         'Accounting: primary accounting operations.',
         'Banks and authorities: the relationship with financial institutions and the state administration.',

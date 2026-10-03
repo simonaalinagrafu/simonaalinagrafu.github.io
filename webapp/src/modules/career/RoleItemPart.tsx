@@ -33,9 +33,10 @@ export default function RoleItemPart({ role }: Props) {
           <span>{role.impact}</span>
         </p>
       )}
-      {role.about && (
+      {/* Company context: the long form where there is one, else the CV's one-liner. */}
+      {(role.about ?? role.aboutShort) && (
         <p className="text-faint border-line-strong mt-3 border-s-2 ps-3.5 text-sm leading-relaxed">
-          {role.about}
+          {role.about ?? role.aboutShort}
         </p>
       )}
       {role.summary && <p className="text-muted mt-3 leading-relaxed">{role.summary}</p>}

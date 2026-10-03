@@ -43,9 +43,9 @@ export const ro: ProfileText = {
       impact:
         'Conduc biroul de vânzări, în subordinea Directorului Comercial: raportarea agenților de vânzări, alocarea lucrărilor între ei și deplasările lor la clienți — alături de un portofoliu propriu de clienți.',
       aboutShort:
-        'Tipografie din București — 30 de ani de experiență, o echipă de peste 140 de oameni, offset și digital.',
+        'Tipografia Everest 2001 SRL — tipografie din București: 30 de ani de experiență, o echipă de peste 140 de oameni, offset și digital.',
       about:
-        'Tipografia Everest, fondată la București în 1994, este o tipografie cu trei decenii de experiență și o echipă de peste 140 de oameni. Tipărește în coală și în rolă, offset și digital, cu o gamă completă de finisări, și prelucrează circa 400 de tone de hârtie pe lună. Lucrările ei merg de la tipărituri comerciale, cărți și editură la agende și blocnotesuri, etichete și ambalaje și legătorie de artă, sub certificările ISO 9001 (calitate), ISO 14001 (mediu) și FSC (lanț de custodie). În februarie 2012 a preluat tipografia RH Printing.',
+        'Tipografia Everest (S.C. Tipografia Everest 2001 S.R.L.), fondată la București în 1994, cu sediul pe Bulevardul Timișoara, este o tipografie cu trei decenii de experiență și o echipă de peste 140 de oameni. Tipărește în coală și în rolă, offset și digital, cu o gamă completă de finisări, și prelucrează circa 400 de tone de hârtie pe lună. Lucrările ei merg de la tipărituri comerciale, cărți și editură la agende și blocnotesuri, etichete și ambalaje și legătorie de artă, sub certificările ISO 9001 (calitate), ISO 14001 (mediu) și FSC (lanț de custodie). În februarie 2012 a preluat tipografia RH Printing.',
       summary:
         'Promovare în aprilie 2015, la trei ani după venirea în tipografie ca reprezentant comercial. Rolul adaugă muncii de vânzări conducerea biroului însuși: cum raportează agenții, cum se alocă lucrările și cum lucrează vânzările cu producția, expediția și departamentul financiar.',
       bullets: [
@@ -119,9 +119,9 @@ export const ro: ProfileText = {
       impact:
         'Am vândut ambalaje tipărite către clienți business — de la oferta de preț și contract la comanda urmărită prin producție.',
       aboutShort:
-        'Societate tipografică producătoare de ambalaje din hârtie, carton și folie OPP, în tipar offset și rotogravură.',
+        'Rodata SA — societate tipografică producătoare de ambalaje din hârtie, carton și folie OPP, în tipar offset și rotogravură.',
       about:
-        'Rodata este un producător bucureștean de etichete și ambalaje alimentare și nealimentare — etichete pentru băuturi răcoritoare și apă minerală, ambalaje pentru snacks tipărite în rotogravură — cu servicii complete de pre-press, consultanță de ambalare, producție integrată și logistică.',
+        'Rodata SA era, la acea vreme, o societate tipografică ce executa ambalaje din hârtie, carton și folie OPP, în tipar offset și rotogravură. Astăzi este un producător bucureștean de etichete și ambalaje alimentare și nealimentare — etichete pentru băuturi răcoritoare și apă minerală, ambalaje pentru snacks tipărite în rotogravură — cu servicii complete de pre-press, consultanță de ambalare, producție integrată și logistică.',
       bullets: [
         'Oferte și contracte: ofertare, negociere și contracte cu clienți business.',
         'Comenzi în producție: urmărirea fiecărei comenzi și a fiecărui contract prin producție.',
@@ -137,7 +137,9 @@ export const ro: ProfileText = {
       location: 'București, România',
       impact:
         'Oferte de preț, contracte și analiza vânzărilor pentru un importator, în relație cu clienți din România și furnizori externi.',
-      aboutShort: 'Importator de instalații și echipamente pentru GPL.',
+      aboutShort: 'Neweuropetrolgaz Exim SRL — importator de instalații și echipamente pentru GPL.',
+      about:
+        'Neweuropetrolgaz Exim SRL — societate comercială din București, importator de instalații și echipamente pentru GPL (gaz petrolier lichefiat).',
       bullets: [
         'Oferte și contracte: ofertare și negocierea contractelor cu clienții.',
         'Furnizori externi: relația cu furnizorii externi de marfă și documentele bancare aferente fiecărui import.',
@@ -154,7 +156,9 @@ export const ro: ProfileText = {
       impact:
         'Am elaborat și implementat politica de marketing și de promovare a firmei și am realizat un studiu permanent al concurenței.',
       aboutShort:
-        'Importator de produse pentru amenajări interioare — gresie, faianță, obiecte sanitare.',
+        'Delta Distribution SA — importator de produse pentru amenajări interioare: gresie, faianță, obiecte sanitare.',
+      about:
+        'Delta Distribution SA — societate comercială din București, importator de produse pentru amenajări interioare: gresie, faianță și obiecte sanitare.',
       bullets: [
         'Politica de marketing: elaborarea și implementarea strategiei de marketing a firmei, în special a politicii de promovare — a imaginii firmei și a produselor comercializate.',
         'Studiul concurenței: cercetare de birou și de teren asupra concurenței, cu rapoarte periodice.',
@@ -168,7 +172,10 @@ export const ro: ProfileText = {
       location: 'București, România',
       impact:
         'Primul rol după facultate: contabilitate, relația cu băncile și documentație de import–export pentru o firmă de comerț — baza financiară a muncii de vânzări care a urmat.',
-      aboutShort: 'Importator de materiale pentru industria mobilei și exportator de mobilier.',
+      aboutShort:
+        'Euromobex SA — importator de materiale pentru industria mobilei și exportator de mobilier.',
+      about:
+        'Euromobex SA — societate comercială din București, importator de materiale pentru industria mobilei și exportator de produse de mobilier.',
       bullets: [
         'Contabilitate: operațiuni de contabilitate primară.',
         'Bănci și autorități: relația cu organismele financiar-bancare și cu administrația de stat.',
