@@ -4,16 +4,17 @@
 //
 // Translated prose lives in ro.ts / en.ts, keyed by the IDs below. Because the
 // text maps are typed `Record<RoleId, RoleText>`, a locale that forgets an
-// entry is a TYPE ERROR — `npm run check` (the CI gate) catches drift between
+// entry is a TYPE ERROR — the type check in `npm run build` (a CI gate) catches drift between
 // the two languages before it can ship.
 //
 // SOURCES. The six roles — employers, titles and dates — come from Simona's
 // LinkedIn profile (linkedin.com/in/simona-deliu-413a5b2b). The prose under
 // each role is drafted and awaits her own wording. Entries still marked
 // `placeholder: true` are the parts nothing confirmed yet: the three
-// achievements. Education is from LinkedIn too. index.ts warns about them at build time
-// and refuses to build under CI, so they cannot be deployed by accident;
-// bracketed text on the page marks the same thing.
+// achievements. Education is from LinkedIn too. The build warns about them
+// (`placeholders` below, read by vite.config.ts) and refuses to run under CI,
+// so they cannot be deployed by accident; bracketed text on the page marks the
+// same thing.
 
 export type RoleId = 'everest' | 'rh-printing' | 'rodata' | 'europetrolgaz' | 'delta' | 'euromobex';
 export type SkillId =
@@ -197,6 +198,14 @@ export const achievementShapes: AchievementShape[] = [
     tags: ['CRM', 'Pipeline', 'Forecasting'],
     placeholder: true,
   },
+];
+
+/** Every entry still marked as an imagined stand-in, named for the build's
+    placeholder guard (vite.config.ts). Empty once the CV is all real. */
+export const placeholders: string[] = [
+  ...roleShapes.filter((r) => r.placeholder).map((r) => `role "${r.id}"`),
+  ...educationShapes.filter((e) => e.placeholder).map((e) => `education "${e.id}"`),
+  ...achievementShapes.filter((a) => a.placeholder).map((a) => `achievement "${a.id}"`),
 ];
 
 // --- The per-locale contract ------------------------------------------------

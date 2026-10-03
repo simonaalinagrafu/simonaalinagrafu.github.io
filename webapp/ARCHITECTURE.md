@@ -1,22 +1,32 @@
 # Architecture
 
+All paths are relative to `webapp/`. The site is a Vite + React 19 single-page app,
+prerendered to static HTML at build time and hydrated in the browser. It was ported from
+Astro in October 2026, keeping the same layers, naming, content and design.
+
 ## Layers
 
 ```
 src/
 ├─ modules/            application layer
-│  ├─ shared/          cross-module parts, BaseLayout, nav data
-│  ├─ index/ career/ skills/ contact/ resume-print/ 404/
+│  ├─ shared/          cross-module parts, BaseLayout, nav data, page metadata, hooks
+│  ├─ index/ career/ skills/ contact/ resume-print/ version/ 404/
 │  └─ …                one directory per page
 ├─ data/profile/       content layer — the site's facts, per locale
 ├─ i18n/               UI strings and page copy, per locale
 ├─ fx/                 framework layer — portable to any project
-│  ├─ components/      fully prop/slot-driven parts (no site content)
-│  └─ lib/             pure functions (routing, locale paths)
+│  ├─ components/      fully prop-driven parts (no site content)
+│  └─ lib/             pure functions (routing, locale paths, cx)
 ├─ styles/global.css   design system (token mapping + Tailwind recipes)
 ├─ themes/             design tokens — one CSS file per look + themes.ts registry
-├─ routes.ts           central route manifest (URL → page module)
-└─ icons/              custom SVG icons for astro-icon (Lucide comes from npm)
+├─ routes.ts           central route manifest (URL → page id), plain data
+├─ routeTree.tsx       route objects built from the manifest (lazy pages)
+├─ router.tsx          the browser router
+├─ prerender.tsx       build-time rendering of a route to HTML
+└─ main.tsx            entry: fonts, global.css, hydrate or render
+index.html             the page shell: site-wide head tags, pre-paint scripts
+vite.config.ts         build constants, sitemap, 404 shell, redirect pages, placeholder guard
+scripts/prerender.ts   post-build step writing one HTML file per route into dist/
 ```
 
 **Dependency rule: imports point downward only.**
@@ -25,14 +35,20 @@ Modules may use `shared`, `@fx`, `@data`, `@i18n`, `@themes`, and design classes
 no theme files (theme tokens reach it only as CSS variables at runtime). A part
 in `fx/` that needs a word takes it as a prop.
 
-Path aliases (tsconfig): `@modules/*`, `@fx/*`, `@data/*`, `@i18n/*`, `@themes/*`,
-`@styles/*`.
+Path aliases (`tsconfig.app.json`, mirrored in `vite.config.ts`): `@modules/*`,
+`@fx/*`, `@data/*`, `@i18n/*`, `@themes/*`, `@styles/*`.
+
+A few files are also read by `vite.config.ts`, which runs in Node without the
+aliases: `routes.ts`, `fx/lib/i18n.ts`, `data/profile/shape.ts` and
+`themes/themes.ts`. Their imports are relative and keep the `.ts` extension.
 
 ## Naming
 
-- `XxxPage.astro` — a page (registered in `src/routes.ts`).
-- `XxxPart.astro` — a reusable component.
-- `XxxLayout.astro` — a layout (`modules/shared/BaseLayout.astro`).
+- `XxxPage.tsx` — a page (registered in `routes.ts` + `routeTree.tsx`).
+- `XxxPart.tsx` — a reusable component.
+- `XxxLayout.tsx` — a layout (`modules/shared/BaseLayout.tsx`).
+- `useXxx.ts` — a hook, in its own file (the `react-refresh` lint rule rejects
+  files that export both components and non-components).
 - A part used by one page lives in that page's module; used by several, in
   `modules/shared/`; usable by other projects, in `fx/components/`.
 
@@ -40,45 +56,103 @@ Path aliases (tsconfig): `@modules/*`, `@fx/*`, `@data/*`, `@i18n/*`, `@themes/*
 
 The site is bilingual: **Romanian is the default and lives at the root**
 (`/career`), English is prefixed (`/en/career`). One page component serves both
-and reads its own locale from the URL:
+and reads its own locale from the URL through `useLocale()`:
 
-```astro
-const locale = getLocale(Astro.url.pathname);
-const s = t(locale);                    // UI strings
+```tsx
+const { locale, s } = useLocale();                 // s = UI strings
 const { site, experience } = getProfile(locale);   // content
 ```
 
 `fx/lib/i18n.ts` holds the pure path helpers — `getLocale`, `localePath`,
-`stripLocale`, `switchLocalePath`. Astro's built-in `i18n` config is deliberately
-**not** used: with `prefixDefaultLocale: false` it generates no routes anyway,
-and it would force trailing slashes onto every href.
+`stripLocale`, `switchLocalePath`. `modules/shared/useLocale.ts` applies them to
+the current URL and also returns `path` (no trailing slash) and `basePath` (the
+path without its locale prefix, the same in every language).
 
 **Nothing drifts, because the type system won't let it.** Translations are stored
 as `Record<Locale, …>` and `Record<RoleId, …>`, so a missing language or a
-missing entry is a type error — `npm run check` is the CI gate that catches it.
+missing entry is a type error — the `tsc -b` in `npm run build` is the CI gate
+that catches it.
 
 Adding a locale: add it to `locales` in `fx/lib/i18n.ts`, add `src/i18n/<code>.ts`
 implementing `UiStrings`, add `src/data/profile/<code>.ts` implementing
-`ProfileText`, and register it in the two dictionary maps. Every page doubles
-automatically; the compiler lists whatever you still owe.
+`ProfileText`, register both in their dictionary maps, and add its sitemap tag to
+`sitemapLang` in `vite.config.ts`. Every route doubles automatically; the compiler
+lists whatever you still owe.
 
-Two things stay single-language on purpose: `/404`, because GitHub Pages serves
-one `404.html` for every unmatched path (it carries both languages in its body),
-and `design/og-image.html`.
+Two things stay single-language on purpose: the 404 page, because GitHub Pages
+serves one `404.html` for every unmatched path (it carries both languages in its
+body), and `design/og-image.html`. `/version` exists only at the root.
 
 ## Routing
 
-There is no `src/pages/`. `src/routes.ts` lists each page once, locale-free, and
-emits one route per locale; the `central-routes` integration in
-`astro.config.mjs` injects them. Two patterns pointing at one entrypoint is a
-supported Astro shape — collision detection compares patterns, not components.
+`src/routes.ts` is the single list of URLs. It lists each page once, locale-free
+— `path`, `page` id, whether it is in the sitemap, whether it renders `bare`
+(outside the shell: the print CV, `/version`) — and expands it to one route per
+locale. It has no React imports, so the build can read it too.
+`src/routeTree.tsx` maps each page id to a `React.lazy` import and builds the
+route objects, adding a catch-all `*` that renders the 404 page inside the shell;
+`src/router.tsx` turns them into `createBrowserRouter` for the browser and
+`src/prerender.tsx` into a static router for the build. Every page is its own
+chunk.
 
-Adding a page = new module directory + one line in `routes.ts`.
+Adding a page = new module directory + one entry in `pages` in `routes.ts` + one
+lazy import in `routeTree.tsx`.
 
-Redirects are **not** locale-expanded automatically — add the `/en/…` counterpart
-by hand in `astro.config.mjs`, and never inject a path that also has a redirect
-(duplicate routes are an error). Removed sections (`/projects`, `/articles`,
-`/ideas`) redirect to their locale's home.
+URLs have one form: **no trailing slash** (`/career`, `/en/career`, and `/en` for
+the English home). Internal links use `<Link>` from React Router with that form;
+`PageMetaPart` normalises the canonical URL to it whichever way the page was
+reached. Both forms are served (see below), so a link to `/career/` still works.
+
+Redirects: sections that once existed (`/resume` → `/career`, `/ideas`,
+`/projects`, `/articles` → home) are listed once, locale-free, in `redirects` in
+`routes.ts`. The build writes a small meta-refresh page for each, in every
+locale. A path there must never also be a page.
+
+## Head metadata
+
+`modules/shared/PageMetaPart.tsx` renders, for every page: `<title>`,
+description, canonical, the hreflang alternates for every locale plus
+`x-default`, and `og:title` / `og:description` / `og:url` / `og:locale`. React 19
+hoists them into `<head>`. With `noindex` (the print CV, the 404, `/version`) it
+adds `robots: noindex` and leaves out the alternates. It also sets
+`<html lang>` on client-side navigation.
+
+Site-wide, page-independent tags (author, theme-color, icon, Open Graph image,
+`og:type`, `og:site_name`, Twitter card) and the two pre-paint scripts live in
+`index.html`.
+
+## Prerendering and SEO
+
+A plain SPA ships an empty `<div id="root">`, so crawlers and link-preview bots
+that do not run JavaScript would see nothing, and GitHub Pages would answer
+every deep link with its 404 page. The build closes that gap:
+
+1. `vite build` bundles the app. The `static-site-files` plugin in
+   `vite.config.ts` writes `sitemap.xml` (every page flagged `sitemap`, each with
+   its language twins as `xhtml:link` alternates), copies `index.html` to
+   `404.html`, and writes the redirect pages.
+2. `scripts/prerender.ts` loads the app in Node through Vite, renders every
+   route with React's static `prerender` and React Router's static handler, and
+   writes the result into `dist/`: the page markup inside `#root`, the page's
+   head tags in `<head>`, the right `<html lang>`, and preload links for the
+   two fonts. Each path is written twice, `career.html` and
+   `career/index.html`, so `/career` and `/career/` both answer with a 200.
+   `prerender.tsx` passes `progressiveChunkSize: Infinity` — without it React
+   moves any large Suspense boundary to a hidden block at the end of the body,
+   and `<main>` would be empty to anything that does not run scripts.
+3. In the browser, `main.tsx` hydrates the prerendered markup. `404.html` stays
+   the empty shell, which renders from scratch.
+
+**Hydration rule:** the first client render must match the prerendered HTML.
+State that differs per visitor (the saved theme) goes through
+`useSyncExternalStore` with a server snapshot (`useTheme.ts`), so the page
+hydrates as rendered and then updates. Values that change over time are fixed
+at build time instead of read at render: `__BUILD_YEAR__` (the footer, the
+Career figures) and `__HAS_PORTRAIT__` (the hero), both defined in
+`vite.config.ts` and declared in `src/env.d.ts`. Anything new that reads
+`localStorage`, the window or the clock while rendering needs the same care.
+
+`public/robots.txt` allows everything and points at `sitemap.xml`.
 
 ## Content
 
@@ -86,15 +160,24 @@ by hand in `astro.config.mjs`, and never inject a path that also has a redirect
 
 - `shape.ts` — what exists and in what order: role IDs, company names, focus
   areas, icons, bullet-count flags, contact details. The same in every language.
-  Entries that are not yet confirmed carry `placeholder: true`.
+  Entries that are not yet confirmed carry `placeholder: true`, and
+  `placeholders` lists them for the build's guard: a warning locally, a hard
+  failure under `CI` (override: `PLACEHOLDERS_OK=1`).
 - `ro.ts` / `en.ts` — the prose, keyed by those IDs.
-- `index.ts` — `getProfile(locale)` merges the two, and guards the placeholders:
-  a warning locally, a hard failure under `CI` (override: `PLACEHOLDERS_OK=1`).
+- `index.ts` — `getProfile(locale)` merges the two.
 
 Icons travel with the thing they describe rather than in a parallel array, so
 they cannot fall out of step when the order changes. A role's `focus` list is
 its areas of responsibility (chips on the Career page, a "Focus" line on the
 PDF); `achievements[0]` is the "Key achievement" the PDF prints.
+
+## Icons
+
+Content files name icons as `'lucide:<kebab-name>'`. `fx/components/IconPart.tsx`
+resolves those to `lucide-react` components from an explicit registry, so only
+the icons in use are bundled. LinkedIn is drawn inline there as `'linkedin'`
+(Lucide no longer ships brand icons). Adding an icon = one import + one registry
+line.
 
 ## Styling ladder
 
@@ -107,12 +190,14 @@ PDF); `achievements[0]` is the "Key achievement" the PDF prints.
    `.nav-pill`, `.menu-item`, `.pager-link`, `.icon-tile`, `.tip`, `.lede`, `.figure` (serif numeral),
    `.rule` (kicker on a hairline), `.band` (the accent panel), `.portrait`…
    Extract a recipe only when a pattern repeats or has a clear name.
-3. **Inline utilities** — everything else, directly in the markup.
+3. **Inline utilities** — everything else, directly in the markup. Conditional
+   classes go through `cx()` from `@fx/lib/cx`.
 4. **`style=` attribute** — only for data-driven values Tailwind cannot know
-   (e.g. `SegmentBarPart` widths, theme swatches).
-5. **`<style>` blocks in components — never.** The one non-Tailwind stylesheet
-   is `modules/resume-print/resume-print.css` (the PDF is deliberately
-   theme-independent print CSS).
+   (e.g. `SegmentBarPart` widths, theme swatches, the masthead's slant).
+5. **Component stylesheets — only one.** `modules/resume-print/resume-print.css`
+   is deliberately theme-independent print CSS. Every rule in it is scoped
+   under `.resume-print`: in a single-page app a stylesheet stays loaded after
+   you navigate away, so an unscoped rule would restyle the rest of the site.
 
 ## Design voice
 
@@ -121,9 +206,10 @@ section device, a serif display face (Fraunces) over Inter, and hairlines
 instead of boxes wherever a box is not doing work. Numerals are set in the
 serif (`.figure`); the only filled accent surface is the closing `.band`.
 
-The hero is built around a portrait (`fx/components/PortraitPart.astro`).
-`IndexPage` checks for `public/portrait.jpg` at build time and passes it in;
-without the file, the frame holds the space with initials.
+The hero is built around a portrait (`fx/components/PortraitPart.tsx`).
+`vite.config.ts` checks for `public/portrait.jpg` at build time
+(`__HAS_PORTRAIT__`) and `IndexPage` passes it in; without the file, the frame
+holds the space with initials.
 
 ## Themes
 
@@ -137,28 +223,31 @@ Adding a theme: create `src/themes/<name>.css` implementing the token
 contract, import it in `themes/index.css`, add an entry in `themes.ts`, and add
 its label to every `src/i18n/*.ts` (the `ThemeId` union makes that a type error
 if you forget). It then appears in the header dropdown automatically. Selection
-persists in `localStorage` and is applied pre-paint in `BaseLayout`'s head
-script; without a selection, cream is the default. Removing a theme is safe:
-the head script drops a stored id that is no longer registered, so anyone who
-had picked it lands on cream rather than on no theme at all.
+persists in `localStorage` (`useTheme`) and is applied pre-paint by the first
+inline script in `index.html`; without a selection, cream is the default.
+Removing a theme is safe: the build injects the registered ids into that script
+(the `theme-ids` plugin in `vite.config.ts`), and it drops a stored id that is
+no longer registered, so anyone who had picked it lands on cream rather than on
+no theme at all.
 
-`modules/shared/nav.ts` is the single list of pages, and three parts read it:
-the desktop pills, the phone dropdown, and `PagerPart` — a phone-only prev/next
-strip under the menu, so the site can be walked in order without opening the
-dropdown each time. The pager finds its own position with `isActive`, which
-means a page outside that list (the 404, the print CV) simply renders no pager,
-and the ends of the sequence stop rather than wrap.
+`modules/shared/nav.ts` is the single list of pages, and four parts read it:
+the desktop pills, the phone dropdown, the footer, and `PagerPart` — a
+phone-only prev/next strip under the menu, so the site can be walked in order
+without opening the dropdown each time. The pager finds its own position with
+`isActive`, which means a page outside that list (the 404) simply renders no
+pager, and the ends of the sequence stop rather than wrap. The phone dropdown
+belongs to the page it was opened on, so any navigation closes it.
 
 The language dropdown works differently on purpose: its items are real links, so
-switching needs no JavaScript and both trees stay crawlable. A chosen language is
-remembered and honoured only for a later visit to the bare root — deep links
-always render the language they name.
+both trees stay crawlable. A chosen language is remembered and honoured only for
+a later visit to the bare root (the second inline script in `index.html`) — deep
+links always render the language they name.
 
 ## Generated files
 
-`public/cv-ro.pdf` and `public/cv-en.pdf` are printed from the `/resume-print/`
+`public/cv-ro.pdf` and `public/cv-en.pdf` are printed from the `/resume-print`
 pages, and `public/og.png` from `design/og-image.html`. `public/favicon.svg` is
-hand-written. The masthead banner above the navigation is `modules/shared/MastheadPart.astro`,
+hand-written. The masthead banner above the navigation is `modules/shared/MastheadPart.tsx`,
 composed from a right-anchored accent panel, an SVG bar mark and live HTML text, all in theme
 tokens — the band's height and its type sizes are set per breakpoint rather than scaling with
 the viewport, so the proportions hold at every width. `public/portrait.jpg` is *not* generated — it is the one asset

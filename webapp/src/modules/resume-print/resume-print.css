@@ -1,16 +1,25 @@
 /* Print stylesheet for the CV PDF (A4). Standalone by design — the PDF must
-   keep a fixed, print-tuned look independent of the site's themes.
+   keep a fixed, print-tuned look independent of the site's themes, so every
+   rule is scoped under .resume-print and uses its own palette. (In a
+   single-page app a stylesheet stays loaded after you navigate away, so an
+   unscoped rule here would restyle the rest of the site.)
 
    Set for reading, not for density: 11pt body, generous margins, serif
    headings in the site's burgundy, and room to run to three pages. */
-:root {
+.resume-print {
   --ink: #2b2724;
   --muted: #5a524b;
   --faint: #857a70;
   --accent: #7a1f2b;
   --line: #e2dbcf;
+
+  font-family: 'Segoe UI', ui-sans-serif, system-ui, Arial, sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.5;
 }
-* {
+.resume-print,
+.resume-print * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -19,51 +28,49 @@
   size: A4;
   margin: 18mm 18mm 20mm;
 }
-body {
-  font-family: 'Segoe UI', ui-sans-serif, system-ui, Arial, sans-serif;
-  color: var(--ink);
-  font-size: 11pt;
-  line-height: 1.5;
-}
-h1,
-h2,
-h3 {
+.resume-print h1,
+.resume-print h2,
+.resume-print h3 {
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: 600;
 }
-a {
+.resume-print a {
   color: var(--accent);
   text-decoration: none;
 }
+/* Tailwind's reset (global.css) strips list markers; the CV's lists keep theirs. */
+.resume-print ul {
+  list-style: disc;
+}
 
 /* ---- Header ------------------------------------------------------------ */
-header {
+.resume-print header {
   border-bottom: 3px solid var(--accent);
   padding-bottom: 14px;
   margin-bottom: 6px;
 }
-h1 {
+.resume-print h1 {
   font-size: 27pt;
   line-height: 1.1;
   letter-spacing: -0.2px;
 }
-.subtitle {
+.resume-print .subtitle {
   font-size: 12.5pt;
   color: var(--accent);
   margin-top: 5px;
 }
-.contact {
+.resume-print .contact {
   margin-top: 9px;
   color: var(--muted);
   font-size: 9.5pt;
 }
-.contact span + span::before {
+.resume-print .contact span + span::before {
   content: ' · ';
   color: var(--faint);
 }
 
 /* ---- Sections ---------------------------------------------------------- */
-h2 {
+.resume-print h2 {
   font-size: 12pt;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -75,18 +82,18 @@ h2 {
 }
 
 /* ---- Summary ----------------------------------------------------------- */
-.highlights {
+.resume-print .highlights {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px 26px;
   margin-top: 10px;
 }
-.highlights div {
+.resume-print .highlights div {
   position: relative;
   padding-left: 15px;
   font-size: 10.5pt;
 }
-.highlights div::before {
+.resume-print .highlights div::before {
   content: '';
   position: absolute;
   left: 0;
@@ -98,70 +105,70 @@ h2 {
 }
 
 /* ---- Skills ------------------------------------------------------------ */
-.skills {
+.resume-print .skills {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9px 26px;
 }
-.skills p {
+.resume-print .skills p {
   font-size: 10pt;
   line-height: 1.45;
   page-break-inside: avoid;
 }
-.skills b {
+.resume-print .skills b {
   color: var(--ink);
 }
 
 /* ---- Experience -------------------------------------------------------- */
-.role {
+.resume-print .role {
   margin-bottom: 18px;
   page-break-inside: avoid;
 }
-.role.allow-break {
+.resume-print .role.allow-break {
   page-break-inside: auto;
 }
-.role-head {
+.resume-print .role-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
   page-break-after: avoid;
 }
-.role-head h3 {
+.resume-print .role-head h3 {
   font-size: 12.5pt;
   line-height: 1.25;
 }
-.role-head .period {
+.resume-print .role-head .period {
   color: var(--muted);
   font-size: 9.5pt;
   white-space: nowrap;
 }
-.role .about {
+.resume-print .role .about {
   margin-top: 2px;
   color: var(--muted);
   font-size: 9.8pt;
 }
-.role .summary {
+.resume-print .role .summary {
   margin-top: 6px;
   color: var(--ink);
 }
-.role ul {
+.resume-print .role ul {
   margin: 7px 0 0 17px;
 }
-.role li {
+.resume-print .role li {
   margin-bottom: 4px;
   font-size: 10.5pt;
 }
 /* The focus line for a role: given a rule and a label, because a recruiter
    scanning for an area should find it without reading prose. */
-.tech {
+.resume-print .tech {
   margin-top: 8px;
   padding-top: 6px;
   border-top: 1px solid var(--line);
   color: var(--ink);
   font-size: 9.5pt;
 }
-.tech-label {
+.resume-print .tech-label {
   display: inline-block;
   margin-right: 9px;
   color: var(--accent);
@@ -172,21 +179,21 @@ h2 {
 }
 
 /* ---- Education, other -------------------------------------------------- */
-.edu {
+.resume-print .edu {
   margin-bottom: 8px;
   font-size: 10.5pt;
 }
-.edu .period {
+.resume-print .edu .period {
   color: var(--muted);
   font-size: 9.5pt;
 }
-.extras {
+.resume-print .extras {
   font-size: 10.5pt;
   color: var(--ink);
 }
 
 /* Contact links stay clickable in the PDF and read as links. */
-.contact a {
+.resume-print .contact a {
   color: var(--accent);
 }
 
@@ -194,15 +201,21 @@ h2 {
    preview in a browser looks like the PDF. Chrome's print engine ignores this
    and uses @page. */
 @media screen {
-  html {
+  body:has(.resume-print) {
     background: #e9e4dc;
   }
-  body {
+  .resume-print {
     width: 210mm;
     min-height: 297mm;
     margin: 24px auto;
     padding: 18mm 18mm 20mm;
     background: #ffffff;
     box-shadow: 0 2px 18px rgb(0 0 0 / 0.12);
+  }
+}
+/* In print, the site's themed page ground must not come through. */
+@media print {
+  body:has(.resume-print) {
+    background: #ffffff;
   }
 }

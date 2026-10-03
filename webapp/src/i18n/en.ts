@@ -198,6 +198,12 @@ export const en: UiStrings = {
     back: '← Back home',
   },
 
+  error: {
+    metaTitle: 'Something went wrong',
+    message: 'This page could not be loaded.',
+    reload: 'Reload the page',
+  },
+
   resume: {
     summary: 'Summary',
     skills: 'Skills',

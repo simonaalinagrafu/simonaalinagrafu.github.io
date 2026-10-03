@@ -40,35 +40,7 @@ export interface Profile {
 
 const texts: Record<Locale, ProfileText> = { ro, en };
 
-// --- Placeholder guard ------------------------------------------------------
-// Imagined stand-in entries (see shape.ts) must never reach the live site.
-// Locally: one warning line per build. Under CI (GitHub Actions sets CI=true):
-// refuse to build, unless PLACEHOLDERS_OK=1 is set on purpose.
-const placeholders = [
-  ...roleShapes.filter((r) => r.placeholder).map((r) => `role "${r.id}"`),
-  ...educationShapes.filter((e) => e.placeholder).map((e) => `education "${e.id}"`),
-  ...achievementShapes.filter((a) => a.placeholder).map((a) => `achievement "${a.id}"`),
-];
-
-let warned = false;
-function guardPlaceholders() {
-  if (placeholders.length === 0 || warned) return;
-  warned = true;
-  const list = placeholders.join(', ');
-  if (process.env.CI && !process.env.PLACEHOLDERS_OK) {
-    throw new Error(
-      `Refusing to build for deployment: profile still contains imagined placeholder ` +
-        `content (${list}). Replace it with real data in src/data/profile/, or set ` +
-        `PLACEHOLDERS_OK=1 to override deliberately.`,
-    );
-  }
-  console.warn(
-    `\n[profile] ${placeholders.length} placeholder entries still in the data: ${list}\n`,
-  );
-}
-
 export function getProfile(locale: Locale): Profile {
-  guardPlaceholders();
   const text = texts[locale];
   return {
     site: { ...siteFacts, ...text.site },

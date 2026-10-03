@@ -2,7 +2,8 @@
 // so this stays inside fx/'s rule of importing nothing above it.
 //
 // Romanian is the default and lives at the root (/career); every other locale
-// is prefixed (/en/career).
+// is prefixed (/en/career). Paths carry no trailing slash, so a locale's home
+// is /en, not /en/.
 
 export const locales = ['ro', 'en'] as const;
 export type Locale = (typeof locales)[number];
@@ -23,14 +24,10 @@ export const stripLocale = (pathname: string): string => {
   return pathname.slice(locale.length + 1) || '/';
 };
 
-/**
- * Put a locale-free path into a locale. Preserves the caller's trailing-slash
- * form, because route patterns and hrefs differ on it: patterns are written
- * '/career', nav hrefs '/career/'.
- */
+/** Put a locale-free path into a locale. '/career' → '/en/career'; '/' → '/en'. */
 export const localePath = (locale: Locale, path: string): string => {
   if (locale === defaultLocale) return path;
-  return path === '/' ? `/${locale}/` : `/${locale}${path}`;
+  return path === '/' ? `/${locale}` : `/${locale}${path}`;
 };
 
 /** The current page in another language — what the language dropdown links to. */

@@ -2,10 +2,10 @@
 //
 //   npm run build && npm run cv
 //
-// The /resume-print/ pages render entirely from src/data/profile/, so this is
+// The /resume-print pages render entirely from src/data/profile/, so this is
 // the step that keeps public/cv-*.pdf in step with the data. It prints from
-// `astro preview` rather than `astro dev` on purpose: the dev server injects
-// the Astro dev toolbar into the page.
+// `vite preview` (the built, prerendered pages) rather than the dev server, so
+// the PDF is exactly what the build produced.
 //
 // Override the browser with CHROME_PATH if yours lives elsewhere.
 import { spawn, spawnSync } from 'node:child_process';
@@ -34,16 +34,16 @@ if (!chrome) {
 
 // One entry per locale: the page to print and the file it becomes.
 const TARGETS = [
-  { url: `${ORIGIN}/resume-print/`, out: join(root, 'public', 'cv-ro.pdf'), label: 'ro' },
-  { url: `${ORIGIN}/en/resume-print/`, out: join(root, 'public', 'cv-en.pdf'), label: 'en' },
+  { url: `${ORIGIN}/resume-print`, out: join(root, 'public', 'cv-ro.pdf'), label: 'ro' },
+  { url: `${ORIGIN}/en/resume-print`, out: join(root, 'public', 'cv-en.pdf'), label: 'en' },
 ];
 
-if (!existsSync(join(root, 'dist', 'resume-print', 'index.html'))) {
+if (!existsSync(join(root, 'dist', 'resume-print.html'))) {
   console.error('No build found. Run `npm run build` first.');
   process.exit(1);
 }
 
-const preview = spawn('npx', ['astro', 'preview', '--port', PORT], {
+const preview = spawn('npx', ['vite', 'preview', '--port', PORT, '--strictPort'], {
   cwd: root,
   stdio: 'ignore',
   shell: true,
@@ -62,7 +62,7 @@ async function waitForServer(timeoutMs = 30_000) {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     try {
-      const res = await fetch(`${ORIGIN}/resume-print/`);
+      const res = await fetch(`${ORIGIN}/resume-print`);
       if (res.ok) return;
     } catch {
       // not up yet
@@ -82,6 +82,9 @@ try {
         '--headless=new',
         '--disable-gpu',
         '--no-pdf-header-footer',
+        // Let the page settle (scripts, hydration) before printing, so the
+        // output is the same run to run.
+        '--virtual-time-budget=10000',
         `--print-to-pdf=${out}`,
         url,
       ],

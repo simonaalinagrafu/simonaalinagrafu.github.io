@@ -10,7 +10,7 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   { id: 'home', href: '/', icon: 'lucide:user' },
-  { id: 'career', href: '/career/', icon: 'lucide:briefcase' },
-  { id: 'skills', href: '/skills/', icon: 'lucide:wrench' },
-  { id: 'contact', href: '/contact/', icon: 'lucide:at-sign' },
+  { id: 'career', href: '/career', icon: 'lucide:briefcase' },
+  { id: 'skills', href: '/skills', icon: 'lucide:wrench' },
+  { id: 'contact', href: '/contact', icon: 'lucide:at-sign' },
 ];

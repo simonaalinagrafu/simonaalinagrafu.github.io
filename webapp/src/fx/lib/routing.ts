@@ -3,3 +3,6 @@
 /** True when `path` is the given href or lives under it ('/' matches only itself). */
 export const isActive = (href: string, path: string) =>
   href === '/' ? path === '/' : path.startsWith(href.replace(/\/$/, ''));
+
+/** One form per URL: no trailing slash, except the root. '/career/' → '/career'. */
+export const trimSlash = (path: string) => (path.length > 1 ? path.replace(/\/+$/, '') : path);

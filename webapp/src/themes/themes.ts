@@ -2,7 +2,7 @@
 // creating its .css file (see index.css for the token contract), importing it
 // there, adding an entry here, and adding its label to both i18n dictionaries
 // (the ThemeId union makes that last step a type error if you forget).
-import type { ThemeId } from '@i18n/types';
+import type { ThemeId } from '../i18n/types.ts';
 
 export interface ThemeDef {
   id: ThemeId;

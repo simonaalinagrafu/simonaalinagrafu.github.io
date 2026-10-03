@@ -9,11 +9,15 @@ Contact.
 
 ## Stack
 
-- [Astro](https://astro.build) — static site generator
-- [Tailwind CSS v4](https://tailwindcss.com) — styling
+- [Vite](https://vite.dev) + [React 19](https://react.dev) + TypeScript — a single-page app,
+  prerendered to static HTML at build time so every page is real HTML for crawlers and link
+  previews
+- [React Router](https://reactrouter.com) — client-side routing
+- [Tailwind CSS v4](https://tailwindcss.com) — styling, with a themeable token layer
+- [Lucide](https://lucide.dev) — icons
 - Deployed to GitHub Pages via GitHub Actions on every push to `main`
 
-The whole Astro project lives in **`webapp/`**; only this README, `.gitignore` and the
+The whole site lives in **`webapp/`**; only this README, `.gitignore` and the
 deploy workflow (`.github/workflows/deploy.yml`, which GitHub requires at the repo root) sit
 outside it. Paths below are relative to `webapp/`.
 
@@ -22,16 +26,22 @@ first-time setup and the list of content that is still placeholder.
 
 ## Development
 
+Requires **Node.js 24**, the same major the deploy workflow uses.
+
 ```sh
 cd webapp
-npm install
-npm run dev      # local dev server at http://localhost:4321
-npm run build    # production build to ./dist
-npm run preview  # preview the production build
-npm run check    # type-check — also the CI gate
+npm ci
+npm run dev      # dev server with hot reload at http://localhost:5173
+npm run build    # tsc -b, vite build, then prerender every route into ./dist
+npm run preview  # serve ./dist at http://localhost:4173 — what GitHub Pages will serve
+npm run lint     # eslint
+npm run check    # type-check only (the build runs it too)
 npm run cv       # regenerate both CV PDFs (after npm run build)
 npm run contrast # WCAG AA check over every theme's tokens
 ```
+
+Before pushing, run `npm run lint && npm run build` — the deploy workflow runs the same two
+steps and does not deploy if either fails.
 
 ## Version
 
@@ -46,10 +56,10 @@ Everything about Simona lives in `src/data/profile/`:
 - `shape.ts` — structure that is the same in every language: role IDs, company names,
   focus areas, icons, and the `placeholder: true` marker on entries that are not yet real
 - `ro.ts` / `en.ts` — the prose for each language, keyed by those IDs
-- `index.ts` — `getProfile(locale)`, plus the placeholder guard (below)
+- `index.ts` — `getProfile(locale)`, which merges the two
 
 It feeds the About, Career and Skills pages and two print-optimized pages at
-`/resume-print/` and `/en/resume-print/` (excluded from the sitemap and marked noindex).
+`/resume-print` and `/en/resume-print` (excluded from the sitemap and marked noindex).
 
 The downloadable PDFs at `public/cv-ro.pdf` and `public/cv-en.pdf` are printed from those
 pages. **They are not rebuilt by `npm run build`** — regenerate them after editing the
@@ -60,7 +70,7 @@ npm run build
 npm run cv
 ```
 
-That prints both, using `astro preview` and headless Chrome. Set `CHROME_PATH` if your
+That prints both, using `vite preview` and headless Chrome. Set `CHROME_PATH` if your
 browser is not in the default location.
 
 ### Portrait
@@ -83,6 +93,6 @@ company or school name in `shape.ts`, and delete the `placeholder: true` line.
 2. Add `src/i18n/<code>.ts` implementing `UiStrings`, and register it in `src/i18n/index.ts`.
 3. Add `src/data/profile/<code>.ts` implementing `ProfileText`, and register it in
    `src/data/profile/index.ts`.
-4. Add the locale to the sitemap `i18n` option in `astro.config.mjs`.
+4. Add its region-qualified tag to `sitemapLang` in `vite.config.ts`.
 
 Every route doubles automatically. `npm run check` lists whatever is still missing.

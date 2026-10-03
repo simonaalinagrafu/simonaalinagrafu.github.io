@@ -128,6 +128,13 @@ export interface UiStrings {
     back: string;
   };
 
+  /** What the router shows when a page fails to render or load. */
+  error: {
+    metaTitle: string;
+    message: string;
+    reload: string;
+  };
+
   resume: {
     summary: string;
     skills: string;

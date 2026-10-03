@@ -202,6 +202,12 @@ export const ro: UiStrings = {
     back: '← Înapoi la pagina principală',
   },
 
+  error: {
+    metaTitle: 'Ceva n-a mers bine',
+    message: 'Această pagină nu a putut fi încărcată.',
+    reload: 'Reîncarcă pagina',
+  },
+
   resume: {
     summary: 'Sumar',
     skills: 'Competențe',

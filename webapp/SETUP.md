@@ -16,7 +16,7 @@ See `ARCHITECTURE.md` for how the code is organised and `README.md` for day-to-d
 | Visibility | Public (required — org Pages sites need a public repo on the free plan) |
 | Default branch | `main` |
 | Live URL | https://simonaalinagrafu.github.io |
-| Stack | Astro 5 (static) + Tailwind CSS v4 |
+| Stack | Vite 8 + React 19 + React Router 8 + TypeScript 6 + Tailwind CSS v4 — a single-page app, prerendered to static HTML at build time |
 | Deploy | GitHub Actions → GitHub Pages, on every push to `main` |
 
 The repo name **must** stay exactly `simonaalinagrafu.github.io` — that is what makes GitHub
@@ -32,7 +32,7 @@ independent of the site's content identity (Simona Alina Grafu).
 
 | Tool | Version used | Notes |
 |---|---|---|
-| Node.js | v24.18.1 | Any Node 18+ works; there is no `engines` field pinning it |
+| Node.js | v24.18.1 | Node 24, the same major CI uses. The build runs `scripts/prerender.ts` with plain `node`, which relies on Node's built-in TypeScript support |
 | npm | 11.16.0 | Ships with Node |
 | Git | 2.53.0 | |
 | Google Chrome | any recent | **Only** needed to regenerate the CV PDFs and `og.png` (§6) |
@@ -54,27 +54,31 @@ cd simonaalinagrafu.github.io/webapp
 npm ci
 ```
 
-`npm ci` prints `allow-scripts` warnings for `esbuild` and `sharp`. That is expected and
-harmless — both are optional postinstall steps and the build works without approving them.
-
 Then:
 
 ```sh
-npm run dev        # dev server at http://localhost:4321
-npm run check      # astro check — type-checks .astro/.ts (must be 0 errors)
-npm run build      # static build to ./dist
-npm run preview    # serve ./dist, to see exactly what deploys
+npm run dev        # dev server with hot reload at http://localhost:5173
+npm run lint       # eslint — a CI gate
+npm run check      # tsc -b — type-check only (the build runs it too)
+npm run build      # tsc -b, vite build, then prerender every route into ./dist
+npm run preview    # serve ./dist at http://localhost:4173, to see exactly what deploys
 npm run cv         # regenerate both CV PDFs (needs a build first)
 npm run contrast   # WCAG AA check over every theme's tokens
 npm run format     # prettier over src/
 ```
 
-**Expected clean state:** `npm run check` → *0 errors, 0 warnings, 0 hints*;
-`npm run build` → *11 page(s) built* (About, Career, Skills, Contact and the CV print page
-in Romanian and English, plus `/404`, which is single-language) and **one warning line**
-listing the placeholder entries (§7).
+**Expected clean state:** `npm run lint` prints nothing; `npm run build` ends with
+**11 `prerendered` lines** (Home, Career, Skills, Contact and the CV print page in Romanian
+and English, plus `/version`) and prints **one warning line** listing the placeholder entries
+(§7). The 404 is not prerendered: `dist/404.html` is the bare app shell, and the page renders
+in the browser.
 
-> If port 4321 is busy, Astro picks the next free port — or pass one explicitly:
+The dev server serves the app only. The prerendered HTML, `sitemap.xml`, `404.html` and the
+redirect pages come from the build, so use `build` + `preview` to check what GitHub Pages will
+actually serve. (Unknown URLs behave differently there: `preview` answers them with the home
+page, GitHub Pages with `404.html`.)
+
+> If a port is busy, Vite picks the next free one — or pass one explicitly:
 > `npm run preview -- --port 4322`.
 
 ---
@@ -103,7 +107,8 @@ curl -s https://simonaalinagrafu.github.io | grep -o "<title>[^<]*</title>"
 
 - **"Refusing to build for deployment: … placeholder content"** — expected while §7 is not
   empty. That is the guard doing its job; replace the placeholders, don't override it.
-- **A type error in `npm run check`** — the same gate you run locally; fix and push.
+- **A lint error, or a type error in the build** — the same gates you run locally
+  (`npm run lint`, `npm run build`); fix and push.
 - Anything else, check one level up at **organization → Settings**, since the repo is owned by
   an organization: **Actions → General** (Actions permissions, workflow permissions) and
   **Pages** (who may publish, at what visibility).
@@ -112,21 +117,20 @@ curl -s https://simonaalinagrafu.github.io | grep -o "<title>[^<]*</title>"
 
 `.github/workflows/deploy.yml`, triggered on push to `main` and via `workflow_dispatch`:
 
-- **build** — checkout → `npm ci` → `npm run check`, both run inside `webapp/` (type-check
-  gate: a type error fails the deploy) → `withastro/action@v3` with `path: webapp`, which
-  builds and uploads the Pages artifact.
+- **build** — checkout → Node 24 (with the npm cache) → `npm ci` → `npm run lint` →
+  `npm run build`, all inside `webapp/`. A lint or type error fails the run and nothing
+  deploys. Then `actions/configure-pages` and `actions/upload-pages-artifact` package
+  `webapp/dist` as the Pages artifact.
 - **deploy** — `actions/deploy-pages@v4` publishes that artifact to the `github-pages`
   environment.
 
-Note that `withastro/action@v3` runs its own install and build, so dependencies are installed
-twice. It is redundant but harmless — the explicit `npm ci` exists so `npm run check` can run
-as a gate before the action takes over.
+The build output is never committed; `dist/` exists only on the runner and on your machine.
 
 ---
 
 ## 5. Pushing
 
-`.gitignore` already covers `node_modules/`, `dist/`, `.astro/`.
+`.gitignore` already covers `node_modules/` and `dist/`.
 
 ```sh
 git add -A
@@ -148,18 +152,19 @@ the data behind them changes.
 
 ### The CV PDFs — after any edit to `src/data/profile/`
 
-Both are printed from the `/resume-print/` and `/en/resume-print/` pages, which render
-entirely from `src/data/profile/` and are `noindex` + excluded from the sitemap.
+Both are printed from the `/resume-print` and `/en/resume-print` pages, which render
+entirely from `src/data/profile/`, outside the site shell, and are `noindex` + excluded from
+the sitemap.
 
 ```sh
 npm run build
 npm run cv
 ```
 
-`scripts/print-cv.mjs` starts `astro preview`, prints both PDFs with headless Chrome, and
-shuts the server down. It uses `preview` rather than `dev` deliberately — the dev server
-injects the Astro dev toolbar into the page. Set `CHROME_PATH` if Chrome is not at one of
-the default locations.
+`scripts/print-cv.mjs` starts `vite preview` on port 4322, prints both PDFs with headless
+Chrome, and shuts the server down. It prints the built, prerendered pages rather than the dev
+server's, so the PDF is exactly what the build produced. Set `CHROME_PATH` if Chrome is not at
+one of the default locations.
 
 Both CVs currently run to **three pages**. If you want them at two, the `pdfBullets` field
 on a role caps how many bullets the PDF shows while the Career page keeps full detail; note
@@ -182,7 +187,7 @@ It pulls Fraunces and Inter from Google Fonts, so this needs a network connectio
 
 ### The masthead
 
-`src/modules/shared/MastheadPart.astro` — the supplied banner, shown above the navigation on
+`src/modules/shared/MastheadPart.tsx` — the supplied banner, shown above the navigation on
 every page and at every width. It is composed, not one scalable picture: the accent panel is a
 right-anchored block with a constant 28 px slant, the bar mark an SVG sized as a fraction of the
 band, and the name and title real HTML text. That is deliberate — as a single SVG the type
@@ -203,8 +208,8 @@ reads at 16 px where three did not.
 ### `public/portrait.jpg` — the one asset supplied by hand
 
 The home hero is designed around a portrait. Save the photo as `public/portrait.jpg`
-(JPEG, 4:5 portrait orientation, ≥ 900×1125 px) and rebuild; `IndexPage.astro` detects the
-file at build time. Until it exists the frame shows her initials on a warm block, at the same
+(JPEG, 4:5 portrait orientation, ≥ 900×1125 px) and rebuild; `vite.config.ts` detects the
+file at build time (`__HAS_PORTRAIT__`). Until it exists the frame shows her initials on a warm block, at the same
 size, so the layout is identical before and after.
 
 ## 7. Outstanding — what is still drafted or unconfirmed
@@ -214,7 +219,7 @@ from Simona's LinkedIn profile (`linkedin.com/in/simona-deliu-413a5b2b`), which 
 LinkedIn link the site uses. What remains is prose she has not written yet and two facts nobody
 has confirmed.
 
-**Placeholders are live.** The guard in `src/data/profile/index.ts` (§8) is overridden with
+**Placeholders are live.** The guard in `vite.config.ts` (§8) is overridden with
 `PLACEHOLDERS_OK: '1'` in `.github/workflows/deploy.yml`, by decision. **When this list is
 empty, delete that `env:` block from the workflow** so the guard protects future edits again.
 
@@ -249,22 +254,21 @@ After changing any of these, regenerate both CV PDFs (§6).
 
 ## 8. Known rough edges
 
-- **The placeholder guard.** `getProfile()` in `src/data/profile/index.ts` throws when
-  `process.env.CI` is set and any placeholder remains. GitHub Actions sets `CI=true`, so a
-  push with placeholders fails at the build step rather than deploying invented content.
+- **The placeholder guard.** The `static-site-files` plugin in `vite.config.ts` reads
+  `placeholders` from `src/data/profile/shape.ts` when a build starts, and throws when
+  `process.env.CI` is set and any remain. GitHub Actions sets `CI=true`, so a push with
+  placeholders fails at the build step rather than deploying invented content.
   `PLACEHOLDERS_OK=1` overrides it — and **the workflow currently sets it** (see §7). Once
   the list in §7 is empty, delete the `env:` block from the workflow first, then the guard
   itself — it has no purpose after that.
-- **`src/fx/components/FlowDiagramPart.astro` is unused.** Its only consumer was the
-  Projects page, which has been removed. It is kept because `fx/` is the portable framework
-  layer rather than site content — delete it if that layer is ever pruned.
-- **Removed sections redirect.** `/projects`, `/articles` and `/ideas` (and their `/en/`
-  twins) redirect to their locale's home, alongside `/resume` → `/career`.
-- **Redirects are not locale-expanded automatically.** Adding one means adding its `/en/…`
-  counterpart by hand in `astro.config.mjs`. Never inject a route for a path that also has
-  a redirect — Astro treats the duplicate as an error.
+- **Removed sections redirect.** `/projects`, `/articles` and `/ideas` redirect to their
+  locale's home, alongside `/resume` → `/career`. They are listed once, locale-free, in
+  `redirects` in `src/routes.ts`; the build writes a small redirect page for each, in every
+  locale. A path there must never also be a page.
 - **`/404` is single-language.** GitHub Pages serves one `404.html` for every unmatched
-  path, in either language, so that page carries Romanian and English together.
-- **No tests and no linter.** `npm run check` is the only automated gate, and it is the same
-  gate CI runs. It is load-bearing here: translations are typed as `Record<Locale, ...>`, so
-  a missing translation is a type error rather than a half-English page.
+  path, in either language, so that page carries Romanian and English together. It is the
+  bare app shell; the page renders in the browser.
+- **No tests.** `npm run lint` and the `tsc -b` inside `npm run build` are the automated
+  gates, the same ones CI runs. The type check is load-bearing here: translations are typed
+  as `Record<Locale, ...>`, so a missing translation is a type error rather than a
+  half-English page.

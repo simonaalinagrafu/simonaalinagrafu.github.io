@@ -17,27 +17,38 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Deliberate override of the placeholder guard in src/data/profile/index.ts:
-    # the site ships with imagined stand-in entries (bracketed names) until the
-    # real CV arrives. REMOVE this env block once SETUP.md §7 is empty, so the
-    # guard protects future edits again.
+    # Deliberate override of the placeholder guard in vite.config.ts: the site
+    # ships with imagined stand-in entries until the real CV arrives. REMOVE
+    # this env block once webapp/SETUP.md §7 is empty, so the guard protects
+    # future edits again.
     env:
       PLACEHOLDERS_OK: '1'
-    # The Astro project lives in webapp/, not at the repo root.
+    # The site lives in webapp/, not at the repo root.
     defaults:
       run:
         working-directory: webapp
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: webapp/package-lock.json
       - name: Install dependencies
         run: npm ci
-      - name: Type-check
-        run: npm run check
-      - name: Build with Astro
-        uses: withastro/action@v3
+      - name: Lint
+        run: npm run lint
+      # tsc -b, vite build, then prerender every route into dist/.
+      - name: Build
+        run: npm run build
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: webapp
+          path: webapp/dist
 
   deploy:
     needs: build

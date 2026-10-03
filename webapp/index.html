@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ro" class="antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Per-page <title>, description, canonical, hreflang alternates and the
+         og:title/description/url/locale tags are rendered by PageMetaPart
+         (React 19 hoists them into <head>). Only site-wide, page-independent
+         tags live here. <html lang> is set per page by the prerenderer and
+         kept in step by PageMetaPart. -->
+    <meta name="author" content="Simona Alina Grafu" />
+    <meta name="theme-color" content="#7a1f2b" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simona Alina Grafu" />
+    <meta property="og:image" content="https://simonaalinagrafu.github.io/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://simonaalinagrafu.github.io/og.png" />
+    <script>
+      // Apply the saved theme before first paint so there is no flash of the
+      // default look. ThemeMenuPart owns the choice from here on. A theme that
+      // has since been retired would leave the page on no theme at all, so an
+      // unknown stored value is dropped and cream applies.
+      (function () {
+        var themeIds = __THEME_IDS__;
+        var t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch (e) {}
+        if (t && themeIds.indexOf(t) === -1) {
+          try {
+            localStorage.removeItem('theme');
+          } catch (e) {}
+          t = null;
+        }
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <script>
+      // Honour a previously chosen language, but only for someone arriving at
+      // the bare root. Deep links always render the language they name.
+      (function () {
+        if (window.location.pathname !== '/') return;
+        try {
+          if (localStorage.getItem('locale') === 'en') window.location.replace('/en');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-bg text-ink/90 overflow-x-clip font-sans">
+    <div id="root" class="flex min-h-screen flex-col"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
