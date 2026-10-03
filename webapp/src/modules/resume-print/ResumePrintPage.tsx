@@ -27,7 +27,7 @@ export default function ResumePrintPage() {
 
   return (
     <div className="resume-print">
-      <PageMetaPart title={`${site.name} — ${s.career.metaTitle}`} noindex />
+      <PageMetaPart title={`${site.name} — ${s.career.metaTitle}`} description={null} noindex />
 
       <header>
         <h1>{site.name}</h1>

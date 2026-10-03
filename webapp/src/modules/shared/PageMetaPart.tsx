@@ -12,8 +12,9 @@ import { useLocale } from './useLocale';
 
 interface Props {
   title: string;
-  /** Defaults to the profile's tagline in the page's language. */
-  description?: string;
+  /** Defaults to the profile's tagline in the page's language; null for none
+      (the print CV, which is a print source, not a page to describe). */
+  description?: string | null;
   /** Keep search engines out (the print CV, the 404, /version). These carry
       no language alternates either: there is nothing to point them at. */
   noindex?: boolean;
@@ -21,7 +22,7 @@ interface Props {
 
 export default function PageMetaPart({ title, description, noindex = false }: Props) {
   const { locale, s, path, basePath } = useLocale();
-  const desc = description ?? getProfile(locale).site.tagline;
+  const desc = description === undefined ? getProfile(locale).site.tagline : description;
   const href = (p: string) => new URL(p, siteFacts.url).href;
   const url = href(path);
 
@@ -32,7 +33,7 @@ export default function PageMetaPart({ title, description, noindex = false }: Pr
   return (
     <>
       <title>{title}</title>
-      <meta name="description" content={desc} />
+      {desc && <meta name="description" content={desc} />}
       {noindex && <meta name="robots" content="noindex" />}
       <link rel="canonical" href={url} />
       {!noindex &&
@@ -52,7 +53,7 @@ export default function PageMetaPart({ title, description, noindex = false }: Pr
         />
       )}
       <meta property="og:title" content={title} />
-      <meta property="og:description" content={desc} />
+      {desc && <meta property="og:description" content={desc} />}
       <meta property="og:url" content={url} />
       <meta property="og:locale" content={s.ogLocale} />
     </>

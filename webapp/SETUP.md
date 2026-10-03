@@ -121,7 +121,7 @@ curl -s https://simonaalinagrafu.github.io | grep -o "<title>[^<]*</title>"
   `npm run build`, all inside `webapp/`. A lint or type error fails the run and nothing
   deploys. Then `actions/configure-pages` and `actions/upload-pages-artifact` package
   `webapp/dist` as the Pages artifact.
-- **deploy** — `actions/deploy-pages@v4` publishes that artifact to the `github-pages`
+- **deploy** — `actions/deploy-pages@v5` publishes that artifact to the `github-pages`
   environment.
 
 The build output is never committed; `dist/` exists only on the runner and on your machine.
