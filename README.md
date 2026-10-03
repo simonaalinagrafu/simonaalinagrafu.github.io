@@ -33,6 +33,12 @@ npm run cv       # regenerate both CV PDFs (after npm run build)
 npm run contrast # WCAG AA check over every theme's tokens
 ```
 
+## Version
+
+`version.json` (in `webapp/`) holds the site's version. It is published, as written, at
+**https://simonaalinagrafu.github.io/version** — bump it with a change and that page shows
+whether the deploy is live. The page is noindex and left out of the sitemap.
+
 ## Updating the profile
 
 Everything about Simona lives in `src/data/profile/`:

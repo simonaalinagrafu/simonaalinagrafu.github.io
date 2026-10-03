@@ -38,7 +38,7 @@ export default defineConfig({
         defaultLocale: 'ro',
         locales: { ro: 'ro-RO', en: 'en-US' },
       },
-      filter: (page) => !page.includes('/resume-print/'),
+      filter: (page) => !page.includes('/resume-print/') && !page.endsWith('/version/'),
     }),
   ],
   vite: {

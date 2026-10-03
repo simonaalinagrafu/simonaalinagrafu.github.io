@@ -27,6 +27,8 @@ const pages: PageDef[] = [
   // GitHub Pages serves one /404.html for every unmatched path, so this page
   // cannot be per-locale — it carries both languages instead.
   { path: '/404', entrypoint: './src/modules/404/NotFoundPage.astro', locales: ['ro'] },
+  // Language-neutral: the contents of webapp/version.json.
+  { path: '/version', entrypoint: './src/modules/version/VersionPage.astro', locales: ['ro'] },
 ];
 
 /** Patterns carry no trailing slash; only the root is bare. */
