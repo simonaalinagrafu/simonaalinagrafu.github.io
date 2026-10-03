@@ -62,29 +62,30 @@ export default function ResumePrintPage() {
       <div className="skills">
         {skills.map((skill) => (
           <p key={skill.id}>
-            <b>{skill.group}:</b>{' '}
-            {(skill.pdfItems ? skill.items.slice(0, skill.pdfItems) : skill.items).join(', ')}
+            <b>{skill.group}:</b> {skill.items.join(', ')}
           </p>
         ))}
       </div>
 
       <h2>{s.resume.experience}</h2>
       {experience.map((role) => {
-        // The Career page carries every bullet; the PDF takes the leading few
-        // when a role sets pdfBullets, which caps how long the resume can grow.
-        const bullets = role.pdfBullets ? role.bullets.slice(0, role.pdfBullets) : role.bullets;
+        // The CV is the first thing an employer reads, often without ever
+        // opening the site — so each role carries everything the Career page
+        // does: the one-line impact, the company, the summary, every duty.
+        const about = role.about ?? role.aboutShort;
         return (
-          <div key={role.id} className={bullets.length > 3 ? 'role allow-break' : 'role'}>
+          <div key={role.id} className={role.bullets.length > 3 ? 'role allow-break' : 'role'}>
             <div className="role-head">
               <h3>
                 {role.position} · {role.company}, {role.location}
               </h3>
               <span className="period">{role.period}</span>
             </div>
-            {role.aboutShort && <p className="about">{role.aboutShort}</p>}
+            {role.impact && <p className="impact">{role.impact}</p>}
+            {about && <p className="about">{about}</p>}
             {role.summary && <p className="summary">{role.summary}</p>}
             <ul>
-              {bullets.map((b) => {
+              {role.bullets.map((b) => {
                 const { title, rest } = splitBullet(b);
                 return (
                   <li key={b}>

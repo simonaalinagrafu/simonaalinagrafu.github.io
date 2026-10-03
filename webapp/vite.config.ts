@@ -100,7 +100,7 @@ export default defineConfig({
     // disagree across a New Year.
     __BUILD_YEAR__: new Date().getFullYear(),
     // The home hero is built around public/portrait.jpg once it exists; until
-    // then the frame holds the space with initials.
+    // then the hero shows the B2B sales cycle instead (SalesCyclePart).
     __HAS_PORTRAIT__: existsSync(fileURLToPath(new URL('./public/portrait.jpg', import.meta.url))),
   },
   plugins: [react(), tailwindcss(), staticSiteFiles(), themeIds()],

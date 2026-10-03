@@ -159,14 +159,19 @@ at build time instead of read at render: `__BUILD_YEAR__` (the footer and every
 `src/data/profile/` splits the CV in two:
 
 - `shape.ts` — what exists and in what order: role IDs, company names, icons,
-  bullet-count flags (`pdfBullets`, `pdfItems`: how much the PDF shows), contact
-  details, and the start dates the year counts come
+  the `leadBullets` count, contact details, and the start dates the year counts come
   from (`salesStart`, `printStart`, `leadershipStart`). The same in every
   language. Its header names the document every entry comes from.
 - `ro.ts` / `en.ts` — the prose, keyed by those IDs: per role a position,
   period, one-line `impact`, company lines, summary, bullets and `focus` chips.
 - `index.ts` — `getProfile(locale)` merges the two; `tenure` and `yearsSince`
   turn the start dates into the figures every page shows.
+
+Skills are fed by the roles: each group in `skillShapes` lists the `roles` whose
+documented duties contain it, and the Skills page derives its evidence line —
+"Since 2001 · Rodata · RH Printing · Tipografia Everest" — from their dates and
+companies. The same page shows the current role's `focus` chips as "In daily
+use" and every role's chips as "What each role added".
 
 A promotion inside one company is its own role (Everest has two), so each title
 keeps its own dates and duties. Icons travel with the thing they describe rather
@@ -225,7 +230,11 @@ serif (`.figure`); the only filled accent surface is the closing `.band`.
 The hero is built around a portrait (`fx/components/PortraitPart.tsx`).
 `vite.config.ts` checks for `public/portrait.jpg` at build time
 (`__HAS_PORTRAIT__`) and `IndexPage` passes it in; without the file, the frame
-holds the space with initials.
+is replaced by `modules/index/SalesCyclePart.tsx` — the B2B sales cycle as a
+wheel: six coloured stages around a handshake, with its words from the i18n
+dictionaries. Its six stage colours are its own, the one deliberate exception
+to the no-raw-colours rule above: no theme has six hues, and a cycle needs one
+per stage.
 
 ## Themes
 

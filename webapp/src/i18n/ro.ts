@@ -22,8 +22,8 @@ export const ro: UiStrings = {
 
   themes: {
     cream: 'Crem',
-    forest: 'Pădure',
-    marine: 'Marin',
+    forest: 'Verde',
+    marine: 'Albastru marin',
   },
 
   header: {
@@ -33,6 +33,7 @@ export const ro: UiStrings = {
     changeLanguageTip: 'Citește acest site în altă limbă',
     openMenu: 'Deschide meniul',
     closeMenu: 'Închide meniul',
+    phone: 'Telefon',
     email: 'Email',
     emailTip: 'Trimite-mi un email',
     linkedin: 'LinkedIn',
@@ -57,6 +58,17 @@ export const ro: UiStrings = {
       'Conduc biroul de vânzări al Tipografiei Everest, o tipografie din București cu peste 140 de oameni, care lucrează în offset și digital. În subordinea Directorului Comercial, coordonez agenții de vânzări, gestionez un portofoliu propriu de clienți și particip la planificarea și implementarea strategiei de vânzări.',
       'Am venit la Everest în 2012 ca reprezentant comercial și conduc biroul de vânzări din 2015. Înainte: aproape nouă ani de vânzări de tipar la RH Printing, vânzări de ambalaje la Rodata și primele roluri în contabilitate, marketing și analiza vânzărilor.',
     ],
+    cycle: {
+      caption: 'Ciclul vânzării',
+      steps: {
+        prospecting: 'Prospectare',
+        offer: 'Ofertă',
+        negotiation: 'Negociere',
+        contract: 'Contract',
+        production: 'Producție',
+        collection: 'Încasare',
+      },
+    },
     ctaCareer: 'Toată cariera',
     ctaContact: 'Contact',
     kickerScope: 'Ce coordonez acum',
@@ -141,10 +153,21 @@ export const ro: UiStrings = {
   skills: {
     metaTitle: 'Competențe',
     metaDescription:
-      'Competențe în coordonarea biroului de vânzări, portofoliul de clienți, oferte și contracte, clienți noi și planul de vânzări, și fundamentele de business de dedesubt.',
+      'Competențe izvorâte din munca propriu-zisă: coordonarea biroului de vânzări, portofoliul de clienți, oferte și contracte, planificarea vânzărilor, tipar și ambalaje, marketing, financiar și comerț exterior.',
     kicker: 'Instrumentar',
     heading: 'Competențe',
-    lede: 'Competențele pe care se sprijină rolul — de la coordonarea unui birou de vânzări la încasarea contravalorii unei vânzări.',
+    lede: 'Fiecare competență de mai jos vine din munca pe care am făcut-o — rolurile din spatele ei sunt numite alături.',
+    kickerDaily: 'În fiecare zi',
+    dailyLede: 'Ariile muncii mele actuale, ca {position} la {company}.',
+    kickerAreas: 'Pe domenii',
+    since: 'Din {year}',
+    kickerOverTime: 'În timp',
+    headingOverTime: 'Ce a adăugat fiecare rol',
+    careerLink: {
+      before: 'Rolurile din spatele acestor competențe, cu fiecare atribuție, sunt pe pagina ',
+      link: 'Carieră',
+      after: '.',
+    },
   },
 
   contact: {

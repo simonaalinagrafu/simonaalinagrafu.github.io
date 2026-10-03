@@ -31,16 +31,18 @@ export type RoleId =
   | 'delta'
   | 'euromobex';
 export type SkillId =
-  | 'sales-leadership'
-  | 'key-accounts'
-  | 'negotiation'
-  | 'pipeline'
-  | 'tools'
-  | 'business'
+  | 'sales-office'
+  | 'client-portfolio'
+  | 'offers-contracts'
+  | 'new-business'
+  | 'planning-reporting'
+  | 'print-packaging'
+  | 'marketing'
+  | 'finance-trade'
   | 'personal';
 export type AchievementId = 'promotion';
 export type EducationId = 'journalism' | 'marketing';
-export type ExtraId = 'languages' | 'licence';
+export type ExtraId = 'languages' | 'office' | 'licence';
 
 /** Facts that never change with language. */
 export const siteFacts = {
@@ -87,8 +89,6 @@ export interface RoleShape {
   /** How many leading bullets describe the scope of the role (the people
       coordinated) rather than the work itself — the Career page emphasises those. */
   leadBullets?: number;
-  /** How many bullets the resume PDF shows. Omit to show all. */
-  pdfBullets?: number;
 }
 
 export interface RoleText {
@@ -106,7 +106,7 @@ export interface RoleText {
   aboutShort?: string;
   /** What was done there. Some roles are carried by their bullets alone. */
   summary?: string;
-  /** "Lead-in: detail" form; ordered most resume-worthy first. */
+  /** "Lead-in: detail" form; ordered most important first. */
   bullets: string[];
   /** Areas of responsibility — chips under the role, and a "Focus" line on the PDF. */
   focus?: string[];
@@ -123,9 +123,8 @@ export const roleShapes: RoleShape[] = [
     company: 'Tipografia Everest',
     icon: 'lucide:users',
     leadBullets: 3,
-    pdfBullets: 5,
   },
-  { id: 'everest-rep', company: 'Tipografia Everest', icon: 'lucide:briefcase', pdfBullets: 4 },
+  { id: 'everest-rep', company: 'Tipografia Everest', icon: 'lucide:briefcase' },
   { id: 'rh-printing', company: 'RH Printing', icon: 'lucide:printer' },
   { id: 'rodata', company: 'Rodata', icon: 'lucide:handshake' },
   { id: 'neweuropetrolgaz', company: 'Neweuropetrolgaz', icon: 'lucide:chart-line' },
@@ -139,8 +138,12 @@ export interface SkillShape {
   id: SkillId;
   /** Lucide icon, used on the Skills page. The PDF ignores it. */
   icon: string;
-  /** How many items the resume PDF shows. Omit to show all. */
-  pdfItems?: number;
+  /**
+   * The roles this group was practised in — its evidence. The Skills page
+   * derives "Since <year> · <companies>" from them, so a skill is never
+   * claimed without a role behind it. Omitted for personal strengths.
+   */
+  roles?: RoleId[];
 }
 
 export interface SkillText {
@@ -150,14 +153,50 @@ export interface SkillText {
   items: string[];
 }
 
+/**
+ * Each group is fed by what she did: `roles` names the jobs whose documented
+ * duties contain it (see the sources at the top of this file). RH Printing has
+ * no document behind it, so it counts only where the title and the company
+ * leave no doubt — the client portfolio and the print itself.
+ */
 export const skillShapes: SkillShape[] = [
-  { id: 'sales-leadership', icon: 'lucide:users' },
-  { id: 'key-accounts', icon: 'lucide:handshake' },
-  { id: 'negotiation', icon: 'lucide:file-signature' },
-  { id: 'pipeline', icon: 'lucide:chart-line' },
-  { id: 'business', icon: 'lucide:calculator' },
-  { id: 'tools', icon: 'lucide:clipboard-list' },
-  { id: 'personal', icon: 'lucide:user-round', pdfItems: 4 },
+  { id: 'sales-office', icon: 'lucide:users', roles: ['everest-head'] },
+  {
+    id: 'client-portfolio',
+    icon: 'lucide:handshake',
+    roles: ['rodata', 'rh-printing', 'everest-rep', 'everest-head'],
+  },
+  {
+    id: 'offers-contracts',
+    icon: 'lucide:file-signature',
+    roles: ['neweuropetrolgaz', 'rodata', 'everest-rep', 'everest-head'],
+  },
+  {
+    id: 'new-business',
+    icon: 'lucide:target',
+    roles: ['everest-rep', 'everest-head'],
+  },
+  {
+    id: 'planning-reporting',
+    icon: 'lucide:chart-line',
+    roles: ['neweuropetrolgaz', 'rodata', 'everest-rep', 'everest-head'],
+  },
+  {
+    id: 'print-packaging',
+    icon: 'lucide:printer',
+    roles: ['rodata', 'rh-printing', 'everest-rep', 'everest-head'],
+  },
+  {
+    id: 'marketing',
+    icon: 'lucide:megaphone',
+    roles: ['delta', 'neweuropetrolgaz', 'everest-head'],
+  },
+  {
+    id: 'finance-trade',
+    icon: 'lucide:calculator',
+    roles: ['euromobex', 'neweuropetrolgaz', 'everest-rep', 'everest-head'],
+  },
+  { id: 'personal', icon: 'lucide:user-round' },
 ];
 
 // --- Education --------------------------------------------------------------
@@ -204,6 +243,7 @@ export interface ExtraShape {
 /** The closing facts — the "Other" line of the CV and the chips under Skills. */
 export const extraShapes: ExtraShape[] = [
   { id: 'languages', icon: 'lucide:languages' },
+  { id: 'office', icon: 'lucide:monitor' },
   { id: 'licence', icon: 'lucide:car' },
 ];
 

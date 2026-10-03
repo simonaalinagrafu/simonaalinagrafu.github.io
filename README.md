@@ -54,7 +54,8 @@ whether the deploy is live. The page is noindex and left out of the sitemap.
 Everything about Simona lives in `src/data/profile/`:
 
 - `shape.ts` — structure that is the same in every language: role IDs, company names,
-  icons, and the start dates every "N years" figure is counted from
+  icons, the start dates every "N years" figure is counted from, and — for each skill group —
+  the roles it was practised in (the Skills page shows that as "Since 2001 · Rodata · …")
 - `ro.ts` / `en.ts` — the prose for each language, keyed by those IDs
 - `index.ts` — `getProfile(locale)`, which merges the two, plus the derived `tenure` figures
 
@@ -62,8 +63,9 @@ It feeds the About, Career and Skills pages and two print-optimized pages at
 `/resume-print` and `/en/resume-print` (excluded from the sitemap and marked noindex).
 
 The downloadable PDFs at `public/cv-ro.pdf` and `public/cv-en.pdf` are printed from those
-pages. **They are not rebuilt by `npm run build`** — regenerate them after editing the
-profile:
+pages. They carry everything the Career page does — an employer often reads the CV before,
+or instead of, the site — and run to four pages. **They are not rebuilt by `npm run build`**
+— regenerate them after editing the profile:
 
 ```sh
 npm run build
@@ -76,8 +78,9 @@ browser is not in the default location.
 ### Portrait
 
 The home page hero is built around a photo. Save it as **`public/portrait.jpg`** — JPEG,
-portrait orientation 4:5, at least 900×1125 — and rebuild. Until the file exists the frame
-shows her initials instead, so nothing else on the page moves when the photo arrives.
+portrait orientation 4:5, at least 900×1125 — and rebuild. Until the file exists the photo frame
+is not there at all: the hero shows the B2B sales cycle instead — six coloured stages around a
+handshake (`src/modules/index/SalesCyclePart.tsx`).
 
 ### Where the content comes from
 

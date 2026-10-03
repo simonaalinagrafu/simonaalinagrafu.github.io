@@ -28,7 +28,7 @@ export default function HeaderPart() {
     <header className="sticky top-0 z-10">
       <div className="bg-accent-solid h-1 w-full"></div>
       <div className="border-line-strong bg-chip/95 border-b shadow-[0_3px_0_-1px_var(--t-line)] backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 sm:px-6 lg:px-8">
           <MenuButtonPart
             open={menuOpen}
             onToggle={() => setOpenOn(menuOpen ? null : path)}
@@ -37,9 +37,9 @@ export default function HeaderPart() {
             controls={MOBILE_MENU_ID}
           />
           <NavMenuPart />
-          <div className="flex items-center gap-x-3 sm:gap-x-5">
+          <div className="flex items-center gap-x-2 sm:gap-x-5">
             <SocialLinksPart />
-            <div className="flex items-center gap-x-2">
+            <div className="flex items-center gap-x-1.5 sm:gap-x-2">
               <LanguageMenuPart />
               <ThemeMenuPart />
             </div>

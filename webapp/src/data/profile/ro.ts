@@ -31,8 +31,9 @@ export const ro: ProfileText = {
   },
 
   extras: {
-    languages: 'Engleză — bine; franceză, rusă — nivel de bază',
-    licence: 'Permis de conducere, categoria B (din 2001)',
+    languages: 'Engleză',
+    office: 'Microsoft Office',
+    licence: 'Permis de conducere, categoria B',
   },
 
   roles: {
@@ -186,18 +187,19 @@ export const ro: ProfileText = {
   },
 
   skills: {
-    'sales-leadership': {
+    'sales-office': {
       group: 'Coordonarea biroului de vânzări',
       blurb: 'Activitatea de zi cu zi a unui birou de vânzări.',
       items: [
         'Coordonarea agenților de vânzări',
         'Raportarea activității',
         'Alocarea lucrărilor',
-        'Planificarea vizitelor la clienți',
+        'Supervizarea vizitelor la clienți',
         'Strategia de vânzări — planificare și implementare',
+        'Ofertare la timp',
       ],
     },
-    'key-accounts': {
+    'client-portfolio': {
       group: 'Portofoliul de clienți',
       blurb: 'Păstrarea și dezvoltarea clienților deja câștigați.',
       items: [
@@ -206,62 +208,91 @@ export const ro: ProfileText = {
         'Consultanță tehnică și comercială',
         'Urmărirea comenzilor și informarea clienților',
         'Reclamații și satisfacția clienților',
+        'Baza de date a clienților',
       ],
     },
-    negotiation: {
-      group: 'Oferte și contracte',
+    'offers-contracts': {
+      group: 'Oferte, negociere și contracte',
       blurb: 'De la oferta de preț la acordul semnat.',
       items: [
         'Oferte de preț',
         'Negociere',
-        'Contracte de prestări servicii tipografice',
+        'Întocmirea contractelor',
         'Semnarea contractelor în limite delegate',
         'Urmărirea derulării contractelor',
+        'Aprobarea stornărilor și a comisioanelor',
       ],
     },
-    pipeline: {
-      group: 'Clienți noi și planul de vânzări',
-      blurb: 'Clienții noi și planul față de care se măsoară rezultatele.',
+    'new-business': {
+      group: 'Clienți noi',
+      blurb: 'Găsirea clienților noi și verificarea lor înainte de semnarea contractului.',
       items: [
         'Prospectarea clienților noi',
+        'Cereri de ofertă de pe orice canal de vânzare',
         'Vânzare directă și indirectă',
+        'Verificarea clienților noi — incidente de plăți, Registrul Comerțului, insolvență',
+      ],
+    },
+    'planning-reporting': {
+      group: 'Planificarea și raportarea vânzărilor',
+      blurb: 'Planul față de care se măsoară rezultatele și rapoartele despre el.',
+      items: [
         'Planuri de vânzări lunare, trimestriale și anuale',
         'Analiza zilnică a vânzărilor',
-        'Rapoarte și estimări pentru conducere',
+        'Rapoarte pentru conducere',
+        'Estimări de vânzări',
       ],
     },
-    business: {
-      group: 'Fundamente de business',
-      blurb: 'Partea comercială și financiară a unei vânzări.',
+    'print-packaging': {
+      group: 'Tipar și ambalaje',
+      blurb: 'Produsele și procesele din spatele a ceea ce vând.',
+      items: [
+        'Offset în coală',
+        'Rotogravură',
+        'Tipar digital',
+        'Ambalaje — hârtie, carton, folie',
+        'Etichete',
+        'Tipărituri comerciale și carte',
+        'Comenzi urmărite prin producție',
+      ],
+    },
+    marketing: {
+      group: 'Marketing',
+      blurb: 'Licență în marketing și marketing practicat înainte de vânzări și alături de ele.',
+      items: [
+        'Politica de marketing și de promovare',
+        'Studiul concurenței — birou și teren',
+        'Analiza pieței',
+        'Evenimente și campanii',
+        'Propuneri de produse noi',
+      ],
+    },
+    'finance-trade': {
+      group: 'Financiar și comerț exterior',
+      blurb: 'Partea financiară și de comerț a unei vânzări.',
       items: [
         'Încasări și creanțe',
-        'Verificarea clienților noi',
-        'Analiza pieței tipografice și a concurenței',
-        'Contabilitate',
-        'Import și furnizori externi',
-      ],
-    },
-    tools: {
-      group: 'Instrumente',
-      blurb: 'Instrumentele de lucru ale rolului.',
-      items: [
-        'Microsoft Office — Word, Excel, PowerPoint',
-        'Gestionarea bazei de date a clienților',
+        'Contabilitate primară',
+        'Documente bancare',
+        'Bănci și autorități de stat',
+        'Documentație de import–export',
+        'Furnizori externi',
       ],
     },
     personal: {
       group: 'Calități personale',
-      blurb: 'Ce aduc dincolo de fișa postului — în cuvintele mele.',
+      blurb: 'Ce cere rolul și ce aduc eu în el.',
       items: [
-        'Lucru cu termene-limită strânse',
-        'Gândire strategică și calități organizatorice',
+        'Negociere',
+        'Comunicare clară, orală și scrisă',
+        'Organizare; lucru cu termene-limită strânse',
+        'Rezistență la stres; decizii prompte',
+        'Gândire strategică',
         'Învățare rapidă și integrare rapidă într-o echipă',
         'Experiență directă și îndelungată în lucrul cu oamenii',
         'Gândire critică și mobilitate internă',
         'Obiectivitate și eficiență',
         'Creativitate și imaginație',
-        'Educație vastă, în științe și în domeniul umanist',
-        'Cunoștințe conceptuale și umane extinse',
       ],
     },
   },

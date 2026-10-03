@@ -13,6 +13,8 @@ export type NavId = 'home' | 'career' | 'skills' | 'contact';
 export type ThemeId = 'cream' | 'forest' | 'marine';
 export type ScopeId = 'team' | 'clients' | 'contracts' | 'plan' | 'coordination' | 'market';
 export type HighlightId = 'promotion' | 'print' | 'foundation';
+export type CycleStepId =
+  'prospecting' | 'offer' | 'negotiation' | 'contract' | 'production' | 'collection';
 export type CareerStatId = 'sales' | 'print' | 'leadership';
 
 export interface UiStrings {
@@ -39,6 +41,8 @@ export interface UiStrings {
     changeLanguageTip: string;
     openMenu: string;
     closeMenu: string;
+    /** Accessible name of the phone link; its tooltip is the number itself. */
+    phone: string;
     email: string;
     emailTip: string;
     linkedin: string;
@@ -65,6 +69,9 @@ export interface UiStrings {
     facts: string;
     /** The hero paragraphs, in order. */
     paragraphs: string[];
+    /** The sales-cycle wheel in the hero. `caption` is read by screen readers only;
+        step names are one short word, because each sits inside a disc. */
+    cycle: { caption: string; steps: Record<CycleStepId, string> };
     ctaCareer: string;
     ctaContact: string;
     kickerScope: string;
@@ -102,6 +109,16 @@ export interface UiStrings {
     kicker: string;
     heading: string;
     lede: string;
+    kickerDaily: string;
+    /** Template: {position}, {company}. */
+    dailyLede: string;
+    kickerAreas: string;
+    /** Template, the evidence line under a group: {year}. Companies follow it. */
+    since: string;
+    kickerOverTime: string;
+    headingOverTime: string;
+    /** "…on the [Career] page." — split so the middle can be a link. */
+    careerLink: { before: string; link: string; after: string };
   };
 
   contact: {

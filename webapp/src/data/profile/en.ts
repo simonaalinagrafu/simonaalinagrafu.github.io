@@ -25,8 +25,9 @@ export const en: ProfileText = {
   },
 
   extras: {
-    languages: 'English — good; French, Russian — basic',
-    licence: 'Driving licence, category B (since 2001)',
+    languages: 'English',
+    office: 'Microsoft Office',
+    licence: 'Driving licence, category B',
   },
 
   roles: {
@@ -174,18 +175,19 @@ export const en: ProfileText = {
   },
 
   skills: {
-    'sales-leadership': {
-      group: 'Sales Office Coordination',
+    'sales-office': {
+      group: 'Sales Office Management',
       blurb: 'Running the day-to-day work of a sales office.',
       items: [
         'Coordinating sales agents',
         'Activity reporting',
         'Work allocation',
-        'Client visit planning',
+        'Supervising client visits',
         'Sales strategy — planning & implementation',
+        'Offer turnaround',
       ],
     },
-    'key-accounts': {
+    'client-portfolio': {
       group: 'Client Portfolio',
       blurb: 'Keeping and growing the clients already won.',
       items: [
@@ -193,60 +195,92 @@ export const en: ProfileText = {
         'New opportunities with existing clients',
         'Technical & commercial advice',
         'Order follow-up & client updates',
-        'Complaint handling & client satisfaction',
+        'Complaints & client satisfaction',
+        'Client database',
       ],
     },
-    negotiation: {
-      group: 'Offers & Contracts',
+    'offers-contracts': {
+      group: 'Offers, Negotiation & Contracts',
       blurb: 'From the price offer to the signed agreement.',
       items: [
         'Price offers',
         'Negotiation',
-        'Printing-service contracts',
-        'Contract signing within delegated limits',
+        'Contract drafting',
+        'Signing within delegated limits',
         'Contract follow-through',
+        'Approving invoice reversals & commissions',
       ],
     },
-    pipeline: {
-      group: 'New Business & Sales Plan',
-      blurb: 'New clients, and the plan the results are measured against.',
+    'new-business': {
+      group: 'New Business',
+      blurb: 'Finding new clients, and checking them before a contract is signed.',
       items: [
         'Prospecting new clients',
+        'Requests from every sales channel',
         'Direct & indirect sales',
+        'New-client checks — payment incidents, Trade Register, insolvency',
+      ],
+    },
+    'planning-reporting': {
+      group: 'Sales Planning & Reporting',
+      blurb: 'The plan the results are measured against, and the reports on it.',
+      items: [
         'Monthly, quarterly & annual sales plans',
         'Daily sales analysis',
-        'Reports & estimates for management',
+        'Reports for management',
+        'Sales estimates',
       ],
     },
-    business: {
-      group: 'Business Foundations',
-      blurb: 'The commercial and financial side of a sale.',
+    'print-packaging': {
+      group: 'Printing & Packaging',
+      blurb: 'The products and processes behind what I sell.',
+      items: [
+        'Sheet-fed offset',
+        'Rotogravure',
+        'Digital print',
+        'Packaging — paper, cardboard, film',
+        'Labels',
+        'Commercial print & books',
+        'Orders followed through production',
+      ],
+    },
+    marketing: {
+      group: 'Marketing',
+      blurb: 'A marketing degree, and marketing practised before and alongside sales.',
+      items: [
+        'Marketing & promotion policy',
+        'Competitor research — desk & field',
+        'Market analysis',
+        'Events & campaigns',
+        'New-product proposals',
+      ],
+    },
+    'finance-trade': {
+      group: 'Finance & Foreign Trade',
+      blurb: 'The financial and trade side of a sale.',
       items: [
         'Collections & receivables',
-        'Client due diligence',
-        'Printing market & competitor analysis',
-        'Accounting',
-        'Import & foreign suppliers',
+        'Primary accounting',
+        'Banking documents',
+        'Banks & state authorities',
+        'Import–export documentation',
+        'Foreign suppliers',
       ],
-    },
-    tools: {
-      group: 'Tools',
-      blurb: 'The working instruments of the role.',
-      items: ['Microsoft Office — Word, Excel, PowerPoint', 'Client database management'],
     },
     personal: {
       group: 'Personal Strengths',
-      blurb: 'What I bring beyond the job description — in my own words.',
+      blurb: 'What the role requires, and what I bring to it.',
       items: [
-        'Used to working to tight deadlines',
-        'Strategic thinking and organisational skills',
-        'Quick to learn and to integrate into a team',
+        'Negotiation',
+        'Clear spoken and written communication',
+        'Organised; used to tight deadlines',
+        'Calm under pressure; prompt decisions',
+        'Strategic thinking',
+        'Quick to learn and to join a team',
         'Long, first-hand experience in dealing with people',
         'Critical thinking and internal mobility',
         'Objectivity and efficiency',
         'Creativity and imagination',
-        'Broad education in science and liberal arts',
-        'Extensive conceptual and human knowledge',
       ],
     },
   },

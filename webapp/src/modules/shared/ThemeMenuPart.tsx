@@ -26,7 +26,9 @@ export default function ThemeMenuPart() {
         className="tip tip-end border-line-strong text-muted hover:border-accent hover:text-accent inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
       >
         <IconPart name="lucide:palette" className="h-4 w-4" />
-        <span>{s.themes[theme]}</span>
+        {/* The name shows only where there is room: with three contact icons
+            beside it, the header would otherwise wrap onto a second line. */}
+        <span className="hidden lg:inline">{s.themes[theme]}</span>
         <IconPart
           name="lucide:chevron-down"
           className={cx('h-3.5 w-3.5 transition-transform', open && 'rotate-180')}

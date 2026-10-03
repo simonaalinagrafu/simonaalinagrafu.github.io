@@ -1,5 +1,7 @@
 // Generic horizontal segment bar: each segment's width is proportional to its
-// weight; one segment can be highlighted with the solid accent.
+// weight; one segment can be highlighted with the solid accent. Segments never
+// break their label, so the bar wraps onto more lines until the screen is wide
+// enough to hold them all in one.
 import { cx } from '../lib/cx';
 
 export interface Segment {
@@ -16,7 +18,7 @@ interface Props {
 
 export default function SegmentBarPart({ segments, ariaLabel }: Props) {
   return (
-    <div className="mt-6 flex flex-wrap gap-1.5 sm:flex-nowrap" aria-label={ariaLabel}>
+    <div className="mt-6 flex flex-wrap gap-1.5 lg:flex-nowrap" aria-label={ariaLabel}>
       {segments.map((s) => (
         <div
           key={s.label}

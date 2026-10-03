@@ -28,6 +28,7 @@ export const en: UiStrings = {
     changeLanguageTip: 'Read this site in another language',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
+    phone: 'Phone',
     email: 'Email',
     emailTip: 'Send me an email',
     linkedin: 'LinkedIn',
@@ -52,6 +53,17 @@ export const en: UiStrings = {
       'I run the sales office at Tipografia Everest, a Bucharest printing house of over 140 people working in offset and digital print. Reporting to the Commercial Director, I coordinate the sales agents, manage a client portfolio of my own, and take part in planning and implementing the sales strategy.',
       'I joined Everest in 2012 as a sales representative and have led its sales office since 2015. Before that: almost nine years in print sales at RH Printing, packaging sales at Rodata, and first roles in accounting, marketing and sales analysis.',
     ],
+    cycle: {
+      caption: 'Sales cycle',
+      steps: {
+        prospecting: 'Prospecting',
+        offer: 'Offer',
+        negotiation: 'Negotiation',
+        contract: 'Contract',
+        production: 'Production',
+        collection: 'Collection',
+      },
+    },
     ctaCareer: 'Full career',
     ctaContact: 'Contact',
     kickerScope: 'Current scope',
@@ -136,10 +148,21 @@ export const en: UiStrings = {
   skills: {
     metaTitle: 'Skills',
     metaDescription:
-      'Skills across sales office coordination, the client portfolio, offers and contracts, new business and the sales plan, and the business foundations beneath them.',
+      'Skills drawn from the work itself: sales office management, the client portfolio, offers and contracts, sales planning, printing and packaging, marketing, finance and foreign trade.',
     kicker: 'Toolbox',
     heading: 'Skills',
-    lede: 'The skills the role draws on — from coordinating a sales office to collecting the payment behind a sale.',
+    lede: 'Each skill below comes from work I have done — the roles behind it are named next to it.',
+    kickerDaily: 'In daily use',
+    dailyLede: 'The areas of my current work as {position} at {company}.',
+    kickerAreas: 'By area',
+    since: 'Since {year}',
+    kickerOverTime: 'Over time',
+    headingOverTime: 'What each role added',
+    careerLink: {
+      before: 'The roles behind these skills, duty by duty, are on the ',
+      link: 'Career',
+      after: ' page.',
+    },
   },
 
   contact: {

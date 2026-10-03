@@ -4,8 +4,6 @@ import { localePath } from '@fx/lib/i18n';
 import { navItems } from './nav';
 import { useLocale } from './useLocale';
 
-const telHref = `tel:${siteFacts.phone.replace(/\s/g, '')}`;
-
 export default function FooterPart() {
   const { locale, s } = useLocale();
   return (
@@ -24,19 +22,9 @@ export default function FooterPart() {
             ))}
           </nav>
         </div>
+        {/* Contact details live in the header and on the Contact page. */}
         <p className="text-faint mt-8 text-sm">
-          © {__BUILD_YEAR__} {siteFacts.name} ·{' '}
-          <a href={`mailto:${siteFacts.email}`} className="hover:text-accent">
-            {siteFacts.email}
-          </a>{' '}
-          ·{' '}
-          <a href={telHref} className="hover:text-accent">
-            {siteFacts.phone}
-          </a>{' '}
-          ·{' '}
-          <a href={siteFacts.linkedin} className="hover:text-accent">
-            {s.header.linkedin}
-          </a>
+          © {__BUILD_YEAR__} {siteFacts.name}
         </p>
       </div>
     </footer>

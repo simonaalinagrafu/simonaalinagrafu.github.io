@@ -11,3 +11,6 @@ export const yearsOnly = (period: string) =>
     .split('–')
     .map((part) => part.match(/\d{4}/)?.[0] ?? part.trim())
     .join(' – ');
+
+/** The first year in a period: "April 2001 – December 2002" → 2001. */
+export const startYear = (period: string) => Number(period.match(/\d{4}/)?.[0]);

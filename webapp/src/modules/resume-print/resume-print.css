@@ -5,7 +5,8 @@
    unscoped rule here would restyle the rest of the site.)
 
    Set for reading, not for density: 11pt body, generous margins, serif
-   headings in the site's burgundy, and room to run to three pages. */
+   headings in the site's burgundy. It carries everything the Career page
+   does, so it runs to four pages. */
 .resume-print {
   --ink: #2b2724;
   --muted: #5a524b;
@@ -16,7 +17,7 @@
   font-family: 'Segoe UI', ui-sans-serif, system-ui, Arial, sans-serif;
   color: var(--ink);
   font-size: 11pt;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 .resume-print,
 .resume-print * {
@@ -75,7 +76,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--accent);
-  margin: 24px 0 10px;
+  margin: 19px 0 9px;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--line);
   page-break-after: avoid;
@@ -121,7 +122,7 @@
 
 /* ---- Experience -------------------------------------------------------- */
 .resume-print .role {
-  margin-bottom: 18px;
+  margin-bottom: 15px;
   page-break-inside: avoid;
 }
 .resume-print .role.allow-break {
@@ -143,6 +144,11 @@
   font-size: 9.5pt;
   white-space: nowrap;
 }
+.resume-print .role .impact {
+  margin-top: 5px;
+  color: var(--ink);
+  font-weight: 600;
+}
 .resume-print .role .about {
   margin-top: 2px;
   color: var(--muted);
@@ -156,7 +162,7 @@
   margin: 7px 0 0 17px;
 }
 .resume-print .role li {
-  margin-bottom: 4px;
+  margin-bottom: 2.5px;
   font-size: 10.5pt;
 }
 /* The focus line for a role: given a rule and a label, because a recruiter

@@ -163,12 +163,11 @@ Chrome, and shuts the server down. It prints the built, prerendered pages rather
 server's, so the PDF is exactly what the build produced. Set `CHROME_PATH` if Chrome is not at
 one of the default locations.
 
-Both CVs run to **three pages**, and Romanian, which runs longer, fills the third almost to
-the end. Check the page count after every profile change. Two levers keep it there: the
-`pdfBullets` field on a role caps how many bullets the PDF shows while the Career page keeps
-full detail (the Everest roles show 5 and 4), `pdfItems` does the same for a skills group
-(Personal Strengths shows its first 4), and any role with more than three bullets may break
-across a page (`ResumePrintPage.tsx`).
+The CV is the first thing an employer reads, often without opening the site, so it carries
+everything the Career page does: for each role the one-line impact, the company description,
+the summary, every duty and the focus areas — and every skill group in full. Nothing is
+shortened for print. Both CVs run to **four pages**; check the page count after a profile
+change (a fifth page holding one line means the spacing in `resume-print.css` needs a touch).
 
 ### `public/og.png` — after any change to name, title, or URL
 
@@ -208,8 +207,9 @@ reads at 16 px where three did not.
 
 The home hero is designed around a portrait. Save the photo as `public/portrait.jpg`
 (JPEG, 4:5 portrait orientation, ≥ 900×1125 px) and rebuild; `vite.config.ts` detects the
-file at build time (`__HAS_PORTRAIT__`). Until it exists the frame shows her initials on a warm block, at the same
-size, so the layout is identical before and after.
+file at build time (`__HAS_PORTRAIT__`). Until it exists the hero shows the B2B sales cycle instead
+(`src/modules/index/SalesCyclePart.tsx`: six coloured stages around a handshake); the photo,
+when it arrives, replaces it in a narrower 4:5 frame.
 
 ## 7. Outstanding — what is still drafted or unconfirmed
 
@@ -223,8 +223,12 @@ deliberately outside it, because the originals carry a home address and a date o
   2012) and *Șef Birou Vânzări* (from April 2015), and the contract addendum that made the
   change. Two duties of the current role — the weekly/monthly/annual reporting and estimates,
   and the marketing events and campaigns — come from her own LinkedIn "About" instead.
-- **Personal strengths** — her LinkedIn "Specialties", plus three from her own cover letters
-  (tight deadlines, strategic thinking and organisation, quick to learn and join a team).
+- **Skills** — every group is built from documented duties and names the roles behind it
+  (`roles` in `skillShapes`); the Skills page derives "Since <year> · <companies>" from
+  them. Printing & Packaging and Marketing were added in that pass.
+- **Personal strengths** — the abilities her job description requires (negotiation, clear
+  communication, organisation, calm under pressure), three from her own cover letters, and
+  four of her LinkedIn "Specialties". The two vaguest LinkedIn phrases were dropped.
 - **Company descriptions** — her CVs and the companies' own sites (everest.ro, rodata.ro),
   re-checked in October 2026. Press claims were removed in that review: "leader of the local
   sheet-fed offset market", "certified since 2007", the €12 million investment, and RH

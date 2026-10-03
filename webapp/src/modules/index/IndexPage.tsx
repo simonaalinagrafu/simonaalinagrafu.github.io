@@ -14,13 +14,11 @@ import type { HighlightId, ScopeId } from '@i18n/types';
 import { cvHref } from '@modules/shared/cv';
 import PageMetaPart from '@modules/shared/PageMetaPart';
 import { useLocale } from '@modules/shared/useLocale';
+import SalesCyclePart from './SalesCyclePart';
 
-// The hero is built around a portrait. Drop public/portrait.jpg in and rebuild;
-// until then the frame holds the space with initials (see vite.config.ts).
-const monogram = siteFacts.name
-  .split(' ')
-  .map((word) => word[0])
-  .join('');
+// The hero's right-hand side is a portrait once public/portrait.jpg exists
+// (drop it in and rebuild — see vite.config.ts); until then it is the B2B sales
+// cycle, drawn by SalesCyclePart.
 
 // Display order and icons live here; the words live in the i18n dictionaries,
 // keyed by the same ids — so neither can drift out of step with the other.
@@ -105,13 +103,16 @@ export default function IndexPage() {
               </Link>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-52 sm:max-w-64 lg:mr-0 lg:ml-auto lg:w-72">
-            <PortraitPart
-              src={__HAS_PORTRAIT__ ? '/portrait.jpg' : undefined}
-              alt={siteFacts.name}
-              initials={monogram}
-            />
-          </div>
+          {__HAS_PORTRAIT__ ? (
+            <div className="mx-auto w-full max-w-52 sm:max-w-64 lg:mr-0 lg:ml-auto lg:w-72">
+              <PortraitPart src="/portrait.jpg" alt={siteFacts.name} />
+            </div>
+          ) : (
+            // A diagram with words in it needs more room than a photo does.
+            <div className="mx-auto w-full max-w-80 sm:max-w-96 lg:mr-0 lg:ml-auto lg:w-[22rem] lg:max-w-none xl:w-[26rem]">
+              <SalesCyclePart />
+            </div>
+          )}
         </div>
       </section>
 
