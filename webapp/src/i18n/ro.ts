@@ -1,8 +1,8 @@
 import type { UiStrings } from './types';
 
 // Romanian UI strings — drafted for review. Same two conventions as
-// data/profile/ro.ts: English job titles are kept where they are the norm on
-// the Romanian market, and the prose stays gender-neutral.
+// data/profile/ro.ts: job titles as her documents give them, and prose that
+// stays gender-neutral.
 
 export const ro: UiStrings = {
   htmlLang: 'ro',
@@ -10,6 +10,8 @@ export const ro: UiStrings = {
   localeShort: 'RO',
   dateLocale: 'ro-RO',
   ogLocale: 'ro_RO',
+  // „1 an”, „11 ani”, dar „26 de ani”: de la 20 în sus (și la sute rotunde) se pune „de”.
+  years: (n) => (n === 1 ? '1 an' : n % 100 === 0 || n % 100 >= 20 ? `${n} de ani` : `${n} ani`),
 
   nav: {
     home: 'Despre mine',
@@ -41,151 +43,113 @@ export const ro: UiStrings = {
   },
 
   footer: {
-    blurb: 'Vânzări B2B, conturi cheie și echipele care le livrează.',
+    blurb: 'Vânzări B2B în industria tipografică — oferte, contracte și biroul de vânzări.',
   },
 
   home: {
-    metaTitle: 'Manager de Vânzări, B2B',
-    greeting: 'Bună, sunt Simona.',
-    headline: 'Vânzări B2B, de la prima discuție la relația care ține.',
-    ctaCareer: 'Povestea carierei mele',
-    ctaContact: 'Hai să vorbim',
-    kickerReach: 'Anvergură și practică',
-    kickerDoing: 'Ce fac',
-    kickerWorking: 'Cum e să lucrezi cu mine',
-    kickerPrinciples: 'Principii',
-    kickerProcess: 'Cum lucrez',
-    headingWorking: 'Ce aduc într-o organizație',
-    headingPrinciples: 'Ce mă motivează',
-    headingProcess: 'Patru pași, de fiecare dată',
-
-    stats: {
-      years: { value: '20+', label: 'ani în vânzări B2B' },
-      b2b: { value: 'B2B', label: 'vânzări către companii' },
-      team: { value: 'O echipă', label: 'de oameni de vânzări condusă, pregătită și păstrată' },
-      accounts: { value: 'Conturi cheie', label: 'gestionate de la primul contact la reînnoire' },
-      stages: { value: 'Fiecare etapă', label: 'de la prospectare la livrare' },
-      relationships: { value: 'Pe termen lung', label: 'relații cu clienții, an după an' },
-    },
-
-    doing: {
+    metaTitle: 'Șef Birou Vânzări, tipar B2B',
+    metaDescription:
+      '{position} la {company}, coordonând agenții de vânzări ai unei tipografii din București. {sales} în vânzări, {leadership} la conducerea biroului de vânzări.',
+    kicker: 'Profil',
+    heading: '{position} la {company}',
+    facts: '{location} · {sales} în vânzări · {leadership} la conducerea biroului de vânzări',
+    paragraphs: [
+      'Conduc biroul de vânzări al Tipografiei Everest, o tipografie din București cu peste 140 de oameni, care lucrează în offset și digital — coordonez agenții de vânzări și păstrez totodată un portofoliu propriu de clienți.',
+      'Am venit la Everest în 2012 ca reprezentant comercial și conduc biroul de vânzări din 2015. Înainte: aproape nouă ani de vânzări în tipografie la RH Printing, vânzări de ambalaje la Rodata și un început în contabilitate, marketing și analiza vânzărilor.',
+    ],
+    ctaCareer: 'Toată cariera',
+    ctaContact: 'Contact',
+    kickerScope: 'Ce coordonez acum',
+    scope: {
       team: {
-        title: 'Conducerea echipei de vânzări',
-        body: 'Conduc echipa de vânzări de la {company} — stabilesc obiective, fac coaching cu fiecare și construiesc rutinele care transformă indivizii într-o echipă ce își atinge cifrele împreună.',
+        term: 'Echipa',
+        detail:
+          'Agenții de vânzări ai Tipografiei Everest — raportarea lor zilnică, împărțirea lucrărilor între ei și deplasările lor la clienți.',
       },
-      accounts: {
-        title: 'Managementul conturilor cheie',
-        body: 'Gestionez relațiile care aduc cea mai mare parte din venituri: înțeleg afacerea fiecărui client suficient de bine încât să văd ce va avea nevoie în continuare și să fiu persoana pe care o sună prima.',
+      clients: {
+        term: 'Clienți',
+        detail:
+          'Un portofoliu propriu: oferte, comenzi, consultanță tehnică și comercială și relația cu clientul de la prima solicitare.',
       },
-      pipeline: {
-        title: 'Pipeline și prognoze',
-        body: 'Prospectare, calificare, prioritizare. Un pipeline pe care îl vede toată echipa și o prognoză pe care conducerea poate planifica, pentru că a fost onestă și până acum.',
+      contracts: {
+        term: 'Contracte',
+        detail:
+          'Contracte de prestări servicii tipografice, negociate și semnate în limitele stabilite de Directorul Comercial și Directorul General.',
       },
-      negotiation: {
-        title: 'Negociere și închidere',
-        body: 'Prețuri, contracte, condiții și reînnoiri cu clienți business de orice dimensiune — acorduri care rezistă pentru că ambele părți pot trăi cu ele.',
+      plan: {
+        term: 'Planul de vânzări',
+        detail:
+          'Obiective lunare, trimestriale și anuale, analiza zilnică a vânzărilor față de ele și rapoarte de analiză pentru conducere.',
       },
-    },
-
-    value: {
-      revenue: {
-        title: 'Venituri care cresc',
-        body: 'Un portofoliu construit prin prospectare constantă și păstrarea a ce s-a câștigat.',
+      coordination: {
+        term: 'Coordonare',
+        detail:
+          'Legătura dintre vânzări și producție, expediție și financiar — ca ofertele să plece la timp și comenzile să fie bine planificate.',
       },
-      retention: {
-        title: 'Clienți care rămân',
-        body: 'Retenția ca măsură a succesului, nu doar mărimea listei.',
-      },
-      team: {
-        title: 'O echipă care performează',
-        body: 'Oameni de vânzări recrutați, pregătiți și păstrați — obiective atinse ca un întreg.',
-      },
-      pipeline: {
-        title: 'Un pipeline predictibil',
-        body: 'Prognoze pe care afacerea poate planifica, pentru că au fost corecte și înainte.',
-      },
-      relationships: {
-        title: 'Relații care deschid uși',
-        body: 'Douăzeci de ani de contacte de business care răspund la telefon.',
-      },
-      process: {
-        title: 'Proces, nu eroism',
-        body: 'Rezultate care se repetă, pentru că modul de lucru este clar.',
+      market: {
+        term: 'Piața',
+        detail: 'Concurența și piața serviciilor tipografice, urmărite permanent.',
       },
     },
-
-    principles: {
-      trust: {
-        title: 'Încrederea mai întâi',
-        body: 'Fiecare client pe care l-am păstrat ani de zile a început cu o promisiune respectată. Prefer să pierd o vânzare decât să o câștig cu ceva ce nu pot livra. Clienții observă și se întorc.',
+    kickerHighlights: 'Repere',
+    highlights: {
+      promotion: {
+        title: 'La conducerea biroului de vânzări',
+        context: 'Tipografia Everest · 2015',
+        body: 'Promovare la trei ani după venirea ca reprezentant comercial — biroul de vânzări a devenit parte din meserie, alături de clienți.',
       },
-      listen: {
-        title: 'Ascultă înainte să vinzi',
-        body: 'Oferta care prinde este cea care răspunde unei nevoi pe care clientul o are cu adevărat. Mare parte din vânzare este înțelegere — afacerea, constrângerile, cum arată un rezultat bun pentru omul de peste masă.',
+      print: {
+        title: '{print} în tipar și ambalaje',
+        context: 'Rodata · RH Printing · Tipografia Everest',
+        body: 'Ambalaje tipărite în offset și rotogravură la Rodata, tipar offset în coală la RH Printing, apoi tipărituri comerciale, cărți și ambalaje la Everest.',
       },
-      team: {
-        title: 'Echipa câștigă',
-        body: 'Cele mai bune rezultate ale mele au venit din echipe în care oamenii împart ce funcționează, se acoperă unii pe alții și sunt mândri de cifra de pe tablă. A conduce înseamnă a face posibilă o astfel de echipă și apoi a nu-i sta în cale.',
-      },
-      results: {
-        title: 'Rezultate măsurabile',
-        body: 'Un pipeline, o prognoză și un obiectiv sunt utile doar dacă sunt oneste. Țin cifrele reale, chiar și atunci când cifra reală este incomodă, pentru că doar așa pot fi îmbunătățite.',
+      foundation: {
+        title: 'Un început pe partea de cifre',
+        context: 'Euromobex · Delta Distribution · Neweuropetrolgaz · 1997–2001',
+        body: 'Mai întâi economist, apoi marketing și analiza vânzărilor — așa că partea contabilă din spatele unei oferte e teren cunoscut.',
       },
     },
-
-    process: {
-      listen: {
-        title: 'Ascult',
-        body: 'Înainte de orice ofertă, înțeleg afacerea clientului, constrângerile lui și ce înseamnă un rezultat bun pentru el.',
-      },
-      propose: {
-        title: 'Propun',
-        body: 'O ofertă care răspunde nevoii reale, cu prețuri și condiții pe care le pot susține.',
-      },
-      negotiate: {
-        title: 'Negociez',
-        body: 'Acorduri cu care ambele părți pot trăi ani la rând — nu victorii de o zi.',
-      },
-      deliver: {
-        title: 'Livrez și rămân',
-        body: 'Ce s-a promis ajunge la client, iar relația continuă și după semnătură.',
-      },
+    kickerBackground: 'Parcurs',
+    kickerEducation: 'Educație',
+    careerLink: {
+      before: 'Rol cu rol, cu ce a presupus fiecare, pe pagina ',
+      link: 'Carieră',
+      after: '.',
     },
   },
 
   career: {
     metaTitle: 'Carieră',
     metaDescription:
-      '20+ ani în vânzări B2B: de la Euromobex și RH Printing la conducerea echipei de vânzări a Tipografiei Everest.',
+      'De la economist și asistent de marketing la conducerea biroului de vânzări al Tipografiei Everest — din 1997 până azi, în vânzări din 2000.',
     kicker: 'Parcurs',
     heading: 'Carieră',
-    lede: 'Rolurile pe care le-am avut, echipele pe care le-am construit și ce a adăugat fiecare capitol.',
+    lede: 'Rolurile pe care le-am avut și ce a presupus fiecare — de la primul loc de muncă, ca economist, la conducerea unui birou de vânzări.',
     download: 'Descarcă CV-ul (PDF)',
     downloadFile: 'Simona-Alina-Grafu-CV',
     stats: {
-      years: 'ani în vânzări B2B',
-      everest: 'ani la Tipografia Everest',
-      companies: 'companii',
+      sales: 'ani în vânzări',
+      print: 'ani în tipografie',
+      leadership: 'ani la conducerea biroului de vânzări',
     },
     education: 'Educație',
     timeline: 'Cronologia carierei, pe companii',
     now: 'acum',
-    placeholderTag: 'de confirmat',
   },
 
   skills: {
     metaTitle: 'Competențe',
     metaDescription:
-      'Competențe în leadership de vânzări, managementul conturilor cheie, negociere, pipeline și prognoze, și fundamentele de business de dedesubt.',
+      'Competențe în coordonarea biroului de vânzări, portofoliul de clienți, oferte și contracte, clienți noi și planul de vânzări, și fundamentele de business de dedesubt.',
     kicker: 'Instrumentar',
     heading: 'Competențe',
-    lede: 'La ce apelez și pe ce se sprijină — de la condusul unei echipe la marja din spatele unui preț.',
+    lede: 'La ce apelez și pe ce se sprijină — de la coordonarea unui birou de vânzări la încasarea din spatele unei vânzări.',
   },
 
   contact: {
     metaTitle: 'Contact',
     metaDescription:
-      'Ia legătura cu Simona Alina Grafu pentru vânzări B2B, conturi cheie și conducerea echipelor de vânzări.',
+      'Ia legătura cu Simona Alina Grafu pentru vânzări B2B în tipografie, portofolii de clienți și conducerea unui birou de vânzări.',
     heading: 'Contact',
     lede: 'Citesc tot și răspund mesajelor bine gândite.',
     email: 'Email',
@@ -217,10 +181,10 @@ export const ro: UiStrings = {
     other: 'Diverse',
     focus: 'Arii',
     highlights: [
-      '20+ ani în vânzări B2B, cei mai mulți în industria tipografică',
-      'Conduce echipa de vânzări a Tipografiei Everest, unde lucrează din 2012',
-      'Gestionează conturile cheie care aduc cea mai mare parte din venituri',
-      'Retenția și un pipeline predictibil ca măsuri ale succesului',
+      'În vânzări din 2000, în industria tipografică din 2001',
+      'Șef Birou Vânzări la Tipografia Everest din 2015; acolo din 2012',
+      'Întregul ciclu comercial: ofertă, negociere, contract, producție, încasare',
+      'Un început în contabilitate și marketing — cifrele din spatele fiecărei oferte',
     ],
   },
 };

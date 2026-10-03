@@ -1,7 +1,8 @@
 import IconPart from '@fx/components/IconPart';
 import SegmentBarPart from '@fx/components/SegmentBarPart';
 import StatTilePart from '@fx/components/StatTilePart';
-import { getProfile, siteFacts } from '@data/profile';
+import { getProfile, siteFacts, tenure } from '@data/profile';
+import { cvHref } from '@modules/shared/cv';
 import PageMetaPart from '@modules/shared/PageMetaPart';
 import { useLocale } from '@modules/shared/useLocale';
 import RoleItemPart from './RoleItemPart';
@@ -10,13 +11,13 @@ export default function CareerPage() {
   const { locale, s } = useLocale();
   const { experience, education } = getProfile(locale);
 
-  // The Everest figure is derived from her start date there (February 2012),
-  // so it ages on its own — counted to the build year, which the prerendered
-  // HTML and the hydrated page agree on.
+  // Every figure is derived from a start date in data/profile/shape.ts and
+  // counted to the build year, so the tiles age on their own and agree with
+  // the home page and the CV.
   const stats = [
-    { value: '20+', label: s.career.stats.years },
-    { value: String(__BUILD_YEAR__ - 2012), label: s.career.stats.everest },
-    { value: String(experience.length), label: s.career.stats.companies },
+    { value: `${tenure.sales}`, label: s.career.stats.sales },
+    { value: `${tenure.print}`, label: s.career.stats.print },
+    { value: `${tenure.leadership}`, label: s.career.stats.leadership },
   ];
 
   // Company eras for the ribbon; widths are proportional to duration. Company
@@ -24,13 +25,11 @@ export default function CareerPage() {
   const eras = [
     { label: 'Euromobex', note: '’97–’99', weight: 2 },
     { label: 'Delta', note: '’99–’00', weight: 1.2 },
-    { label: 'Europetrolgaz', note: '’00–’01', weight: 0.7 },
+    { label: 'Neweuropetrolgaz', note: '’00–’01', weight: 0.7 },
     { label: 'Rodata', note: '’01–’02', weight: 1.7 },
     { label: 'RH Printing', note: '’03–’12', weight: 8.8 },
     { label: 'Tipografia Everest', note: `’12–${s.career.now}`, weight: 14.6, highlight: true },
   ];
-
-  const cv = locale === 'ro' ? '/cv-ro.pdf' : '/cv-en.pdf';
 
   return (
     <>
@@ -45,7 +44,11 @@ export default function CareerPage() {
           <h1 className="title-page mt-2">{s.career.heading}</h1>
           <p className="lede">{s.career.lede}</p>
         </div>
-        <a href={cv} download={`${s.career.downloadFile}.pdf`} className="btn btn-primary">
+        <a
+          href={cvHref(locale)}
+          download={`${s.career.downloadFile}.pdf`}
+          className="btn btn-primary"
+        >
           <IconPart name="lucide:download" className="h-3.5 w-3.5" />
           {s.career.download}
         </a>

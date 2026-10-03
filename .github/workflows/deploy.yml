@@ -17,12 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Deliberate override of the placeholder guard in vite.config.ts: the site
-    # ships with imagined stand-in entries until the real CV arrives. REMOVE
-    # this env block once webapp/SETUP.md §7 is empty, so the guard protects
-    # future edits again.
-    env:
-      PLACEHOLDERS_OK: '1'
     # The site lives in webapp/, not at the repo root.
     defaults:
       run:

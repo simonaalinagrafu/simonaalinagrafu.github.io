@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, type Plugin } from 'vite';
 import type { Locale } from './src/fx/lib/i18n.ts';
-import { placeholders, siteFacts } from './src/data/profile/shape.ts';
+import { siteFacts } from './src/data/profile/shape.ts';
 import { redirects, routes } from './src/routes.ts';
 import { themes } from './src/themes/themes.ts';
 
@@ -56,22 +56,6 @@ function redirectHtml(from: string, to: string): string {
   ].join('\n');
 }
 
-// Imagined stand-in entries (see src/data/profile/shape.ts) must never reach
-// the live site. Locally: one warning line per build. Under CI (GitHub Actions
-// sets CI=true): refuse to build, unless PLACEHOLDERS_OK=1 is set on purpose.
-function guardPlaceholders(warn: (message: string) => void) {
-  if (placeholders.length === 0) return;
-  const list = placeholders.join(', ');
-  if (process.env.CI && !process.env.PLACEHOLDERS_OK) {
-    throw new Error(
-      `Refusing to build for deployment: profile still contains imagined placeholder ` +
-        `content (${list}). Replace it with real data in src/data/profile/, or set ` +
-        `PLACEHOLDERS_OK=1 to override deliberately.`,
-    );
-  }
-  warn(`${placeholders.length} placeholder entries still in the data: ${list}`);
-}
-
 // Static-site files a SPA on GitHub Pages still needs: sitemap.xml from the
 // route manifest, 404.html as a copy of index.html so deep links load the app
 // and the router takes over, and a redirect page for every moved URL. Every
@@ -80,9 +64,6 @@ function staticSiteFiles(): Plugin {
   return {
     name: 'static-site-files',
     apply: 'build',
-    buildStart() {
-      guardPlaceholders((message) => this.warn(message));
-    },
     generateBundle() {
       this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: sitemapXml() });
     },

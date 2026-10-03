@@ -1,11 +1,17 @@
+// The home page, organised as a profile rather than a landing page: who she is
+// in the current role, what that role owns, three highlights, and the whole
+// background and education straight from the profile data — so this page
+// cannot drift from the Career page or the CV.
 import { Link } from 'react-router';
 import IconPart from '@fx/components/IconPart';
 import PortraitPart from '@fx/components/PortraitPart';
-import StatTilePart from '@fx/components/StatTilePart';
-import StepListPart from '@fx/components/StepListPart';
+import { cx } from '@fx/lib/cx';
+import { fill } from '@fx/lib/fill';
 import { localePath } from '@fx/lib/i18n';
-import { getProfile, siteFacts } from '@data/profile';
-import type { DoingId, PrincipleId, ProcessId, StatId, ValueId } from '@i18n/types';
+import { yearsOnly } from '@fx/lib/yearsOnly';
+import { getProfile, siteFacts, tenure } from '@data/profile';
+import type { HighlightId, ScopeId } from '@i18n/types';
+import { cvHref } from '@modules/shared/cv';
 import PageMetaPart from '@modules/shared/PageMetaPart';
 import { useLocale } from '@modules/shared/useLocale';
 
@@ -19,80 +25,83 @@ const monogram = siteFacts.name
 // Display order and icons live here; the words live in the i18n dictionaries,
 // keyed by the same ids — so neither can drift out of step with the other.
 
-// Reach and practice: the one real figure (20+ years), then the shape of the
-// work. Nothing here is a number that could be wrong.
-const statOrder: StatId[] = ['years', 'b2b', 'team', 'accounts', 'stages', 'relationships'];
-
-const doingIcons: Record<DoingId, string> = {
+// What the current role owns, as a labelled list rather than a card grid: the
+// block a recruiter reads to place the role, so it stays dense and factual.
+const scopeIcons: Record<ScopeId, string> = {
   team: 'lucide:users',
-  accounts: 'lucide:handshake',
-  pipeline: 'lucide:chart-line',
-  negotiation: 'lucide:file-signature',
+  clients: 'lucide:handshake',
+  contracts: 'lucide:file-signature',
+  plan: 'lucide:chart-line',
+  coordination: 'lucide:clipboard-list',
+  market: 'lucide:compass',
 };
-const doingOrder: DoingId[] = ['team', 'accounts', 'pipeline', 'negotiation'];
+const scopeOrder: ScopeId[] = ['team', 'clients', 'contracts', 'plan', 'coordination', 'market'];
 
-// The four-step way of working — the section that makes this a sales site.
-const processOrder: ProcessId[] = ['listen', 'propose', 'negotiate', 'deliver'];
-
-// Written from the employer's point of view rather than mine — one line each,
-// stating a benefit rather than restating a fact the tiles above already carry.
-const valueIcons: Record<ValueId, string> = {
-  revenue: 'lucide:trending-up',
-  retention: 'lucide:heart-handshake',
-  team: 'lucide:sprout',
-  pipeline: 'lucide:gauge',
-  relationships: 'lucide:handshake',
-  process: 'lucide:clipboard-list',
+// Three things stated as facts from her documents, not as claims about her.
+const highlightIcons: Record<HighlightId, string> = {
+  promotion: 'lucide:trending-up',
+  print: 'lucide:printer',
+  foundation: 'lucide:calculator',
 };
-const valueOrder: ValueId[] = [
-  'revenue',
-  'retention',
-  'team',
-  'pipeline',
-  'relationships',
-  'process',
-];
-
-// What keeps me in this work, as opposed to what I am paid to do.
-const principleIcons: Record<PrincipleId, string> = {
-  trust: 'lucide:heart-handshake',
-  listen: 'lucide:compass',
-  team: 'lucide:users',
-  results: 'lucide:target',
-};
-const principleOrder: PrincipleId[] = ['trust', 'listen', 'team', 'results'];
+const highlightOrder: HighlightId[] = ['promotion', 'print', 'foundation'];
 
 export default function IndexPage() {
   const { locale, s } = useLocale();
-  const { site, experience } = getProfile(locale);
+  const { site, experience, education } = getProfile(locale);
   const current = experience[0];
+  const counts = {
+    position: current.position,
+    company: current.company,
+    location: site.location,
+    sales: s.years(tenure.sales),
+    print: s.years(tenure.print),
+    leadership: s.years(tenure.leadership),
+  };
 
   return (
     <>
-      <PageMetaPart title={`${siteFacts.name} — ${s.home.metaTitle}`} description={site.tagline} />
+      <PageMetaPart
+        title={`${siteFacts.name} — ${s.home.metaTitle}`}
+        description={fill(s.home.metaDescription, counts)}
+      />
 
-      {/* Hero: greeting, headline and one paragraph on the left, the portrait on
-          the right. It opens the page directly under the menu, so it carries no
-          top padding of its own. Contact is the primary action — this is a sales
-          site. */}
-      <section className="pb-6 sm:pb-10">
-        {/* The portrait column is sized to the portrait and pushed to the right
-            edge, so the text column takes the slack instead of it turning into a
-            gap in the middle. */}
+      {/* Profile. The masthead above carries the name at full size, so this
+          opens with the role — the first thing a recruiter needs to place her.
+          It sits directly under the menu, so it carries no top padding. */}
+      <section className="pb-8">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
-          <div>
-            {/* The name and the role line are the masthead's job on every page,
-                so the hero says neither: the greeting is first-name only and the
-                h1 states the work. Nothing on this page is said twice. */}
-            <p className="text-accent font-medium">{s.home.greeting}</p>
-            <h1 className="title-hero mt-2 max-w-3xl">{s.home.headline}</h1>
-            <p className="text-muted mt-6 max-w-2xl text-lg leading-relaxed">{site.intro}</p>
+          <div className="max-w-3xl min-w-0">
+            <p className="kicker">{s.home.kicker}</p>
+            <h1 className="title-page mt-2">{fill(s.home.heading, counts)}</h1>
+            <p className="text-faint mt-3 text-sm">{fill(s.home.facts, counts)}</p>
+            {s.home.paragraphs.map((p, i) => (
+              <p
+                key={p}
+                className={cx(
+                  'text-muted max-w-2xl text-lg leading-relaxed',
+                  i === 0 ? 'mt-6' : 'mt-4',
+                )}
+              >
+                {p}
+              </p>
+            ))}
+            {/* One primary action — the CV — and two quiet ones. */}
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to={localePath(locale, '/contact')} className="btn btn-primary">
-                {s.home.ctaContact}
-              </Link>
+              <a
+                href={cvHref(locale)}
+                download={`${s.career.downloadFile}.pdf`}
+                className="btn btn-primary"
+              >
+                <IconPart name="lucide:download" className="h-4 w-4" />
+                {s.career.download}
+              </a>
               <Link to={localePath(locale, '/career')} className="btn btn-ghost">
+                <IconPart name="lucide:briefcase" className="h-4 w-4" />
                 {s.home.ctaCareer}
+              </Link>
+              <Link to={localePath(locale, '/contact')} className="btn btn-ghost">
+                <IconPart name="lucide:at-sign" className="h-4 w-4" />
+                {s.home.ctaContact}
               </Link>
             </div>
           </div>
@@ -108,94 +117,95 @@ export default function IndexPage() {
 
       <section className="py-8">
         <p className="rule">
-          <span className="kicker">{s.home.kickerReach}</span>
+          <span className="kicker">{s.home.kickerScope}</span>
         </p>
-        <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 sm:gap-x-10">
-          {statOrder.map((id) => (
-            <StatTilePart
-              key={id}
-              value={s.home.stats[id].value}
-              label={s.home.stats[id].label}
-              bare
-            />
+        <dl className="divide-line border-line mt-6 divide-y border-y">
+          {scopeOrder.map((id) => (
+            <div key={id} className="grid gap-1 py-4 sm:grid-cols-[12rem_1fr] sm:gap-6">
+              <dt className="title-item flex items-center gap-2.5">
+                <IconPart name={scopeIcons[id]} className="text-label h-4.5 w-4.5 shrink-0" />
+                {s.home.scope[id].term}
+              </dt>
+              <dd className="text-muted leading-relaxed">{s.home.scope[id].detail}</dd>
+            </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       <section className="py-8">
         <p className="rule">
-          <span className="kicker">{s.home.kickerDoing}</span>
+          <span className="kicker">{s.home.kickerHighlights}</span>
         </p>
-        {/* A list on hairlines rather than a card grid. */}
-        <div className="mt-6 grid gap-x-12 gap-y-8 sm:grid-cols-2">
-          {doingOrder.map((id) => (
-            <div key={id} className="border-line border-t pt-6">
-              <div>
-                <div className="flex items-center gap-2.5">
-                  <IconPart name={doingIcons[id]} className="text-label h-4.5 w-4.5" />
-                  <h2 className="title-item">{s.home.doing[id].title}</h2>
+        <ol className="mt-6 space-y-6">
+          {highlightOrder.map((id) => {
+            const h = s.home.highlights[id];
+            return (
+              <li key={id} className="border-line-strong border-s-2 ps-4">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h2 className="title-item flex items-center gap-2.5">
+                    <IconPart
+                      name={highlightIcons[id]}
+                      className="text-label h-4.5 w-4.5 shrink-0"
+                    />
+                    {fill(h.title, counts)}
+                  </h2>
+                  <span className="text-faint text-sm">{h.context}</span>
                 </div>
-                <p className="text-muted mt-2 text-sm leading-relaxed">
-                  {s.home.doing[id].body.replace('{company}', current.company)}
-                </p>
-              </div>
-            </div>
+                <p className="text-muted mt-2 max-w-3xl leading-relaxed">{h.body}</p>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+
+      {/* Roles and degrees straight from the profile data, so these lists
+          cannot drift from the Career page. */}
+      <section className="py-8">
+        <p className="rule">
+          <span className="kicker">{s.home.kickerBackground}</span>
+        </p>
+        <ul className="mt-6 space-y-3">
+          {experience.map((r) => (
+            <li key={r.id} className="grid gap-x-6 gap-y-1 sm:grid-cols-[8rem_1fr]">
+              <span className="text-faint text-sm whitespace-nowrap tabular-nums sm:mt-0.5">
+                {yearsOnly(r.period)}
+              </span>
+              <span className="flex items-start gap-2.5">
+                <IconPart name={r.icon} className="text-label mt-1 h-4 w-4 shrink-0" />
+                <span>
+                  <span className="text-ink font-medium">{r.position}</span>
+                  <span className="text-muted"> · {r.company}</span>
+                </span>
+              </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       <section className="py-8">
         <p className="rule">
-          <span className="kicker">{s.home.kickerProcess}</span>
+          <span className="kicker">{s.home.kickerEducation}</span>
         </p>
-        <h2 className="title-section mt-4">{s.home.headingProcess}</h2>
-        <div className="mt-8">
-          <StepListPart steps={processOrder.map((id) => s.home.process[id])} />
-        </div>
-      </section>
-
-      <section className="py-8">
-        <p className="rule">
-          <span className="kicker">{s.home.kickerWorking}</span>
-        </p>
-        <h2 className="title-section mt-4">{s.home.headingWorking}</h2>
-        {/* The only panel on a page of rules and lists — that shape is enough to
-            mark the zone, so the colour stays out of it. */}
-        <div className="bg-tint border-line mt-6 grid gap-8 rounded-2xl border p-8 sm:grid-cols-2 lg:grid-cols-3">
-          {valueOrder.map((id) => (
-            <div key={id}>
-              <div className="icon-tile">
-                <IconPart name={valueIcons[id]} className="h-4 w-4" />
-              </div>
-              <h3 className="font-display text-ink mt-4 text-lg font-semibold">
-                {s.home.value[id].title}
-              </h3>
-              <p className="text-muted mt-1.5 text-sm leading-relaxed">{s.home.value[id].body}</p>
-            </div>
+        <ul className="mt-6 space-y-3">
+          {education.map((e) => (
+            <li key={e.id} className="grid gap-x-6 gap-y-1 sm:grid-cols-[8rem_1fr]">
+              <span className="text-faint text-sm whitespace-nowrap tabular-nums sm:mt-0.5">
+                {e.period}
+              </span>
+              <span>
+                <span className="text-ink block font-medium">{e.degree}</span>
+                <span className="text-muted block">{e.school}</span>
+              </span>
+            </li>
           ))}
-        </div>
-      </section>
-
-      <section className="py-8">
-        <p className="rule">
-          <span className="kicker">{s.home.kickerPrinciples}</span>
+        </ul>
+        <p className="text-muted mt-8">
+          {s.home.careerLink.before}
+          <Link to={localePath(locale, '/career')} className="link-accent">
+            {s.home.careerLink.link}
+          </Link>
+          {s.home.careerLink.after}
         </p>
-        <h2 className="title-section mt-4">{s.home.headingPrinciples}</h2>
-        <div className="mt-8 grid gap-x-12 gap-y-9 sm:grid-cols-2">
-          {principleOrder.map((id) => (
-            <div key={id} className="flex gap-4">
-              <IconPart name={principleIcons[id]} className="text-label mt-1 h-5 w-5 shrink-0" />
-              <div>
-                <h3 className="font-display text-ink text-lg font-semibold">
-                  {s.home.principles[id].title}
-                </h3>
-                <p className="text-muted mt-1.5 text-sm leading-relaxed">
-                  {s.home.principles[id].body}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* Closing band: the one place the accent fills a whole panel. Plain

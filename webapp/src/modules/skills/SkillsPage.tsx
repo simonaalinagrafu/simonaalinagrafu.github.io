@@ -49,10 +49,10 @@ export default function SkillsPage() {
             <span className="kicker">{s.resume.other}</span>
           </p>
           <ul className="mt-5 flex flex-wrap gap-2">
-            {extras.map((item) => (
-              <li key={item} className="chip text-sm">
-                <IconPart name="lucide:car" className="text-label h-4 w-4" />
-                {item}
+            {extras.map((extra) => (
+              <li key={extra.id} className="chip text-sm">
+                <IconPart name={extra.icon} className="text-label h-4 w-4" />
+                {extra.text}
               </li>
             ))}
           </ul>

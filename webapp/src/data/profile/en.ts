@@ -2,46 +2,76 @@ import type { ProfileText } from './shape';
 
 // English profile text.
 //
-// WHAT IS REAL AND WHAT IS DRAFTED. The six roles — employers, titles, dates —
-// and both education entries are from Simona's LinkedIn profile. The Everest
-// bullets restate the responsibilities in her own LinkedIn "About"; the prose
-// under the five earlier roles is drafted to fit the title and awaits her
-// wording. No figures are invented. Still unconfirmed, and marked
-// `placeholder: true` in shape.ts: the three achievements.
+// WHERE IT COMES FROM. The Everest roles restate her job descriptions (2012
+// and 2015) and the 2015 contract addendum; the four roles from 1997 to 2002
+// restate her own CVs of 2003; the company lines are from those CVs and from
+// the companies' public sources. RH Printing is still drafted from her
+// LinkedIn title and dates, and awaits her wording. No figures are invented —
+// see the note at the top of shape.ts.
 
 export const en: ProfileText = {
   site: {
-    title: 'Sales Manager | B2B Sales | Team Leadership',
-    titleShort: 'Sales Manager | B2B',
+    title: 'Head of Sales Office | B2B Print Sales | Key Accounts',
+    titleShort: 'Head of Sales Office | B2B Print',
     tagline:
-      'Sales manager with 20+ years in B2B sales, most of them in the printing industry — from field sales to key accounts to leading a sales team that delivers.',
+      'Head of the sales office at Tipografia Everest. In B2B sales since 2000 and in printing since 2001 — offers, negotiation, contracts and a team of sales agents.',
     intro:
-      '20+ years in B2B sales, most of them in the printing industry, and every stage of it: finding the client, understanding the business, negotiating the agreement, delivering on it, and keeping the relationship for the long term. Today I lead the sales team at Tipografia Everest.',
+      'In sales since 2000 and in the printing industry since 2001. Today I run the sales office at Tipografia Everest — coordinating the sales agents while keeping a client portfolio of my own — and the whole commercial cycle is part of the job: the price offer, the negotiation, the contract, the order through production, and the payment collected on time.',
     location: 'Bucharest, Romania',
   },
 
-  extras: ['Driving licence, category B'],
+  extras: {
+    languages: 'English — good; French, Russian — basic',
+    licence: 'Driving licence, category B (since 2001)',
+  },
 
   roles: {
-    everest: {
-      position: 'Sales Manager',
-      period: 'February 2012 – Present',
+    'everest-head': {
+      position: 'Head of Sales Office',
+      period: 'April 2015 – Present',
       location: 'Bucharest, Romania',
+      impact:
+        'Run the sales office: the agents’ reporting, the way work is shared out among them, and their visits to clients — on top of a client portfolio of my own.',
       aboutShort: 'Bucharest printing house — 30 years, a team of over 140, offset and digital.',
       about:
         'Tipografia Everest, founded in Bucharest in 1994, is a printing house with three decades of experience and a team of over 140 people, covering offset and digital printing with a full range of finishing techniques. Its work spans commercial printing, books and publishing, agendas and notebooks, labels and packaging, and art bindery, under ISO 9001 quality and ISO 14001 environmental management systems certified since 2007. In February 2012 it took over the assets of the RH Printing house, doubling its capacity and becoming the leader of the local sheet-fed offset market.',
       summary:
-        'I lead the sales team at Tipografia Everest and keep my own hand on the accounts that matter most — from the first request to the negotiated contract, the price offer built for that client, the internal order and its delivery, and the reporting and planning that keep next year predictable.',
+        'Promoted in April 2015, three years after joining as a sales representative. The sales work carries on as before; what the role adds is the office itself — how the agents report, how the jobs are shared out, and how sales works with production, dispatch and finance.',
       bullets: [
-        'Lead the sales team: setting targets, giving direction, and keeping every member accountable for their numbers.',
-        'Clients and their needs: handling requests and complaints, and matching products to what each client actually needs.',
-        'Negotiate contracts: with clients and with suppliers — prices, delivery terms and conditions.',
-        'Recruit new customers: prospecting and bringing new business accounts into the portfolio.',
-        'Price offers per client: managing each client’s budget and building an offer adapted to it.',
-        'Plan internal orders: scheduling production orders and negotiating delivery terms.',
-        'Sales reporting and planning: weekly, monthly and annual reports; monthly and annual sales estimates.',
-        'Marketing activities: negotiating and organising events and campaigns that promote the company’s products.',
+        'Coordinate the sales agents: their daily activity reports, delivered on the deadlines the Commercial Director sets.',
+        'Share out the work: allocating jobs among the agents together with the Commercial or General Director, so the load is fair.',
+        'Supervise client visits: planning the agents’ trips to clients and the resources they need.',
+        'Offers on time: proposing changes to the sales office’s daily work so that price offers go out when promised.',
+        'Sales and production: leading internal projects on the flow of information between sales and the other departments, so orders are planned into production efficiently.',
+        'Analysis for management: sales analysis reports for the Commercial Director and the General Director.',
+        'Own portfolio: offers, orders, contracts and the client relationship — the work of the role before, which carries on.',
       ],
+      focus: [
+        'Sales office',
+        'Sales agents',
+        'Work allocation',
+        'Reporting',
+        'Production planning',
+      ],
+    },
+
+    'everest-rep': {
+      position: 'Sales Representative',
+      period: 'February 2012 – April 2015',
+      location: 'Bucharest, Romania',
+      impact:
+        'Represented the printing house to existing and new clients — from the price offer and technical advice to the signed contract and the payment collected.',
+      bullets: [
+        'Client portfolio: answering requests for offers, passing orders into production on the agreed terms, and keeping each client informed at every stage of their order.',
+        'New business: finding and contacting potential clients, and answering requests from every sales channel in good time.',
+        'Contracts: preparing, negotiating and signing printing-service contracts within the limits set by the Commercial and General Directors.',
+        'Client checks: every new client verified with the payment-incidents register, the Trade Register and the insolvency records before a contract is signed.',
+        'Collections: following up payments on the agreed terms and acting on overdue receivables.',
+        'Sales plan: a daily analysis of my own sales against the monthly, quarterly and annual plan.',
+        'Quality and complaints: client feedback passed to management, complaints logged in the non-conformity register and followed until resolved.',
+        'Market watch: the competition, the trends in printing services, and each client’s own business.',
+      ],
+      focus: ['Key accounts', 'New business', 'Offers & contracts', 'Collections', 'Sales plan'],
     },
 
     'rh-printing': {
@@ -60,121 +90,134 @@ export const en: ProfileText = {
         'Coordination with production: following every order from approval to delivery.',
         'Key accounts: the clients with steady volume, kept year after year.',
       ],
+      focus: ['B2B', 'Print', 'Key accounts', 'Quotes', 'Production'],
     },
 
     rodata: {
       position: 'Sales Executive',
       period: 'April 2001 – December 2002',
       location: 'Bucharest, Romania',
+      impact:
+        'Sold printed packaging — paper, cardboard and OPP film, in offset and rotogravure — from the price offer to the order in production.',
       aboutShort:
         'Label and packaging manufacturer — among the most important in Romania and Eastern Europe.',
       about:
         'Rodata, founded in Bucharest in 1994, is one of the most important manufacturers of food and non-food labels and packaging in Romania and Eastern Europe: labels for soft drinks and mineral water, snack packaging printed in rotogravure, with complete pre-press services, packaging consultancy, integrated production and logistics.',
       bullets: [
-        'B2B sales: building a portfolio of company clients for labels and packaging.',
-        'Quoting and negotiation: from the first meeting to the order.',
-        'Client relationship: follow-up and retention.',
+        'Offers and contracts: price offers, negotiation and contracts with business clients.',
+        'Orders in production: following each order and contract through production.',
+        'Client relationship: the day-to-day contact with every client in the portfolio.',
+        'Sales analysis: analyses and reports for the company’s management.',
       ],
+      focus: ['B2B', 'Packaging', 'Offers & contracts', 'Production'],
     },
 
-    europetrolgaz: {
-      position: 'Sales Representative',
+    neweuropetrolgaz: {
+      position: 'Sales & Marketing Analyst',
       period: 'August 2000 – March 2001',
       location: 'Bucharest, Romania',
+      impact:
+        'Offers, contracts and sales analysis for an importer — on both sides of the trade, with clients at home and suppliers abroad.',
+      aboutShort: 'Importer of LPG installations and equipment.',
       bullets: [
-        'Field sales: visits, presentations and orders from business clients.',
-        'Prospecting: new clients on a territory of my own.',
+        'Offers and contracts: price offers and contract negotiation with clients.',
+        'Suppliers abroad: the relationship with foreign suppliers and the banking documents behind each import.',
+        'Banks and the state: the relationship with financial institutions and the state administration.',
+        'Sales analysis: sales and marketing analyses and reports for management.',
       ],
+      focus: ['B2B', 'Import', 'Offers & contracts', 'Sales analysis'],
     },
 
     delta: {
-      position: 'Marketing Representative',
+      position: 'Marketing Assistant',
       period: 'June 1999 – August 2000',
       location: 'Bucharest, Romania',
-      aboutShort: 'Distribution company.',
+      impact:
+        'Shaped the company’s marketing and promotion policy, and kept a standing study of the competition.',
+      aboutShort: 'Importer of interior-finishing products — floor and wall tiles, sanitary ware.',
       bullets: [
-        'Promoting the product portfolio to business clients.',
-        'Supporting the sales team: materials, campaigns and feedback from the market.',
+        'Marketing policy: drafting and putting into practice the company’s marketing strategy, above all its promotion — of the company’s image and of the products it sold.',
+        'Competitor research: desk and field research on the competition, with periodic reports.',
       ],
+      focus: ['Marketing', 'Promotion', 'Market research'],
     },
 
     euromobex: {
-      position: 'Sales Representative',
+      position: 'Economist',
       period: 'July 1997 – June 1999',
       location: 'Bucharest, Romania',
-      summary:
-        'The first sales role — and the first habits that stayed: steady prospecting, disciplined follow-up, and clients who come back.',
+      impact:
+        'The first job after university: the accounting, the banks and the paperwork behind a trading company — the numbers every later offer rests on.',
+      aboutShort: 'Importer of materials for the furniture industry, and exporter of furniture.',
       bullets: [
-        'Prospecting and direct sales to business clients.',
-        'Building a first portfolio of clients.',
+        'Accounting: primary accounting operations.',
+        'Banks and the state: the relationship with financial institutions and the state administration.',
+        'Partners: clients and suppliers at home and abroad, including the import–export documents.',
       ],
+      focus: ['Accounting', 'Import–export', 'Suppliers'],
     },
   },
 
   skills: {
     'sales-leadership': {
-      group: 'Sales Leadership',
-      blurb: 'Building, coaching and running a sales team.',
+      group: 'Sales Office Coordination',
+      blurb: 'Running the day-to-day of a sales office.',
       items: [
-        'Sales team management',
-        'Target setting & accountability',
-        'Hiring & onboarding salespeople',
-        'Coaching & performance reviews',
-        'Sales process design',
+        'Coordinating sales agents',
+        'Daily activity reporting',
+        'Fair allocation of work',
+        'Planning client visits',
+        'Offer turnaround',
       ],
     },
     'key-accounts': {
-      group: 'Key Account Management',
-      blurb: 'The relationships that carry the revenue.',
+      group: 'Client Portfolio',
+      blurb: 'Keeping and growing the clients already won.',
       items: [
-        'Key account planning',
-        'Client retention & renewals',
-        'Account growth & cross-selling',
-        'Executive relationships',
-        'Complaint resolution',
+        'Portfolio management & growth',
+        'New opportunities with existing clients',
+        'Technical & commercial advice',
+        'Order follow-up & client updates',
+        'Complaint handling',
       ],
     },
     negotiation: {
-      group: 'Negotiation & Closing',
-      blurb: 'Agreements both sides keep.',
+      group: 'Offers & Contracts',
+      blurb: 'From the price offer to the signed agreement.',
       items: [
-        'Pricing & commercial terms',
-        'Contract negotiation',
-        'Objection handling',
-        'Closing techniques',
-        'Tender & proposal writing',
+        'Price offers',
+        'Negotiation',
+        'Printing-service contracts',
+        'Pricing within approved structures',
+        'Contract follow-through',
       ],
     },
     pipeline: {
-      group: 'Pipeline & Forecasting',
-      blurb: 'Turning opportunities into predictable numbers.',
+      group: 'New Business & Sales Plan',
+      blurb: 'New clients, and the plan the numbers are measured against.',
       items: [
-        'Prospecting & lead qualification',
-        'Pipeline management',
-        'Sales forecasting',
-        'Reporting & KPIs',
-        'Territory & segment planning',
-      ],
-    },
-    tools: {
-      group: 'Tools & Process',
-      blurb: 'The systems that keep a team honest.',
-      items: [
-        'Microsoft Office',
-        'Sales reporting — weekly, monthly, annual',
-        'Order-to-delivery coordination',
+        'Prospecting new clients',
+        'Requests from every sales channel',
+        'Monthly, quarterly & annual sales plans',
+        'Daily sales analysis',
+        'Reports for management',
       ],
     },
     business: {
       group: 'Business Foundations',
       blurb: 'What the numbers behind a deal mean.',
       items: [
-        'Margin & pricing',
-        'Budgeting & sales planning',
+        'Collections & receivables',
+        'Client risk checks',
         'Market & competitor analysis',
-        'Customer service',
-        'Communication & presentation',
+        'Accounting',
+        'Import & foreign suppliers',
       ],
+    },
+    tools: {
+      group: 'Tools',
+      blurb: 'The everyday instruments of the job.',
+      items: ['Microsoft Office — Word, Excel', 'Email & internet', 'Client database'],
     },
     personal: {
       group: 'Personal Strengths',
@@ -196,29 +239,17 @@ export const en: ProfileText = {
       degree: 'Journalism',
     },
     marketing: {
-      school: 'Academy of Economic Studies, Bucharest',
-      degree: 'Marketing',
+      school: 'Academy of Economic Studies (ASE), Bucharest',
+      degree: 'Bachelor’s degree in Marketing, Faculty of Commerce',
     },
   },
 
   achievements: {
-    portfolio: {
-      title: 'Growing the B2B Client Portfolio',
-      role: 'Sales Manager · Tipografia Everest',
+    promotion: {
+      title: 'Promoted to Head of the Sales Office',
+      role: 'Tipografia Everest · April 2015',
       description:
-        'Built and grew a portfolio of business clients through consistent prospecting, careful account management and a focus on keeping the clients we already had. The measure was not the size of the list but how many of those clients were still with us years later.',
-    },
-    team: {
-      title: 'Building a Sales Team',
-      role: 'Sales Manager · Tipografia Everest',
-      description:
-        'Hired, onboarded and coached a sales team, and put in place the routines — targets, weekly reviews, a shared pipeline — that let it perform as a unit rather than as a set of individuals.',
-    },
-    'accounts-system': {
-      title: 'A Key-Account Management System',
-      role: 'Sales Manager · Tipografia Everest',
-      description:
-        'Introduced a structured way of managing the largest accounts: an owner for each, a plan per account, and a forecast the whole team could rely on.',
+        'Three years after joining as a sales representative, appointed to run the sales office: coordinating the agents’ reporting, the allocation of work and their client visits, and the way the office works with production and the support departments — while keeping a client portfolio of my own.',
     },
   },
 };

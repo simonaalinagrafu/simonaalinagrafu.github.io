@@ -73,7 +73,7 @@ export default function ResumePrintPage() {
         // when a role sets pdfBullets, which caps how long the resume can grow.
         const bullets = role.pdfBullets ? role.bullets.slice(0, role.pdfBullets) : role.bullets;
         return (
-          <div key={role.id} className={bullets.length > 5 ? 'role allow-break' : 'role'}>
+          <div key={role.id} className={bullets.length > 3 ? 'role allow-break' : 'role'}>
             <div className="role-head">
               <h3>
                 {role.position} · {role.company}, {role.location}
@@ -128,7 +128,7 @@ export default function ResumePrintPage() {
       {extras.length > 0 && (
         <>
           <h2>{s.resume.other}</h2>
-          <p className="extras">{extras.join(' · ')}</p>
+          <p className="extras">{extras.map((extra) => extra.text).join(' · ')}</p>
         </>
       )}
     </div>

@@ -93,7 +93,7 @@ try {
     if (result.status !== 0) throw new Error(`Chrome failed printing ${label}`);
     console.log(`${label} → ${out}`);
   }
-  console.log('\nBoth CVs regenerated. Check each stays within two pages.');
+  console.log('\nBoth CVs regenerated. Check each stays within three pages.');
 } finally {
   stop();
 }

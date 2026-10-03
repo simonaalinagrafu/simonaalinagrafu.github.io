@@ -1,52 +1,88 @@
 import type { ProfileText } from './shape';
 
-// Textul profilului în română — schiță pentru revizuire.
+// Textul profilului în română.
 //
-// CE ESTE REAL ȘI CE ESTE SCHIȚAT. Cele șase roluri — angajatori, titluri,
-// date — și cele două studii sunt din profilul de LinkedIn al Simonei.
-// Punctele de la Everest reiau responsabilitățile din secțiunea ei „About”;
-// textul de sub celelalte cinci roluri este schițat ca să se potrivească
-// titlului și așteaptă formularea ei. Nu s-au inventat cifre. Neconfirmate
-// încă, marcate `placeholder: true` în shape.ts: cele trei realizări.
+// DE UNDE VINE. Rolurile de la Everest reiau fișele postului (2012 și 2015) și
+// actul adițional din 21.04.2015; cele patru roluri din 1997–2002 reiau
+// CV-urile ei din 2003; descrierile companiilor sunt din aceleași CV-uri și din
+// surse publice. RH Printing este încă schițat după titlul și datele de pe
+// LinkedIn și așteaptă formularea ei. Nu s-au inventat cifre — vezi nota din
+// capul fișierului shape.ts.
 //
-// Două convenții, ușor de schimbat: titlurile de post păstrează engleza acolo
-// unde aceasta este norma pe piața românească (Key Account Manager), iar proza
-// este scrisă neutru din punct de vedere al genului (perfect compus, fără
-// adjective predicative despre sine).
+// Două convenții, ușor de schimbat: titlurile de post sunt cele din documente
+// (inclusiv „Sales Executive”, cum apare în CV-ul ei), iar proza este scrisă
+// neutru din punct de vedere al genului (perfect compus, fără adjective
+// predicative despre sine).
 
 export const ro: ProfileText = {
   site: {
-    title: 'Manager de Vânzări | Vânzări B2B | Conducere de echipe',
-    titleShort: 'Manager de Vânzări | B2B',
+    title: 'Șef Birou Vânzări | Vânzări B2B în tipografie | Conturi cheie',
+    titleShort: 'Șef Birou Vânzări | Tipar B2B',
     tagline:
-      'Manager de vânzări cu 20+ ani în vânzări B2B, cei mai mulți în industria tipografică — de la vânzări în teren la conturi cheie și la conducerea unei echipe care livrează.',
+      'Șef Birou Vânzări la Tipografia Everest. În vânzări B2B din 2000 și în tipografie din 2001 — oferte, negociere, contracte și o echipă de agenți de vânzări.',
     intro:
-      '20+ ani în vânzări B2B, cei mai mulți în industria tipografică, și fiecare etapă a lor: găsirea clientului, înțelegerea afacerii lui, negocierea acordului, respectarea lui și păstrarea relației pe termen lung. Astăzi conduc echipa de vânzări a Tipografiei Everest.',
+      'În vânzări din 2000 și în industria tipografică din 2001. Astăzi conduc biroul de vânzări al Tipografiei Everest — coordonez agenții de vânzări și păstrez un portofoliu propriu de clienți —, iar întregul ciclu comercial ține de meserie: oferta, negocierea, contractul, comanda în producție și încasarea la termen.',
     location: 'București, România',
   },
 
-  extras: ['Permis de conducere, categoria B'],
+  extras: {
+    languages: 'Engleză — bine; franceză, rusă — nivel de bază',
+    licence: 'Permis de conducere, categoria B (din 2001)',
+  },
 
   roles: {
-    everest: {
-      position: 'Manager de Vânzări',
-      period: 'Februarie 2012 – Prezent',
+    'everest-head': {
+      position: 'Șef Birou Vânzări',
+      period: 'Aprilie 2015 – Prezent',
       location: 'București, România',
+      impact:
+        'Conduc biroul de vânzări: raportarea agenților, împărțirea lucrărilor între ei și deplasările lor la clienți — pe lângă un portofoliu propriu de clienți.',
       aboutShort:
         'Tipografie din București — 30 de ani, o echipă de peste 140 de oameni, offset și digital.',
       about:
         'Tipografia Everest, fondată la București în 1994, este o tipografie cu trei decenii de experiență și o echipă de peste 140 de oameni, care acoperă tipar offset și digital cu o gamă completă de tehnici de finisare. Lucrările ei merg de la tipărituri comerciale, cărți și editură la agende și blocnotesuri, etichete și ambalaje și legătorie de artă, sub sisteme de management al calității ISO 9001 și al mediului ISO 14001, certificate din 2007. În februarie 2012 a preluat activele tipografiei RH Printing, dublându-și capacitatea și devenind liderul pieței locale de tipar offset în coală.',
       summary:
-        'Conduc echipa de vânzări a Tipografiei Everest și păstrez în portofoliul meu conturile care contează cel mai mult — de la prima solicitare la contractul negociat, oferta de preț construită pentru acel client, comanda internă și livrarea ei, și raportarea și planificarea care fac anul următor predictibil.',
+        'Promovare în aprilie 2015, la trei ani după venirea în tipografie ca reprezentant comercial. Munca de vânzări continuă ca înainte; ce adaugă rolul este biroul însuși — cum raportează agenții, cum se împart lucrările și cum lucrează vânzările cu producția, expediția și financiarul.',
       bullets: [
-        'Conduc echipa de vânzări: obiective, direcție și fiecare membru responsabil de cifrele lui.',
-        'Clienții și nevoile lor: gestionarea solicitărilor și a reclamațiilor și potrivirea produselor cu ce are nevoie fiecare client cu adevărat.',
-        'Negociez contracte: cu clienții și cu furnizorii — prețuri, termene de livrare și condiții.',
-        'Recrutez clienți noi: prospectare și aducerea de conturi business noi în portofoliu.',
-        'Oferte de preț pe client: gestionarea bugetului fiecărui client și construirea unei oferte adaptate lui.',
-        'Planific comenzile interne: programarea comenzilor de producție și negocierea termenelor de livrare.',
-        'Raportare și planificare: rapoarte săptămânale, lunare și anuale; estimarea planului de vânzări lunar și anual.',
-        'Activități de marketing: negocierea și organizarea evenimentelor și a campaniilor care promovează produsele companiei.',
+        'Coordonez agenții de vânzări: rapoartele lor zilnice de activitate, predate la termenele stabilite de Directorul Comercial.',
+        'Împart lucrările: alocarea lor pe agenți, împreună cu Directorul Comercial sau Directorul General, astfel încât distribuția să fie echitabilă.',
+        'Supervizez deplasările la clienți: planificarea vizitelor agenților și a resurselor de care au nevoie.',
+        'Oferte la timp: propun îmbunătățiri ale activității zilnice a biroului, ca ofertele de preț să plece când au fost promise.',
+        'Vânzări și producție: coordonez proiectele interne privind fluxul de informații dintre vânzări și celelalte departamente, ca planificarea comenzilor în producție să fie eficientă.',
+        'Analize pentru conducere: rapoarte de analiză a vânzărilor pentru Directorul Comercial și Directorul General.',
+        'Portofoliu propriu: oferte, comenzi, contracte și relația cu clienții — munca rolului de dinainte, care continuă.',
+      ],
+      focus: [
+        'Biroul de vânzări',
+        'Agenți de vânzări',
+        'Alocarea lucrărilor',
+        'Raportare',
+        'Planificarea producției',
+      ],
+    },
+
+    'everest-rep': {
+      position: 'Reprezentant comercial',
+      period: 'Februarie 2012 – Aprilie 2015',
+      location: 'București, România',
+      impact:
+        'Am reprezentat tipografia în relația cu clienții existenți și noi — de la oferta de preț și consultanța tehnică la contractul semnat și încasarea lui.',
+      bullets: [
+        'Portofoliul de clienți: răspunsul la cererile de ofertă, comenzile date în lucru în condițiile agreate și clienții ținuți la curent cu fiecare etapă a comenzii.',
+        'Clienți noi: identificarea și contactarea clienților potențiali și răspunsul la timp la cererile venite pe orice canal de vânzare.',
+        'Contracte: întocmirea, negocierea și semnarea contractelor de prestări servicii tipografice, în limitele stabilite de Directorul Comercial și Directorul General.',
+        'Verificarea clienților: orice client nou verificat la Centrala Incidentelor de Plăți, la Registrul Comerțului și la Biroul Insolvenței înainte de semnarea contractului.',
+        'Încasări: urmărirea plăților la termenele convenite și măsuri pentru încasarea creanțelor.',
+        'Planul de vânzări: analiza zilnică a vânzărilor proprii față de planul lunar, trimestrial și anual.',
+        'Calitate și reclamații: feedback-ul clienților transmis conducerii, reclamațiile trecute în Registrul de Neconformități și urmărite până la rezolvare.',
+        'Piața: concurența, tendințele pieței de servicii tipografice și mediul de afaceri al fiecărui client.',
+      ],
+      focus: [
+        'Conturi cheie',
+        'Clienți noi',
+        'Oferte și contracte',
+        'Încasări',
+        'Planul de vânzări',
       ],
     },
 
@@ -66,121 +102,135 @@ export const ro: ProfileText = {
         'Coordonare cu producția: urmărirea fiecărei comenzi de la aprobare la livrare.',
         'Conturi cheie: clienții cu volum constant, păstrați an după an.',
       ],
+      focus: ['B2B', 'Tipar', 'Conturi cheie', 'Ofertare', 'Producție'],
     },
 
     rodata: {
       position: 'Sales Executive',
       period: 'Aprilie 2001 – Decembrie 2002',
       location: 'București, România',
+      impact:
+        'Am vândut ambalaje tipărite — din hârtie, carton și folie OPP, în offset și rotogravură — de la oferta de preț la comanda din producție.',
       aboutShort:
         'Producător de etichete și ambalaje — între cei mai importanți din România și Europa de Est.',
       about:
         'Rodata, fondată la București în 1994, este unul dintre cei mai importanți producători de etichete și ambalaje alimentare și nealimentare din România și Europa de Est: etichete pentru băuturi răcoritoare și apă minerală, ambalaje pentru snacks tipărite în rotogravură, cu servicii complete de pre-press, consultanță de ambalare, producție integrată și logistică.',
       bullets: [
-        'Vânzări B2B: construirea unui portofoliu de clienți companii pentru etichete și ambalaje.',
-        'Ofertare și negociere: de la prima întâlnire la comandă.',
-        'Relația cu clientul: follow-up și retenție.',
+        'Oferte și contracte: ofertare, negociere și contracte cu clienți business.',
+        'Comenzi în producție: urmărirea fiecărei comenzi și a fiecărui contract prin producție.',
+        'Relația cu clienții: contactul de zi cu zi cu fiecare client din portofoliu.',
+        'Analiza vânzărilor: analize și raportare către conducerea firmei.',
       ],
+      focus: ['B2B', 'Ambalaje', 'Oferte și contracte', 'Producție'],
     },
 
-    europetrolgaz: {
-      position: 'Reprezentant Vânzări',
+    neweuropetrolgaz: {
+      position: 'Analist Marketing – Vânzări',
       period: 'August 2000 – Martie 2001',
       location: 'București, România',
+      impact:
+        'Oferte, contracte și analiza vânzărilor pentru un importator — de ambele părți ale comerțului, cu clienți în țară și furnizori externi.',
+      aboutShort: 'Importator de instalații și echipamente pentru GPL.',
       bullets: [
-        'Vânzări în teren: vizite, prezentări și comenzi de la clienți business.',
-        'Prospectare: clienți noi pe un teritoriu propriu.',
+        'Oferte și contracte: ofertare și negocierea contractelor cu clienții.',
+        'Furnizori externi: relația cu furnizorii externi de marfă și documentele bancare ale fiecărui import.',
+        'Bănci și stat: relația cu organismele financiar-bancare și cu administrația de stat.',
+        'Analiza vânzărilor: analize de vânzări și marketing și raportare către conducerea firmei.',
       ],
+      focus: ['B2B', 'Import', 'Oferte și contracte', 'Analiza vânzărilor'],
     },
 
     delta: {
-      position: 'Reprezentant Marketing',
+      position: 'Asistent de Marketing',
       period: 'Iunie 1999 – August 2000',
       location: 'București, România',
-      aboutShort: 'Companie de distribuție.',
+      impact:
+        'Politica de marketing și de promovare a firmei, și un studiu permanent al concurenței.',
+      aboutShort:
+        'Importator de produse pentru amenajări interioare — gresie, faianță, obiecte sanitare.',
       bullets: [
-        'Promovarea portofoliului de produse către clienți business.',
-        'Suport pentru echipa de vânzări: materiale, campanii și feedback din piață.',
+        'Politica de marketing: elaborarea și implementarea strategiei de marketing a firmei, mai ales a politicii de promovare — a imaginii firmei și a produselor comercializate.',
+        'Studiul concurenței: cercetare de birou și de teren asupra concurenței, cu rapoarte periodice.',
       ],
+      focus: ['Marketing', 'Promovare', 'Studii de piață'],
     },
 
     euromobex: {
-      position: 'Reprezentant Vânzări',
+      position: 'Economist',
       period: 'Iulie 1997 – Iunie 1999',
       location: 'București, România',
-      summary:
-        'Primul rol în vânzări — și primele obiceiuri care au rămas: prospectare constantă, follow-up disciplinat și clienți care revin.',
+      impact:
+        'Primul loc de muncă după facultate: contabilitatea, băncile și actele unei firme de comerț — cifrele pe care se sprijină orice ofertă de mai târziu.',
+      aboutShort: 'Importator de materiale pentru industria mobilei și exportator de mobilier.',
       bullets: [
-        'Prospectare și vânzare directă către clienți business.',
-        'Construirea primului portofoliu de clienți.',
+        'Contabilitate: operațiuni de contabilitate primară.',
+        'Bănci și stat: relația cu organismele financiar-bancare și cu administrația de stat.',
+        'Parteneri: clienți și furnizori interni și externi, inclusiv documentele de import–export.',
       ],
+      focus: ['Contabilitate', 'Import–export', 'Furnizori'],
     },
   },
 
   skills: {
     'sales-leadership': {
-      group: 'Leadership în vânzări',
-      blurb: 'Construirea, coaching-ul și conducerea unei echipe de vânzări.',
+      group: 'Coordonarea biroului de vânzări',
+      blurb: 'Activitatea de zi cu zi a unui birou de vânzări.',
       items: [
-        'Managementul echipei de vânzări',
-        'Stabilirea obiectivelor și responsabilizare',
-        'Recrutarea și integrarea oamenilor de vânzări',
-        'Coaching și evaluări de performanță',
-        'Proiectarea procesului de vânzare',
+        'Coordonarea agenților de vânzări',
+        'Raportarea zilnică a activității',
+        'Alocarea echitabilă a lucrărilor',
+        'Planificarea vizitelor la clienți',
+        'Ofertare la timp',
       ],
     },
     'key-accounts': {
-      group: 'Managementul conturilor cheie',
-      blurb: 'Relațiile care aduc veniturile.',
+      group: 'Portofoliul de clienți',
+      blurb: 'Păstrarea și dezvoltarea clienților deja câștigați.',
       items: [
-        'Planificarea conturilor cheie',
-        'Retenția clienților și reînnoiri',
-        'Dezvoltarea conturilor și cross-selling',
-        'Relații la nivel de management',
+        'Administrarea și dezvoltarea portofoliului',
+        'Oportunități noi la clienții existenți',
+        'Consultanță tehnică și comercială',
+        'Urmărirea comenzilor și informarea clienților',
         'Rezolvarea reclamațiilor',
       ],
     },
     negotiation: {
-      group: 'Negociere și închidere',
-      blurb: 'Acorduri pe care ambele părți le respectă.',
+      group: 'Oferte și contracte',
+      blurb: 'De la oferta de preț la acordul semnat.',
       items: [
-        'Prețuri și condiții comerciale',
-        'Negocierea contractelor',
-        'Gestionarea obiecțiilor',
-        'Tehnici de închidere',
-        'Redactarea ofertelor și a licitațiilor',
+        'Oferte de preț',
+        'Negociere',
+        'Contracte de prestări servicii tipografice',
+        'Prețuri în structura aprobată',
+        'Urmărirea derulării contractelor',
       ],
     },
     pipeline: {
-      group: 'Pipeline și prognoze',
-      blurb: 'Transformarea oportunităților în cifre predictibile.',
+      group: 'Clienți noi și planul de vânzări',
+      blurb: 'Clienții noi și planul față de care se măsoară cifrele.',
       items: [
-        'Prospectare și calificarea lead-urilor',
-        'Gestionarea pipeline-ului',
-        'Prognoze de vânzări',
-        'Raportare și KPI',
-        'Planificare pe teritorii și segmente',
-      ],
-    },
-    tools: {
-      group: 'Instrumente și proces',
-      blurb: 'Sistemele care țin o echipă onestă.',
-      items: [
-        'Microsoft Office',
-        'Raportare de vânzări — săptămânal, lunar, anual',
-        'Coordonare comandă–livrare',
+        'Prospectarea clienților noi',
+        'Cereri de ofertă de pe orice canal',
+        'Planuri de vânzări lunare, trimestriale și anuale',
+        'Analiza zilnică a vânzărilor',
+        'Rapoarte pentru conducere',
       ],
     },
     business: {
       group: 'Fundamente de business',
       blurb: 'Ce înseamnă cifrele din spatele unei tranzacții.',
       items: [
-        'Marjă și prețuri',
-        'Bugetare și planificarea vânzărilor',
+        'Încasări și creanțe',
+        'Verificarea riscului de client',
         'Analiza pieței și a concurenței',
-        'Servicii pentru clienți',
-        'Comunicare și prezentare',
+        'Contabilitate',
+        'Import și furnizori externi',
       ],
+    },
+    tools: {
+      group: 'Instrumente',
+      blurb: 'Uneltele de zi cu zi ale meseriei.',
+      items: ['Microsoft Office — Word, Excel', 'Email și internet', 'Baza de date a clienților'],
     },
     personal: {
       group: 'Calități personale',
@@ -202,29 +252,17 @@ export const ro: ProfileText = {
       degree: 'Jurnalism',
     },
     marketing: {
-      school: 'Academia de Studii Economice din București',
-      degree: 'Marketing',
+      school: 'Academia de Studii Economice (ASE), București',
+      degree: 'Licență în Marketing, Facultatea de Comerț',
     },
   },
 
   achievements: {
-    portfolio: {
-      title: 'Creșterea portofoliului de clienți B2B',
-      role: 'Manager de Vânzări · Tipografia Everest',
+    promotion: {
+      title: 'Promovare la conducerea biroului de vânzări',
+      role: 'Tipografia Everest · Aprilie 2015',
       description:
-        'Am construit și dezvoltat un portofoliu de clienți business prin prospectare constantă, gestionarea atentă a conturilor și accent pe păstrarea clienților pe care îi aveam deja. Măsura nu a fost mărimea listei, ci câți dintre acei clienți erau încă alături de noi ani mai târziu.',
-    },
-    team: {
-      title: 'Construirea unei echipe de vânzări',
-      role: 'Manager de Vânzări · Tipografia Everest',
-      description:
-        'Am recrutat, integrat și pregătit o echipă de vânzări și am pus în loc rutinele — obiective, analize săptămânale, pipeline comun — care o fac să performeze ca un întreg, nu ca o sumă de individualități.',
-    },
-    'accounts-system': {
-      title: 'Un sistem de gestionare a conturilor cheie',
-      role: 'Manager de Vânzări · Tipografia Everest',
-      description:
-        'Am introdus un mod structurat de a gestiona cele mai mari conturi: un responsabil pentru fiecare, un plan pe cont și o prognoză pe care întreaga echipă se putea baza.',
+        'La trei ani după venirea în tipografie ca reprezentant comercial, numire în funcția de Șef Birou Vânzări: coordonarea raportării agenților, a alocării lucrărilor și a deplasărilor la clienți, și a modului în care biroul lucrează cu producția și cu departamentele suport — păstrând totodată un portofoliu propriu de clienți.',
     },
   },
 };

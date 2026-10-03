@@ -69,8 +69,7 @@ npm run format     # prettier over src/
 
 **Expected clean state:** `npm run lint` prints nothing; `npm run build` ends with
 **11 `prerendered` lines** (Home, Career, Skills, Contact and the CV print page in Romanian
-and English, plus `/version`) and prints **one warning line** listing the placeholder entries
-(§7). The 404 is not prerendered: `dist/404.html` is the bare app shell, and the page renders
+and English, plus `/version`). The 404 is not prerendered: `dist/404.html` is the bare app shell, and the page renders
 in the browser.
 
 The dev server serves the app only. The prerendered HTML, `sitemap.xml`, `404.html` and the
@@ -105,8 +104,6 @@ curl -s https://simonaalinagrafu.github.io | grep -o "<title>[^<]*</title>"
 
 ### If a deploy fails
 
-- **"Refusing to build for deployment: … placeholder content"** — expected while §7 is not
-  empty. That is the guard doing its job; replace the placeholders, don't override it.
 - **A lint error, or a type error in the build** — the same gates you run locally
   (`npm run lint`, `npm run build`); fix and push.
 - Anything else, check one level up at **organization → Settings**, since the repo is owned by
@@ -166,10 +163,11 @@ Chrome, and shuts the server down. It prints the built, prerendered pages rather
 server's, so the PDF is exactly what the build produced. Set `CHROME_PATH` if Chrome is not at
 one of the default locations.
 
-Both CVs currently run to **three pages**. If you want them at two, the `pdfBullets` field
-on a role caps how many bullets the PDF shows while the Career page keeps full detail; note
-Romanian prose runs a little longer than English, so the two locales may need different
-caps.
+Both CVs run to **three pages**, and Romanian, which runs longer, fills the third almost to
+the end. Check the page count after every profile change. Two levers keep it there: the
+`pdfBullets` field on a role caps how many bullets the PDF shows while the Career page keeps
+full detail (both Everest roles show 4), and any role with more than three bullets may break
+across a page (`ResumePrintPage.tsx`).
 
 ### `public/og.png` — after any change to name, title, or URL
 
@@ -214,39 +212,34 @@ size, so the layout is identical before and after.
 
 ## 7. Outstanding — what is still drafted or unconfirmed
 
-The career is now **real**: the six roles — employers, titles and dates, 1997 to today — come
-from Simona's LinkedIn profile (`linkedin.com/in/simona-deliu-413a5b2b`), which is also the
-LinkedIn link the site uses. What remains is prose she has not written yet and two facts nobody
-has confirmed.
+The career is now **sourced from her own documents**, transcribed as Markdown next to the
+scans in `simonaalinagrafu.github.io__data_source/` — a folder beside this repository and
+deliberately outside it, because the originals carry a home address and a date of birth:
 
-**Placeholders are live.** The guard in `vite.config.ts` (§8) is overridden with
-`PLACEHOLDERS_OK: '1'` in `.github/workflows/deploy.yml`, by decision. **When this list is
-empty, delete that `env:` block from the workflow** so the guard protects future edits again.
+- **1997–2002** (Euromobex, Delta Distribution, Neweuropetrolgaz, Rodata) — her CVs of 2003,
+  in Romanian and English;
+- **Tipografia Everest** — the job descriptions for *Reprezentant comercial* (from February
+  2012) and *Șef Birou Vânzări* (from April 2015), and the contract addendum that made the
+  change.
 
-Text lives in `src/data/profile/ro.ts` and `en.ts`; structure (names, flags) in
-`src/data/profile/shape.ts`.
+Job titles are the ones those documents give. Nothing on the site is imagined any more, so
+the placeholder guard and its CI override are gone. What remains:
 
-- [ ] **Everest job title.** The site says *Manager de Vânzări / Sales Manager* and describes
-      leading the sales team, as told. Her LinkedIn headline says *Account Manager*. One of the
-      two should change so the site and LinkedIn agree — a recruiter will see both.
-- [ ] **Role prose for the five earlier roles** — their `summary` and `bullets` are drafted to
-      fit the title; nothing in them is a figure, but it is not her wording. The **Everest**
-      bullets are different: they restate the responsibilities from her own LinkedIn "About",
-      so only the phrasing needs her eye. Real numbers (team size, portfolio, volumes) would
-      strengthen all six.
-- [ ] **Achievements** `portfolio`, `team`, `accounts-system` — imagined. The first prints on
-      the CV as "Key achievement". Replace with real wins, ideally with figures, then remove
-      the three `placeholder: true` flags.
-- [ ] **Company descriptions** — Everest, RH Printing and Rodata have sourced descriptions
-      (everest.ro, rodata.ro, Ziarul Financiar and print-romania.ro for the 2007 investment
-      and the February 2012 takeover). Europetrolgaz, Delta Distribution and Euromobex have
-      none beyond what the name says; add a line each if she wants context there.
+- [ ] **RH Printing (2003–2012)** — title and dates from her LinkedIn; the `summary` and
+      `bullets` are drafted to fit the title and await her wording. No document in the data
+      source covers these years.
+- [ ] **LinkedIn** — her headline says *Account Manager*; the site now says *Head of Sales
+      Office* (2015–) and *Sales Representative* (2012–2015), as her documents do. Updating
+      LinkedIn would make the two agree — a recruiter will see both.
+- [ ] **Figures** — the CV's "Key achievement" is the documented 2015 promotion. Real numbers
+      (agents coordinated, portfolio size, volumes) would strengthen it and the Everest roles.
+- [ ] **Journalism degree** (University of Bucharest, 2010–2012) — from LinkedIn only.
 - [ ] **Email** — `simonaalinagrafu@gmail.com` was derived from the site name. Confirm the
       mailbox exists; it is on the Contact page, in the footer and on both CVs.
-- [ ] **Romanian translation** — drafted and not yet reviewed by a native speaker. Two
-      conventions, easy to reverse: English job titles where they are the market norm, and
-      gender-neutral prose (Romanian agrees adjectives with gender). If she prefers explicitly
-      feminine wording, it is one pass over the two `ro.ts` files.
+- [ ] **Romanian translation** — not yet reviewed by a native speaker. Two conventions, easy
+      to reverse: job titles exactly as her documents give them, and gender-neutral prose
+      (Romanian agrees adjectives with gender). If she prefers explicitly feminine wording,
+      it is one pass over the two `ro.ts` files.
 
 After changing any of these, regenerate both CV PDFs (§6).
 
@@ -254,13 +247,6 @@ After changing any of these, regenerate both CV PDFs (§6).
 
 ## 8. Known rough edges
 
-- **The placeholder guard.** The `static-site-files` plugin in `vite.config.ts` reads
-  `placeholders` from `src/data/profile/shape.ts` when a build starts, and throws when
-  `process.env.CI` is set and any remain. GitHub Actions sets `CI=true`, so a push with
-  placeholders fails at the build step rather than deploying invented content.
-  `PLACEHOLDERS_OK=1` overrides it — and **the workflow currently sets it** (see §7). Once
-  the list in §7 is empty, delete the `env:` block from the workflow first, then the guard
-  itself — it has no purpose after that.
 - **Removed sections redirect.** `/projects`, `/articles` and `/ideas` redirect to their
   locale's home, alongside `/resume` → `/career`. They are listed once, locale-free, in
   `redirects` in `src/routes.ts`; the build writes a small redirect page for each, in every

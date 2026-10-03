@@ -16,7 +16,7 @@ src/
 ├─ i18n/               UI strings and page copy, per locale
 ├─ fx/                 framework layer — portable to any project
 │  ├─ components/      fully prop-driven parts (no site content)
-│  └─ lib/             pure functions (routing, locale paths, cx)
+│  └─ lib/             pure functions (routing, locale paths, cx, fill, yearsOnly)
 ├─ styles/global.css   design system (token mapping + Tailwind recipes)
 ├─ themes/             design tokens — one CSS file per look + themes.ts registry
 ├─ routes.ts           central route manifest (URL → page id), plain data
@@ -25,7 +25,7 @@ src/
 ├─ prerender.tsx       build-time rendering of a route to HTML
 └─ main.tsx            entry: fonts, global.css, hydrate or render
 index.html             the page shell: site-wide head tags, pre-paint scripts
-vite.config.ts         build constants, sitemap, 404 shell, redirect pages, placeholder guard
+vite.config.ts         build constants, sitemap, 404 shell, redirect pages
 scripts/prerender.ts   post-build step writing one HTML file per route into dist/
 ```
 
@@ -147,8 +147,8 @@ every deep link with its 404 page. The build closes that gap:
 State that differs per visitor (the saved theme) goes through
 `useSyncExternalStore` with a server snapshot (`useTheme.ts`), so the page
 hydrates as rendered and then updates. Values that change over time are fixed
-at build time instead of read at render: `__BUILD_YEAR__` (the footer, the
-Career figures) and `__HAS_PORTRAIT__` (the hero), both defined in
+at build time instead of read at render: `__BUILD_YEAR__` (the footer and every
+"N years" figure) and `__HAS_PORTRAIT__` (the hero), both defined in
 `vite.config.ts` and declared in `src/env.d.ts`. Anything new that reads
 `localStorage`, the window or the clock while rendering needs the same care.
 
@@ -158,18 +158,33 @@ Career figures) and `__HAS_PORTRAIT__` (the hero), both defined in
 
 `src/data/profile/` splits the CV in two:
 
-- `shape.ts` — what exists and in what order: role IDs, company names, focus
-  areas, icons, bullet-count flags, contact details. The same in every language.
-  Entries that are not yet confirmed carry `placeholder: true`, and
-  `placeholders` lists them for the build's guard: a warning locally, a hard
-  failure under `CI` (override: `PLACEHOLDERS_OK=1`).
-- `ro.ts` / `en.ts` — the prose, keyed by those IDs.
-- `index.ts` — `getProfile(locale)` merges the two.
+- `shape.ts` — what exists and in what order: role IDs, company names, icons,
+  bullet-count flags, contact details, and the start dates the year counts come
+  from (`salesStart`, `printStart`, `leadershipStart`). The same in every
+  language. Its header names the document every entry comes from.
+- `ro.ts` / `en.ts` — the prose, keyed by those IDs: per role a position,
+  period, one-line `impact`, company lines, summary, bullets and `focus` chips.
+- `index.ts` — `getProfile(locale)` merges the two; `tenure` and `yearsSince`
+  turn the start dates into the figures every page shows.
 
-Icons travel with the thing they describe rather than in a parallel array, so
-they cannot fall out of step when the order changes. A role's `focus` list is
-its areas of responsibility (chips on the Career page, a "Focus" line on the
-PDF); `achievements[0]` is the "Key achievement" the PDF prints.
+A promotion inside one company is its own role (Everest has two), so each title
+keeps its own dates and duties. Icons travel with the thing they describe rather
+than in a parallel array, so they cannot fall out of step when the order
+changes. A role's `impact` is the line a skimming reader takes away (Career page
+only); its `focus` list is its areas of responsibility (chips on the Career
+page, a "Focus" line on the PDF); `achievements[0]` is the "Key achievement" the
+PDF prints.
+
+**No figure is typed into a dictionary.** UI strings that need one are
+templates — `'{sales} in sales'` — filled with `fill()` from `@fx/lib/fill`.
+Counts go in as phrases from `s.years(n)`, because the grammar differs per
+language: "26 years", but "11 ani" and "26 de ani" in Romanian.
+
+The home page is a profile rather than a landing page, after vasilegrafu.github.io:
+the current role as the heading with the tenure line under it, two paragraphs and
+the CV as the main action; then the current scope as a labelled list, three
+highlights, and the background and education lists generated from the profile
+data, so they cannot drift from the Career page or the CV.
 
 ## Icons
 

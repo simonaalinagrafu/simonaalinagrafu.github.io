@@ -6,6 +6,7 @@ export const en: UiStrings = {
   localeShort: 'EN',
   dateLocale: 'en-GB',
   ogLocale: 'en_US',
+  years: (n) => (n === 1 ? '1 year' : `${n} years`),
 
   nav: {
     home: 'About Me',
@@ -37,151 +38,113 @@ export const en: UiStrings = {
   },
 
   footer: {
-    blurb: 'B2B sales, key accounts, and the teams that deliver them.',
+    blurb: 'B2B sales in the printing industry — offers, contracts and the sales office.',
   },
 
   home: {
-    metaTitle: 'Sales Manager, B2B',
-    greeting: 'Hello, I’m Simona.',
-    headline: 'B2B sales, from the first conversation to the relationship that lasts.',
-    ctaCareer: 'My career story',
-    ctaContact: 'Get in touch',
-    kickerReach: 'Reach and practice',
-    kickerDoing: 'What I do',
-    kickerWorking: 'Working with me',
-    kickerPrinciples: 'Principles',
-    kickerProcess: 'How I work',
-    headingWorking: 'What I bring to an organization',
-    headingPrinciples: 'What drives me',
-    headingProcess: 'Four steps, every time',
-
-    stats: {
-      years: { value: '20+', label: 'years in B2B sales' },
-      b2b: { value: 'B2B', label: 'selling to businesses' },
-      team: { value: 'A team', label: 'of salespeople led, coached and kept' },
-      accounts: { value: 'Key accounts', label: 'owned from first contact to renewal' },
-      stages: { value: 'Every stage', label: 'from prospecting to delivery' },
-      relationships: { value: 'Long-term', label: 'client relationships, year after year' },
-    },
-
-    doing: {
+    metaTitle: 'Head of Sales Office, B2B Print',
+    metaDescription:
+      '{position} at {company}, coordinating the sales agents of a Bucharest printing house. {sales} in sales, {leadership} leading the sales office.',
+    kicker: 'Profile',
+    heading: '{position} at {company}',
+    facts: '{location} · {sales} in sales · {leadership} leading the sales office',
+    paragraphs: [
+      'I run the sales office at Tipografia Everest, a Bucharest printing house of over 140 people working in offset and digital print — coordinating the sales agents while keeping a client portfolio of my own.',
+      'I joined Everest in 2012 as a sales representative and have led its sales office since 2015. Before that came almost nine years selling print at RH Printing, packaging sales at Rodata, and a start in accounting, marketing and sales analysis.',
+    ],
+    ctaCareer: 'Full career',
+    ctaContact: 'Contact',
+    kickerScope: 'Current scope',
+    scope: {
       team: {
-        title: 'Sales team leadership',
-        body: 'Leading the sales team at {company} — setting targets, coaching each person, and building the routines that turn individuals into a team that hits its numbers together.',
+        term: 'Team',
+        detail:
+          'The sales agents at Tipografia Everest — their daily reporting, how the work is shared out among them, and their visits to clients.',
       },
-      accounts: {
-        title: 'Key account management',
-        body: 'Owning the relationships that carry the most revenue: understanding each client’s business well enough to see what they will need next, and being the person they call first.',
+      clients: {
+        term: 'Clients',
+        detail:
+          'A portfolio of my own: offers, orders, technical and commercial advice, and the relationship from the first request onwards.',
       },
-      pipeline: {
-        title: 'Pipeline & forecasting',
-        body: 'Prospecting, qualifying, prioritising. A pipeline the whole team can see, and a forecast that management can plan against because it has been honest before.',
+      contracts: {
+        term: 'Contracts',
+        detail:
+          'Printing-service contracts, negotiated and signed within the limits set by the Commercial and General Directors.',
       },
-      negotiation: {
-        title: 'Negotiation & closing',
-        body: 'Pricing, contracts, terms and renewals with business clients of every size — agreements that hold up because both sides can live with them.',
+      plan: {
+        term: 'Sales plan',
+        detail:
+          'Monthly, quarterly and annual targets, a daily look at the sales against them, and analysis reports for management.',
       },
-    },
-
-    value: {
-      revenue: {
-        title: 'Revenue that grows',
-        body: 'A portfolio built by prospecting steadily and keeping what was won.',
+      coordination: {
+        term: 'Coordination',
+        detail:
+          'The flow between sales and production, dispatch and finance — so offers go out on time and orders are planned well.',
       },
-      retention: {
-        title: 'Clients who stay',
-        body: 'Retention as the measure of success, not just the size of the list.',
-      },
-      team: {
-        title: 'A team that performs',
-        body: 'Salespeople hired, coached and kept — targets met as a unit.',
-      },
-      pipeline: {
-        title: 'A predictable pipeline',
-        body: 'Forecasts the business can plan against, because they have been right before.',
-      },
-      relationships: {
-        title: 'Relationships that open doors',
-        body: 'Twenty years of business contacts who pick up the phone.',
-      },
-      process: {
-        title: 'Process, not heroics',
-        body: 'Results that repeat because the way of working is clear.',
+      market: {
+        term: 'Market',
+        detail: 'The competition and the market for printing services, followed continuously.',
       },
     },
-
-    principles: {
-      trust: {
-        title: 'Trust first',
-        body: 'Every sale I have kept for years started with a promise that was kept. I would rather lose a deal than win it with something I cannot deliver. Clients notice, and they come back.',
+    kickerHighlights: 'Highlights',
+    highlights: {
+      promotion: {
+        title: 'Head of the sales office',
+        context: 'Tipografia Everest · 2015',
+        body: 'Promoted three years after joining as a sales representative — the sales office became part of the job, alongside the clients.',
       },
-      listen: {
-        title: 'Listen before you sell',
-        body: 'The offer that lands is the one that answers a need the client actually has. Most of selling is understanding — the business, the constraints, what a good outcome looks like for the person across the table.',
+      print: {
+        title: '{print} in print and packaging',
+        context: 'Rodata · RH Printing · Tipografia Everest',
+        body: 'Printed packaging in offset and rotogravure at Rodata, sheet-fed offset at RH Printing, then commercial printing, books and packaging at Everest.',
       },
-      team: {
-        title: 'The team wins',
-        body: 'My best results have come from teams where people share what works, cover for each other, and take pride in the number on the board. Leading means making that kind of team possible, then getting out of the way.',
-      },
-      results: {
-        title: 'Results you can measure',
-        body: 'A pipeline, a forecast and a target are only useful if they are honest. I keep the numbers real, even when the real number is uncomfortable, because that is the only way to improve them.',
+      foundation: {
+        title: 'A start on the numbers side',
+        context: 'Euromobex · Delta Distribution · Neweuropetrolgaz · 1997–2001',
+        body: 'An economist first, then marketing and sales analysis — so the accounting behind an offer is familiar ground.',
       },
     },
-
-    process: {
-      listen: {
-        title: 'Listen',
-        body: 'Before any offer, I understand the client’s business, its constraints, and what a good outcome means to them.',
-      },
-      propose: {
-        title: 'Propose',
-        body: 'An offer that answers the real need, at prices and terms I can stand behind.',
-      },
-      negotiate: {
-        title: 'Negotiate',
-        body: 'Agreements both sides can live with for years — not one-day wins.',
-      },
-      deliver: {
-        title: 'Deliver and stay',
-        body: 'What was promised reaches the client, and the relationship continues after the signature.',
-      },
+    kickerBackground: 'Background',
+    kickerEducation: 'Education',
+    careerLink: {
+      before: 'Role by role, with what each one involved, on the ',
+      link: 'Career',
+      after: ' page.',
     },
   },
 
   career: {
     metaTitle: 'Career',
     metaDescription:
-      '20+ years in B2B sales, from Euromobex and RH Printing to leading the sales team at Tipografia Everest.',
+      'From economist and marketing assistant to head of the sales office at Tipografia Everest — 1997 to today, in sales since 2000.',
     kicker: 'Journey',
     heading: 'Career',
-    lede: 'The roles I’ve held, the teams I’ve built, and what each chapter added.',
+    lede: 'The roles I’ve held and what each one involved — from a first job as an economist to running a sales office.',
     download: 'Download CV (PDF)',
     downloadFile: 'Simona-Alina-Grafu-CV',
     stats: {
-      years: 'years in B2B sales',
-      everest: 'years at Tipografia Everest',
-      companies: 'companies',
+      sales: 'years in sales',
+      print: 'years in printing',
+      leadership: 'years leading the sales office',
     },
     education: 'Education',
     timeline: 'Career timeline by company',
     now: 'now',
-    placeholderTag: 'to be confirmed',
   },
 
   skills: {
     metaTitle: 'Skills',
     metaDescription:
-      'Skills across sales leadership, key account management, negotiation, pipeline and forecasting, and the business fundamentals beneath them.',
+      'Skills across sales office coordination, the client portfolio, offers and contracts, new business and the sales plan, and the business foundations beneath them.',
     kicker: 'Toolbox',
     heading: 'Skills',
-    lede: 'What I reach for and the ground it stands on — from leading a team to the margin behind a price.',
+    lede: 'What I reach for and the ground it stands on — from coordinating a sales office to the receivables behind a sale.',
   },
 
   contact: {
     metaTitle: 'Contact',
     metaDescription:
-      'Get in touch with Simona Alina Grafu about B2B sales, key accounts, and leading sales teams.',
+      'Get in touch with Simona Alina Grafu about B2B sales in the printing industry, client portfolios, and running a sales office.',
     heading: 'Contact',
     lede: 'I read everything and reply to thoughtful messages.',
     email: 'Email',
@@ -213,10 +176,10 @@ export const en: UiStrings = {
     other: 'Other',
     focus: 'Focus',
     highlights: [
-      '20+ years in B2B sales, most of them in the printing industry',
-      'Leads the sales team at Tipografia Everest, where she has been since 2012',
-      'Owns the key accounts that carry the most revenue',
-      'Retention and a predictable pipeline as the measures of success',
+      'In sales since 2000, in the printing industry since 2001',
+      'Head of the sales office at Tipografia Everest since 2015; there since 2012',
+      'The whole commercial cycle: offer, negotiation, contract, production, collection',
+      'A start in accounting and marketing — the numbers behind every offer',
     ],
   },
 };

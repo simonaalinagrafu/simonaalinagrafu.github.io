@@ -1,36 +1,38 @@
-// One entry on the Career timeline: era icon, period in gold small caps, a
-// "to be confirmed" tag while the role is still a placeholder, company
-// context, role summary, a numbered list of what I did, and focus-area chips.
+// One entry on the Career timeline: era icon, years in gold small caps, the
+// one-line impact, company context, role summary, a numbered list of what I
+// did, and focus-area chips.
 // The icon travels with the role (data/profile/shape.ts) rather than through a
 // positional array, so the two cannot fall out of step.
 import IconPart from '@fx/components/IconPart';
 import { cx } from '@fx/lib/cx';
+import { yearsOnly } from '@fx/lib/yearsOnly';
 import type { Role } from '@data/profile';
-import { useLocale } from '@modules/shared/useLocale';
 
 interface Props {
   role: Role;
 }
 
 export default function RoleItemPart({ role }: Props) {
-  const { s } = useLocale();
   return (
     <li className="ms-6">
       <span className="border-accent-line bg-bg text-accent absolute -start-3.5 mt-1 flex h-7 w-7 items-center justify-center rounded-full border">
         <IconPart name={role.icon} className="h-3.5 w-3.5" />
       </span>
       <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-        <span className="badge">{role.period}</span>
+        {/* Years only: orientation, not verification. The CV keeps the months. */}
+        <span className="badge tabular-nums">{yearsOnly(role.period)}</span>
         <span className="text-faint">{role.location}</span>
-        {role.placeholder && (
-          <span className="border-label text-label rounded-md border px-1.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase">
-            {s.career.placeholderTag}
-          </span>
-        )}
       </p>
       <h2 className="title-item mt-2">
         {role.position} <span className="text-faint font-normal">·</span> {role.company}
       </h2>
+      {/* The takeaway for a skimming reader, before the company context. */}
+      {role.impact && (
+        <p className="text-ink mt-3 flex gap-2.5 leading-relaxed font-medium">
+          <IconPart name="lucide:target" className="text-accent mt-1 h-4 w-4 shrink-0" />
+          <span>{role.impact}</span>
+        </p>
+      )}
       {role.about && (
         <p className="text-faint border-line-strong mt-3 border-s-2 ps-3.5 text-sm leading-relaxed">
           {role.about}

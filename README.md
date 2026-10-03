@@ -22,7 +22,7 @@ deploy workflow (`.github/workflows/deploy.yml`, which GitHub requires at the re
 outside it. Paths below are relative to `webapp/`.
 
 See `webapp/ARCHITECTURE.md` for how the code is laid out and `webapp/SETUP.md` for
-first-time setup and the list of content that is still placeholder.
+first-time setup and the list of what is still unconfirmed.
 
 ## Development
 
@@ -54,9 +54,9 @@ whether the deploy is live. The page is noindex and left out of the sitemap.
 Everything about Simona lives in `src/data/profile/`:
 
 - `shape.ts` — structure that is the same in every language: role IDs, company names,
-  focus areas, icons, and the `placeholder: true` marker on entries that are not yet real
+  icons, and the start dates every "N years" figure is counted from
 - `ro.ts` / `en.ts` — the prose for each language, keyed by those IDs
-- `index.ts` — `getProfile(locale)`, which merges the two
+- `index.ts` — `getProfile(locale)`, which merges the two, plus the derived `tenure` figures
 
 It feeds the About, Career and Skills pages and two print-optimized pages at
 `/resume-print` and `/en/resume-print` (excluded from the sitemap and marked noindex).
@@ -79,13 +79,15 @@ The home page hero is built around a photo. Save it as **`public/portrait.jpg`**
 portrait orientation 4:5, at least 900×1125 — and rebuild. Until the file exists the frame
 shows her initials instead, so nothing else on the page moves when the photo arrives.
 
-### Placeholder content
+### Where the content comes from
 
-Entries marked `placeholder: true` in `shape.ts` are imagined stand-ins waiting for the real
-CV. `npm run build` prints one warning line listing them. **Under CI the build refuses to
-run** while any remain, so they cannot be deployed by accident; `PLACEHOLDERS_OK=1`
-overrides that deliberately. To replace one: edit its text in `ro.ts` and `en.ts`, fix the
-company or school name in `shape.ts`, and delete the `placeholder: true` line.
+Every role traces to a document: her own CVs of 2003 for 1997–2002, and her Tipografia
+Everest job descriptions and 2015 contract addendum for 2012 to today. They are transcribed
+as Markdown next to the scans in `simonaalinagrafu.github.io__data_source/`, a folder beside
+this repository and deliberately outside it — the originals carry a home address and a date
+of birth. Job titles are the ones those documents give, and no figure is typed in by hand:
+years are counted from the start dates in `shape.ts`. What is still unconfirmed is listed in
+`webapp/SETUP.md` §7.
 
 ## Adding a language
 

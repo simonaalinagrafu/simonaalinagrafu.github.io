@@ -23,7 +23,9 @@ export default function ContactPage() {
       <p className="lede">{s.contact.lede}</p>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_20rem]">
-        <div className="space-y-4">
+        {/* min-w-0: a grid item will not shrink below its content otherwise,
+            and the e-mail address would push the page wider than a phone. */}
+        <div className="min-w-0 space-y-4">
           <LinkCardPart
             href={`mailto:${site.email}`}
             icon="lucide:mail"
