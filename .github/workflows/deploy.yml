@@ -23,6 +23,10 @@ jobs:
     # guard protects future edits again.
     env:
       PLACEHOLDERS_OK: '1'
+    # The Astro project lives in webapp/, not at the repo root.
+    defaults:
+      run:
+        working-directory: webapp
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,6 +36,8 @@ jobs:
         run: npm run check
       - name: Build with Astro
         uses: withastro/action@v3
+        with:
+          path: webapp
 
   deploy:
     needs: build

@@ -50,7 +50,7 @@ C:\Program Files\Google\Chrome\Application\chrome.exe
 
 ```sh
 git clone https://github.com/simonaalinagrafu/simonaalinagrafu.github.io.git
-cd simonaalinagrafu.github.io
+cd simonaalinagrafu.github.io/webapp
 npm ci
 ```
 
@@ -81,7 +81,8 @@ listing the placeholder entries (§7).
 
 ## 4. Deployment — configured ✅
 
-Every push to `main` builds and publishes the site through `.github/workflows/deploy.yml`.
+Every push to `main` builds and publishes the site through `.github/workflows/deploy.yml`
+(at the repo root, one level above this `webapp/` folder, where GitHub requires it to be).
 The repo's Pages source is set to **GitHub Actions** (repo → Settings → Pages → Build and
 deployment → Source). Before that was set, GitHub also ran its legacy Jekyll build on every
 push — a red `pages build and deployment` run beside the green one, failing harmlessly. If
@@ -111,8 +112,9 @@ curl -s https://simonaalinagrafu.github.io | grep -o "<title>[^<]*</title>"
 
 `.github/workflows/deploy.yml`, triggered on push to `main` and via `workflow_dispatch`:
 
-- **build** — checkout → `npm ci` → `npm run check` (type-check gate: a type error fails the
-  deploy) → `withastro/action@v3`, which builds and uploads the Pages artifact.
+- **build** — checkout → `npm ci` → `npm run check`, both run inside `webapp/` (type-check
+  gate: a type error fails the deploy) → `withastro/action@v3` with `path: webapp`, which
+  builds and uploads the Pages artifact.
 - **deploy** — `actions/deploy-pages@v4` publishes that artifact to the `github-pages`
   environment.
 
@@ -171,9 +173,9 @@ file, not part of the build). It is single-language by design.
 
 ```powershell
 & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu `
-  --screenshot="D:\Dev.Work\simonaalinagrafu.github.io\public\og.png" `
+  --screenshot="D:\Dev.Work\simonaalinagrafu.github.io\webapp\public\og.png" `
   --window-size=1200,630 --hide-scrollbars `
-  "D:\Dev.Work\simonaalinagrafu.github.io\design\og-image.html"
+  "D:\Dev.Work\simonaalinagrafu.github.io\webapp\design\og-image.html"
 ```
 
 It pulls Fraunces and Inter from Google Fonts, so this needs a network connection.

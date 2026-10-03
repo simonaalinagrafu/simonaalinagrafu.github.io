@@ -13,12 +13,17 @@ Contact.
 - [Tailwind CSS v4](https://tailwindcss.com) — styling
 - Deployed to GitHub Pages via GitHub Actions on every push to `main`
 
-See `ARCHITECTURE.md` for how the code is laid out and `SETUP.md` for first-time setup and
-the list of content that is still placeholder.
+The whole Astro project lives in **`webapp/`**; only this README, `.gitignore` and the
+deploy workflow (`.github/workflows/deploy.yml`, which GitHub requires at the repo root) sit
+outside it. Paths below are relative to `webapp/`.
+
+See `webapp/ARCHITECTURE.md` for how the code is laid out and `webapp/SETUP.md` for
+first-time setup and the list of content that is still placeholder.
 
 ## Development
 
 ```sh
+cd webapp
 npm install
 npm run dev      # local dev server at http://localhost:4321
 npm run build    # production build to ./dist
